@@ -4,6 +4,7 @@ import { withBase } from "../utils/paths";
 export type HomeLink = {
   label: string;
   href: string;
+  description: string;
 };
 
 export type HomeField = {
@@ -137,6 +138,38 @@ export const homePage = {
     title: "What do you want to find Out?",
     defaultLabel: "About",
   } satisfies HomeDiscovery,
+  crawlLinks: [
+    {
+      label: "About Mark Jayson Farol",
+      href: withBase("/bio"),
+      description: "Biography, background, and the interdisciplinary story behind the work.",
+    },
+    {
+      label: "Research papers and academic work",
+      href: withBase("/research"),
+      description: "Published research, working papers, methods, and higher-education analysis.",
+    },
+    {
+      label: "Publications and writing",
+      href: withBase("/articles"),
+      description: "Articles, commentaries, essays, and public-facing scholarship.",
+    },
+    {
+      label: "CV and resume",
+      href: withBase("/resume"),
+      description: "Education, experience, technical skills, and current certifications.",
+    },
+    {
+      label: "Media and official profiles",
+      href: withBase("/profiles"),
+      description: "Professional, academic, and creative profile links collected in one place.",
+    },
+    {
+      label: "Contact Mark Jayson",
+      href: "#contact",
+      description: "Jump directly to the homepage contact form and send a message.",
+    },
+  ] satisfies HomeLink[],
   discoveryItems: cornerMenuItems,
   contact: {
     label: "Get in Touch",

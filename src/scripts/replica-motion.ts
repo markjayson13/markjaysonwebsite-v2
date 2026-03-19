@@ -137,8 +137,17 @@ const setupHomeMotion = (reducedMotion: boolean) => {
     (element): element is HTMLElement => element instanceof HTMLElement,
   );
 
-  if (contactTrigger instanceof HTMLButtonElement && contactBand instanceof HTMLElement) {
-    const handleClick = () => {
+  if ((contactTrigger instanceof HTMLButtonElement || contactTrigger instanceof HTMLAnchorElement) && contactBand instanceof HTMLElement) {
+    const handleClick = (event: Event) => {
+      if (contactTrigger instanceof HTMLAnchorElement) {
+        event.preventDefault();
+
+        const href = contactTrigger.getAttribute("href");
+        if (href?.startsWith("#")) {
+          window.history.replaceState(null, "", href);
+        }
+      }
+
       contactBand.scrollIntoView({
         behavior: reducedMotion ? "auto" : "smooth",
         block: "start",

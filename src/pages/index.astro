@@ -23,9 +23,9 @@ import { homePage, replicaFooterCredit } from "../data/editorial";
             {homePage.hero.headlineTop}
           </p>
 
-          <button class="home-hero-band__contact" type="button" data-contact-trigger data-home-stagger>
+          <a class="home-hero-band__contact" href="#contact" data-contact-trigger data-home-stagger>
             {homePage.hero.ctaLabel}
-          </button>
+          </a>
         </div>
 
         <div class="home-hero-band__frame" data-home-stagger>
@@ -68,6 +68,23 @@ import { homePage, replicaFooterCredit } from "../data/editorial";
 
     <section class="home-discovery-band" data-home-discovery>
       <div class="replica-canvas home-discovery-band__canvas">
+        <nav class="home-index-nav" aria-label="Primary homepage links" data-home-reveal>
+          <p class="home-index-nav__eyebrow">Explore the site</p>
+
+          <ul class="home-index-nav__list">
+            {
+              homePage.crawlLinks.map((link) => (
+                <li class="home-index-nav__item">
+                  <a class="home-index-nav__link" href={link.href}>
+                    <span class="home-index-nav__label">{link.label}</span>
+                    <span class="home-index-nav__description">{link.description}</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+
         <div
           class="replica-menu-sheet replica-menu-sheet--inline"
           data-preview-menu-root
