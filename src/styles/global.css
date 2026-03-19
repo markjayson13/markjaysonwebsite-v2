@@ -170,12 +170,46 @@ p {
     border-color 160ms ease;
 }
 
+body[data-page="home"] .corner-menu__trigger,
+body[data-page="portfolio"] .corner-menu__trigger,
+body[data-page="projects"] .corner-menu__trigger,
+body[data-page="articles"] .corner-menu__trigger,
+body[data-page="creative"] .corner-menu__trigger,
+body[data-page="profiles"] .corner-menu__trigger {
+  border-color: rgba(255, 255, 255, 0.72);
+  background: rgba(0, 0, 0, 0.92);
+  color: #f5f4ed;
+  box-shadow: none;
+}
+
 .corner-menu__trigger:hover,
 .corner-menu__trigger:focus-visible,
 .corner-menu.is-open .corner-menu__trigger {
   transform: translateY(-2px);
   border-color: rgba(17, 17, 17, 1);
   background: rgba(255, 255, 255, 0.98);
+}
+
+body[data-page="home"] .corner-menu__trigger:hover,
+body[data-page="home"] .corner-menu__trigger:focus-visible,
+body[data-page="home"] .corner-menu.is-open .corner-menu__trigger,
+body[data-page="portfolio"] .corner-menu__trigger:hover,
+body[data-page="portfolio"] .corner-menu__trigger:focus-visible,
+body[data-page="portfolio"] .corner-menu.is-open .corner-menu__trigger,
+body[data-page="projects"] .corner-menu__trigger:hover,
+body[data-page="projects"] .corner-menu__trigger:focus-visible,
+body[data-page="projects"] .corner-menu.is-open .corner-menu__trigger,
+body[data-page="articles"] .corner-menu__trigger:hover,
+body[data-page="articles"] .corner-menu__trigger:focus-visible,
+body[data-page="articles"] .corner-menu.is-open .corner-menu__trigger,
+body[data-page="creative"] .corner-menu__trigger:hover,
+body[data-page="creative"] .corner-menu__trigger:focus-visible,
+body[data-page="creative"] .corner-menu.is-open .corner-menu__trigger,
+body[data-page="profiles"] .corner-menu__trigger:hover,
+body[data-page="profiles"] .corner-menu__trigger:focus-visible,
+body[data-page="profiles"] .corner-menu.is-open .corner-menu__trigger {
+  border-color: rgba(255, 255, 255, 0.9);
+  background: rgba(11, 11, 11, 0.98);
 }
 
 .corner-menu__overlay {

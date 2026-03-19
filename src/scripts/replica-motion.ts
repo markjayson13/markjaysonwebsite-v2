@@ -28,6 +28,9 @@ const setupAutoplayVideos = () => {
       return;
     }
 
+    const requestedStartTime = Number.parseFloat(video.dataset.startTime ?? "");
+    let startTimeApplied = false;
+
     video.muted = true;
     video.defaultMuted = true;
     video.playsInline = true;
@@ -46,15 +49,41 @@ const setupAutoplayVideos = () => {
       void video.play().catch(() => {});
     };
 
-    video.addEventListener("loadedmetadata", ensurePlaying);
-    video.addEventListener("canplay", ensurePlaying);
+    const maybeApplyStartTime = () => {
+      if (startTimeApplied || !Number.isFinite(requestedStartTime) || requestedStartTime <= 0) {
+        return;
+      }
+
+      if (video.readyState >= 1) {
+        try {
+          video.currentTime = Math.min(requestedStartTime, Math.max(video.duration - 0.05, requestedStartTime));
+          startTimeApplied = true;
+        } catch {
+          // Some browsers block currentTime updates until metadata is ready enough.
+        }
+      }
+    };
+
+    const handleLoadedMetadata = () => {
+      maybeApplyStartTime();
+      ensurePlaying();
+    };
+
+    const handleCanPlay = () => {
+      maybeApplyStartTime();
+      ensurePlaying();
+    };
+
+    video.addEventListener("loadedmetadata", handleLoadedMetadata);
+    video.addEventListener("canplay", handleCanPlay);
 
     if (video.paused) {
+      maybeApplyStartTime();
       ensurePlaying();
     }
 
-    teardownFns.push(() => video.removeEventListener("loadedmetadata", ensurePlaying));
-    teardownFns.push(() => video.removeEventListener("canplay", ensurePlaying));
+    teardownFns.push(() => video.removeEventListener("loadedmetadata", handleLoadedMetadata));
+    teardownFns.push(() => video.removeEventListener("canplay", handleCanPlay));
   });
 };
 

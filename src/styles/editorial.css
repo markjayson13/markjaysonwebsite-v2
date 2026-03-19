@@ -240,7 +240,7 @@ body[data-page="creative"] {
 
 .home-hero-band {
   min-height: 100svh;
-  padding: 5.8rem 0 2.6rem;
+  padding: 3.85rem 0 2.25rem;
 }
 
 .home-hero-band__canvas {
@@ -254,17 +254,17 @@ body[data-page="creative"] {
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 1.5rem;
   align-items: start;
-  margin-bottom: 1rem;
+  margin-bottom: 0.4rem;
 }
 
 .home-hero-band__headline-top {
   margin: 0;
   max-width: 64rem;
   font-family: var(--replica-font-display);
-  font-size: clamp(4.4rem, 9.6vw, 8rem);
+  font-size: clamp(4.95rem, 10.4vw, 8.55rem);
   font-weight: 600;
-  letter-spacing: -0.076em;
-  line-height: 0.82;
+  letter-spacing: -0.081em;
+  line-height: 0.8;
   color: var(--replica-light);
 }
 
@@ -273,13 +273,13 @@ body[data-page="creative"] {
   z-index: 4;
   align-self: start;
   min-height: 3.85rem;
-  min-width: 10.7rem;
+  min-width: 12.1rem;
   padding: 0.9rem 1.3rem;
   border: 1px solid rgba(255, 255, 255, 0.82);
-  background: transparent;
+  background: rgba(0, 0, 0, 0.9);
   color: #fff;
   font-family: var(--replica-font-ui);
-  font-size: 0.86rem;
+  font-size: 0.94rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   line-height: 1;
@@ -292,15 +292,15 @@ body[data-page="creative"] {
 .home-hero-band__contact:hover,
 .home-hero-band__contact:focus-visible {
   transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(12, 12, 12, 0.98);
 }
 
 .home-hero-band__frame {
   display: grid;
-  grid-template-columns: minmax(16rem, 28.5rem) minmax(22rem, 1fr) minmax(12rem, 17rem);
+  grid-template-columns: minmax(16rem, 30.25rem) minmax(22rem, 1fr) minmax(12rem, 16rem);
   align-items: stretch;
   width: 100%;
-  min-height: clamp(31rem, 58vw, 44rem);
+  min-height: clamp(33rem, 59vw, 45rem);
   border: 1px solid rgba(255, 255, 255, 0.36);
   overflow: hidden;
 }
@@ -309,7 +309,7 @@ body[data-page="creative"] {
   display: grid;
   align-content: start;
   gap: 0.1rem;
-  padding: 1rem 0.95rem 0.8rem 0.95rem;
+  padding: 0.7rem 0.95rem 0.8rem 0.95rem;
   background: rgba(0, 0, 0, 0.9);
   color: var(--replica-light);
 }
@@ -317,10 +317,10 @@ body[data-page="creative"] {
 .home-hero-band__frame-line {
   display: block;
   font-family: var(--replica-font-display);
-  font-size: clamp(4rem, 8.4vw, 7.05rem);
+  font-size: clamp(4.25rem, 8.9vw, 7.35rem);
   font-weight: 600;
-  letter-spacing: -0.078em;
-  line-height: 0.84;
+  letter-spacing: -0.084em;
+  line-height: 0.8;
 }
 
 .home-hero-band__media {
@@ -331,31 +331,32 @@ body[data-page="creative"] {
 
 .home-hero-band__video {
   inset: 0;
-  object-position: center 38%;
-  filter: brightness(0.86) saturate(0.95) contrast(1.03);
+  object-position: center 28%;
+  transform: scale(1.11);
+  filter: brightness(1.02) saturate(1.02) contrast(1.02);
 }
 
 .home-hero-band__shade {
   background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.08) 26%, rgba(0, 0, 0, 0.64) 100%),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.54) 0%, rgba(0, 0, 0, 0.05) 52%, rgba(0, 0, 0, 0.74) 100%);
+    linear-gradient(180deg, rgba(0, 0, 0, 0.74) 0%, rgba(0, 0, 0, 0.02) 24%, rgba(0, 0, 0, 0.56) 100%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.44) 0%, rgba(0, 0, 0, 0.02) 52%, rgba(0, 0, 0, 0.66) 100%);
 }
 
 .home-hero-band__roles {
   display: grid;
   align-content: center;
   justify-items: end;
-  gap: 0.7rem;
-  padding: 1.75rem 1.15rem 1.65rem;
+  gap: 0.62rem;
+  padding: 1.55rem 1.1rem 1.55rem;
   background: rgba(0, 0, 0, 0.92);
 }
 
 .home-hero-band__role {
   font-family: var(--replica-font-ui);
-  font-size: clamp(1.28rem, 1.8vw, 2.08rem);
+  font-size: clamp(1.16rem, 1.64vw, 1.9rem);
   font-weight: 500;
   line-height: 1;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.025em;
   text-transform: uppercase;
   color: rgba(237, 240, 242, 0.82);
 }
@@ -974,13 +975,15 @@ body[data-page="articles"] .rail-entry__meta {
 
 .profiles-page__media {
   position: absolute;
-  inset: 0 auto 0 0;
-  width: min(44rem, 58vw);
+  inset: 0 auto 0 50%;
+  width: min(22rem, 28vw);
   overflow: hidden;
+  transform: translateX(-50%);
 }
 
 .profiles-page__video {
-  object-position: center top;
+  object-position: center 14%;
+  transform: scale(1.26);
 }
 
 .profiles-page__canvas {
@@ -989,28 +992,30 @@ body[data-page="articles"] .rail-entry__meta {
   min-height: 100svh;
   display: grid;
   align-content: center;
-  gap: 1rem;
-  padding: 4rem 0 2rem;
+  gap: 1.3rem;
+  padding: 3.2rem 0 2rem;
 }
 
 .profiles-page__header {
   display: grid;
   justify-items: center;
-  gap: 1rem;
+  gap: 0.85rem;
   text-align: center;
 }
 
 .profiles-page__lead {
-  max-width: var(--page-lead-measure);
+  max-width: min(58rem, 100%);
   color: rgba(255, 255, 255, 0.88);
+  font-size: clamp(1.18rem, 1.55vw, 1.72rem);
+  line-height: 1.3;
 }
 
 .profiles-page__grid {
-  width: min(48rem, 100%);
-  margin: 1rem auto 0;
+  width: min(44.5rem, 100%);
+  margin: 1.45rem auto 0;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.15rem;
+  gap: 1.6rem 1.2rem;
 }
 
 .profiles-page__button {
@@ -1018,10 +1023,10 @@ body[data-page="articles"] .rail-entry__meta {
   align-items: center;
   justify-content: center;
   gap: 0.85rem;
-  min-height: 3.85rem;
-  padding: 0.9rem 1rem;
+  min-height: 3.95rem;
+  padding: 0.95rem 1rem;
   border: 1px solid rgba(255, 255, 255, 0.76);
-  background: rgba(0, 0, 0, 0.18);
+  background: rgba(0, 0, 0, 0.34);
   color: #f5f4ed;
   font-family: var(--replica-font-ui);
   font-size: 0.88rem;
@@ -1190,7 +1195,7 @@ body[data-page="articles"] .rail-entry__meta {
   }
 
   .home-hero-band__headline-top {
-    font-size: clamp(3.4rem, 14vw, 5.75rem);
+    font-size: clamp(3.8rem, 14vw, 6.1rem);
   }
 
   .home-hero-band__frame {
@@ -1204,7 +1209,7 @@ body[data-page="articles"] .rail-entry__meta {
   }
 
   .home-hero-band__frame-line {
-    font-size: clamp(3.45rem, 14.8vw, 5.8rem);
+    font-size: clamp(3.65rem, 14.8vw, 6.1rem);
   }
 
   .home-hero-band__media {
@@ -1243,7 +1248,7 @@ body[data-page="articles"] .rail-entry__meta {
   .portfolio-page__title,
   .creative-page__title,
   .profiles-page__title {
-    font-size: clamp(3.15rem, 14vw, 4.9rem);
+    font-size: clamp(3.4rem, 14vw, 5.2rem);
   }
 
   .bio-page__title {
