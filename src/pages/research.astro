@@ -1,0 +1,71 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionRail from "../components/SectionRail.astro";
+import { replicaFooterCredit, researchPage } from "../data/editorial";
+
+const groupedYears = researchPage.rail.map((item) => ({
+  ...item,
+  entries: researchPage.entries.filter((entry) => entry.year === item.label),
+}));
+---
+
+<BaseLayout
+  title="Research"
+  description="Research page for Mark Jayson Martinez Farol."
+  page="research"
+  accent="#edf0f2"
+  shell="bare"
+  footer={false}
+  replicaFooter={false}
+  replicaMotion={true}
+>
+  <article class="replica-page research-page">
+    <div class="replica-canvas research-page__canvas">
+      <header class="rail-page__header">
+        <h1 class="rail-page__title" data-lift>{researchPage.title}</h1>
+        <p class="rail-page__lead" data-lift>{researchPage.lead} <span class="rail-page__legend">{researchPage.legend}</span></p>
+      </header>
+
+      <div class="rail-page__layout" data-section-rail-root>
+        <SectionRail title={researchPage.title} items={researchPage.rail} />
+
+        <div class="rail-page__content">
+          {
+            groupedYears.map((group) => (
+              <section id={group.id} class="rail-page__group" data-rail-section data-section-id={group.id}>
+                <h2 class="rail-page__group-title">{group.label}</h2>
+
+                <div class="rail-page__entries">
+                  {
+                    group.entries.map((entry) => (
+                      <article class="rail-entry" data-lift>
+                        <div class="rail-entry__meta">
+                          <span>{entry.year}</span>
+                          <span>{entry.status}</span>
+                        </div>
+                        <h3>{entry.title}</h3>
+                        <p>{entry.summary}</p>
+                        {
+                          entry.ctaLabel &&
+                            (entry.href ? (
+                              <a class="replica-outline-button replica-outline-button--dark" href={entry.href} target="_blank" rel="noreferrer">
+                                {entry.ctaLabel}
+                              </a>
+                            ) : (
+                              <span class="replica-outline-button replica-outline-button--dark is-disabled">{entry.ctaLabel}</span>
+                            ))
+                        }
+                      </article>
+                    ))
+                  }
+                </div>
+              </section>
+            ))
+          }
+        </div>
+      </div>
+
+      <p class="page-credit page-credit--dark">{replicaFooterCredit}</p>
+    </div>
+  </article>
+</BaseLayout>

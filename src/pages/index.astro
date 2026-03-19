@@ -1,0 +1,126 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { homePage, replicaFooterCredit } from "../data/editorial";
+import { withBase } from "../utils/paths";
+---
+
+<BaseLayout
+  title="Homepage"
+  description="Homepage for Mark Jayson Martinez Farol."
+  page="home"
+  accent="#050505"
+  shell="bare"
+  footer={false}
+  replicaFooter={false}
+  replicaMotion={true}
+>
+  <div class="replica-page home-page home-replica">
+    <section class="home-hero-band" data-home-hero>
+      <div class="replica-canvas home-hero-band__canvas">
+        <button class="home-hero-band__contact" type="button" data-contact-trigger data-home-stagger>
+          Contact
+        </button>
+
+        <div class="home-hero-band__stage">
+          <div class="home-hero-band__frame" data-home-stagger>
+            <video
+              class="home-hero-band__video"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="auto"
+              disablePictureInPicture
+              disableRemotePlayback
+              aria-hidden="true"
+            >
+              <source src={withBase("/media/canva-home-hero.mp4")} type="video/mp4" />
+            </video>
+            <div class="home-hero-band__shade"></div>
+          </div>
+
+          <div class="home-hero-band__overlay">
+            <div class="home-hero-band__title" data-home-stagger>
+              {
+                homePage.titleLines.map((line) => (
+                  <span class="home-hero-band__title-line">{line}</span>
+                ))
+              }
+            </div>
+
+            <div class="home-hero-band__roles" data-home-stagger>
+              {
+                homePage.roles.map((role) => (
+                  <span class="home-hero-band__role">{role}</span>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-contact-band" id="contact" data-home-contact>
+      <video
+        class="home-contact-band__video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        disablePictureInPicture
+        disableRemotePlayback
+        aria-hidden="true"
+      >
+        <source src={withBase("/media/canva-home-contact.mp4")} type="video/mp4" />
+      </video>
+      <div class="home-contact-band__shade"></div>
+
+      <div class="replica-canvas home-contact-band__canvas">
+        <div class="home-contact-band__content">
+          <div class="home-contact-band__portrait" data-lift>
+            <img src={withBase("/images/canva-home-portrait.png")} alt="Mark Jayson Farol holding a glowing globe." loading="eager" />
+          </div>
+
+          <div class="home-contact-band__form-block" data-lift>
+            <div class="home-contact-band__heading">
+              <h2>Contact</h2>
+              <p>{homePage.contactCopy}</p>
+            </div>
+
+            <form class="home-contact-band__form" action="#" method="post" onsubmit="event.preventDefault();">
+              <label class="home-contact-band__field">
+                <span>First Name*</span>
+                <input type="text" name="first-name" />
+              </label>
+
+              <label class="home-contact-band__field">
+                <span>EMAIL*</span>
+                <input type="email" name="email" />
+              </label>
+
+              <label class="home-contact-band__field home-contact-band__field--message">
+                <span>Message</span>
+                <textarea name="message"></textarea>
+              </label>
+
+              <label class="home-contact-band__field">
+                <span>Last Name*</span>
+                <input type="text" name="last-name" />
+              </label>
+
+              <label class="home-contact-band__field">
+                <span>Subject</span>
+                <input type="text" name="subject" />
+              </label>
+
+              <button class="home-contact-band__submit" type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
+
+        <p class="page-credit page-credit--light">{replicaFooterCredit}</p>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

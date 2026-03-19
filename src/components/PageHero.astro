@@ -1,0 +1,43 @@
+---
+import type { Metric } from "../data/site";
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  lede: string;
+  stats?: Metric[];
+}
+
+const { eyebrow, title, lede, stats = [] } = Astro.props;
+---
+
+<section class="page-hero" data-reveal>
+  <div class="page-hero__grid">
+    <div class="page-hero__copy">
+      <p class="eyebrow">{eyebrow}</p>
+      <h1 class="display-title">{title}</h1>
+      <p class="lede">{lede}</p>
+      <div class="page-hero__actions">
+        <slot name="actions" />
+      </div>
+    </div>
+
+    <div class="page-hero__aside">
+      <slot name="aside" />
+    </div>
+  </div>
+
+  {
+    stats.length > 0 && (
+      <div class="hero-stat-grid">
+        {stats.map((stat) => (
+          <article class="hero-stat">
+            <span class="hero-stat__value">{stat.value}</span>
+            <strong>{stat.label}</strong>
+            <small>{stat.note}</small>
+          </article>
+        ))}
+      </div>
+    )
+  }
+</section>

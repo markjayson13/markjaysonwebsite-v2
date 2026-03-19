@@ -1,0 +1,42 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { portfolioPage, replicaFooterCredit } from "../data/editorial";
+---
+
+<BaseLayout
+  title="Portfolio"
+  description="Portfolio hub for Mark Jayson Martinez Farol."
+  page="portfolio"
+  accent="#050505"
+  shell="bare"
+  footer={false}
+  replicaFooter={false}
+  replicaMotion={true}
+>
+  <article class="replica-page portfolio-page">
+    <div class="replica-canvas portfolio-page__canvas">
+      <div class="portfolio-page__shell">
+        <header class="portfolio-page__header">
+          <h1 class="portfolio-page__title" data-lift>{portfolioPage.title}</h1>
+          <p class="portfolio-page__lead" data-lift>{portfolioPage.lead}</p>
+        </header>
+
+        <div class="portfolio-page__grid">
+          {
+            portfolioPage.tiles.map((tile) => (
+              <a class:list={["portfolio-tile", `portfolio-tile--${tile.tone}`]} href={tile.href} data-lift>
+                <div class="portfolio-tile__copy">
+                  <h2>{tile.title}</h2>
+                  <p>{tile.description}</p>
+                </div>
+                <span class="portfolio-tile__cta">{tile.cta}</span>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <p class="page-credit page-credit--light">{replicaFooterCredit}</p>
+    </div>
+  </article>
+</BaseLayout>

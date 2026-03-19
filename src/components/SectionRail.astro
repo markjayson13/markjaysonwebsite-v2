@@ -1,0 +1,23 @@
+---
+import type { RailItem } from "../data/editorial";
+
+interface Props {
+  title: string;
+  items: RailItem[];
+}
+
+const { title, items } = Astro.props;
+---
+
+<nav class="section-rail" aria-label={`${title} section navigation`} data-section-rail>
+  <p class="section-rail__title">{title}</p>
+  <div class="section-rail__items">
+    {
+      items.map((item) => (
+        <a href={`#${item.id}`} class="section-rail__link" data-rail-link data-target={item.id}>
+          {item.label}
+        </a>
+      ))
+    }
+  </div>
+</nav>

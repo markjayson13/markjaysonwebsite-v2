@@ -1,0 +1,62 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { profilesPage, replicaFooterCredit } from "../data/editorial";
+import { withBase } from "../utils/paths";
+---
+
+<BaseLayout
+  title="Profiles"
+  description="Profile links for Mark Jayson Martinez Farol."
+  page="profiles"
+  accent="#050505"
+  shell="bare"
+  footer={false}
+  replicaFooter={false}
+  replicaMotion={true}
+>
+  <article class="replica-page profiles-page">
+    <div class="profiles-page__media">
+      <video
+        class="profiles-page__video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        disablePictureInPicture
+        disableRemotePlayback
+        aria-hidden="true"
+      >
+        <source src={withBase("/media/canva-profiles.mp4")} type="video/mp4" />
+      </video>
+      <div class="profiles-page__shade"></div>
+    </div>
+
+    <div class="replica-canvas profiles-page__canvas">
+      <header class="profiles-page__header">
+        <h1 class="profiles-page__title" data-lift>{profilesPage.title}</h1>
+        <p class="profiles-page__lead" data-lift>{profilesPage.lead}</p>
+      </header>
+
+      <div class="profiles-page__grid">
+        {
+          profilesPage.buttons.map((button) =>
+            button.href && !button.disabled ? (
+              <a class="profiles-page__button" href={button.href} target="_blank" rel="noreferrer" data-lift>
+                <span class="profiles-page__symbol">{button.symbol}</span>
+                <span>{button.label}</span>
+              </a>
+            ) : (
+              <span class="profiles-page__button profiles-page__button--disabled" data-lift>
+                <span class="profiles-page__symbol">{button.symbol}</span>
+                <span>{button.label}</span>
+              </span>
+            )
+          )
+        }
+      </div>
+
+      <p class="page-credit page-credit--light">{replicaFooterCredit}</p>
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,48 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { bioPage, replicaFooterCredit } from "../data/editorial";
+import { withBase } from "../utils/paths";
+---
+
+<BaseLayout
+  title="About"
+  description="Biographical overview for Mark Jayson Martinez Farol."
+  page="bio"
+  accent="#edf0f2"
+  shell="bare"
+  footer={false}
+  replicaFooter={false}
+  replicaMotion={true}
+>
+  <article class="replica-page bio-page">
+    <div class="replica-canvas bio-page__canvas">
+      <h1 class="bio-page__title" data-lift>{bioPage.title}</h1>
+
+      <div class="bio-page__body">
+        <div class="bio-page__portrait" data-lift>
+          <img src={withBase("/images/canva-bio-portrait.png")} alt="Portrait of Mark Jayson Farol." loading="eager" />
+        </div>
+
+        <div class="bio-page__copy">
+          {
+            bioPage.paragraphs.map((paragraph) => (
+              <p data-lift>{paragraph}</p>
+            ))
+          }
+
+          <div class="bio-page__links">
+            {
+              bioPage.links.map((link) => (
+                <a class="replica-black-card" href={link.href} data-lift>
+                  {link.label}
+                </a>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+
+      <p class="page-credit page-credit--dark">{replicaFooterCredit}</p>
+    </div>
+  </article>
+</BaseLayout>

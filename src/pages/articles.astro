@@ -1,0 +1,42 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionRail from "../components/SectionRail.astro";
+import { articlesPage, replicaFooterCredit } from "../data/editorial";
+---
+
+<BaseLayout
+  title="Articles"
+  description="Articles page for Mark Jayson Martinez Farol."
+  page="articles"
+  accent="#0b3b0b"
+  shell="bare"
+  footer={false}
+  replicaFooter={false}
+  replicaMotion={true}
+>
+  <article class="replica-page articles-page">
+    <div class="replica-canvas articles-page__canvas">
+      <header class="rail-page__header rail-page__header--light">
+        <h1 class="rail-page__title" data-lift>{articlesPage.title}</h1>
+        <p class="rail-page__lead" data-lift>{articlesPage.lead}</p>
+      </header>
+
+      <div class="rail-page__layout rail-page__layout--light" data-section-rail-root>
+        <SectionRail title={articlesPage.title} items={articlesPage.rail} />
+
+        <div class="rail-page__content">
+          {
+            articlesPage.sections.map((section) => (
+              <section id={section.id} class="rail-page__group" data-rail-section data-section-id={section.id}>
+                <h2 class="rail-page__group-title">{section.title}</h2>
+                <p class="rail-page__group-intro">{section.description}</p>
+              </section>
+            ))
+          }
+        </div>
+      </div>
+
+      <p class="page-credit page-credit--light">{replicaFooterCredit}</p>
+    </div>
+  </article>
+</BaseLayout>
