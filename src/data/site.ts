@@ -1,3 +1,5 @@
+import { withBase } from "../utils/paths";
+
 export type NavLink = {
   label: string;
   href: string;
@@ -87,8 +89,6 @@ export type GalleryImage = {
   alt: string;
   caption: string;
 };
-
-import { withBase } from "../utils/paths";
 
 export const navLinks: NavLink[] = [
   { label: "Home", href: withBase("/") },
