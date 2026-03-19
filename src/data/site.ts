@@ -132,6 +132,66 @@ export const navLinks: NavLink[] = [
 
 export const cornerMenuItems: CornerMenuItem[] = [
   {
+    label: "Home",
+    href: withBase("/"),
+    title: "Home",
+    description:
+      "The homepage composition with the hero frame, discovery prompts, and contact band.",
+  },
+  {
+    label: "About",
+    href: withBase("/bio"),
+    title: "About",
+    description:
+      "Economics, performance, data, and public-facing work arranged around one interdisciplinary story.",
+  },
+  {
+    label: "Resume/CV",
+    href: withBase("/resume"),
+    title: "Resume/CV",
+    description:
+      "Education, experience, certifications, projects, and technical skills in a tighter CV format.",
+  },
+  {
+    label: "Portfolio",
+    href: withBase("/portfolio"),
+    title: "Portfolio",
+    description: "A gateway to research papers, data projects, public writing, and creative work.",
+  },
+  {
+    label: "Research",
+    href: withBase("/research"),
+    title: "Research",
+    description: "Academic papers, working research, and quantitative higher-education analysis.",
+  },
+  {
+    label: "Projects",
+    href: withBase("/projects"),
+    title: "Projects",
+    description: "Applied data, panel-building, and analytics projects translated into concrete outputs.",
+  },
+  {
+    label: "Articles",
+    href: withBase("/articles"),
+    title: "Articles",
+    description: "Public writing, essays, commentary, and accessible scholarship.",
+  },
+  {
+    label: "Creative",
+    href: withBase("/creative"),
+    title: "Creative",
+    description: "Performance, music, and creative practice presented through the same editorial shell.",
+  },
+  {
+    label: "Profiles",
+    href: withBase("/profiles"),
+    title: "Profiles",
+    description: "A curated hub of academic, professional, technical, and creative profiles.",
+  },
+];
+
+export const homeDiscoveryItems: CornerMenuItem[] = [
+  {
     label: "About",
     href: withBase("/bio"),
     title: "About",

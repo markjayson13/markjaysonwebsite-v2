@@ -142,32 +142,75 @@ p {
 
 .corner-menu {
   position: fixed;
-  top: 0.85rem;
-  right: 0.9rem;
+  top: 1rem;
+  right: 1rem;
   z-index: 300;
 }
 
 .corner-menu__trigger {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  min-height: 3.05rem;
-  min-width: min(17.4rem, calc(100vw - 1.8rem));
-  padding: 0.78rem 1.05rem;
+  justify-content: flex-end;
+  min-height: 3.4rem;
+  padding: 0.3rem;
   border: 1px solid rgba(17, 17, 17, 0.74);
   background: rgba(247, 248, 248, 0.96);
   color: #111;
   font-family: var(--font-ui);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  transition:
+    transform 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.corner-menu__trigger-icon {
+  display: inline-grid;
+  gap: 0.28rem;
+  width: 2.8rem;
+  min-width: 2.8rem;
+  height: 2.8rem;
+  padding: 0.7rem 0.58rem;
+  border: 1px solid currentColor;
+  place-content: center;
+}
+
+.corner-menu__trigger-bar {
+  display: block;
+  width: 1.45rem;
+  height: 1px;
+  background: currentColor;
+  transform-origin: center;
+  transition:
+    transform 180ms ease,
+    opacity 180ms ease,
+    width 180ms ease;
+}
+
+.corner-menu__trigger-copy {
+  display: inline-flex;
+  align-items: center;
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding-inline: 0;
+  transition:
+    max-width 200ms ease,
+    opacity 180ms ease,
+    padding-inline 180ms ease;
+}
+
+.corner-menu__trigger-label {
+  display: inline-block;
+  white-space: nowrap;
   font-size: 0.79rem;
   font-weight: 600;
   letter-spacing: 0.075em;
   line-height: 1;
   text-transform: uppercase;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
-  transition:
-    transform 160ms ease,
-    background 160ms ease,
-    border-color 160ms ease;
+  transform: translateX(0.5rem);
+  transition: transform 200ms ease;
 }
 
 body[data-page="home"] .corner-menu__trigger,
@@ -188,6 +231,7 @@ body[data-page="profiles"] .corner-menu__trigger {
   transform: translateY(-2px);
   border-color: rgba(17, 17, 17, 1);
   background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 18px 32px rgba(0, 0, 0, 0.16);
 }
 
 body[data-page="home"] .corner-menu__trigger:hover,
@@ -212,6 +256,44 @@ body[data-page="profiles"] .corner-menu.is-open .corner-menu__trigger {
   background: rgba(11, 11, 11, 0.98);
 }
 
+@media (hover: hover) {
+  .corner-menu:hover .corner-menu__trigger-copy,
+  .corner-menu:focus-within .corner-menu__trigger-copy,
+  .corner-menu.is-open .corner-menu__trigger-copy {
+    max-width: 18rem;
+    opacity: 1;
+    padding-inline: 0.95rem 0.7rem;
+  }
+
+  .corner-menu:hover .corner-menu__trigger-label,
+  .corner-menu:focus-within .corner-menu__trigger-label,
+  .corner-menu.is-open .corner-menu__trigger-label {
+    transform: translateX(0);
+  }
+}
+
+.corner-menu.is-open .corner-menu__trigger-copy {
+  max-width: 18rem;
+  opacity: 1;
+  padding-inline: 0.95rem 0.7rem;
+}
+
+.corner-menu.is-open .corner-menu__trigger-label {
+  transform: translateX(0);
+}
+
+.corner-menu.is-open .corner-menu__trigger-bar:nth-child(1) {
+  transform: translateY(0.37rem) rotate(45deg);
+}
+
+.corner-menu.is-open .corner-menu__trigger-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.corner-menu.is-open .corner-menu__trigger-bar:nth-child(3) {
+  transform: translateY(-0.37rem) rotate(-45deg);
+}
+
 .corner-menu__overlay {
   position: fixed;
   inset: 0;
@@ -228,11 +310,11 @@ body[data-page="profiles"] .corner-menu.is-open .corner-menu__trigger {
 
 .corner-menu__panel {
   position: absolute;
-  top: 3.88rem;
+  top: 4.35rem;
   left: 50%;
   transform: translateX(-50%);
-  width: min(61rem, calc(100vw - 2rem));
-  padding: 2.15rem 2.35rem 2.1rem;
+  width: min(67rem, calc(100vw - 2rem));
+  padding: 2rem 2.2rem 2.1rem;
   background: rgba(255, 255, 255, 0.985);
   color: #0d0d0d;
   box-shadow: 0 28px 80px rgba(0, 0, 0, 0.24);
@@ -265,16 +347,16 @@ body[data-page="profiles"] .corner-menu.is-open .corner-menu__trigger {
 
 .replica-menu-sheet__layout {
   display: grid;
-  grid-template-columns: minmax(15rem, 18.25rem) minmax(0, 1fr);
-  gap: clamp(1.8rem, 2.6vw, 3rem);
+  grid-template-columns: minmax(18rem, 22rem) minmax(0, 1fr);
+  gap: clamp(2rem, 2.8vw, 3.2rem);
   align-items: start;
 }
 
 .replica-menu-sheet__nav {
   display: grid;
-  gap: 1.15rem;
+  gap: 0.95rem;
   justify-items: end;
-  padding-right: clamp(1rem, 1.7vw, 1.7rem);
+  padding-right: clamp(1.2rem, 2vw, 1.9rem);
   border-right: 3px solid #111;
   text-align: right;
 }
@@ -282,7 +364,7 @@ body[data-page="profiles"] .corner-menu.is-open .corner-menu__trigger {
 .replica-menu-sheet__link {
   display: block;
   font-family: var(--font-ui);
-  font-size: clamp(2rem, 2.7vw, 2.75rem);
+  font-size: clamp(1.72rem, 2.15vw, 2.32rem);
   font-weight: 400;
   letter-spacing: 0.01em;
   line-height: 0.98;
@@ -301,24 +383,24 @@ body[data-page="profiles"] .corner-menu.is-open .corner-menu__trigger {
 }
 
 .replica-menu-sheet__preview {
-  max-width: 34rem;
-  min-height: 8rem;
-  padding-top: 0.1rem;
+  max-width: 35rem;
+  min-height: 10rem;
+  padding-top: 0.3rem;
 }
 
 .replica-menu-sheet__preview h3 {
-  margin: 0 0 0.55rem;
+  margin: 0 0 0.6rem;
   font-family: var(--font-ui);
-  font-size: clamp(1.65rem, 1.95vw, 2rem);
+  font-size: clamp(1.7rem, 2vw, 2.05rem);
   font-weight: 600;
   line-height: 1.04;
 }
 
 .replica-menu-sheet__preview p {
   margin: 0;
-  max-width: 28rem;
-  font-size: clamp(1.02rem, 1.15vw, 1.28rem);
-  line-height: 1.34;
+  max-width: 31rem;
+  font-size: clamp(1.02rem, 1.08vw, 1.18rem);
+  line-height: 1.42;
   color: rgba(17, 17, 17, 0.92);
 }
 
@@ -393,7 +475,7 @@ body[data-page="profiles"] .corner-menu.is-open .corner-menu__trigger {
   }
 
   .corner-menu__panel {
-    top: 4.05rem;
+    top: 4.3rem;
     left: 50%;
     transform: translateX(-50%);
     width: min(44rem, calc(100vw - 1.6rem));
@@ -425,16 +507,16 @@ body[data-page="profiles"] .corner-menu.is-open .corner-menu__trigger {
   }
 
   .corner-menu__trigger {
-    min-width: auto;
-    width: calc(100vw - 1.6rem);
-    padding-inline: 0.9rem;
-    font-size: 0.73rem;
-    letter-spacing: 0.06em;
+    max-width: calc(100vw - 1.6rem);
   }
 
   .corner-menu__panel {
     width: calc(100vw - 1.6rem);
     padding: 1.35rem 1.15rem 1.4rem;
+  }
+
+  .corner-menu__trigger-copy {
+    display: none;
   }
 }
 

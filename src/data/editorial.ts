@@ -1,4 +1,4 @@
-import { cornerMenuItems, socialLinks } from "./site";
+import { homeDiscoveryItems, socialLinks } from "./site";
 import { withBase } from "../utils/paths";
 
 export type HomeLink = {
@@ -30,6 +30,7 @@ export type HomeContact = {
   label: string;
   title: string;
   copy: string;
+  note: string;
   portraitSrc: string;
   videoSrc: string;
   submitLabel: string;
@@ -170,12 +171,13 @@ export const homePage = {
       description: "Jump directly to the homepage contact form and send a message.",
     },
   ] satisfies HomeLink[],
-  discoveryItems: cornerMenuItems,
+  discoveryItems: homeDiscoveryItems,
   contact: {
     label: "Get in Touch",
     title: "Get in Touch",
-    copy: "Use the form below to start a conversation about research, data work, creative collaboration, or speaking.",
-    portraitSrc: withBase("/images/canva-home-portrait.png"),
+    copy: "Reach out for research, data work, performance, speaking, or interdisciplinary collaboration.",
+    note: "Use the form below to send a direct message.",
+    portraitSrc: withBase("/images/home-contact-portrait.png"),
     videoSrc: withBase("/media/canva-home-contact.mp4"),
     submitLabel: "Submit",
   } satisfies HomeContact,

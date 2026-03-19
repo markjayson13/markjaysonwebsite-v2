@@ -142,49 +142,56 @@ import { homePage, replicaFooterCredit } from "../data/editorial";
             <img src={homePage.contact.portraitSrc} alt="Mark Jayson Farol holding a glowing globe." loading="eager" />
           </div>
 
-          <div class="home-contact-band__form-block">
+          <div class="home-contact-band__panel">
             <div class="home-contact-band__heading">
-              <h2>{homePage.contact.title}</h2>
+              <p class="home-contact-band__eyebrow">{homePage.contact.label}</p>
+              <h2><span>{homePage.contact.title}</span></h2>
               <p>{homePage.contact.copy}</p>
+              <p class="home-contact-band__note">{homePage.contact.note}</p>
             </div>
 
-            <form
-              class="home-contact-band__form"
-              action="https://formsubmit.co/markjayson@markjayson.com"
-              method="post"
-            >
-              <input type="hidden" name="_subject" value="New message from markjayson.com" />
-              <input type="hidden" name="_template" value="table" />
-              <input type="hidden" name="_url" value="https://markjayson.com/" />
-              <input type="text" name="_honey" class="home-contact-band__honeypot" tabindex="-1" autocomplete="off" />
+            <div class="home-contact-band__form-shell">
+              <form
+                class="home-contact-band__form"
+                action="https://formsubmit.co/markjayson@markjayson.com"
+                method="post"
+              >
+                <input type="hidden" name="_subject" value="New message from markjayson.com" />
+                <input type="hidden" name="_template" value="table" />
+                <input type="hidden" name="_url" value="https://markjayson.com/" />
+                <input type="text" name="_honey" class="home-contact-band__honeypot" tabindex="-1" autocomplete="off" />
 
-              <label class="home-contact-band__field">
-                <span>First Name*</span>
-                <input type="text" name="first_name" required autocomplete="given-name" />
-              </label>
+                {
+                  homePage.contactFields.map((field) => (
+                    <label class:list={["home-contact-band__field", field.full && "home-contact-band__field--message"]}>
+                      <span>{field.label}</span>
+                      {
+                        field.name === "message" ? (
+                          <textarea name={field.name} required></textarea>
+                        ) : (
+                          <input
+                            type={field.name === "email" ? "email" : "text"}
+                            name={field.name}
+                            required={field.name !== "subject"}
+                            autocomplete={
+                              field.name === "first-name"
+                                ? "given-name"
+                                : field.name === "last-name"
+                                  ? "family-name"
+                                  : field.name === "email"
+                                    ? "email"
+                                    : "off"
+                            }
+                          />
+                        )
+                      }
+                    </label>
+                  ))
+                }
 
-              <label class="home-contact-band__field">
-                <span>EMAIL*</span>
-                <input type="email" name="email" required autocomplete="email" />
-              </label>
-
-              <label class="home-contact-band__field">
-                <span>Last Name*</span>
-                <input type="text" name="last_name" required autocomplete="family-name" />
-              </label>
-
-              <label class="home-contact-band__field">
-                <span>Subject</span>
-                <input type="text" name="subject" autocomplete="off" />
-              </label>
-
-              <label class="home-contact-band__field home-contact-band__field--message">
-                <span>Message</span>
-                <textarea name="message" required></textarea>
-              </label>
-
-              <button class="home-contact-band__submit" type="submit">{homePage.contact.submitLabel}</button>
-            </form>
+                <button class="home-contact-band__submit" type="submit">{homePage.contact.submitLabel}</button>
+              </form>
+            </div>
           </div>
         </div>
 
