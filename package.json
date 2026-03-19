@@ -1,0 +1,37 @@
+{
+  "name": "mark-jayson-farol-site",
+  "version": "1.0.0",
+  "description": "Editorial-cinematic personal website for Mark Jayson Farol.",
+  "scripts": {
+    "check:node": "node scripts/check-node-version.mjs",
+    "predev": "npm run check:node",
+    "dev": "astro dev",
+    "prebuild": "npm run check:node",
+    "build": "astro build",
+    "prepreview": "npm run check:node",
+    "preview": "astro preview",
+    "deploy": "wrangler pages deploy dist --project-name markjaysonwebsite-v2"
+  },
+  "keywords": [
+    "astro",
+    "personal-site",
+    "portfolio"
+  ],
+  "author": "Mark Jayson Farol",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "gsap": "^3.13.0"
+  },
+  "engines": {
+    "node": "22.x"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.8",
+    "@astrojs/sitemap": "^3.7.1",
+    "@types/node": "^25.3.5",
+    "astro": "^6.0.8",
+    "typescript": "^5.9.3",
+    "wrangler": "^4.71.0"
+  }
+}
