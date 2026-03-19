@@ -16,6 +16,9 @@
   "author": "Mark Jayson Farol",
   "license": "ISC",
   "type": "module",
+  "dependencies": {
+    "gsap": "^3.13.0"
+  },
   "engines": {
     "node": "22.x"
   },

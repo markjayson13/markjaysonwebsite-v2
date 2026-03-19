@@ -12,6 +12,12 @@ export type CornerMenuItem = {
   description: string;
 };
 
+export type PageTheme = {
+  titleMeasure: string;
+  leadMeasure: string;
+  copyMeasure?: string;
+};
+
 export type Metric = {
   value: string;
   label: string;
@@ -110,7 +116,8 @@ export const cornerMenuItems: CornerMenuItem[] = [
     label: "Resume/CV",
     href: withBase("/resume"),
     title: "Resume/CV",
-    description: "(Placeholder)",
+    description:
+      "Education, experience, certifications, projects, and technical skills arranged as a tighter curriculum vitae.",
   },
   {
     label: "Portfolio",
@@ -126,6 +133,54 @@ export const cornerMenuItems: CornerMenuItem[] = [
       "A curated hub of my academic, professional, technical, and creative presence across the web.",
   },
 ];
+
+export const pageThemes: Record<string, PageTheme> = {
+  home: {
+    titleMeasure: "46rem",
+    leadMeasure: "34rem",
+    copyMeasure: "66rem",
+  },
+  bio: {
+    titleMeasure: "41rem",
+    leadMeasure: "34rem",
+    copyMeasure: "47rem",
+  },
+  resume: {
+    titleMeasure: "44rem",
+    leadMeasure: "52rem",
+    copyMeasure: "67rem",
+  },
+  portfolio: {
+    titleMeasure: "29rem",
+    leadMeasure: "30rem",
+    copyMeasure: "34rem",
+  },
+  research: {
+    titleMeasure: "28rem",
+    leadMeasure: "68rem",
+    copyMeasure: "72rem",
+  },
+  projects: {
+    titleMeasure: "28rem",
+    leadMeasure: "58rem",
+    copyMeasure: "68rem",
+  },
+  articles: {
+    titleMeasure: "28rem",
+    leadMeasure: "58rem",
+    copyMeasure: "68rem",
+  },
+  creative: {
+    titleMeasure: "26rem",
+    leadMeasure: "46rem",
+    copyMeasure: "46rem",
+  },
+  profiles: {
+    titleMeasure: "30rem",
+    leadMeasure: "52rem",
+    copyMeasure: "52rem",
+  },
+};
 
 export const profile = {
   name: "Mark Jayson Farol",

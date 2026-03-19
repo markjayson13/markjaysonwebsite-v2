@@ -1,4 +1,4 @@
-import { socialLinks } from "./site";
+import { cornerMenuItems, socialLinks } from "./site";
 import { withBase } from "../utils/paths";
 
 export type HomeLink = {
@@ -10,6 +10,28 @@ export type HomeField = {
   label: string;
   name: string;
   full?: boolean;
+};
+
+export type HomeHero = {
+  headlineTop: string;
+  headlineFrame: string[];
+  roles: string[];
+  ctaLabel: string;
+  videoSrc: string;
+};
+
+export type HomeDiscovery = {
+  title: string;
+  defaultLabel: string;
+};
+
+export type HomeContact = {
+  label: string;
+  title: string;
+  copy: string;
+  portraitSrc: string;
+  videoSrc: string;
+  submitLabel: string;
 };
 
 export type ResumeJumpLink = {
@@ -104,20 +126,27 @@ const githubProfile = "https://github.com/markjayson13";
 export const replicaFooterCredit = "© Mark Jayson Martinez Farol";
 
 export const homePage = {
-  titleLines: ["Mark Jayson", "Martinez Farol"],
-  roles: ["Data Scientist", "Data Engineer", "Economist", "Statistician", "Scientist", "Artist", "Musician", "Singer", "Actor"],
-  links: [
-    { label: "About", href: withBase("/bio") },
-    { label: "Resume/CV", href: withBase("/resume") },
-    { label: "Portfolio", href: withBase("/portfolio") },
-    { label: "Profiles", href: withBase("/profiles") },
-  ] satisfies HomeLink[],
-  aboutLabel: "About",
-  about:
-    "I’m Mark Jayson Farol, an economist, artist, scientist, musician, and statistician working at the intersection of data, policy, and creative expression.",
-  contactLabel: "Contact",
-  contactCopy:
-    "Use the form below to start a conversation about research, data work, policy analysis, creative collaborations, or speaking opportunities.",
+  hero: {
+    headlineTop: "Mark Jayson",
+    headlineFrame: ["Martinez", "Farol"],
+    roles: ["Artist", "Scientist", "Economist", "Data Scientist", "Data Engineer", "Statistician", "Musician", "Singer", "Actor"],
+    ctaLabel: "Contact",
+    videoSrc: withBase("/media/canva-home-hero.mp4"),
+  } satisfies HomeHero,
+  discovery: {
+    title: "What do you want to find Out?",
+    defaultLabel: "About",
+  } satisfies HomeDiscovery,
+  discoveryItems: cornerMenuItems,
+  contact: {
+    label: "Get in Touch",
+    title: "Get in Touch",
+    copy:
+      "Use the form below to start a conversation about research, data work, policy analysis, creative collaborations, or speaking opportunities.",
+    portraitSrc: withBase("/images/canva-home-portrait.png"),
+    videoSrc: withBase("/media/canva-home-contact.mp4"),
+    submitLabel: "Submit",
+  } satisfies HomeContact,
   contactFields: [
     { label: "First Name*", name: "first-name" },
     { label: "EMAIL*", name: "email" },
@@ -125,7 +154,7 @@ export const homePage = {
     { label: "Subject", name: "subject" },
     { label: "Message", name: "message", full: true },
   ] satisfies HomeField[],
-};
+} as const;
 
 export const bioPage = {
   title: "Mark Jayson Martinez Farol",
@@ -565,7 +594,7 @@ export const articlesPage = {
 };
 
 export const creativePage = {
-  eyebrow: "Placeholder",
+  eyebrow: "Performance, Music & Film",
   title: "Creative",
   lead: "Music, performance, film, and storytelling across my artistic practice.",
 };

@@ -1,5 +1,6 @@
 ---
-import { cornerMenuItems, profile } from "../data/site";
+import { cornerMenuItems, pageThemes, profile } from "../data/site";
+import ReplicaMotion from "../components/ReplicaMotion.astro";
 import { withBase } from "../utils/paths";
 import "../styles/global.css";
 import "../styles/editorial.css";
@@ -25,6 +26,7 @@ const {
 
 const siteOrigin = Astro.site ?? new URL("https://markjayson.com");
 const canonical = new URL(Astro.url.pathname, siteOrigin).toString();
+const pageTheme = pageThemes[page] ?? pageThemes.home;
 const cornerMenuDefaultLabel =
   page === "bio"
     ? "About"
@@ -73,7 +75,10 @@ const cornerMenuDefaultLabel =
     />
   </head>
 
-  <body data-page={page} style={`--page-accent:${accent};`}>
+  <body
+    data-page={page}
+    style={`--page-accent:${accent}; --page-title-measure:${pageTheme.titleMeasure}; --page-lead-measure:${pageTheme.leadMeasure}; --page-copy-measure:${pageTheme.copyMeasure ?? pageTheme.leadMeasure};`}
+  >
     <main id="main-content" class="site-main site-main--bare">
       <slot />
     </main>
@@ -94,25 +99,27 @@ const cornerMenuDefaultLabel =
 
         <section
           id="site-corner-menu-panel"
-          class="corner-menu__panel"
+          class="corner-menu__panel replica-menu-sheet replica-menu-sheet--overlay"
           role="dialog"
           aria-modal="true"
           aria-labelledby="corner-menu-title"
+          data-preview-menu-root
+          data-default-label={cornerMenuDefaultLabel}
         >
           <button class="corner-menu__panel-close" type="button" aria-label="Close navigation menu" data-corner-menu-close>
             Close
           </button>
 
-          <h2 id="corner-menu-title" class="corner-menu__title">What do you want to find Out?</h2>
+          <h2 id="corner-menu-title" class="replica-menu-sheet__title">What do you want to find Out?</h2>
 
-          <div class="corner-menu__layout">
-            <nav class="corner-menu__nav" aria-label="Site navigation">
+          <div class="replica-menu-sheet__layout">
+            <nav class="replica-menu-sheet__nav" aria-label="Site navigation" data-menu-nav>
               {
                 cornerMenuItems.map((item) => (
                   <a
                     href={item.href}
-                    class="corner-menu__link"
-                    data-corner-menu-item
+                    class="replica-menu-sheet__link"
+                    data-menu-item
                     data-title={item.title}
                     data-description={item.description}
                     data-label={item.label}
@@ -123,9 +130,9 @@ const cornerMenuDefaultLabel =
               }
             </nav>
 
-            <div class="corner-menu__preview">
-              <h3 data-corner-menu-preview-title></h3>
-              <p data-corner-menu-preview-description></p>
+            <div class="replica-menu-sheet__preview">
+              <h3 data-menu-preview-title></h3>
+              <p data-menu-preview-description></p>
             </div>
           </div>
         </section>
@@ -144,41 +151,68 @@ const cornerMenuDefaultLabel =
         const trigger = root.querySelector("[data-corner-menu-trigger]");
         const overlay = root.querySelector("[data-corner-menu-overlay]");
         const closeButtons = root.querySelectorAll("[data-corner-menu-close]");
-        const nav = root.querySelector(".corner-menu__nav");
-        const items = Array.from(root.querySelectorAll("[data-corner-menu-item]"));
-        const titleEl = root.querySelector("[data-corner-menu-preview-title]");
-        const descriptionEl = root.querySelector("[data-corner-menu-preview-description]");
         const defaultLabel = root.dataset.defaultLabel ?? "About";
 
         if (!(trigger instanceof HTMLButtonElement) || !(overlay instanceof HTMLElement)) {
           return;
         }
 
-        const getItemByLabel = (label) =>
-          items.find((item) => item instanceof HTMLElement && item.dataset.label === label);
-
-        const setPreview = (label) => {
-          const active = getItemByLabel(label);
-          if (!(active instanceof HTMLElement)) {
+        const bindPreviewMenu = (menuRoot) => {
+          if (!(menuRoot instanceof HTMLElement) || menuRoot.dataset.previewBound === "true") {
             return null;
           }
 
-          items.forEach((item) => {
-            if (item instanceof HTMLElement) {
-              item.classList.toggle("is-active", item === active);
+          menuRoot.dataset.previewBound = "true";
+          const nav = menuRoot.querySelector("[data-menu-nav]");
+          const items = Array.from(menuRoot.querySelectorAll("[data-menu-item]")).filter(
+            (item) => item instanceof HTMLElement,
+          );
+          const titleEl = menuRoot.querySelector("[data-menu-preview-title]");
+          const descriptionEl = menuRoot.querySelector("[data-menu-preview-description]");
+          const menuDefaultLabel = menuRoot.dataset.defaultLabel ?? defaultLabel;
+
+          const getItemByLabel = (label) =>
+            items.find((item) => item instanceof HTMLElement && item.dataset.label === label);
+
+          const setPreview = (label) => {
+            const active = getItemByLabel(label);
+            if (!(active instanceof HTMLElement)) {
+              return null;
             }
+
+            items.forEach((item) => {
+              if (item instanceof HTMLElement) {
+                item.classList.toggle("is-active", item === active);
+              }
+            });
+
+            if (titleEl instanceof HTMLElement) {
+              titleEl.textContent = active.dataset.title ?? label;
+            }
+
+            if (descriptionEl instanceof HTMLElement) {
+              descriptionEl.textContent = active.dataset.description ?? "";
+            }
+
+            return active;
+          };
+
+          items.forEach((item) => {
+            const label = item.dataset.label || menuDefaultLabel;
+            item.addEventListener("mouseenter", () => setPreview(label));
+            item.addEventListener("focus", () => setPreview(label));
           });
 
-          if (titleEl instanceof HTMLElement) {
-            titleEl.textContent = active.dataset.title ?? label;
+          if (nav instanceof HTMLElement) {
+            nav.addEventListener("mouseleave", () => setPreview(menuDefaultLabel));
           }
 
-          if (descriptionEl instanceof HTMLElement) {
-            descriptionEl.textContent = active.dataset.description ?? "";
-          }
+          setPreview(menuDefaultLabel);
 
-          return active;
+          return { items, setPreview };
         };
+
+        const previewMenu = bindPreviewMenu(root.querySelector("[data-preview-menu-root]"));
 
         const closeMenu = () => {
           root.classList.remove("is-open");
@@ -193,7 +227,7 @@ const cornerMenuDefaultLabel =
           document.body.classList.add("has-corner-menu-open");
           overlay.hidden = false;
           trigger.setAttribute("aria-expanded", "true");
-          const activeItem = setPreview(defaultLabel);
+          const activeItem = previewMenu?.setPreview(defaultLabel);
           if (activeItem instanceof HTMLAnchorElement) {
             activeItem.focus();
           }
@@ -213,25 +247,76 @@ const cornerMenuDefaultLabel =
           }
         });
 
-        items.forEach((item) => {
+        previewMenu?.items.forEach((item) => {
           if (!(item instanceof HTMLElement)) {
             return;
           }
 
-          const label = item.dataset.label || defaultLabel;
-          item.addEventListener("mouseenter", () => setPreview(label));
-          item.addEventListener("focus", () => setPreview(label));
           item.addEventListener("click", closeMenu);
         });
-
-        if (nav instanceof HTMLElement) {
-          nav.addEventListener("mouseleave", () => setPreview(defaultLabel));
-        }
 
         document.addEventListener("keydown", (event) => {
           if (event.key === "Escape") {
             closeMenu();
           }
+        });
+      };
+
+      const setupInlinePreviewMenus = () => {
+        const roots = document.querySelectorAll("[data-preview-menu-root]");
+        roots.forEach((root) => {
+          if (!(root instanceof HTMLElement) || root.closest("[data-corner-menu-root]")) {
+            return;
+          }
+
+          if (root.dataset.previewBound === "true") {
+            return;
+          }
+
+          const nav = root.querySelector("[data-menu-nav]");
+          const items = Array.from(root.querySelectorAll("[data-menu-item]")).filter(
+            (item) => item instanceof HTMLElement,
+          );
+          const titleEl = root.querySelector("[data-menu-preview-title]");
+          const descriptionEl = root.querySelector("[data-menu-preview-description]");
+          const defaultLabel = root.dataset.defaultLabel ?? "About";
+
+          const getItemByLabel = (label) =>
+            items.find((item) => item instanceof HTMLElement && item.dataset.label === label);
+
+          const setPreview = (label) => {
+            const active = getItemByLabel(label);
+            if (!(active instanceof HTMLElement)) {
+              return;
+            }
+
+            items.forEach((item) => {
+              if (item instanceof HTMLElement) {
+                item.classList.toggle("is-active", item === active);
+              }
+            });
+
+            if (titleEl instanceof HTMLElement) {
+              titleEl.textContent = active.dataset.title ?? label;
+            }
+
+            if (descriptionEl instanceof HTMLElement) {
+              descriptionEl.textContent = active.dataset.description ?? "";
+            }
+          };
+
+          root.dataset.previewBound = "true";
+          items.forEach((item) => {
+            const label = item.dataset.label || defaultLabel;
+            item.addEventListener("mouseenter", () => setPreview(label));
+            item.addEventListener("focus", () => setPreview(label));
+          });
+
+          if (nav instanceof HTMLElement) {
+            nav.addEventListener("mouseleave", () => setPreview(defaultLabel));
+          }
+
+          setPreview(defaultLabel);
         });
       };
 
@@ -341,10 +426,12 @@ const cornerMenuDefaultLabel =
 
       document.addEventListener("DOMContentLoaded", setupCornerMenu);
       document.addEventListener("astro:page-load", setupCornerMenu);
+      document.addEventListener("DOMContentLoaded", setupInlinePreviewMenus);
+      document.addEventListener("astro:page-load", setupInlinePreviewMenus);
       document.addEventListener("DOMContentLoaded", setupContactForm);
       document.addEventListener("astro:page-load", setupContactForm);
     </script>
 
-    {replicaMotion && <script src={withBase("/scripts/replica-motion.js")} defer></script>}
+    {replicaMotion && <ReplicaMotion />}
   </body>
 </html>
