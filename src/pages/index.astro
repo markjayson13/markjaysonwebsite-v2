@@ -72,6 +72,7 @@ import { homePage, replicaFooterCredit } from "../data/editorial";
           class="replica-menu-sheet replica-menu-sheet--inline"
           data-preview-menu-root
           data-default-label={homePage.discovery.defaultLabel}
+          data-home-reveal
         >
           <h2 class="replica-menu-sheet__title">{homePage.discovery.title}</h2>
 
@@ -119,12 +120,12 @@ import { homePage, replicaFooterCredit } from "../data/editorial";
       <div class="home-contact-band__shade"></div>
 
       <div class="replica-canvas home-contact-band__canvas">
-        <div class="home-contact-band__content">
-          <div class="home-contact-band__portrait" data-lift>
+        <div class="home-contact-band__content" data-home-reveal>
+          <div class="home-contact-band__portrait">
             <img src={homePage.contact.portraitSrc} alt="Mark Jayson Farol holding a glowing globe." loading="eager" />
           </div>
 
-          <div class="home-contact-band__form-block" data-lift>
+          <div class="home-contact-band__form-block">
             <div class="home-contact-band__heading">
               <h2>{homePage.contact.title}</h2>
               <p>{homePage.contact.copy}</p>
@@ -170,7 +171,7 @@ import { homePage, replicaFooterCredit } from "../data/editorial";
           </div>
         </div>
 
-        <p class="page-credit page-credit--light">{replicaFooterCredit}</p>
+        <p class="page-credit page-credit--light" data-home-reveal>{replicaFooterCredit}</p>
       </div>
     </section>
   </div>

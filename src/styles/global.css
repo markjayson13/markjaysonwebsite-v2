@@ -142,8 +142,8 @@ p {
 
 .corner-menu {
   position: fixed;
-  top: 1.25rem;
-  right: 1.25rem;
+  top: 0.9rem;
+  right: 1rem;
   z-index: 300;
 }
 
@@ -151,19 +151,19 @@ p {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 3.45rem;
-  min-width: min(21rem, calc(100vw - 2.5rem));
-  padding: 0.85rem 1.35rem;
+  min-height: 3.25rem;
+  min-width: min(18.6rem, calc(100vw - 2rem));
+  padding: 0.82rem 1.2rem;
   border: 1px solid rgba(17, 17, 17, 0.74);
   background: rgba(247, 248, 248, 0.96);
   color: #111;
   font-family: var(--font-ui);
-  font-size: 0.93rem;
+  font-size: 0.82rem;
   font-weight: 600;
-  letter-spacing: 0.09em;
+  letter-spacing: 0.08em;
   line-height: 1;
   text-transform: uppercase;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.14);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.14);
   transition:
     transform 160ms ease,
     background 160ms ease,
@@ -228,7 +228,7 @@ body[data-page="profiles"] .corner-menu.is-open .corner-menu__trigger {
 
 .corner-menu__panel {
   position: absolute;
-  top: 4.6rem;
+  top: 4.1rem;
   left: 50%;
   transform: translateX(-50%);
   width: min(66rem, calc(100vw - 2.2rem));

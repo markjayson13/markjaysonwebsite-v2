@@ -134,6 +134,9 @@ const setupHomeMotion = (reducedMotion: boolean) => {
   const discoveryBand = page.querySelector("[data-home-discovery]");
   const contactBand = page.querySelector("[data-home-contact]");
   const contactTrigger = page.querySelector("[data-contact-trigger]");
+  const revealBlocks = Array.from(page.querySelectorAll("[data-home-reveal]")).filter(
+    (element): element is HTMLElement => element instanceof HTMLElement,
+  );
 
   if (contactTrigger instanceof HTMLButtonElement && contactBand instanceof HTMLElement) {
     const handleClick = () => {
@@ -149,11 +152,7 @@ const setupHomeMotion = (reducedMotion: boolean) => {
 
   if (reducedMotion) {
     gsap.set(heroItems, { autoAlpha: 1, y: 0 });
-    [discoveryBand, contactBand].forEach((band) => {
-      if (band instanceof HTMLElement) {
-        gsap.set(band, { autoAlpha: 1, y: 0 });
-      }
-    });
+    gsap.set(revealBlocks, { y: 0 });
     return;
   }
 
@@ -166,23 +165,32 @@ const setupHomeMotion = (reducedMotion: boolean) => {
     });
   }
 
-  [discoveryBand, contactBand].forEach((band) => {
-    if (!(band instanceof HTMLElement)) {
+  [
+    {
+      trigger: discoveryBand,
+      items: revealBlocks.filter((element) => element.closest("[data-home-discovery]")),
+    },
+    {
+      trigger: contactBand,
+      items: revealBlocks.filter((element) => element.closest("[data-home-contact]")),
+    },
+  ].forEach(({ trigger, items }) => {
+    if (!(trigger instanceof HTMLElement) || !items.length) {
       return;
     }
 
-    gsap.set(band, { autoAlpha: 0, y: 48 });
+    gsap.set(items, { y: 40 });
 
     ScrollTrigger.create({
-      trigger: band,
+      trigger,
       start: "top 82%",
       once: true,
       onEnter: () => {
-        gsap.to(band, {
-          autoAlpha: 1,
+        gsap.to(items, {
           y: 0,
           duration: 1,
           ease: "power3.out",
+          stagger: 0.08,
         });
       },
     });
