@@ -1,0 +1,167 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { replicaFooterCredit, resumePage } from "../data/editorial";
+---
+
+<BaseLayout
+  title="Resume/CV"
+  description="Resume and curriculum vitae for Mark Jayson Martinez Farol."
+  page="resume"
+  accent="#edf0f2"
+  shell="bare"
+  footer={false}
+  replicaFooter={false}
+  replicaMotion={true}
+>
+  <article class="replica-page resume-page">
+    <div class="replica-canvas resume-page__canvas">
+      <header class="resume-page__header">
+        <h1 class="resume-page__title" data-lift>{resumePage.title}</h1>
+
+        <nav class="resume-page__jump-row" aria-label="Resume sections" data-lift>
+          {
+            resumePage.jumpLinks.map((link) => (
+              <a href={link.href} class="resume-page__jump-link">
+                {link.label}
+              </a>
+            ))
+          }
+        </nav>
+      </header>
+
+      <div class="resume-page__sections">
+        <section id="summary" class="resume-page__section">
+          <p class="resume-page__section-label">Summary</p>
+          <div class="resume-page__section-body resume-page__section-body--single">
+            {
+              resumePage.summary.map((paragraph) => (
+                <p data-lift>{paragraph}</p>
+              ))
+            }
+          </div>
+        </section>
+
+        <section id="education" class="resume-page__section">
+          <p class="resume-page__section-label">Education</p>
+          <div class="resume-page__section-body">
+            <div class="resume-page__copy">
+              {
+                resumePage.educationNarrative.map((paragraph) => (
+                  <p data-lift>{paragraph}</p>
+                ))
+              }
+            </div>
+
+            <div class="resume-page__grid">
+              {
+                resumePage.credentials.map((credential) => (
+                  <article class="resume-page__card" data-lift>
+                    <h3>{credential.title}</h3>
+                    <strong>{credential.subtitle}</strong>
+                    <p>{credential.summary}</p>
+                  </article>
+                ))
+              }
+            </div>
+          </div>
+        </section>
+
+        <section id="experience" class="resume-page__section">
+          <p class="resume-page__section-label">Experience</p>
+          <div class="resume-page__section-body">
+            <div class="resume-page__copy">
+              {
+                resumePage.experienceNarrative.map((paragraph) => (
+                  <p data-lift>{paragraph}</p>
+                ))
+              }
+            </div>
+
+            <div class="resume-page__grid">
+              {
+                resumePage.roles.map((role) => (
+                  <article class="resume-page__card" data-lift>
+                    <h3>{role.organization}</h3>
+                    <strong>{role.role}</strong>
+                    <p>{role.summary}</p>
+                  </article>
+                ))
+              }
+            </div>
+          </div>
+        </section>
+
+        <section id="projects" class="resume-page__section">
+          <p class="resume-page__section-label">Projects</p>
+          <div class="resume-page__section-body">
+            <div class="resume-page__copy">
+              <p data-lift>{resumePage.projectsIntro}</p>
+            </div>
+
+            <div class="resume-page__project-grid">
+              {
+                resumePage.projectCards.map((card) => (
+                  <a class="resume-page__project-card" href={card.href} data-lift>
+                    <h3>{card.title}</h3>
+                    <p>{card.description}</p>
+                    <span>{card.cta}</span>
+                  </a>
+                ))
+              }
+            </div>
+          </div>
+        </section>
+
+        <section id="certifications" class="resume-page__section">
+          <p class="resume-page__section-label">Certifications</p>
+          <div class="resume-page__section-body">
+            <div class="resume-page__copy">
+              <p data-lift>{resumePage.certificationsIntro}</p>
+            </div>
+
+            <div class="resume-page__grid">
+              {
+                resumePage.certifications.map((certification) => (
+                  <article class="resume-page__card" data-lift>
+                    <p class="resume-page__card-meta">{certification.track}</p>
+                    <h3>{certification.title}</h3>
+                    <strong>{certification.provider}</strong>
+                    <p>{certification.summary}</p>
+                  </article>
+                ))
+              }
+            </div>
+          </div>
+        </section>
+
+        <section id="skills" class="resume-page__section">
+          <p class="resume-page__section-label">Skills</p>
+          <div class="resume-page__section-body">
+            <div class="resume-page__copy">
+              <p data-lift>{resumePage.skillsIntro}</p>
+            </div>
+
+            <div class="resume-page__grid">
+              {
+                resumePage.skillGroups.map((group) => (
+                  <article class="resume-page__card" data-lift>
+                    <h3>{group.title}</h3>
+                    <ul class="resume-page__skill-list">
+                      {
+                        group.items.map((item) => (
+                          <li>{item}</li>
+                        ))
+                      }
+                    </ul>
+                  </article>
+                ))
+              }
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <p class="page-credit page-credit--dark">{replicaFooterCredit}</p>
+    </div>
+  </article>
+</BaseLayout>
