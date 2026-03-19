@@ -88,30 +88,39 @@ import { withBase } from "../utils/paths";
               <p>{homePage.contactCopy}</p>
             </div>
 
-            <form class="home-contact-band__form" action="#" method="post" onsubmit="event.preventDefault();">
+            <form
+              class="home-contact-band__form"
+              action="https://formsubmit.co/markjayson@markjayson.com"
+              method="post"
+            >
+              <input type="hidden" name="_subject" value="New message from markjayson.com" />
+              <input type="hidden" name="_template" value="table" />
+              <input type="hidden" name="_url" value="https://markjayson.com/" />
+              <input type="text" name="_honey" class="home-contact-band__honeypot" tabindex="-1" autocomplete="off" />
+
               <label class="home-contact-band__field">
                 <span>First Name*</span>
-                <input type="text" name="first-name" />
+                <input type="text" name="first_name" required autocomplete="given-name" />
               </label>
 
               <label class="home-contact-band__field">
                 <span>EMAIL*</span>
-                <input type="email" name="email" />
+                <input type="email" name="email" required autocomplete="email" />
               </label>
 
               <label class="home-contact-band__field home-contact-band__field--message">
                 <span>Message</span>
-                <textarea name="message"></textarea>
+                <textarea name="message" required></textarea>
               </label>
 
               <label class="home-contact-band__field">
                 <span>Last Name*</span>
-                <input type="text" name="last-name" />
+                <input type="text" name="last_name" required autocomplete="family-name" />
               </label>
 
               <label class="home-contact-band__field">
                 <span>Subject</span>
-                <input type="text" name="subject" />
+                <input type="text" name="subject" autocomplete="off" />
               </label>
 
               <button class="home-contact-band__submit" type="submit">Submit</button>

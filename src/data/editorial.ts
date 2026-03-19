@@ -101,7 +101,7 @@ export type ProfileButton = {
 
 const socialLookup = new Map(socialLinks.map((link) => [link.label, link.href]));
 const githubProfile = "https://github.com/markjayson13";
-export const replicaFooterCredit = "C Mark jayson M. Farol";
+export const replicaFooterCredit = "© Mark Jayson Martinez Farol";
 
 export const homePage = {
   titleLines: ["Mark Jayson", "Martinez Farol"],
