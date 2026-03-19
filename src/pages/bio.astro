@@ -19,10 +19,6 @@ import { withBase } from "../utils/paths";
       <h1 class="bio-page__title" data-lift>{bioPage.title}</h1>
 
       <div class="bio-page__body">
-        <div class="bio-page__portrait" data-lift>
-          <img src={withBase("/images/canva-bio-portrait.png")} alt="Portrait of Mark Jayson Farol." loading="eager" />
-        </div>
-
         <div class="bio-page__copy">
           {
             bioPage.paragraphs.map((paragraph) => (
@@ -39,6 +35,10 @@ import { withBase } from "../utils/paths";
               ))
             }
           </div>
+        </div>
+
+        <div class="bio-page__portrait" data-lift>
+          <img src={withBase("/images/canva-bio-portrait.png")} alt="Portrait of Mark Jayson Farol." loading="eager" />
         </div>
       </div>
 
