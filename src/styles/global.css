@@ -142,8 +142,8 @@ p {
 
 .corner-menu {
   position: fixed;
-  top: 0.9rem;
-  right: 1rem;
+  top: 0.85rem;
+  right: 0.9rem;
   z-index: 300;
 }
 
@@ -151,19 +151,19 @@ p {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 3.25rem;
-  min-width: min(18.6rem, calc(100vw - 2rem));
-  padding: 0.82rem 1.2rem;
+  min-height: 3.05rem;
+  min-width: min(17.4rem, calc(100vw - 1.8rem));
+  padding: 0.78rem 1.05rem;
   border: 1px solid rgba(17, 17, 17, 0.74);
   background: rgba(247, 248, 248, 0.96);
   color: #111;
   font-family: var(--font-ui);
-  font-size: 0.82rem;
+  font-size: 0.79rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.075em;
   line-height: 1;
   text-transform: uppercase;
-  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.14);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
   transition:
     transform 160ms ease,
     background 160ms ease,
@@ -228,11 +228,11 @@ body[data-page="profiles"] .corner-menu.is-open .corner-menu__trigger {
 
 .corner-menu__panel {
   position: absolute;
-  top: 4.1rem;
+  top: 3.88rem;
   left: 50%;
   transform: translateX(-50%);
-  width: min(66rem, calc(100vw - 2.2rem));
-  padding: 2.55rem 2.8rem 2.35rem;
+  width: min(61rem, calc(100vw - 2rem));
+  padding: 2.15rem 2.35rem 2.1rem;
   background: rgba(255, 255, 255, 0.985);
   color: #0d0d0d;
   box-shadow: 0 28px 80px rgba(0, 0, 0, 0.24);
@@ -253,38 +253,38 @@ body[data-page="profiles"] .corner-menu.is-open .corner-menu__trigger {
 }
 
 .replica-menu-sheet__title {
-  margin: 0 0 2.15rem;
+  margin: 0 0 1.85rem;
   text-align: center;
   font-family: var(--font-ui);
-  font-size: clamp(2rem, 2.8vw, 2.9rem);
+  font-size: clamp(1.85rem, 2.4vw, 2.5rem);
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.055em;
   line-height: 0.98;
   text-transform: uppercase;
 }
 
 .replica-menu-sheet__layout {
   display: grid;
-  grid-template-columns: minmax(14rem, 19rem) minmax(0, 1fr);
-  gap: clamp(1.9rem, 3vw, 3.4rem);
+  grid-template-columns: minmax(15rem, 18.25rem) minmax(0, 1fr);
+  gap: clamp(1.8rem, 2.6vw, 3rem);
   align-items: start;
 }
 
 .replica-menu-sheet__nav {
   display: grid;
-  gap: 1.35rem;
+  gap: 1.15rem;
   justify-items: end;
-  padding-right: clamp(1.2rem, 2vw, 2rem);
-  border-right: 4px solid #111;
+  padding-right: clamp(1rem, 1.7vw, 1.7rem);
+  border-right: 3px solid #111;
   text-align: right;
 }
 
 .replica-menu-sheet__link {
   display: block;
   font-family: var(--font-ui);
-  font-size: clamp(2.15rem, 3vw, 3.2rem);
+  font-size: clamp(2rem, 2.7vw, 2.75rem);
   font-weight: 400;
-  letter-spacing: 0.005em;
+  letter-spacing: 0.01em;
   line-height: 0.98;
   text-transform: uppercase;
   color: rgba(17, 17, 17, 0.72);
@@ -301,24 +301,24 @@ body[data-page="profiles"] .corner-menu.is-open .corner-menu__trigger {
 }
 
 .replica-menu-sheet__preview {
-  max-width: 42rem;
-  min-height: 9rem;
+  max-width: 34rem;
+  min-height: 8rem;
   padding-top: 0.1rem;
 }
 
 .replica-menu-sheet__preview h3 {
   margin: 0 0 0.55rem;
   font-family: var(--font-ui);
-  font-size: clamp(1.8rem, 2.1vw, 2.2rem);
+  font-size: clamp(1.65rem, 1.95vw, 2rem);
   font-weight: 600;
   line-height: 1.04;
 }
 
 .replica-menu-sheet__preview p {
   margin: 0;
-  max-width: 34rem;
-  font-size: clamp(1.15rem, 1.35vw, 1.52rem);
-  line-height: 1.42;
+  max-width: 28rem;
+  font-size: clamp(1.02rem, 1.15vw, 1.28rem);
+  line-height: 1.34;
   color: rgba(17, 17, 17, 0.92);
 }
 
@@ -356,7 +356,7 @@ body[data-page="profiles"] .corner-menu.is-open .corner-menu__trigger {
   }
 
   .corner-menu__panel {
-    top: 4.15rem;
+    top: 4.05rem;
     left: 50%;
     transform: translateX(-50%);
     width: min(44rem, calc(100vw - 1.6rem));
@@ -391,7 +391,7 @@ body[data-page="profiles"] .corner-menu.is-open .corner-menu__trigger {
     min-width: auto;
     width: calc(100vw - 1.6rem);
     padding-inline: 0.9rem;
-    font-size: 0.74rem;
+    font-size: 0.73rem;
     letter-spacing: 0.06em;
   }
 

@@ -129,7 +129,7 @@ export const homePage = {
   hero: {
     headlineTop: "Mark Jayson",
     headlineFrame: ["Martinez", "Farol"],
-    roles: ["Artist", "Scientist", "Economist", "Data Scientist", "Data Engineer", "Statistician", "Musician", "Singer", "Actor"],
+    roles: ["Economist", "Artist", "Scientist", "Musician", "Statistician", "Data Scientist", "Data Engineer", "Actor", "Singer"],
     ctaLabel: "Contact",
     videoSrc: withBase("/media/canva-home-hero.mp4"),
   } satisfies HomeHero,
@@ -141,8 +141,7 @@ export const homePage = {
   contact: {
     label: "Get in Touch",
     title: "Get in Touch",
-    copy:
-      "Use the form below to start a conversation about research, data work, policy analysis, creative collaborations, or speaking opportunities.",
+    copy: "Use the form below to start a conversation about research, data work, creative collaboration, or speaking.",
     portraitSrc: withBase("/images/canva-home-portrait.png"),
     videoSrc: withBase("/media/canva-home-contact.mp4"),
     submitLabel: "Submit",

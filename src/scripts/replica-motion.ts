@@ -97,12 +97,12 @@ const setupLiftIns = (reducedMotion: boolean) => {
   }
 
   if (reducedMotion) {
-    gsap.set(elements, { autoAlpha: 1, y: 0 });
+    gsap.set(elements, { y: 0 });
     return;
   }
 
   elements.forEach((element, index) => {
-    gsap.set(element, { autoAlpha: 0, y: 28 });
+    gsap.set(element, { y: 26 });
 
     ScrollTrigger.create({
       trigger: element,
@@ -110,9 +110,8 @@ const setupLiftIns = (reducedMotion: boolean) => {
       once: true,
       onEnter: () => {
         gsap.to(element, {
-          autoAlpha: 1,
           y: 0,
-          duration: 0.9,
+          duration: 0.85,
           ease: "power3.out",
           delay: (index % 3) * 0.04,
         });

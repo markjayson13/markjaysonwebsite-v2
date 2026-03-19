@@ -110,65 +110,64 @@ export const cornerMenuItems: CornerMenuItem[] = [
     href: withBase("/bio"),
     title: "About",
     description:
-      "I’m Mark Jayson Farol, an economist, artist, scientist, musician, and statistician working at the intersection of data, policy, and creative expression.",
+      "Economics, performance, data, and public-facing work arranged around one interdisciplinary story.",
   },
   {
     label: "Resume/CV",
     href: withBase("/resume"),
     title: "Resume/CV",
     description:
-      "Education, experience, certifications, projects, and technical skills arranged as a tighter curriculum vitae.",
+      "Education, experience, certifications, projects, and technical skills in a tighter CV format.",
   },
   {
     label: "Portfolio",
     href: withBase("/portfolio"),
     title: "Portfolio",
-    description: "Research, projects, public writing, and creative work.",
+    description: "Research papers, data projects, public writing, and creative work.",
   },
   {
     label: "Profiles",
     href: withBase("/profiles"),
     title: "Profiles",
-    description:
-      "A curated hub of my academic, professional, technical, and creative presence across the web.",
+    description: "A curated hub of academic, professional, technical, and creative profiles.",
   },
 ];
 
 export const pageThemes: Record<string, PageTheme> = {
   home: {
-    titleMeasure: "46rem",
-    leadMeasure: "34rem",
-    copyMeasure: "66rem",
+    titleMeasure: "54rem",
+    leadMeasure: "36rem",
+    copyMeasure: "70rem",
   },
   bio: {
-    titleMeasure: "41rem",
-    leadMeasure: "34rem",
-    copyMeasure: "47rem",
+    titleMeasure: "45rem",
+    leadMeasure: "32rem",
+    copyMeasure: "49rem",
   },
   resume: {
-    titleMeasure: "44rem",
-    leadMeasure: "52rem",
-    copyMeasure: "67rem",
+    titleMeasure: "52rem",
+    leadMeasure: "56rem",
+    copyMeasure: "70rem",
   },
   portfolio: {
-    titleMeasure: "29rem",
-    leadMeasure: "30rem",
-    copyMeasure: "34rem",
+    titleMeasure: "31rem",
+    leadMeasure: "32rem",
+    copyMeasure: "36rem",
   },
   research: {
-    titleMeasure: "28rem",
-    leadMeasure: "68rem",
-    copyMeasure: "72rem",
+    titleMeasure: "31rem",
+    leadMeasure: "60rem",
+    copyMeasure: "68rem",
   },
   projects: {
-    titleMeasure: "28rem",
-    leadMeasure: "58rem",
-    copyMeasure: "68rem",
+    titleMeasure: "31rem",
+    leadMeasure: "52rem",
+    copyMeasure: "64rem",
   },
   articles: {
-    titleMeasure: "28rem",
-    leadMeasure: "58rem",
-    copyMeasure: "68rem",
+    titleMeasure: "31rem",
+    leadMeasure: "52rem",
+    copyMeasure: "64rem",
   },
   creative: {
     titleMeasure: "26rem",
@@ -176,9 +175,9 @@ export const pageThemes: Record<string, PageTheme> = {
     copyMeasure: "46rem",
   },
   profiles: {
-    titleMeasure: "30rem",
-    leadMeasure: "52rem",
-    copyMeasure: "52rem",
+    titleMeasure: "34rem",
+    leadMeasure: "44rem",
+    copyMeasure: "48rem",
   },
 };
 
