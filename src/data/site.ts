@@ -1,5 +1,31 @@
 import { withBase } from "../utils/paths";
 
+const canonicalSiteUrl = "https://markjayson.com";
+const githubProfileUrl = "https://github.com/markjayson13";
+const linkedInProfileUrl = "https://www.linkedin.com/in/markjaysonfarol/";
+const googleScholarProfileUrl = "https://scholar.google.com/citations?user=vdr24hsAAAAJ&hl=en";
+const orcidProfileUrl = "https://orcid.org/0009-0004-1245-9959";
+const researchGateProfileUrl = "https://www.researchgate.net/profile/Mark-Jayson-Farol?ev=hdr_xprf";
+const backstageProfileUrl = "https://www.backstage.com/tal/mark-jayson-farol/";
+const legacyCreativePortfolioUrl = "https://markjay1869760.wixsite.com/mysite";
+const instagramProfileUrl = "https://www.instagram.com/markjayson13/";
+const facebookProfileUrl = "https://www.facebook.com/markjaysonfarol13";
+const xProfileUrl = "https://twitter.com/mark_jayson13";
+
+export type StructuredDataValue =
+  | string
+  | number
+  | boolean
+  | null
+  | StructuredDataNode
+  | StructuredDataValue[];
+
+export type StructuredDataNode = {
+  [key: string]: StructuredDataValue;
+};
+
+export type StructuredData = StructuredDataNode | StructuredDataNode[];
+
 export type NavLink = {
   label: string;
   href: string;
@@ -202,6 +228,48 @@ export const profile = {
   languages: ["English", "Tagalog"],
   tools: ["Stata", "R", "Python", "Excel", "DuckDB", "PyArrow", "GitHub"],
 };
+
+export const identityPersonStructuredData: StructuredDataNode = {
+  "@type": "Person",
+  "@id": `${canonicalSiteUrl}/#person`,
+  name: "Mark Jayson Martinez Farol",
+  alternateName: [profile.name, "Mark Jayson M. Farol"],
+  url: `${canonicalSiteUrl}/`,
+  description: profile.summary,
+  jobTitle: profile.title,
+  image: new URL(withBase("/images/canva-bio-portrait.png"), canonicalSiteUrl).toString(),
+  homeLocation: {
+    "@type": "Place",
+    name: profile.location,
+  },
+  sameAs: [
+    linkedInProfileUrl,
+    githubProfileUrl,
+    googleScholarProfileUrl,
+    orcidProfileUrl,
+    researchGateProfileUrl,
+    backstageProfileUrl,
+  ],
+};
+
+export const buildProfilePageStructuredData = (
+  pageUrl: string,
+  pageName: string,
+  pageDescription: string,
+): StructuredDataNode[] => [
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "@id": `${pageUrl}#webpage`,
+    url: pageUrl,
+    name: pageName,
+    description: pageDescription,
+    mainEntity: {
+      "@id": String(identityPersonStructuredData["@id"]),
+    },
+  },
+  identityPersonStructuredData,
+];
 
 export const pageStats = {
   home: [
@@ -499,17 +567,17 @@ export const researchItems: ResearchItem[] = [
 export const researchProfiles = [
   {
     label: "Google Scholar",
-    href: "https://scholar.google.com/citations?user=vdr24hsAAAAJ&hl=en",
+    href: googleScholarProfileUrl,
     note: "Citation profile and publication record",
   },
   {
     label: "ORCID",
-    href: "https://orcid.org/0009-0004-1245-9959",
+    href: orcidProfileUrl,
     note: "Research identity and verified work metadata",
   },
   {
     label: "ResearchGate",
-    href: "https://www.researchgate.net/profile/Mark-Jayson-Farol?ev=hdr_xprf",
+    href: researchGateProfileUrl,
     note: "Academic network profile and research visibility",
   },
 ];
@@ -673,63 +741,63 @@ export const performanceCredits: PerformanceCredit[] = [
 export const socialLinks: SocialLink[] = [
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/markjaysonfarol/",
+    href: linkedInProfileUrl,
     category: "Professional",
     note: "Professional profile and current positioning",
     enabled: true,
   },
   {
     label: "Google Scholar",
-    href: "https://scholar.google.com/citations?user=vdr24hsAAAAJ&hl=en",
+    href: googleScholarProfileUrl,
     category: "Academic",
     note: "Publications and citation profile",
     enabled: true,
   },
   {
     label: "ORCID",
-    href: "https://orcid.org/0009-0004-1245-9959",
+    href: orcidProfileUrl,
     category: "Academic",
     note: "Verified research identity",
     enabled: true,
   },
   {
     label: "ResearchGate",
-    href: "https://www.researchgate.net/profile/Mark-Jayson-Farol?ev=hdr_xprf",
+    href: researchGateProfileUrl,
     category: "Academic",
     note: "Academic networking profile",
     enabled: true,
   },
   {
     label: "Backstage",
-    href: "https://www.backstage.com/tal/mark-jayson-farol/",
+    href: backstageProfileUrl,
     category: "Creative",
     note: "Performance profile, credits, and headshots",
     enabled: true,
   },
   {
     label: "Legacy creative portfolio",
-    href: "https://markjay1869760.wixsite.com/mysite",
+    href: legacyCreativePortfolioUrl,
     category: "Creative",
     note: "Earlier artist portfolio and archived material",
     enabled: true,
   },
   {
     label: "Instagram",
-    href: "https://www.instagram.com/markjayson13/",
+    href: instagramProfileUrl,
     category: "Social",
     note: "Public social presence",
     enabled: true,
   },
   {
     label: "Facebook",
-    href: "https://www.facebook.com/markjaysonfarol13",
+    href: facebookProfileUrl,
     category: "Social",
     note: "Public social profile",
     enabled: true,
   },
   {
     label: "X",
-    href: "https://twitter.com/mark_jayson13",
+    href: xProfileUrl,
     category: "Social",
     note: "Public social profile",
     enabled: true,

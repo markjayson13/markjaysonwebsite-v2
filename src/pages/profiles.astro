@@ -1,18 +1,29 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { profilesPage, replicaFooterCredit } from "../data/editorial";
+import { buildProfilePageStructuredData } from "../data/site";
 import { withBase } from "../utils/paths";
+
+const pageTitle = "Profiles";
+const pageDescription = "Profile links for Mark Jayson Martinez Farol.";
+const siteOrigin = Astro.site ?? new URL("https://markjayson.com");
+const structuredData = buildProfilePageStructuredData(
+  new URL(Astro.url.pathname, siteOrigin).toString(),
+  pageTitle,
+  pageDescription,
+);
 ---
 
 <BaseLayout
-  title="Profiles"
-  description="Profile links for Mark Jayson Martinez Farol."
+  title={pageTitle}
+  description={pageDescription}
   page="profiles"
   accent="#050505"
   shell="bare"
   footer={false}
   replicaFooter={false}
   replicaMotion={true}
+  structuredData={structuredData}
 >
   <article class="replica-page profiles-page">
     <div class="profiles-page__media">

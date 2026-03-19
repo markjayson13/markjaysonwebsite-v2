@@ -1,5 +1,6 @@
 ---
 import { cornerMenuItems, pageThemes, profile } from "../data/site";
+import type { StructuredData } from "../data/site";
 import ReplicaMotion from "../components/ReplicaMotion.astro";
 import { withBase } from "../utils/paths";
 import "../styles/global.css";
@@ -14,6 +15,7 @@ interface Props {
   footer?: boolean;
   replicaFooter?: boolean;
   replicaMotion?: boolean;
+  structuredData?: StructuredData;
 }
 
 const {
@@ -22,10 +24,12 @@ const {
   page,
   accent = "#0f6d63",
   replicaMotion = true,
+  structuredData,
 } = Astro.props;
 
 const siteOrigin = Astro.site ?? new URL("https://markjayson.com");
 const canonical = new URL(Astro.url.pathname, siteOrigin).toString();
+const structuredDataJson = structuredData ? JSON.stringify(structuredData, null, 2) : null;
 const pageTheme = pageThemes[page] ?? pageThemes.home;
 const cornerMenuDefaultLabel =
   page === "bio"
@@ -55,6 +59,7 @@ const cornerMenuDefaultLabel =
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content={profile.name} />
     <meta name="twitter:card" content="summary_large_image" />
+    {structuredDataJson && <script type="application/ld+json" set:html={structuredDataJson}></script>}
     <link rel="preload" href={withBase("/fonts/arimo-regular.woff2")} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={withBase("/fonts/arimo-bold.woff2")} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={withBase("/fonts/itc-franklin-gothic-lt-regular.woff2")} as="font" type="font/woff2" crossorigin />

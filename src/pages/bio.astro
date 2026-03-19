@@ -1,18 +1,29 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { bioPage, replicaFooterCredit } from "../data/editorial";
+import { buildProfilePageStructuredData } from "../data/site";
 import { withBase } from "../utils/paths";
+
+const pageTitle = "About";
+const pageDescription = "Biographical overview for Mark Jayson Martinez Farol.";
+const siteOrigin = Astro.site ?? new URL("https://markjayson.com");
+const structuredData = buildProfilePageStructuredData(
+  new URL(Astro.url.pathname, siteOrigin).toString(),
+  pageTitle,
+  pageDescription,
+);
 ---
 
 <BaseLayout
-  title="About"
-  description="Biographical overview for Mark Jayson Martinez Farol."
+  title={pageTitle}
+  description={pageDescription}
   page="bio"
   accent="#edf0f2"
   shell="bare"
   footer={false}
   replicaFooter={false}
   replicaMotion={true}
+  structuredData={structuredData}
 >
   <article class="replica-page bio-page">
     <div class="replica-canvas bio-page__canvas">

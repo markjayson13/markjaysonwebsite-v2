@@ -23,6 +23,7 @@
     "node": "22.x"
   },
   "devDependencies": {
+    "@astrojs/sitemap": "^3.1.6",
     "@types/node": "^25.3.5",
     "astro": "^4.16.19",
     "typescript": "^5.9.3",
