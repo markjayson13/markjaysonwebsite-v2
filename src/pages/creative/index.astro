@@ -1,0 +1,83 @@
+---
+import CreativeClusterNav from "../../components/CreativeClusterNav.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { creativeCluster, replicaFooterCredit } from "../../data/editorial";
+
+const landingPage = creativeCluster.landing;
+---
+
+<BaseLayout
+  title="Creative"
+  description="Creative cluster for Mark Jayson Martinez Farol."
+  page="creative"
+  accent="#ba9838"
+  shell="bare"
+  footer={false}
+  replicaFooter={false}
+  replicaMotion={true}
+>
+  <article class="replica-page creative-cluster-page creative-cluster-page--landing">
+    <div class="replica-canvas creative-cluster-page__canvas">
+      <div class="creative-cluster-page__shell">
+        <CreativeClusterNav items={creativeCluster.nav} activeHref={creativeCluster.nav[0].href} />
+
+        <header class="creative-cluster-page__header">
+          <p class="creative-page__eyebrow" data-lift>{landingPage.eyebrow}</p>
+          <h1 class="creative-page__title" data-lift>{landingPage.title}</h1>
+          <p class="creative-cluster-page__lead" data-lift>{landingPage.lead}</p>
+        </header>
+
+        <section class="creative-cluster-page__spotlight" data-lift>
+          <div class="creative-cluster-page__spotlight-copy">
+            <p class="creative-cluster-page__section-label">Artistic Background</p>
+            <p class="creative-cluster-page__statement">{landingPage.statement}</p>
+            {
+              landingPage.background.map((paragraph) => (
+                <p class="creative-cluster-page__copy">{paragraph}</p>
+              ))
+            }
+          </div>
+
+          <aside class="creative-cluster-page__spotlight-side">
+            <p class="creative-cluster-page__section-label">Practice</p>
+            <div class="creative-cluster-page__skills">
+              {
+                landingPage.skills.map((skill) => (
+                  <span class="creative-cluster-page__skill">{skill}</span>
+                ))
+              }
+            </div>
+
+            <a class="replica-outline-button" href={landingPage.headshotsCta.href}>
+              {landingPage.headshotsCta.label}
+            </a>
+          </aside>
+        </section>
+
+        <section class="creative-cluster-page__grid" aria-label="Creative areas">
+          {
+            landingPage.featureCards.map((card) => (
+              <article class="creative-feature-card" data-lift>
+                <div class="creative-feature-card__copy">
+                  <h2>{card.title}</h2>
+                  <p>{card.description}</p>
+                  {card.note && <p class="creative-feature-card__note">{card.note}</p>}
+                </div>
+
+                {card.href && card.cta ? (
+                  <a class="replica-outline-button" href={card.href}>
+                    {card.cta}
+                  </a>
+                ) : (
+                  <span class="creative-feature-card__status">Info block</span>
+                )}
+              </article>
+            ))
+          }
+        </section>
+      </div>
+
+      <p class="page-credit page-credit--light">{replicaFooterCredit}</p>
+    </div>
+  </article>
+</BaseLayout>

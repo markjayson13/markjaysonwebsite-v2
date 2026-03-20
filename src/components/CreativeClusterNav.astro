@@ -1,0 +1,29 @@
+---
+import type { CreativeClusterNavItem } from "../data/editorial";
+
+interface Props {
+  items: CreativeClusterNavItem[];
+  activeHref: string;
+}
+
+const { items, activeHref } = Astro.props;
+
+const normalizeHref = (href: string) => href.replace(/\/+$/, "") || "/";
+const activePath = normalizeHref(activeHref);
+---
+
+<nav class="creative-cluster-nav" aria-label="Creative cluster navigation">
+  <div class="creative-cluster-nav__items">
+    {
+      items.map((item) => {
+        const isActive = normalizeHref(item.href) === activePath;
+
+        return (
+          <a class:list={["creative-cluster-nav__link", isActive && "is-active"]} href={item.href} aria-current={isActive ? "page" : undefined}>
+            {item.shortLabel ?? item.label}
+          </a>
+        );
+      })
+    }
+  </div>
+</nav>

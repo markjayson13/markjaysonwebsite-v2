@@ -1,4 +1,4 @@
-import { homeDiscoveryItems, socialLinks } from "./site";
+import { artistryProfile, galleryImages, homeDiscoveryItems, performanceCredits, socialLinks } from "./site";
 import { withBase } from "../utils/paths";
 
 export type HomeLink = {
@@ -116,6 +116,68 @@ export type ArticleSection = {
   description: string;
 };
 
+export type LatestResearchPanel = {
+  id: string;
+  label: string;
+  intro: string;
+  entries: ResearchEntry[];
+};
+
+export type LatestProjectPanel = {
+  id: string;
+  label: string;
+  intro: string;
+  entries: ProjectEntry[];
+};
+
+export type LatestArticlePanel = {
+  id: string;
+  label: string;
+  intro: string;
+  sections: ArticleSection[];
+};
+
+export type CreativeClusterNavItem = {
+  label: string;
+  href: string;
+  shortLabel?: string;
+};
+
+export type CreativeFeatureCard = {
+  title: string;
+  description: string;
+  href?: string;
+  cta?: string;
+  note?: string;
+};
+
+export type CreativeResumeEntry = {
+  title: string;
+  subtitle?: string;
+  meta?: string;
+  description?: string;
+};
+
+export type CreativeResumeSection = {
+  id: string;
+  label: string;
+  intro: string;
+  entries: CreativeResumeEntry[];
+};
+
+export type CreativeGalleryItem = {
+  src: string;
+  alt: string;
+  caption: string;
+};
+
+export type CreativeGalleryGroup = {
+  id: string;
+  label: string;
+  intro: string;
+  items: CreativeGalleryItem[];
+};
+
 export type ProfileButton = {
   label: string;
   symbol: string;
@@ -125,6 +187,7 @@ export type ProfileButton = {
 
 const socialLookup = new Map(socialLinks.map((link) => [link.label, link.href]));
 const githubProfile = "https://github.com/markjayson13";
+const backstageHref = socialLookup.get("Backstage");
 export const replicaFooterCredit = "© Mark Jayson Martinez Farol";
 
 export const homePage = {
@@ -182,9 +245,9 @@ export const homePage = {
     submitLabel: "Submit",
   } satisfies HomeContact,
   contactFields: [
+    { label: "Last Name*", name: "last-name" },
     { label: "First Name*", name: "first-name" },
     { label: "EMAIL*", name: "email" },
-    { label: "Last Name*", name: "last-name" },
     { label: "Subject", name: "subject" },
     { label: "Message", name: "message", full: true },
   ] satisfies HomeField[],
@@ -358,8 +421,8 @@ export const resumePage = {
       title: "Creative Roles",
       description:
         "Performance, music, theatre, and interdisciplinary creative work that strengthens storytelling, communication, presence, and the human side of analytical practice.",
-      href: withBase("/creative"),
-      cta: "Read more",
+      href: withBase("/creative/artistic-resume"),
+      cta: "View resume",
     },
     {
       title: "Profiles",
@@ -424,11 +487,96 @@ export const portfolioPage = {
       title: "Creative",
       description: "Music, performance, film, and storytelling across my artistic practice.",
       href: withBase("/creative"),
-      cta: "Read more",
+      cta: "Explore cluster",
       tone: "mustard",
     },
   ] satisfies PortfolioTile[],
 };
+
+const researchEntries = [
+  {
+    year: "2026",
+    id: "packaging-hierarchies",
+    title: "Packaging Hierarchies in U.S. Higher Education: Pell Exposure and the Composition of Aid (Working Paper)\u2020",
+    status: "Working Paper",
+    summary:
+      "Working paper mapping how U.S. colleges structure financial-aid packages for full-time, first-time undergraduates and how these hierarchies vary with Pell exposure. Built institution-year, per-FTFT measures from 2009\u20132023 IPEDS by linking Student Financial Aid aggregates to residency-weighted COA, expressed as shares of cost of attendance with indices for Grant-First, Pell-Anchor, and Institutional Top-off.",
+  },
+  {
+    year: "2026",
+    id: "when-costs-define-aid",
+    title: "When Costs Define Aid: Responses to Federal Cost-of-Attendance Caps\u2020",
+    status: "Working Paper",
+    summary:
+      "Institutions adjust the Cost of Attendance differently across sectors, with private nonprofits exhibiting strategic price-aid bundling and publics showing adjustment through non-tuition borrowing margins. Uses institution fixed effects, dynamic fixed effects, and system-GMM models of cost of attendance, tuition, and non-tuition components.",
+  },
+  {
+    year: "2026",
+    id: "ipeds-panel-letter",
+    title: "Building a Quality-Assured IPEDS Institution-Year Panel from Annual Access Databases, 2004\u20132023\u2020",
+    status: "Working Paper",
+    summary:
+      "Introduces IPEDSDB_Panel, an open-source workflow that converts annual NCES IPEDS Access databases into a reproducible, integrity-checked unbalanced panel keyed by institution and year for 2004\u20132023. The workflow automates acquisition, extraction, metadata harmonization, panel construction, parent-child cleaning, and layered validation.",
+  },
+  {
+    year: "2025",
+    id: "financial-literacy-food-insecurity",
+    title: "Financial Literacy & Food Insecurity in Seniors (Master\u2019s Capstone)",
+    status: "Master's Capstone",
+    summary:
+      "Examines the link between financial literacy and food insecurity among older adults in Clark County, Nevada using local survey data and multiple probability-based models to measure the relationship and test robustness.",
+  },
+  {
+    year: "2025",
+    id: "dynamic-structure-federal-aid",
+    title: "A Dynamic Structure of the Causal Link Between Increases in Federal Student Aid and Increases in College Prices",
+    status: "Working Paper",
+    summary:
+      "Extends the Bennett's Hypothesis literature through dynamic panel specifications and pricing-aid structure analysis, focusing on how federal student aid and institutional responses interact over time across higher-education sectors.",
+  },
+  {
+    year: "2025",
+    id: "ai-diffusion-gender-wage",
+    title: "AI Diffusion and Gender Wage Inequality: A Quasi-Experimental Approach\u2020",
+    status: "Working Paper",
+    summary:
+      "Studies whether the diffusion of generative AI shifted gender wage inequality across tech versus non-tech roles using CPS-MORG via IPUMS. Uses pooled OLS with a triple-interaction quasi-experimental design and Blinder-Oaxaca decompositions.",
+  },
+  {
+    year: "2025",
+    id: "revisiting-bennetts-hypothesis",
+    title: "Revisiting Bennett\u2019s Hypothesis: The Unintended Effects of Student Financial Aid on the Cost of College\u2021",
+    status: "Published",
+    summary:
+      "Investigates Bennett\u2019s Hypothesis with National Center for Education Statistics data, focusing on public and private nonprofit colleges and the effects of government and institutional financial aid on the cost of attendance.",
+    href: "https://doi.org/10.9741/2766-7227.1033",
+    ctaLabel: "View PDF",
+  },
+  {
+    year: "2024",
+    id: "race-for-increasing-college-costs",
+    title: "The Race for Increasing College Costs",
+    status: "Research Paper",
+    summary:
+      "A cross-sectional study of tuition growth, aid, and institutional behavior using National Center for Education Statistics data and Bennett\u2019s Hypothesis as a guiding framework.",
+  },
+  {
+    year: "2024",
+    id: "caesars-philippines",
+    title: "Potential Expansion for Caesars Entertainment to the Philippines",
+    status: "Research Paper",
+    summary:
+      "Explores whether the Philippines offers a viable expansion opportunity by combining macro indicators, tourism and spending trends, regulatory analysis, and competitor benchmarking.",
+  },
+  {
+    year: "2023",
+    id: "retirement-age",
+    title: "Economic Effects of Raising Retirement Age",
+    status: "Research Paper",
+    summary:
+      "Analyzes the economic effects of France\u2019s policy shift to raise the retirement age from 62 to 64 using the Solow Model, IS/MP-PC, and labor-market frameworks.",
+  },
+] satisfies ResearchEntry[];
 
 export const researchPage = {
   title: "Research",
@@ -436,202 +584,429 @@ export const researchPage = {
     "My research investigates the systems, incentives, and institutions that influence economic and social life, using quantitative analysis and large-scale data to uncover meaningful patterns.",
   legend: "\u2020 Working Paper \u2021 Published",
   rail: [
+    { id: "latest", label: "Latest" },
     { id: "2026", label: "2026" },
     { id: "2025", label: "2025" },
     { id: "2024", label: "2024" },
     { id: "2023", label: "2023" },
   ] satisfies RailItem[],
-  entries: [
-    {
-      year: "2026",
-      id: "packaging-hierarchies",
-      title: "Packaging Hierarchies in U.S. Higher Education: Pell Exposure and the Composition of Aid (Working Paper)\u2020",
-      status: "Working Paper",
-      summary:
-        "Working paper mapping how U.S. colleges structure financial-aid packages for full-time, first-time undergraduates and how these hierarchies vary with Pell exposure. Built institution-year, per-FTFT measures from 2009\u20132023 IPEDS by linking Student Financial Aid aggregates to residency-weighted COA, expressed as shares of cost of attendance with indices for Grant-First, Pell-Anchor, and Institutional Top-off.",
-    },
-    {
-      year: "2026",
-      id: "when-costs-define-aid",
-      title: "When Costs Define Aid: Responses to Federal Cost-of-Attendance Caps\u2020",
-      status: "Working Paper",
-      summary:
-        "Institutions adjust the Cost of Attendance differently across sectors, with private nonprofits exhibiting strategic price-aid bundling and publics showing adjustment through non-tuition borrowing margins. Uses institution fixed effects, dynamic fixed effects, and system-GMM models of cost of attendance, tuition, and non-tuition components.",
-    },
-    {
-      year: "2026",
-      id: "ipeds-panel-letter",
-      title: "Building a Quality-Assured IPEDS Institution-Year Panel from Annual Access Databases, 2004\u20132023\u2020",
-      status: "Working Paper",
-      summary:
-        "Introduces IPEDSDB_Panel, an open-source workflow that converts annual NCES IPEDS Access databases into a reproducible, integrity-checked unbalanced panel keyed by institution and year for 2004\u20132023. The workflow automates acquisition, extraction, metadata harmonization, panel construction, parent-child cleaning, and layered validation.",
-    },
-    {
-      year: "2025",
-      id: "financial-literacy-food-insecurity",
-      title: "Financial Literacy & Food Insecurity in Seniors (Master\u2019s Capstone)",
-      status: "Master's Capstone",
-      summary:
-        "Examines the link between financial literacy and food insecurity among older adults in Clark County, Nevada using local survey data and multiple probability-based models to measure the relationship and test robustness.",
-    },
-    {
-      year: "2025",
-      id: "dynamic-structure-federal-aid",
-      title: "A Dynamic Structure of the Causal Link Between Increases in Federal Student Aid and Increases in College Prices",
-      status: "Working Paper",
-      summary:
-        "Extends the Bennett's Hypothesis literature through dynamic panel specifications and pricing-aid structure analysis, focusing on how federal student aid and institutional responses interact over time across higher-education sectors.",
-    },
-    {
-      year: "2025",
-      id: "ai-diffusion-gender-wage",
-      title: "AI Diffusion and Gender Wage Inequality: A Quasi-Experimental Approach\u2020",
-      status: "Working Paper",
-      summary:
-        "Studies whether the diffusion of generative AI shifted gender wage inequality across tech versus non-tech roles using CPS-MORG via IPUMS. Uses pooled OLS with a triple-interaction quasi-experimental design and Blinder-Oaxaca decompositions.",
-    },
-    {
-      year: "2025",
-      id: "revisiting-bennetts-hypothesis",
-      title: "Revisiting Bennett\u2019s Hypothesis: The Unintended Effects of Student Financial Aid on the Cost of College\u2021",
-      status: "Published",
-      summary:
-        "Investigates Bennett\u2019s Hypothesis with National Center for Education Statistics data, focusing on public and private nonprofit colleges and the effects of government and institutional financial aid on the cost of attendance.",
-      href: "https://doi.org/10.9741/2766-7227.1033",
-      ctaLabel: "View PDF",
-    },
-    {
-      year: "2024",
-      id: "race-for-increasing-college-costs",
-      title: "The Race for Increasing College Costs",
-      status: "Research Paper",
-      summary:
-        "A cross-sectional study of tuition growth, aid, and institutional behavior using National Center for Education Statistics data and Bennett\u2019s Hypothesis as a guiding framework.",
-    },
-    {
-      year: "2024",
-      id: "caesars-philippines",
-      title: "Potential Expansion for Caesars Entertainment to the Philippines",
-      status: "Research Paper",
-      summary:
-        "Explores whether the Philippines offers a viable expansion opportunity by combining macro indicators, tourism and spending trends, regulatory analysis, and competitor benchmarking.",
-    },
-    {
-      year: "2023",
-      id: "retirement-age",
-      title: "Economic Effects of Raising Retirement Age",
-      status: "Research Paper",
-      summary:
-        "Analyzes the economic effects of France\u2019s policy shift to raise the retirement age from 62 to 64 using the Solow Model, IS/MP-PC, and labor-market frameworks.",
-    },
-  ] satisfies ResearchEntry[],
+  latest: {
+    id: "latest",
+    label: "Latest",
+    intro: "Current research directions and the most recent working papers driving the portfolio right now.",
+    entries: researchEntries.slice(0, 3),
+  } satisfies LatestResearchPanel,
+  entries: researchEntries,
 };
+
+const projectDataEngineeringEntries = [
+  {
+    title: "IPEDS Harmonized Panel Builder (2004\u20132024)",
+    summary:
+      "A reproducible Python and SQL data-engineering pipeline that converts NCES IPEDS cross-sections into institution-year panels with strict release checks, provenance-preserving harmonization, parent-child cleaning, and auditable QC artifacts.",
+    href: githubProfile,
+    ctaLabel: "GitHub Repo",
+  },
+  {
+    title: "Federal Student Aid Volume Reports Panel Pipeline (1999\u20132025)",
+    summary:
+      "A reproducible workflow that transforms Federal Student Aid Title IV volume reports into institution-year panel datasets using exact OPEID8 and award-year keys, with QA/QC checks for coverage, duplicate keys, year gaps, and descriptor conflicts.",
+    href: githubProfile,
+    ctaLabel: "GitHub Repo",
+  },
+] satisfies ProjectEntry[];
+
+const projectEconomicToolsEntries = [
+  {
+    title: "IPEDS Variable Browser",
+    summary:
+      "A browser-style utility for exploring IPEDS variables, metadata, and release differences without manually stepping through annual dictionaries.",
+  },
+  {
+    title: "Econometric Workflow Utilities",
+    summary:
+      "Small tools that standardize filtering, variable selection, data checks, and model-ready outputs for repeated analytical tasks.",
+  },
+] satisfies ProjectEntry[];
+
+const projectMiscEntries = [
+  {
+    title: "Public Portfolio Site",
+    summary:
+      "A routed Astro site that packages academic, analytical, and creative work into a clearer public-facing system.",
+  },
+  {
+    title: "Presentation and Writing Systems",
+    summary:
+      "Reusable templates and structured workflows used to prepare talks, public writing, and research communication materials.",
+  },
+] satisfies ProjectEntry[];
 
 export const projectsPage = {
   title: "Projects",
   lead: "Built systems, tools, and infrastructure that support research and analysis.",
   rail: [
+    { id: "latest", label: "Latest" },
     { id: "data-engineering", label: "Data Engineering" },
     { id: "economic-tools", label: "Economic Tools" },
     { id: "misc", label: "Misc" },
   ] satisfies RailItem[],
+  latest: {
+    id: "latest",
+    label: "Latest",
+    intro: "Recent systems, data pipelines, and workflow tools that currently define the project portfolio.",
+    entries: [
+      projectDataEngineeringEntries[0],
+      projectDataEngineeringEntries[1],
+      projectEconomicToolsEntries[0],
+    ],
+  } satisfies LatestProjectPanel,
   sections: [
     {
       id: "data-engineering",
       label: "Data Engineering",
       intro:
         "I build data systems that transform fragmented, messy, or multi-source information into structured, usable, and research-ready datasets. This work includes panel construction, data harmonization, variable engineering, validation, and reproducible workflows designed to support serious empirical analysis.",
-      entries: [
-        {
-          title: "IPEDS Harmonized Panel Builder (2004\u20132024)",
-          summary:
-            "A reproducible Python and SQL data-engineering pipeline that converts NCES IPEDS cross-sections into institution-year panels with strict release checks, provenance-preserving harmonization, parent-child cleaning, and auditable QC artifacts.",
-          href: githubProfile,
-          ctaLabel: "GitHub Repo",
-        },
-        {
-          title: "Federal Student Aid Volume Reports Panel Pipeline (1999\u20132025)",
-          summary:
-            "A reproducible workflow that transforms Federal Student Aid Title IV volume reports into institution-year panel datasets using exact OPEID8 and award-year keys, with QA/QC checks for coverage, duplicate keys, year gaps, and descriptor conflicts.",
-          href: githubProfile,
-          ctaLabel: "GitHub Repo",
-        },
-      ],
+      entries: projectDataEngineeringEntries,
     },
     {
       id: "economic-tools",
       label: "Economic Tools",
       intro:
         "These projects focus on usability at the level of the researcher, analyst, or decision-maker. They include interfaces, browsers, utilities, and workflow tools that make data easier to navigate, select, interpret, and use in practice.",
-      entries: [
-        {
-          title: "IPEDS Variable Browser",
-          summary:
-            "A browser-style utility for exploring IPEDS variables, metadata, and release differences without manually stepping through annual dictionaries.",
-        },
-        {
-          title: "Econometric Workflow Utilities",
-          summary:
-            "Small tools that standardize filtering, variable selection, data checks, and model-ready outputs for repeated analytical tasks.",
-        },
-      ],
+      entries: projectEconomicToolsEntries,
     },
     {
       id: "misc",
       label: "Misc",
       intro:
         "Smaller supporting builds, exploratory systems, and public-facing packaging work that stay useful even when they sit outside the main research pipeline.",
-      entries: [
-        {
-          title: "Public Portfolio Site",
-          summary:
-            "A routed Astro site that packages academic, analytical, and creative work into a clearer public-facing system.",
-        },
-        {
-          title: "Presentation and Writing Systems",
-          summary:
-            "Reusable templates and structured workflows used to prepare talks, public writing, and research communication materials.",
-        },
-      ],
+      entries: projectMiscEntries,
     },
   ] satisfies ProjectSection[],
 };
+
+const articleSections = [
+  {
+    id: "op-ed",
+    title: "OP-Ed",
+    description:
+      "These are argument-driven pieces written for broader public audiences. They focus on issues that deserve clarity, urgency, and perspective, often connecting economic reasoning and systems thinking to questions of policy, opportunity, and everyday life.",
+  },
+  {
+    id: "commentaries",
+    title: "Commentaries",
+    description:
+      "These writings are shorter reflections on institutions, incentives, culture, and social behavior. They often begin with an observation or tension and expand into a broader interpretation of how systems function and why that matters.",
+  },
+  {
+    id: "essays-notes",
+    title: "Essays & Notes",
+    description:
+      "This section holds writing that moves more freely across forms: reflective essays, interdisciplinary observations, public scholarship, and exploratory pieces that sit between analysis, narrative, and critique.",
+  },
+] satisfies ArticleSection[];
 
 export const articlesPage = {
   title: "Articles",
   lead: "Public-facing writing that translates research and systems thinking for wider audiences.",
   rail: [
+    { id: "latest", label: "Latest" },
     { id: "op-ed", label: "OP-Ed" },
     { id: "commentaries", label: "Commentaries" },
     { id: "essays-notes", label: "Essays & Notes" },
   ] satisfies RailItem[],
-  sections: [
-    {
-      id: "op-ed",
-      title: "OP-Ed",
-      description:
-        "These are argument-driven pieces written for broader public audiences. They focus on issues that deserve clarity, urgency, and perspective, often connecting economic reasoning and systems thinking to questions of policy, opportunity, and everyday life.",
-    },
-    {
-      id: "commentaries",
-      title: "Commentaries",
-      description:
-        "These writings are shorter reflections on institutions, incentives, culture, and social behavior. They often begin with an observation or tension and expand into a broader interpretation of how systems function and why that matters.",
-    },
-    {
-      id: "essays-notes",
-      title: "Essays & Notes",
-      description:
-        "This section holds writing that moves more freely across forms: reflective essays, interdisciplinary observations, public scholarship, and exploratory pieces that sit between analysis, narrative, and critique.",
-    },
-  ] satisfies ArticleSection[],
+  latest: {
+    id: "latest",
+    label: "Latest",
+    intro: "Current writing directions across public scholarship, commentary, and essays while the archive continues to expand.",
+    sections: articleSections,
+  } satisfies LatestArticlePanel,
+  sections: articleSections,
 };
 
-export const creativePage = {
-  eyebrow: "Performance, Music & Film",
-  title: "Creative",
-  lead: "Music, performance, film, and storytelling across my artistic practice.",
-};
+const creativePortraitSelections = [
+  {
+    src: withBase("/images/canva-home-portrait.png"),
+    alt: "Mark Jayson Farol portrait in a dark editorial frame",
+    caption: "Homepage portrait study",
+  },
+  {
+    src: withBase("/images/home-contact-portrait.png"),
+    alt: "Mark Jayson Farol portrait used in the contact band",
+    caption: "Contact portrait",
+  },
+  {
+    src: withBase("/images/canva-bio-portrait.png"),
+    alt: "Mark Jayson Farol portrait used on the about page",
+    caption: "Biography portrait",
+  },
+  {
+    src: withBase("/images/bio-portrait-proof.png"),
+    alt: "Mark Jayson Farol studio proof portrait",
+    caption: "Studio proof",
+  },
+  {
+    src: withBase("/images/bio-portrait-cutout.png"),
+    alt: "Mark Jayson Farol cutout portrait",
+    caption: "Cutout portrait",
+  },
+] satisfies CreativeGalleryItem[];
+
+const creativeResumePerformanceEntries = performanceCredits.map((credit) => ({
+  title: credit.title,
+  subtitle: credit.role,
+  meta: `${credit.venue} · ${credit.date}`,
+})) satisfies CreativeResumeEntry[];
+
+export const creativeCluster = {
+  nav: [
+    { label: "Creative", shortLabel: "Overview", href: withBase("/creative") },
+    { label: "Artistic Resume", shortLabel: "Resume", href: withBase("/creative/artistic-resume") },
+    { label: "Headshots", href: withBase("/creative/headshots") },
+    { label: "Photoshoots", href: withBase("/creative/photoshoots") },
+  ] satisfies CreativeClusterNavItem[],
+  landing: {
+    eyebrow: "Performance, Modeling & Storytelling",
+    title: "Creative",
+    lead: "Music, performance, film, and visual storytelling across my artistic practice.",
+    statement: artistryProfile.statement,
+    background: artistryProfile.bio,
+    skills: artistryProfile.skills,
+    headshotsCta: {
+      label: "View Headshots",
+      href: withBase("/creative/headshots"),
+    },
+    featureCards: [
+      {
+        title: "Performing Arts",
+        description:
+          "Theatre, live performance, directing, and the stage work that sharpened voice, timing, and public presence.",
+        href: withBase("/creative/artistic-resume"),
+        cta: "Open Artistic Resume",
+      },
+      {
+        title: "Modeling & Photography",
+        description:
+          "Editorial portraits, portfolio images, and styled visual work collected into categorized shoots and image studies.",
+        href: withBase("/creative/photoshoots"),
+        cta: "Browse Photoshoots",
+      },
+      {
+        title: "Music",
+        description:
+          "Choir training, solo performance, acoustic practice, and musical-theatre work continue to shape phrasing, rhythm, and emotional delivery.",
+        note:
+          "Featured through live performance, rehearsal work, and interdisciplinary creative collaborations.",
+      },
+      {
+        title: "Film",
+        description:
+          "Screen-facing storytelling and camera-ready performance extend the theatre foundation into visual media and scene work.",
+        note:
+          "This remains an informational block in the first pass while the dedicated visual archive is expanded.",
+      },
+    ] satisfies CreativeFeatureCard[],
+  },
+  artisticResume: {
+    title: "Artistic Resume",
+    lead:
+      "A creative CV distinct from the academic resume, centered on performance, stage training, music, directing, and visual storytelling.",
+    sections: [
+      {
+        id: "summary",
+        label: "Summary",
+        intro: "A concise overview of the artistic practice and how it shapes the larger public-facing work.",
+        entries: [
+          {
+            title: "Artist statement",
+            description: artistryProfile.bio[0],
+          },
+          {
+            title: "Creative through-line",
+            description: artistryProfile.bio[1],
+          },
+        ],
+      },
+      {
+        id: "education",
+        label: "Education",
+        intro: "Training across theatre, choir, stage presence, and performance-driven communication.",
+        entries: [
+          {
+            title: "University of Nevada, Las Vegas",
+            subtitle: "Theatre study with stage and screen acting concentration",
+            description:
+              "Formal theatre coursework supporting acting, performance analysis, character work, and public presentation.",
+          },
+          {
+            title: "Liberty High School",
+            subtitle: "Advanced Theatre Studies · Chamber Choir · Show Choir",
+            description:
+              "Foundational training in performance, ensemble work, vocal practice, and rehearsal discipline.",
+          },
+        ],
+      },
+      {
+        id: "musical-theatre",
+        label: "Musical Theatre",
+        intro: "Selected musical theatre and vocal performance roles from training, production work, and staged repertoire.",
+        entries: [
+          {
+            title: "Willy Wonka",
+            subtitle: "Augustus Gloop",
+            meta: "LHS Patriot Theatre · Apr 2019",
+          },
+          {
+            title: "Rock of Ages",
+            subtitle: "Ensemble",
+            meta: "LHS Patriot Theatre · Apr 2018",
+          },
+          {
+            title: "The Phantom of the Opera",
+            subtitle: "Erik / Raoul",
+            meta: "Training and scene work",
+          },
+          {
+            title: "Les Misérables",
+            subtitle: "Jean Valjean / Marius",
+            meta: "Training and scene work",
+          },
+        ],
+      },
+      {
+        id: "plays",
+        label: "Plays",
+        intro: "Straight plays and staged works that developed dramatic range, ensemble work, and direction.",
+        entries: [
+          {
+            title: "The Curious Incident of the Dog in the Night-Time",
+            subtitle: "Christopher / Ensemble",
+            meta: "LHS Patriot Theatre · Feb 2019",
+          },
+          {
+            title: "Radium Girls",
+            subtitle: "Dr. Flinn / C.B. Charlie Lee",
+            meta: "LHS Patriot Theatre · Feb 2018",
+          },
+          {
+            title: "Check Please: Take Two",
+            subtitle: "Director",
+            meta: "LHS Patriot Theatre · Dec 2018",
+          },
+        ],
+      },
+      {
+        id: "performances",
+        label: "Performances",
+        intro: "Live performance appearances, showcases, and public-facing stage work.",
+        entries: [
+          {
+            title: "Nevada Thespian State Conference Opening Number",
+            subtitle: "Featured performer",
+            meta: "State conference appearance",
+          },
+          {
+            title: "Public Education Foundation Ed Hero Award Gala",
+            subtitle: "Performing artist",
+            meta: "Las Vegas, Nevada · Sep 2018",
+          },
+          ...creativeResumePerformanceEntries.filter((entry) =>
+            ["Shattered Stardust", "Rock of Ages", "Willy Wonka"].includes(entry.title),
+          ),
+        ],
+      },
+      {
+        id: "awards",
+        label: "Awards",
+        intro: "Recognition earned through theatre competition, performance quality, and presentation work.",
+        entries: [
+          {
+            title: "International Thespian Festival",
+            subtitle: "Superior in Individual Events",
+          },
+          {
+            title: "Nevada State Thespian Festival",
+            subtitle: "Superior in Individual Events",
+          },
+          {
+            title: "Performance and public-speaking distinction",
+            subtitle: "Work recognized across stage, presentation, and live delivery settings",
+          },
+        ],
+      },
+      {
+        id: "skills",
+        label: "Skills",
+        intro: "Creative tools spanning voice, movement, instruments, and performance delivery.",
+        entries: [
+          {
+            title: "Vocal",
+            description: "Classical, pop, musical theatre, rap, and operatic repertoire",
+          },
+          {
+            title: "Musical Instruments",
+            description: "Guitar, piano, violin, and keyboard accompaniment",
+          },
+          {
+            title: "Dance",
+            description: "Musical theatre, pop, K-pop, and hip-hop movement foundations",
+          },
+          {
+            title: "Accents & Performance",
+            description: "British RP, Australian, Russian, American, bilingual English and Tagalog delivery",
+          },
+        ],
+      },
+    ] satisfies CreativeResumeSection[],
+  },
+  headshots: {
+    title: "Headshots",
+    lead:
+      "Selected headshots and portrait studies gathered from the current site assets and the existing performance-profile archive.",
+    backstageHref,
+    items: [
+      creativePortraitSelections[0],
+      creativePortraitSelections[1],
+      creativePortraitSelections[2],
+      ...galleryImages,
+    ] satisfies CreativeGalleryItem[],
+  },
+  photoshoots: {
+    title: "Photoshoots",
+    lead:
+      "Categorized photo studies from the current creative archive. This first pass organizes the available assets into the same clusters introduced on the updated Canva site.",
+    defaultId: "editorials",
+    rail: [
+      { id: "editorials", label: "Editorials" },
+      { id: "commencement", label: "Commencement" },
+      { id: "halloween", label: "Halloween" },
+    ] satisfies RailItem[],
+    groups: [
+      {
+        id: "editorials",
+        label: "Editorials",
+        intro:
+          "Styled portraits, dramatic lighting, and portfolio-ready frames that carry the strongest editorial energy in the current archive.",
+        items: [galleryImages[0], galleryImages[1], galleryImages[3], creativePortraitSelections[0]],
+      },
+      {
+        id: "commencement",
+        label: "Commencement",
+        intro:
+          "More formal portraiture and milestone imagery from the existing local portrait set while the full commencement gallery is synced from Canva.",
+        items: [creativePortraitSelections[2], creativePortraitSelections[1], creativePortraitSelections[3]],
+      },
+      {
+        id: "halloween",
+        label: "Halloween",
+        intro:
+          "Character-forward styling and moodier image studies from the current archive, standing in for the dedicated costume set in this first pass.",
+        items: [creativePortraitSelections[4], galleryImages[2], galleryImages[1]],
+      },
+    ] satisfies CreativeGalleryGroup[],
+  },
+} as const;
 
 export const profilesPage = {
   title: "Profiles",
