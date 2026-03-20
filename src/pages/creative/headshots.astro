@@ -17,8 +17,8 @@ const structuredData = buildImageCollectionPageStructuredData(pageUrl, pageTitle
 <BaseLayout
   title={pageTitle}
   description={pageDescription}
-  page="creative"
-  accent="#ba9838"
+  page={headshotsPage.theme.page}
+  accent={headshotsPage.theme.accent}
   shell="bare"
   footer={false}
   replicaFooter={false}
@@ -31,23 +31,11 @@ const structuredData = buildImageCollectionPageStructuredData(pageUrl, pageTitle
       <div class="creative-cluster-page__shell">
         <CreativeClusterNav items={creativeCluster.nav} activeHref={creativeCluster.nav[2].href} />
 
-        <header class="creative-cluster-page__header creative-cluster-page__header--split">
-          <div class="creative-cluster-page__header-copy">
-            <p class="creative-page__eyebrow" data-lift>Casting Archive</p>
-            <h1 class="creative-page__title" data-lift>{headshotsPage.title}</h1>
-            <p class="creative-cluster-page__lead" data-lift>{headshotsPage.lead}</p>
-          </div>
-
-          {
-            headshotsPage.backstageHref && (
-              <a class="replica-outline-button" href={headshotsPage.backstageHref} target="_blank" rel="noreferrer">
-                View Backstage
-              </a>
-            )
-          }
+        <header class="creative-cluster-page__header creative-cluster-page__header--centered creative-headshots__header">
+          <h1 class="creative-page__title" data-lift>{headshotsPage.title}</h1>
         </header>
 
-        <section class="creative-headshots__lead" aria-label="Headshot spotlight">
+        <section class="creative-headshots__stage" aria-label="Headshot gallery">
           {
             primaryHeadshot && (
               <figure class="creative-headshots__primary" data-lift>
@@ -57,54 +45,18 @@ const structuredData = buildImageCollectionPageStructuredData(pageUrl, pageTitle
                   alt={primaryHeadshot.alt}
                   loading="eager"
                 />
-                <figcaption class="creative-gallery__caption">{primaryHeadshot.caption}</figcaption>
               </figure>
             )
           }
 
-          <div class="creative-headshots__intro-stack">
-            <div class="creative-headshots__intro-copy" data-lift>
-              <p class="creative-cluster-page__section-label">Casting First</p>
-              <p class="creative-cluster-page__copy">
-                The primary still anchors the page first. The supporting reel and quieter portraits sit behind it to show range, tone, and camera presence without crowding the lead image.
-              </p>
-            </div>
-
-            <figure class="creative-headshots__video" data-lift>
-              <video
-                class="creative-headshots__video-element"
-                src={headshotsPage.introVideo.src}
-                poster={headshotsPage.introVideo.posterSrc}
-                autoplay
-                muted
-                loop
-                playsinline
-                preload="metadata"
-                aria-hidden="true"
-                tabindex="-1"
-              ></video>
-              <figcaption class="creative-gallery__caption">Portrait reel</figcaption>
-            </figure>
-          </div>
-        </section>
-
-        <section class="creative-headshots__gallery-shell" aria-label="Headshot gallery">
-          <div class="creative-headshots__gallery-header" data-lift>
-            <p class="creative-cluster-page__section-label">Supporting Frames</p>
-            <p class="creative-cluster-page__copy">
-              Additional portraits keep the range visible without competing with the primary studio still.
-            </p>
-          </div>
-
-          <div class="creative-gallery creative-gallery--headshots">
-          {
-            supportingHeadshots.map((item) => (
-              <figure class="creative-gallery__figure" data-lift>
-                <img class="creative-gallery__image" src={item.src} alt={item.alt} loading="lazy" />
-                <figcaption class="creative-gallery__caption">{item.caption}</figcaption>
-              </figure>
-            ))
-          }
+          <div class="creative-headshots__supporting">
+            {
+              supportingHeadshots.map((item) => (
+                <figure class="creative-gallery__figure creative-headshots__supporting-card" data-lift>
+                  <img class="creative-gallery__image creative-headshots__supporting-image" src={item.src} alt={item.alt} loading="lazy" />
+                </figure>
+              ))
+            }
           </div>
         </section>
       </div>

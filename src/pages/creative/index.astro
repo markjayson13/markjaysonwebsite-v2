@@ -9,15 +9,15 @@ const pageTitle = "Creative";
 const pageDescription = "Creative cluster for Mark Jayson Martinez Farol.";
 const siteOrigin = Astro.site ?? new URL("https://markjayson.com");
 const pageUrl = new URL(Astro.url.pathname, siteOrigin).toString();
-const landingImages = landingPage.featuredImage ? [landingPage.featuredImage] : [];
+const landingImages = landingPage.headshotPreviews;
 const structuredData = buildImageCollectionPageStructuredData(pageUrl, pageTitle, pageDescription, landingImages);
 ---
 
 <BaseLayout
   title={pageTitle}
   description={pageDescription}
-  page="creative"
-  accent="#ba9838"
+  page={landingPage.theme.page}
+  accent={landingPage.theme.accent}
   shell="bare"
   footer={false}
   replicaFooter={false}
@@ -31,12 +31,11 @@ const structuredData = buildImageCollectionPageStructuredData(pageUrl, pageTitle
         <CreativeClusterNav items={creativeCluster.nav} activeHref={creativeCluster.nav[0].href} />
 
         <header class="creative-cluster-page__header">
-          <p class="creative-page__eyebrow" data-lift>{landingPage.eyebrow}</p>
           <h1 class="creative-page__title" data-lift>{landingPage.title}</h1>
           <p class="creative-cluster-page__lead" data-lift>{landingPage.lead}</p>
         </header>
 
-        <section class="creative-cluster-page__spotlight creative-landing__spotlight" data-lift>
+        <section class="creative-cluster-page__spotlight creative-landing__spotlight" aria-label="Creative spotlight">
           <figure class="creative-cluster-page__spotlight-figure creative-cluster-page__spotlight-figure--video creative-landing__video-frame" data-lift>
             <video
               class="creative-cluster-page__spotlight-video"
@@ -50,87 +49,60 @@ const structuredData = buildImageCollectionPageStructuredData(pageUrl, pageTitle
               aria-hidden="true"
               tabindex="-1"
             ></video>
-            <figcaption class="creative-gallery__caption">Creative spotlight reel</figcaption>
           </figure>
 
-          <div class="creative-landing__aside">
-            <div class="creative-cluster-page__spotlight-copy creative-landing__story">
-              <p class="creative-cluster-page__section-label">Artistic Background</p>
-              <p class="creative-cluster-page__statement">{landingPage.statement}</p>
-              {
-                landingPage.background.map((paragraph) => (
-                  <p class="creative-cluster-page__copy">{paragraph}</p>
-                ))
-              }
-            </div>
+          <div class="creative-cluster-page__spotlight-copy creative-landing__story" data-lift>
+            <p class="creative-cluster-page__section-label">Artistic Background</p>
+            <p class="creative-cluster-page__statement creative-landing__statement">{landingPage.statement}</p>
+          </div>
+        </section>
 
-            <div class="creative-landing__details" data-lift>
-              <div class="creative-landing__measurements">
-                <p class="creative-cluster-page__section-label">Measurements</p>
-                <div class="creative-landing__measurements-grid">
-                  {
-                    landingPage.measurements.map((item) => (
-                      <div class="creative-landing__measurement">
-                        <span class="creative-landing__measurement-label">{item.label}</span>
-                        <span class="creative-landing__measurement-value">{item.value}</span>
-                      </div>
-                    ))
-                  }
-                </div>
-              </div>
-
-              <div class="creative-cluster-page__practice-copy creative-landing__practice-copy">
-                <p class="creative-cluster-page__section-label">Practice</p>
-                <div class="creative-cluster-page__skills">
-                  {
-                    landingPage.skills.map((skill) => (
-                      <span class="creative-cluster-page__skill">{skill}</span>
-                    ))
-                  }
-                </div>
-
-                <div class="creative-landing__actions">
-                  <a class="replica-outline-button" href={landingPage.headshotsCta.href}>
-                    {landingPage.headshotsCta.label}
-                  </a>
-                </div>
-              </div>
-            </div>
-
+        <section class="creative-landing__measurements" aria-label="Creative measurements" data-lift>
+          <div class="creative-landing__measurements-grid">
             {
-              landingPage.featuredImage && (
-                <figure class="creative-cluster-page__spotlight-figure creative-cluster-page__spotlight-figure--supporting creative-landing__supporting" data-lift>
-                  <img
-                    class="creative-cluster-page__spotlight-image"
-                    src={landingPage.featuredImage.src}
-                    alt={landingPage.featuredImage.alt}
-                    loading="eager"
-                  />
-                  <figcaption class="creative-gallery__caption">{landingPage.featuredImage.caption}</figcaption>
+              landingPage.measurements.map((item) => (
+                <div class="creative-landing__measurement">
+                  <span class="creative-landing__measurement-label">{item.label}</span>
+                  <span class="creative-landing__measurement-value">{item.value}</span>
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <section class="creative-landing__headshots" aria-labelledby="creative-headshots-preview-title">
+          <div class="creative-landing__headshots-header" data-lift>
+            <p id="creative-headshots-preview-title" class="creative-cluster-page__section-label">Headshots</p>
+            <a class="creative-landing__headshots-link" href={landingPage.headshotsCta.href}>
+              {landingPage.headshotsCta.label}
+            </a>
+          </div>
+
+          <div class="creative-landing__headshots-grid">
+            {
+              landingPage.headshotPreviews.map((item) => (
+                <figure class="creative-landing__headshot-card" data-lift>
+                  <img class="creative-landing__headshot-image" src={item.src} alt={item.alt} loading="lazy" />
                 </figure>
-              )
+              ))
             }
           </div>
         </section>
 
         <section class="creative-cluster-page__grid creative-landing__grid" aria-label="Creative areas">
-          <p class="creative-cluster-page__section-label">Creative Areas</p>
+          <p class="creative-cluster-page__section-label">Creative Roles</p>
           {
             landingPage.featureCards.map((card) => (
               <article class="creative-feature-card creative-landing__card" data-lift>
                 <div class="creative-feature-card__copy">
-                  <p class="creative-cluster-page__section-label">Creative Area</p>
                   <h2>{card.title}</h2>
                   <p>{card.description}</p>
-                  {card.note && <p class="creative-feature-card__note">{card.note}</p>}
                 </div>
 
-                {card.href && card.cta ? (
-                  <a class="replica-outline-button" href={card.href}>
+                {card.href && card.cta && (
+                  <a class="creative-feature-card__link" href={card.href}>
                     {card.cta}
                   </a>
-                ) : (
-                  <span class="creative-feature-card__status">Info block</span>
                 )}
               </article>
             ))

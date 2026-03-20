@@ -219,7 +219,7 @@ body[data-page="home"] .corner-menu__trigger-label,
 body[data-page="portfolio"] .corner-menu__trigger-label,
 body[data-page="projects"] .corner-menu__trigger-label,
 body[data-page="articles"] .corner-menu__trigger-label,
-body[data-page="creative"] .corner-menu__trigger-label,
+body[data-page-group="creative"] .corner-menu__trigger-label,
 body[data-page="profiles"] .corner-menu__trigger-label {
   border-color: rgba(255, 255, 255, 0.16);
   background: rgba(9, 9, 9, 0.96);

@@ -34,7 +34,8 @@ const canonical = new URL(Astro.url.pathname, siteOrigin).toString();
 const structuredDataJson = structuredData ? JSON.stringify(structuredData, null, 2) : null;
 const previewImage = socialImage ?? socialPreviewImages.home;
 const previewImageUrl = new URL(previewImage.src, siteOrigin).toString();
-const pageTheme = pageThemes[page] ?? pageThemes.home;
+const pageGroup = page.startsWith("creative-") ? "creative" : page;
+const pageTheme = pageThemes[page] ?? pageThemes[pageGroup] ?? pageThemes.home;
 const cornerMenuDefaultLabelMap: Record<string, string> = {
   home: "About",
   bio: "About",
@@ -43,10 +44,9 @@ const cornerMenuDefaultLabelMap: Record<string, string> = {
   research: "Portfolio",
   projects: "Portfolio",
   articles: "Portfolio",
-  creative: "Portfolio",
   profiles: "Profiles",
 };
-const cornerMenuDefaultLabel = cornerMenuDefaultLabelMap[page] ?? "Home";
+const cornerMenuDefaultLabel = cornerMenuDefaultLabelMap[pageGroup] ?? "Home";
 ---
 
 <!doctype html>
@@ -100,6 +100,7 @@ const cornerMenuDefaultLabel = cornerMenuDefaultLabelMap[page] ?? "Home";
 
   <body
     data-page={page}
+    data-page-group={pageGroup}
     style={`--page-accent:${accent}; --page-title-measure:${pageTheme.titleMeasure}; --page-lead-measure:${pageTheme.leadMeasure}; --page-copy-measure:${pageTheme.copyMeasure ?? pageTheme.leadMeasure};`}
   >
     <main id="main-content" class="site-main site-main--bare">

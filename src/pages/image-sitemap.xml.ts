@@ -22,7 +22,7 @@ const imageEntries: ImageSitemapEntry[] = [
   },
   {
     page: `${canonicalSiteUrl}/creative/`,
-    images: creativeCluster.landing.featuredImage ? [creativeCluster.landing.featuredImage.src] : [],
+    images: creativeCluster.landing.headshotPreviews.map((item) => item.src),
   },
   {
     page: `${canonicalSiteUrl}/creative/headshots/`,

@@ -245,6 +245,26 @@ export const pageThemes: Record<string, PageTheme> = {
     leadMeasure: "46rem",
     copyMeasure: "46rem",
   },
+  "creative-landing": {
+    titleMeasure: "22rem",
+    leadMeasure: "38rem",
+    copyMeasure: "38rem",
+  },
+  "creative-artistic-resume": {
+    titleMeasure: "34rem",
+    leadMeasure: "56rem",
+    copyMeasure: "58rem",
+  },
+  "creative-headshots": {
+    titleMeasure: "18rem",
+    leadMeasure: "30rem",
+    copyMeasure: "34rem",
+  },
+  "creative-photoshoots": {
+    titleMeasure: "24rem",
+    leadMeasure: "32rem",
+    copyMeasure: "36rem",
+  },
   profiles: {
     titleMeasure: "34rem",
     leadMeasure: "44rem",

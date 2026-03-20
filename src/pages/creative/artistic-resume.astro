@@ -11,8 +11,8 @@ const artisticResumeSections: CreativeResumeSection[] = artisticResume.sections;
 <BaseLayout
   title="Artistic Resume"
   description="Artistic resume for Mark Jayson Martinez Farol."
-  page="creative"
-  accent="#ba9838"
+  page={artisticResume.theme.page}
+  accent={artisticResume.theme.accent}
   shell="bare"
   footer={false}
   replicaFooter={false}
@@ -25,7 +25,6 @@ const artisticResumeSections: CreativeResumeSection[] = artisticResume.sections;
 
         <div class="creative-resume-page__intro-shell">
           <header class="creative-cluster-page__header creative-cluster-page__header--narrow">
-            <p class="creative-page__eyebrow" data-lift>Creative Resume</p>
             <h1 class="creative-page__title" data-lift>{artisticResume.title}</h1>
             <p class="creative-cluster-page__lead" data-lift>{artisticResume.lead}</p>
           </header>

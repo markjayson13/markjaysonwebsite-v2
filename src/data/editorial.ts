@@ -1,4 +1,4 @@
-import { artistryProfile, homeDiscoveryItems, performanceCredits, socialLinks } from "./site";
+import { homeDiscoveryItems, socialLinks } from "./site";
 import { withBase } from "../utils/paths";
 
 export type HomeLink = {
@@ -202,6 +202,12 @@ export type CreativeGalleryGroup = {
   label: string;
   intro: string;
   items: CreativeGalleryItem[];
+};
+
+export type CreativePageTheme = {
+  page: "creative-landing" | "creative-artistic-resume" | "creative-headshots" | "creative-photoshoots";
+  accent: string;
+  mode: "light" | "dark";
 };
 
 export type ProfileButton = {
@@ -934,46 +940,39 @@ const creativeHalloweenSelections = [
   },
 ] satisfies CreativeGalleryItem[];
 
-const creativeResumePerformanceEntries = performanceCredits.map((credit) => ({
-  title: credit.title,
-  subtitle: credit.role,
-  meta: `${credit.venue} · ${credit.date}`,
-})) satisfies CreativeResumeEntry[];
-
 export const creativeCluster = {
   nav: [
-    { label: "Creative", shortLabel: "Overview", href: withBase("/creative") },
-    { label: "Artistic Resume", shortLabel: "Resume", href: withBase("/creative/artistic-resume") },
+    { label: "Creative", href: withBase("/creative") },
+    { label: "Artistic Resume", href: withBase("/creative/artistic-resume") },
     { label: "Headshots", href: withBase("/creative/headshots") },
     { label: "Photoshoots", href: withBase("/creative/photoshoots") },
   ] satisfies CreativeClusterNavItem[],
   landing: {
-    eyebrow: "Performance, Modeling & Storytelling",
+    theme: {
+      page: "creative-landing",
+      accent: "#b69030",
+      mode: "dark",
+    } satisfies CreativePageTheme,
     title: "Creative",
-    lead: "Music, performance, film, modeling, and visual storytelling collected into one creative archive.",
+    lead: "Music, performance, film, and storytelling across my artistic practice.",
     statement:
-      "Art has always been one of my earliest ways of understanding myself and the world around me. I move through music, theatre, film, performance, and visual storytelling as connected forms of expression and exploration.",
-    background: [
-      "My artistic practice strengthened my discipline, emotional range, confidence, and presence while deepening the human side of how I think and work.",
-      "Across stage, screen, and sound, I continue to treat art as both expression and exploration. The pages in this cluster collect my performances, images, music, and visual studies in one place.",
-    ],
+      "Arts has been one of my earliest ways of understanding myself and the world around me. I exhibit different forms of arts through music, theatre, film, performance, and visual storytelling, each one shaping how I communicate, create, and connect with people. My artistic practice has strengthened my discipline, emotional range, confidence, and presence, while deepening the human side of how I think and work. Across stage, screen, and sound, I continue to treat art as both expression and exploration. Find out my artistic journey through my performances, music, film, and creative work.",
     spotlightVideo: {
       src: withBase("/media/creative/firebook.mov"),
       posterSrc: creativeEditorialSelections[0].src,
       alt: "Landscape creative spotlight reel featuring Mark Jayson Farol.",
     } satisfies CreativeVideoAsset,
-    featuredImage: creativeEditorialSelections[0],
     measurements: [
       { label: "Height", value: "5'7\"" },
+      { label: "Bust", value: "36\"" },
       { label: "Waist", value: "28\"" },
       { label: "Hips", value: "30\"" },
       { label: "Shoes", value: "US 8.5" },
       { label: "Shirt", value: "US S/M" },
       { label: "Hair", value: "Dark Brown" },
       { label: "Eyes", value: "Dark Brown" },
-      { label: "Bust", value: "36\"" },
     ] satisfies CreativeMeasure[],
-    skills: artistryProfile.skills,
+    headshotPreviews: creativeHeadshotSelections.slice(0, 3),
     headshotsCta: {
       label: "View Headshots",
       href: withBase("/creative/headshots"),
@@ -982,199 +981,219 @@ export const creativeCluster = {
       {
         title: "Performing Arts",
         description:
-          "Stage work across musical theatre, straight plays, showcases, and live performance, with strengths in character work, vocals, movement, and stage presence.",
+          "Stage work across musical theatre, plays, and live showcase performances, with strengths in character work, vocals, movement, and stage presence.",
         href: withBase("/creative/artistic-resume"),
-        cta: "Open Artistic Resume",
+        cta: "Artistic Resume",
       },
       {
         title: "Music",
         description:
-          "Music practice spanning vocals, songwriting, live delivery, and performance across pop, musical theatre, and contemporary styles.",
-        note: "Current work includes vocal performance, rehearsal discipline, and interdisciplinary music-led storytelling.",
+          "Music practice spanning vocals, songwriting, and performance across pop, musical theatre, and contemporary styles.",
       },
       {
         title: "Film",
         description:
           "On-camera performance and screen-based storytelling centered on character, presence, and emotional clarity.",
-        note: "Film remains part of the broader creative practice while the moving-image archive continues to expand.",
       },
       {
         title: "Modeling and Photography",
         description:
           "Editorial, portrait, and character-based visual work focused on camera presence, range, styling, and expressive storytelling.",
         href: withBase("/creative/photoshoots"),
-        cta: "Browse Photoshoots",
+        cta: "Photoshoots",
       },
     ] satisfies CreativeFeatureCard[],
   },
   artisticResume: {
+    theme: {
+      page: "creative-artistic-resume",
+      accent: "#570100",
+      mode: "dark",
+    } satisfies CreativePageTheme,
     title: "Mark Jayson M. Farol",
     lead:
-      "Artist, performer, musician, and storyteller with experience across musical theatre, plays, live performance, and on-camera work.",
+      "Artist, performer, musician, and storyteller with experience across musical theatre, plays, live performance, and on-camera work. Trained through theatre and performance-based roles that strengthened stage presence, vocal expression, movement, and character work. Brings discipline, emotional range, and strong audience connection across stage and screen.",
     sections: [
       {
         id: "summary",
         label: "Summary",
-        intro: "A concise overview of the artistic practice and how it shapes the larger public-facing work.",
+        intro: "Overview",
         entries: [
           {
             title: "Artist statement",
-            description: artistryProfile.bio[0],
-          },
-          {
-            title: "Creative through-line",
-            description: artistryProfile.bio[1],
+            description:
+              "Artist, performer, musician, and storyteller with experience across musical theatre, plays, live performance, and on-camera work. Trained through theatre and performance-based roles that strengthened stage presence, vocal expression, movement, and character work. Brings discipline, emotional range, and strong audience connection across stage and screen.",
           },
         ],
       },
       {
         id: "education",
         label: "Education",
-        intro: "Training across theatre, choir, stage presence, and performance-driven communication.",
+        intro: "Training in performance, stagecraft, and theatre-based communication.",
         entries: [
           {
             title: "University of Nevada, Las Vegas",
-            subtitle: "Theatre study with stage and screen acting concentration",
+            subtitle: "Minor in Theatre",
             description:
-              "Formal theatre coursework supporting acting, performance analysis, character work, and public presentation.",
+              "The Department of Theatre in the College of Fine Arts offers programs in performance, production and technology taught by experienced faculty while taking advantage of the entertainment richness of Las Vegas.",
           },
           {
-            title: "Liberty High School",
-            subtitle: "Advanced Theatre Studies · Chamber Choir · Show Choir",
+            title: "Courses",
+            subtitle:
+              "Acting: Camera · Voice and Movement for Actors I · Voice and Movement for Actors II · Acting I: Techniques · Act Studio II: Technique · Play Structure & Analysis · Acting III: Scene Study · Speech for the Actor · Acting as a Profession",
             description:
-              "Foundational training in performance, ensemble work, vocal practice, and rehearsal discipline.",
+              "Coursework across camera acting, movement, text analysis, voice, rehearsal process, and professional preparation.",
           },
         ],
       },
       {
         id: "musical-theatre",
         label: "Musical Theatre",
-        intro: "Selected musical theatre and vocal performance roles from training, production work, and staged repertoire.",
+        intro: "Selected musical theatre roles and training work.",
         entries: [
           {
             title: "Willy Wonka",
             subtitle: "Augustus Gloop",
             meta: "LHS Patriot Theatre · Apr 2019",
+            description:
+              "A whimsical stage musical following the mysterious Willy Wonka and the children invited into his fantastical chocolate factory. Augustus Gloop is bold, indulgent, and larger than life, bringing humor, strong physicality, and exaggerated stage presence to the production.",
           },
           {
             title: "Rock of Ages",
             subtitle: "Ensemble",
             meta: "LHS Patriot Theatre · Apr 2018",
+            description:
+              "A high-energy jukebox musical set on the 1980s Sunset Strip, filled with rock anthems, comedy, and larger-than-life characters chasing fame and connection. Ensemble work helped create the vibrant world of the show through dynamic movement, vocal energy, character versatility, and collaborative stage presence.",
           },
           {
             title: "The Phantom of the Opera",
-            subtitle: "Erik / Raoul",
+            subtitle: "Erik, The Phantom | Viscount Raoul de Chagny",
             meta: "Training and scene work",
+            description:
+              "A gothic musical set in the Paris Opera House, centered on obsession, genius, longing, and the haunting relationship between Christine Daae and the Phantom. Erik demands dramatic depth and emotional complexity, while Raoul brings steadiness, loyalty, and romantic devotion to the story.",
           },
           {
-            title: "Les Misérables",
-            subtitle: "Jean Valjean / Marius",
+            title: "Les Miserables",
+            subtitle: "Jean Valjean | Marius Pontmercy",
             meta: "Training and scene work",
+            description:
+              "An epic musical set in 19th-century France, exploring justice, mercy, sacrifice, and redemption amid social unrest and revolution. Jean Valjean requires immense emotional range and spiritual weight, while Marius carries youthful passion, sincerity, and emotional growth.",
           },
         ],
       },
       {
         id: "plays",
         label: "Plays",
-        intro: "Straight plays and staged works that developed dramatic range, ensemble work, and direction.",
+        intro: "Straight plays and directed work focused on dramatic range and storytelling precision.",
         entries: [
           {
-            title: "The Curious Incident of the Dog in the Night-Time",
-            subtitle: "Christopher / Ensemble",
+            title: "The Curious Incident of the Dog in the Night-time",
+            subtitle: "Christopher (Understudy) | Ensemble",
             meta: "LHS Patriot Theatre · Feb 2019",
+            description:
+              "A stage adaptation of Mark Haddon's novel, following a mathematically gifted teenager as he investigates the death of a neighbor's dog and navigates a world that often feels overwhelming and unpredictable. Christopher requires precision, vulnerability, focus, and a deeply physical performance style.",
           },
           {
             title: "Radium Girls",
             subtitle: "Dr. Flinn / C.B. Charlie Lee",
             meta: "LHS Patriot Theatre · Feb 2018",
+            description:
+              "A historical drama based on the true story of young women poisoned by radium while working in factories, and their fight for justice against powerful institutions. The supporting roles helped shape the tension, authority, and ethical conflict surrounding the workers' struggle.",
           },
           {
             title: "Check Please: Take Two",
             subtitle: "Director",
             meta: "LHS Patriot Theatre · Dec 2018",
+            description:
+              "A fast-paced comedy built around a series of disastrous blind dates, quick transitions, and sharply contrasted characters. The production was directed with attention to pacing, scene flow, comedic timing, and performance clarity.",
           },
         ],
       },
       {
         id: "performances",
         label: "Performances",
-        intro: "Live performance appearances, showcases, and public-facing stage work.",
+        intro: "Live showcases and public-facing performance work.",
         entries: [
           {
             title: "Nevada Thespian State Conference Opening Number",
-            subtitle: "Featured performer",
+            subtitle: "Performer",
             meta: "State conference appearance",
+            description:
+              "Featured performer in the opening number for the Nevada Thespian State Conference, delivering a dynamic combination of vocals, choreography, and character performance in a high-visibility theatrical showcase.",
           },
           {
             title: "Public Education Foundation Ed Hero Award Gala",
             subtitle: "Performing artist",
             meta: "Las Vegas, Nevada · Sep 2018",
+            description:
+              "Featured performer at the Public Education Foundation Ed Hero Award Gala, presenting a polished live performance through singing, dancing, and acting for a public-facing celebratory event.",
           },
-          ...creativeResumePerformanceEntries.filter((entry) =>
-            ["Shattered Stardust", "Rock of Ages", "Willy Wonka"].includes(entry.title),
-          ),
         ],
       },
       {
         id: "awards",
         label: "Awards",
-        intro: "Recognition earned through theatre competition, performance quality, and presentation work.",
+        intro: "Recognition earned through adjudicated theatre events and performance presentation.",
         entries: [
           {
             title: "International Thespian Festival",
             subtitle: "Superior in Individual Events",
+            description:
+              "Received a Superior rating in Individual Events at the International Thespian Festival, recognizing excellence in performance, preparation, and theatrical presentation in a competitive setting.",
           },
           {
-            title: "Nevada State Thespian Festival",
+            title: "State Thespian Festival",
             subtitle: "Superior in Individual Events",
-          },
-          {
-            title: "Performance and public-speaking distinction",
-            subtitle: "Work recognized across stage, presentation, and live delivery settings",
+            description:
+              "Earned a Superior rating in Individual Events at the State Thespian Conference, reflecting strong performance quality, stage presence, and execution in a judged theatre event.",
           },
         ],
       },
       {
         id: "skills",
         label: "Skills",
-        intro: "Creative tools spanning voice, movement, instruments, and performance delivery.",
+        intro: "Performance tools spanning voice, movement, instruments, and accents.",
         entries: [
           {
             title: "Vocal",
-            description: "Classical, pop, musical theatre, rap, and operatic repertoire",
+            description: "Classical, Pop, Rap, Opera",
           },
           {
             title: "Musical Instruments",
-            description: "Guitar, piano, violin, and keyboard accompaniment",
+            description: "Guitar, Piano, Violin",
           },
           {
             title: "Dance",
-            description: "Musical theatre, pop, K-pop, and hip-hop movement foundations",
+            description: "K-Pop, Hip-Hop",
           },
           {
-            title: "Accents & Performance",
-            description: "British RP, Australian, Russian, American, bilingual English and Tagalog delivery",
+            title: "Accents",
+            description: "British RP, Australian, Russian, American",
           },
         ],
       },
     ] satisfies CreativeResumeSection[],
   },
   headshots: {
+    theme: {
+      page: "creative-headshots",
+      accent: "#f6f6fa",
+      mode: "light",
+    } satisfies CreativePageTheme,
     title: "Headshots",
-    lead:
-      "A casting-focused set of studio stills and portrait studies arranged around one primary headshot, a supporting reel, and quieter secondary frames.",
+    lead: "A selection of still-image headshots from the creative archive.",
     backstageHref,
-    introVideo: {
-      src: withBase("/media/creative/headshots-intro.mov"),
-      posterSrc: creativeHeadshotSelections[0].src,
-      alt: "Portrait headshot reel featuring Mark Jayson Farol.",
-    } satisfies CreativeVideoAsset,
     items: creativeHeadshotSelections,
   },
   photoshoots: {
+    theme: {
+      page: "creative-photoshoots",
+      accent: "#000000",
+      mode: "dark",
+    } satisfies CreativePageTheme,
     title: "Photoshoots",
     lead:
-      "Categorized image studies from the updated creative archive, organized into editorials, commencement portraits, and Halloween character work.",
+      "Editorial, commencement, and Halloween image studies from the creative archive.",
     defaultId: "editorials",
     rail: [
       { id: "editorials", label: "Editorials" },

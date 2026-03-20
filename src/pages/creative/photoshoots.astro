@@ -26,8 +26,8 @@ const structuredData = buildImageCollectionPageStructuredData(
 <BaseLayout
   title={pageTitle}
   description={pageDescription}
-  page="creative"
-  accent="#ba9838"
+  page={photoshootsPage.theme.page}
+  accent={photoshootsPage.theme.accent}
   shell="bare"
   footer={false}
   replicaFooter={false}
@@ -41,9 +41,7 @@ const structuredData = buildImageCollectionPageStructuredData(
         <CreativeClusterNav items={creativeCluster.nav} activeHref={creativeCluster.nav[3].href} />
 
         <header class="creative-cluster-page__header creative-cluster-page__header--narrow">
-          <p class="creative-page__eyebrow" data-lift>Visual Archive</p>
           <h1 class="creative-page__title" data-lift>{photoshootsPage.title}</h1>
-          <p class="creative-cluster-page__lead" data-lift>{photoshootsPage.lead}</p>
         </header>
 
         <div class="rail-page__layout rail-page__layout--light creative-photos-page__layout" data-section-rail-root data-default-panel={photoshootsPage.defaultId}>
