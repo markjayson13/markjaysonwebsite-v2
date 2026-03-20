@@ -36,10 +36,10 @@ const cornerMenuDefaultLabelMap: Record<string, string> = {
   bio: "About",
   resume: "Resume/CV",
   portfolio: "Portfolio",
-  research: "Research",
-  projects: "Projects",
-  articles: "Articles",
-  creative: "Creative",
+  research: "Portfolio",
+  projects: "Portfolio",
+  articles: "Portfolio",
+  creative: "Portfolio",
   profiles: "Profiles",
 };
 const cornerMenuDefaultLabel = cornerMenuDefaultLabelMap[page] ?? "Home";
@@ -52,6 +52,8 @@ const cornerMenuDefaultLabel = cornerMenuDefaultLabelMap[page] ?? "Home";
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title} | {profile.name}</title>
     <meta name="description" content={description} />
+    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+    <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href={withBase("/favicon.svg")} type="image/svg+xml" />
     <meta name="theme-color" content={accent} />
@@ -94,17 +96,16 @@ const cornerMenuDefaultLabel = cornerMenuDefaultLabelMap[page] ?? "Home";
       <button
         class="corner-menu__trigger"
         type="button"
+        aria-label="What do you want to find Out?"
         aria-expanded="false"
         aria-controls="site-corner-menu-panel"
         data-corner-menu-trigger
       >
+        <span class="corner-menu__trigger-label">What do you want to find Out?</span>
         <span class="corner-menu__trigger-icon" aria-hidden="true">
           <span class="corner-menu__trigger-bar"></span>
           <span class="corner-menu__trigger-bar"></span>
           <span class="corner-menu__trigger-bar"></span>
-        </span>
-        <span class="corner-menu__trigger-copy">
-          <span class="corner-menu__trigger-label">What do you want to find Out?</span>
         </span>
       </button>
 
