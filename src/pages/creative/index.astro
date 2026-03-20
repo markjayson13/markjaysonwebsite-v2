@@ -36,8 +36,24 @@ const structuredData = buildImageCollectionPageStructuredData(pageUrl, pageTitle
           <p class="creative-cluster-page__lead" data-lift>{landingPage.lead}</p>
         </header>
 
-        <section class="creative-cluster-page__spotlight" data-lift>
-          <div class="creative-cluster-page__spotlight-copy">
+        <section class="creative-cluster-page__spotlight creative-landing__spotlight" data-lift>
+          <figure class="creative-cluster-page__spotlight-figure creative-cluster-page__spotlight-figure--video creative-landing__video-frame" data-lift>
+            <video
+              class="creative-cluster-page__spotlight-video"
+              src={landingPage.spotlightVideo.src}
+              poster={landingPage.spotlightVideo.posterSrc}
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              aria-hidden="true"
+              tabindex="-1"
+            ></video>
+            <figcaption class="creative-gallery__caption">Creative spotlight reel</figcaption>
+          </figure>
+
+          <div class="creative-cluster-page__spotlight-copy creative-landing__story">
             <p class="creative-cluster-page__section-label">Artistic Background</p>
             <p class="creative-cluster-page__statement">{landingPage.statement}</p>
             {
@@ -46,41 +62,10 @@ const structuredData = buildImageCollectionPageStructuredData(pageUrl, pageTitle
               ))
             }
           </div>
-
-          <aside class="creative-cluster-page__spotlight-side">
-            <figure class="creative-cluster-page__spotlight-figure creative-cluster-page__spotlight-figure--video" data-lift>
-              <video
-                class="creative-cluster-page__spotlight-video"
-                src={landingPage.spotlightVideo.src}
-                poster={landingPage.spotlightVideo.posterSrc}
-                autoplay
-                muted
-                loop
-                playsinline
-                preload="metadata"
-                aria-label={landingPage.spotlightVideo.alt}
-              ></video>
-              <figcaption class="creative-gallery__caption">Creative spotlight reel</figcaption>
-            </figure>
-
-            {
-              landingPage.featuredImage && (
-                <figure class="creative-cluster-page__spotlight-figure creative-cluster-page__spotlight-figure--supporting" data-lift>
-                  <img
-                    class="creative-cluster-page__spotlight-image"
-                    src={landingPage.featuredImage.src}
-                    alt={landingPage.featuredImage.alt}
-                    loading="eager"
-                  />
-                  <figcaption class="creative-gallery__caption">{landingPage.featuredImage.caption}</figcaption>
-                </figure>
-              )
-            }
-          </aside>
         </section>
 
-        <section class="creative-cluster-page__practice" data-lift>
-          <div class="creative-cluster-page__practice-copy">
+        <section class="creative-cluster-page__practice creative-landing__practice" data-lift>
+          <div class="creative-cluster-page__practice-copy creative-landing__practice-copy">
             <p class="creative-cluster-page__section-label">Practice</p>
             <div class="creative-cluster-page__skills">
               {
@@ -89,18 +74,35 @@ const structuredData = buildImageCollectionPageStructuredData(pageUrl, pageTitle
                 ))
               }
             </div>
+
+            <div class="creative-landing__actions">
+              <a class="replica-outline-button" href={landingPage.headshotsCta.href}>
+                {landingPage.headshotsCta.label}
+              </a>
+            </div>
           </div>
 
-          <a class="replica-outline-button" href={landingPage.headshotsCta.href}>
-            {landingPage.headshotsCta.label}
-          </a>
+          {
+            landingPage.featuredImage && (
+              <figure class="creative-cluster-page__spotlight-figure creative-cluster-page__spotlight-figure--supporting creative-landing__supporting" data-lift>
+                <img
+                  class="creative-cluster-page__spotlight-image"
+                  src={landingPage.featuredImage.src}
+                  alt={landingPage.featuredImage.alt}
+                  loading="eager"
+                />
+                <figcaption class="creative-gallery__caption">{landingPage.featuredImage.caption}</figcaption>
+              </figure>
+            )
+          }
         </section>
 
-        <section class="creative-cluster-page__grid" aria-label="Creative areas">
+        <section class="creative-cluster-page__grid creative-landing__grid" aria-label="Creative areas">
           {
             landingPage.featureCards.map((card) => (
-              <article class="creative-feature-card" data-lift>
+              <article class="creative-feature-card creative-landing__card" data-lift>
                 <div class="creative-feature-card__copy">
+                  <p class="creative-cluster-page__section-label">Creative Area</p>
                   <h2>{card.title}</h2>
                   <p>{card.description}</p>
                   {card.note && <p class="creative-feature-card__note">{card.note}</p>}

@@ -4,19 +4,30 @@ import type { RailItem } from "../data/editorial";
 interface Props {
   title: string;
   items: RailItem[];
+  activeId?: string;
 }
 
-const { title, items } = Astro.props;
+const { title, items, activeId = items[0]?.id } = Astro.props;
 ---
 
 <nav class="section-rail" aria-label={`${title} section navigation`} data-section-rail>
   <p class="section-rail__title">{title}</p>
-  <div class="section-rail__items">
+  <div class="section-rail__items" role="tablist" aria-label={`${title} filters`}>
     {
       items.map((item) => (
-        <a href={`#${item.id}`} class="section-rail__link" data-rail-link data-target={item.id}>
+        <button
+          type="button"
+          id={`rail-tab-${item.id}`}
+          class:list={["section-rail__link", item.id === activeId && "is-active"]}
+          data-rail-link
+          data-target={item.id}
+          role="tab"
+          aria-controls={`rail-panel-${item.id}`}
+          aria-selected={item.id === activeId ? "true" : "false"}
+          tabindex={item.id === activeId ? "0" : "-1"}
+        >
           {item.label}
-        </a>
+        </button>
       ))
     }
   </div>

@@ -5,7 +5,8 @@ import { creativeCluster, replicaFooterCredit } from "../../data/editorial";
 import { buildImageCollectionPageStructuredData, socialPreviewImages } from "../../data/site";
 
 const headshotsPage = creativeCluster.headshots;
-const [primaryHeadshot, ...supportingHeadshots] = headshotsPage.items;
+const primaryHeadshot = headshotsPage.items.find((item) => item.featured) ?? headshotsPage.items[0];
+const supportingHeadshots = headshotsPage.items.filter((item) => item.src !== primaryHeadshot?.src);
 const pageTitle = "Headshots";
 const pageDescription = "Headshots and portrait studies for Mark Jayson Martinez Farol.";
 const siteOrigin = Astro.site ?? new URL("https://markjayson.com");
@@ -47,20 +48,30 @@ const structuredData = buildImageCollectionPageStructuredData(pageUrl, pageTitle
         </header>
 
         <section class="creative-headshots__lead" aria-label="Headshot spotlight">
-          <figure class="creative-headshots__video" data-lift>
-            <video
-              class="creative-headshots__video-element"
-              src={headshotsPage.introVideo.src}
-              poster={headshotsPage.introVideo.posterSrc}
-              autoplay
-              muted
-              loop
-              playsinline
-              preload="metadata"
-              aria-label={headshotsPage.introVideo.alt}
-            ></video>
-            <figcaption class="creative-gallery__caption">Portrait reel</figcaption>
-          </figure>
+          <div class="creative-headshots__intro-stack">
+            <figure class="creative-headshots__video" data-lift>
+              <video
+                class="creative-headshots__video-element"
+                src={headshotsPage.introVideo.src}
+                poster={headshotsPage.introVideo.posterSrc}
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                aria-hidden="true"
+                tabindex="-1"
+              ></video>
+              <figcaption class="creative-gallery__caption">Portrait reel</figcaption>
+            </figure>
+
+            <div class="creative-headshots__intro-copy" data-lift>
+              <p class="creative-cluster-page__section-label">Casting First</p>
+              <p class="creative-cluster-page__copy">
+                A cleaner headshot archive led by one primary still, followed by supporting portraits for range, mood, and presentation.
+              </p>
+            </div>
+          </div>
 
           {
             primaryHeadshot && (

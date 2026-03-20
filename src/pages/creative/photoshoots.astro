@@ -60,35 +60,41 @@ const structuredData = buildImageCollectionPageStructuredData(
                     aria-labelledby={`rail-tab-${group.id}`}
                     hidden={group.id !== photoshootsPage.defaultId}
                   >
-                    <h2 class="rail-page__group-title">{group.label}</h2>
-                    <p class="rail-page__group-intro">{group.intro}</p>
+                    <div class="creative-photos-page__panel-hero">
+                      <div class="creative-photos-page__panel-copy" data-lift>
+                        <p class="creative-cluster-page__section-label">Series</p>
+                        <h2 class="rail-page__group-title">{group.label}</h2>
+                        <p class="rail-page__group-intro">{group.intro}</p>
+                      </div>
 
-                    {
-                      leadItem && (
-                        <figure
-                          class:list={[
-                            "creative-gallery__figure",
-                            "creative-gallery__figure--lead",
-                            leadItem.aspect === "landscape" && "creative-gallery__figure--landscape",
-                            leadItem.aspect === "portrait" && "creative-gallery__figure--portrait",
-                          ]}
-                          data-lift
-                        >
-                          <img
+                      {
+                        leadItem && (
+                          <figure
                             class:list={[
-                              "creative-gallery__image",
-                              "creative-gallery__image--lead",
-                              leadItem.aspect === "landscape" && "creative-gallery__image--landscape",
-                              leadItem.aspect === "portrait" && "creative-gallery__image--portrait",
+                              "creative-gallery__figure",
+                              "creative-gallery__figure--lead",
+                              "creative-photos-page__lead",
+                              leadItem.aspect === "landscape" && "creative-gallery__figure--landscape",
+                              leadItem.aspect === "portrait" && "creative-gallery__figure--portrait",
                             ]}
-                            src={leadItem.src}
-                            alt={leadItem.alt}
-                            loading="eager"
-                          />
-                          <figcaption class="creative-gallery__caption">{leadItem.caption}</figcaption>
-                        </figure>
-                      )
-                    }
+                            data-lift
+                          >
+                            <img
+                              class:list={[
+                                "creative-gallery__image",
+                                "creative-gallery__image--lead",
+                                leadItem.aspect === "landscape" && "creative-gallery__image--landscape",
+                                leadItem.aspect === "portrait" && "creative-gallery__image--portrait",
+                              ]}
+                              src={leadItem.src}
+                              alt={leadItem.alt}
+                              loading="eager"
+                            />
+                            <figcaption class="creative-gallery__caption">{leadItem.caption}</figcaption>
+                          </figure>
+                        )
+                      }
+                    </div>
 
                     <div class="creative-gallery creative-gallery--photos">
                       {

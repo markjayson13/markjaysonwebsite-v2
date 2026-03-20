@@ -214,98 +214,109 @@ const setupSectionRails = () => {
     }
 
     const links = Array.from(root.querySelectorAll("[data-rail-link]")).filter(
-      (link): link is HTMLAnchorElement => link instanceof HTMLAnchorElement,
+      (link): link is HTMLButtonElement => link instanceof HTMLButtonElement,
     );
 
-    const sections = links
+    const panels = links
       .map((link) => {
         const id = link.dataset.target;
         if (!id) {
           return null;
         }
 
-        const section = root.querySelector(`[data-section-id="${id}"]`) ?? document.getElementById(id);
-        if (!(section instanceof HTMLElement)) {
+        const panel = root.querySelector(`[data-section-id="${id}"]`) ?? document.getElementById(`rail-panel-${id}`);
+        if (!(panel instanceof HTMLElement)) {
           return null;
         }
 
-        return { id, link, section };
+        return { id, link, panel };
       })
       .filter(Boolean);
 
-    if (!sections.length) {
+    if (!panels.length) {
       return;
     }
 
-    const activate = (id: string) => {
-      sections.forEach((item) => {
+    const activate = (id: string, updateHash = true) => {
+      panels.forEach((item) => {
         const isActive = item.id === id;
         item.link.classList.toggle("is-active", isActive);
-        if (isActive) {
-          item.link.setAttribute("aria-current", "location");
-        } else {
-          item.link.removeAttribute("aria-current");
-        }
-      });
-    };
-
-    const syncFromScroll = () => {
-      let current = sections[0];
-      let bestDistance = Number.POSITIVE_INFINITY;
-
-      sections.forEach((item) => {
-        const top = item.section.getBoundingClientRect().top;
-        const distance = Math.abs(top - 176);
-        if (top <= 260 && distance < bestDistance) {
-          bestDistance = distance;
-          current = item;
-        }
+        item.link.setAttribute("aria-selected", isActive ? "true" : "false");
+        item.link.tabIndex = isActive ? 0 : -1;
+        item.panel.hidden = !isActive;
+        item.panel.setAttribute("aria-hidden", isActive ? "false" : "true");
+        item.panel.toggleAttribute("data-active-panel", isActive);
       });
 
-      activate(current.id);
-    };
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-
-        if (visible.length) {
-          const matched = sections.find((item) => item.section === visible[0].target);
-          if (matched) {
-            activate(matched.id);
-            return;
-          }
-        }
-
-        syncFromScroll();
-      },
-      {
-        rootMargin: "-14% 0px -54% 0px",
-        threshold: [0.15, 0.35, 0.65],
-      },
-    );
-
-    sections.forEach((item) => observer.observe(item.section));
-    syncFromScroll();
-
-    const handleScroll = () => syncFromScroll();
-    const handleResize = () => syncFromScroll();
-    const handleClick = (event: Event) => {
-      if (event.currentTarget instanceof HTMLAnchorElement) {
-        activate(event.currentTarget.dataset.target || "");
+      if (updateHash && typeof window.history.replaceState === "function") {
+        const next = new URL(window.location.href);
+        next.hash = id;
+        window.history.replaceState(null, "", next);
       }
     };
 
-    sections.forEach((item) => item.link.addEventListener("click", handleClick));
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleResize);
+    const initialHash = window.location.hash.replace(/^#/, "");
+    const defaultPanel = root.dataset.defaultPanel ?? panels[0]?.id ?? "";
+    const initialPanel = panels.some((item) => item.id === initialHash) ? initialHash : defaultPanel;
 
-    teardownFns.push(() => observer.disconnect());
-    teardownFns.push(() => window.removeEventListener("scroll", handleScroll));
-    teardownFns.push(() => window.removeEventListener("resize", handleResize));
-    teardownFns.push(() => sections.forEach((item) => item.link.removeEventListener("click", handleClick)));
+    activate(initialPanel, false);
+
+    const handleClick = (event: Event) => {
+      if (event.currentTarget instanceof HTMLButtonElement) {
+        const target = event.currentTarget.dataset.target || defaultPanel;
+        activate(target);
+      }
+    };
+
+    const moveFocus = (currentIndex: number, nextIndex: number) => {
+      const item = panels[nextIndex];
+      if (!item) {
+        return;
+      }
+
+      activate(item.id, false);
+      item.link.focus();
+    };
+
+    const handleKeydown = (event: KeyboardEvent) => {
+      if (!(event.currentTarget instanceof HTMLButtonElement)) {
+        return;
+      }
+
+      const currentIndex = panels.findIndex((item) => item.link === event.currentTarget);
+      if (currentIndex < 0) {
+        return;
+      }
+
+      if (event.key === "ArrowDown" || event.key === "ArrowRight") {
+        event.preventDefault();
+        moveFocus(currentIndex, (currentIndex + 1) % panels.length);
+        return;
+      }
+
+      if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
+        event.preventDefault();
+        moveFocus(currentIndex, (currentIndex - 1 + panels.length) % panels.length);
+        return;
+      }
+
+      if (event.key === "Home") {
+        event.preventDefault();
+        moveFocus(currentIndex, 0);
+        return;
+      }
+
+      if (event.key === "End") {
+        event.preventDefault();
+        moveFocus(currentIndex, panels.length - 1);
+      }
+    };
+
+    panels.forEach((item) => item.link.addEventListener("click", handleClick));
+    panels.forEach((item) => item.link.addEventListener("keydown", handleKeydown));
+
+    teardownFns.push(() => panels.forEach((item) => item.link.removeEventListener("click", handleClick)));
+    teardownFns.push(() => panels.forEach((item) => item.link.removeEventListener("keydown", handleKeydown)));
   });
 };
 
