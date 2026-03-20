@@ -1,0 +1,1075 @@
+import { withBase } from "../utils/paths";
+
+export const canonicalSiteUrl = "https://markjayson.com";
+export const creativeSiteUrl = "https://creative.markjayson.com";
+const githubProfileUrl = "https://github.com/markjayson13";
+const linkedInProfileUrl = "https://www.linkedin.com/in/markjaysonfarol/";
+const googleScholarProfileUrl = "https://scholar.google.com/citations?user=vdr24hsAAAAJ&hl=en";
+const orcidProfileUrl = "https://orcid.org/0009-0004-1245-9959";
+const researchGateProfileUrl = "https://www.researchgate.net/profile/Mark-Jayson-Farol?ev=hdr_xprf";
+const backstageProfileUrl = "https://www.backstage.com/tal/mark-jayson-farol/";
+const legacyCreativePortfolioUrl = "https://markjay1869760.wixsite.com/mysite";
+const instagramProfileUrl = "https://www.instagram.com/markjayson13/";
+const facebookProfileUrl = "https://www.facebook.com/markjaysonfarol13";
+const xProfileUrl = "https://twitter.com/mark_jayson13";
+
+export type StructuredDataValue =
+  | string
+  | number
+  | boolean
+  | null
+  | StructuredDataNode
+  | StructuredDataValue[];
+
+export type StructuredDataNode = {
+  [key: string]: StructuredDataValue;
+};
+
+export type StructuredData = StructuredDataNode | StructuredDataNode[];
+
+export type IndexableImage = {
+  src: string;
+  alt: string;
+  caption?: string;
+};
+
+export type SocialPreviewImage = IndexableImage & {
+  width?: number;
+  height?: number;
+};
+
+export type NavLink = {
+  label: string;
+  href: string;
+};
+
+export type FooterContact = {
+  email: string;
+  location: string;
+  buttonLabel: string;
+  buttonHref: string;
+};
+
+export type FooterSocialLink = {
+  label: string;
+  href?: string;
+  icon:
+    | "linkedin"
+    | "github"
+    | "scholar"
+    | "orcid"
+    | "researchgate"
+    | "backstage"
+    | "instagram"
+    | "facebook"
+    | "x"
+    | "tiktok";
+  enabled: boolean;
+};
+
+export type CornerMenuItem = {
+  label: string;
+  href: string;
+  title: string;
+  description: string;
+};
+
+export type MainSiteTopLink = {
+  label: string;
+  href?: string;
+  menuTrigger?: boolean;
+};
+
+export type PageTheme = {
+  titleMeasure: string;
+  leadMeasure: string;
+  copyMeasure?: string;
+};
+
+export type Metric = {
+  value: string;
+  label: string;
+  note: string;
+};
+
+export type GatewayCard = {
+  title: string;
+  description: string;
+  href: string;
+  accent: string;
+  audience: string;
+};
+
+export type SkillCluster = {
+  title: string;
+  items: string[];
+};
+
+export type ExperienceItem = {
+  role: string;
+  organization: string;
+  dateRange: string;
+  location: string;
+  summary: string;
+  bullets: string[];
+  skills: string[];
+};
+
+export type EducationItem = {
+  degree: string;
+  institution: string;
+  dateRange: string;
+  summary: string;
+  highlights: string[];
+};
+
+export type ResearchItem = {
+  status: string;
+  title: string;
+  outlet: string;
+  date: string;
+  summary: string;
+  methods: string[];
+  links: { label: string; href: string }[];
+};
+
+export type PortfolioEntry = {
+  title: string;
+  category: string;
+  timeframe: string;
+  problem: string;
+  approach: string;
+  outcome: string;
+  tools: string[];
+};
+
+export type SocialLink = {
+  label: string;
+  href: string;
+  category: "Academic" | "Professional" | "Creative" | "Social";
+  note: string;
+  enabled: boolean;
+};
+
+export type PerformanceCredit = {
+  date: string;
+  title: string;
+  role: string;
+  venue: string;
+};
+
+export type GalleryImage = {
+  src: string;
+  alt: string;
+  caption: string;
+};
+
+export const withCreativeSite = (path = "/") => new URL(path, creativeSiteUrl).toString();
+
+export const mainSiteTopLinks: MainSiteTopLink[] = [
+  { label: "Home", href: withBase("/") },
+  { label: "About", href: withBase("/bio") },
+  { label: "Resume/CV", href: withBase("/resume") },
+  { label: "Portfolio", href: withBase("/portfolio") },
+  { label: "Profiles", href: withBase("/profiles") },
+  { label: "Contact", href: withBase("/#contact") },
+] satisfies MainSiteTopLink[];
+
+export const navLinks: NavLink[] = [
+  { label: "About", href: withBase("/bio") },
+  { label: "Portfolio", href: withBase("/portfolio") },
+  { label: "Resume", href: withBase("/resume") },
+  { label: "Contact", href: withBase("/#contact") },
+];
+
+export const footerSecondaryLinks: NavLink[] = [
+  { label: "About", href: withBase("/bio") },
+  { label: "Portfolio", href: withBase("/portfolio") },
+  { label: "Resume", href: withBase("/resume") },
+  { label: "Contact", href: withBase("/#contact") },
+];
+
+export const footerLegalLinks: NavLink[] = [
+  { label: "Privacy Policy", href: withBase("/privacy-policy") },
+  { label: "Terms of Use", href: withBase("/terms-of-use") },
+];
+
+export const footerContact: FooterContact = {
+  email: "markjayson@markjayson.com",
+  location: "Las Vegas, Nevada, United States",
+  buttonLabel: "Get in Touch",
+  buttonHref: withBase("/#contact"),
+};
+
+export const footerSocialLinks: FooterSocialLink[] = [
+  { label: "LinkedIn", href: linkedInProfileUrl, icon: "linkedin", enabled: true },
+  { label: "GitHub", href: githubProfileUrl, icon: "github", enabled: true },
+  { label: "Google Scholar", href: googleScholarProfileUrl, icon: "scholar", enabled: true },
+  { label: "ORCID", href: orcidProfileUrl, icon: "orcid", enabled: true },
+  { label: "ResearchGate", href: researchGateProfileUrl, icon: "researchgate", enabled: true },
+];
+
+export const cornerMenuItems: CornerMenuItem[] = [
+  {
+    label: "Home",
+    href: withBase("/"),
+    title: "Home",
+    description: "Main landing page with the current site overview, latest work, and direct paths across the site.",
+  },
+  {
+    label: "About",
+    href: withBase("/bio"),
+    title: "About",
+    description: "About page with the full background narrative, economist foundation, data-engineering focus, and current direction.",
+  },
+  {
+    label: "Resume/CV",
+    href: withBase("/resume"),
+    title: "Resume/CV",
+    description: "Long-form resume page covering education, experience, certifications, projects, and skills.",
+  },
+  {
+    label: "Portfolio",
+    href: withBase("/portfolio"),
+    title: "Portfolio",
+    description: "Selected research, projects, publications, and public writing organized inside the portfolio hub.",
+  },
+  {
+    label: "Profiles",
+    href: withBase("/profiles"),
+    title: "Profiles",
+    description: "Curated academic, professional, and technical destinations across the web.",
+  },
+  {
+    label: "Contact",
+    href: withBase("/#contact"),
+    title: "Contact",
+    description: "Direct contact for research collaboration, data work, and professional opportunities.",
+  },
+];
+
+export const homeDiscoveryItems: CornerMenuItem[] = [
+  {
+    label: "About",
+    href: withBase("/bio"),
+    title: "About",
+    description: "Quantitative economics background, technical foundation, and current professional direction.",
+  },
+  {
+    label: "Resume/CV",
+    href: withBase("/resume"),
+    title: "Resume/CV",
+    description: "Education, experience, certifications, skills, and selected professional highlights.",
+  },
+  {
+    label: "Portfolio",
+    href: withBase("/portfolio"),
+    title: "Portfolio",
+    description: "Research, projects, and publications organized into one clearer evidence hub.",
+  },
+  {
+    label: "Profiles",
+    href: withBase("/profiles"),
+    title: "Profiles",
+    description: "Curated academic, professional, and technical profile surfaces.",
+  },
+];
+
+export const pageThemes: Record<string, PageTheme> = {
+  home: {
+    titleMeasure: "54rem",
+    leadMeasure: "36rem",
+    copyMeasure: "70rem",
+  },
+  bio: {
+    titleMeasure: "45rem",
+    leadMeasure: "32rem",
+    copyMeasure: "49rem",
+  },
+  resume: {
+    titleMeasure: "52rem",
+    leadMeasure: "56rem",
+    copyMeasure: "70rem",
+  },
+  portfolio: {
+    titleMeasure: "31rem",
+    leadMeasure: "32rem",
+    copyMeasure: "36rem",
+  },
+  research: {
+    titleMeasure: "31rem",
+    leadMeasure: "60rem",
+    copyMeasure: "68rem",
+  },
+  projects: {
+    titleMeasure: "31rem",
+    leadMeasure: "52rem",
+    copyMeasure: "64rem",
+  },
+  articles: {
+    titleMeasure: "31rem",
+    leadMeasure: "52rem",
+    copyMeasure: "64rem",
+  },
+  creative: {
+    titleMeasure: "26rem",
+    leadMeasure: "46rem",
+    copyMeasure: "46rem",
+  },
+  "creative-landing": {
+    titleMeasure: "22rem",
+    leadMeasure: "38rem",
+    copyMeasure: "38rem",
+  },
+  "creative-artistic-resume": {
+    titleMeasure: "34rem",
+    leadMeasure: "56rem",
+    copyMeasure: "58rem",
+  },
+  "creative-headshots": {
+    titleMeasure: "18rem",
+    leadMeasure: "30rem",
+    copyMeasure: "34rem",
+  },
+  "creative-photoshoots": {
+    titleMeasure: "24rem",
+    leadMeasure: "32rem",
+    copyMeasure: "36rem",
+  },
+  profiles: {
+    titleMeasure: "34rem",
+    leadMeasure: "44rem",
+    copyMeasure: "48rem",
+  },
+  privacy: {
+    titleMeasure: "34rem",
+    leadMeasure: "48rem",
+    copyMeasure: "56rem",
+  },
+  terms: {
+    titleMeasure: "34rem",
+    leadMeasure: "48rem",
+    copyMeasure: "56rem",
+  },
+};
+
+export const profile = {
+  name: "Mark Jayson Farol",
+  fullName: "Mark Jayson Martinez Farol",
+  shortName: "MJF",
+  title: "Economist & Data Scientist",
+  headline:
+    "Economist and data scientist specializing in econometrics, causal inference, data engineering, and evidence-based policy and financial analysis.",
+  degreeLine:
+    "M.A. in Quantitative Business Economics graduate from the University of Nevada, Las Vegas",
+  location: "Las Vegas, Nevada, United States",
+  relocation: "Relocating to New York, NY",
+  summary:
+    "I build research and analytical systems that turn complex data into clean evidence for finance, policy, and institutional strategy.",
+  mission:
+    "My work connects econometric reasoning, high-dimensional data, and plain-language communication so technical results can guide real decisions.",
+  audience:
+    "I am pursuing economist, data scientist, and analytical roles where quantitative work supports pricing, policy, research, strategy, and financial decision-making.",
+  distinction:
+    "Selected as an Outstanding Student Commencement Speaker for making complex research understandable to a general audience.",
+  languages: ["English", "Tagalog"],
+  tools: ["Stata", "R", "Python", "Excel", "DuckDB", "PyArrow", "GitHub"],
+};
+
+export const identityPersonStructuredData: StructuredDataNode = {
+  "@type": "Person",
+  "@id": `${canonicalSiteUrl}/#person`,
+  name: "Mark Jayson Martinez Farol",
+  alternateName: [profile.name, "Mark Jayson M. Farol"],
+  identifier: "mark-jayson-martinez-farol",
+  url: `${canonicalSiteUrl}/`,
+  description: profile.summary,
+  jobTitle: profile.title,
+  image: new URL(withBase("/images/bio/mark-jayson-bio-portrait.jpeg"), canonicalSiteUrl).toString(),
+  homeLocation: {
+    "@type": "Place",
+    name: profile.location,
+  },
+  sameAs: [
+    linkedInProfileUrl,
+    githubProfileUrl,
+    googleScholarProfileUrl,
+    orcidProfileUrl,
+    researchGateProfileUrl,
+    backstageProfileUrl,
+    instagramProfileUrl,
+    facebookProfileUrl,
+    xProfileUrl,
+  ],
+};
+
+const buildProfilePageMainEntity = (pageUrl: string): StructuredDataNode => ({
+  ...identityPersonStructuredData,
+  mainEntityOfPage: {
+    "@id": `${pageUrl}#webpage`,
+  },
+});
+
+export const buildProfilePageStructuredData = (
+  pageUrl: string,
+  pageName: string,
+  pageDescription: string,
+): StructuredDataNode[] => {
+  const mainEntity = buildProfilePageMainEntity(pageUrl);
+
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      "@id": `${pageUrl}#webpage`,
+      url: pageUrl,
+      name: pageName,
+      description: pageDescription,
+      mainEntity,
+    },
+    {
+      "@context": "https://schema.org",
+      ...mainEntity,
+    },
+  ];
+};
+
+const buildImageObjectNode = (pageUrl: string, image: IndexableImage, index = 1): StructuredDataNode => {
+  const imageUrl = new URL(image.src, canonicalSiteUrl).toString();
+
+  return {
+    "@type": "ImageObject",
+    "@id": `${pageUrl}#image-${index}`,
+    contentUrl: imageUrl,
+    url: imageUrl,
+    caption: image.caption ?? image.alt,
+    description: image.alt,
+    creator: {
+      "@id": String(identityPersonStructuredData["@id"]),
+    },
+    creditText: profile.name,
+    copyrightNotice: profile.name,
+  };
+};
+
+export const buildPrimaryImageStructuredData = (pageUrl: string, image: IndexableImage): StructuredDataNode[] => [
+  {
+    "@context": "https://schema.org",
+    ...buildImageObjectNode(pageUrl, image),
+  },
+];
+
+export const buildImageCollectionPageStructuredData = (
+  pageUrl: string,
+  pageName: string,
+  pageDescription: string,
+  images: IndexableImage[],
+): StructuredDataNode[] => {
+  const imageNodes = images.map((image, index) => buildImageObjectNode(pageUrl, image, index + 1));
+
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "@id": `${pageUrl}#webpage`,
+      url: pageUrl,
+      name: pageName,
+      description: pageDescription,
+      about: {
+        "@id": String(identityPersonStructuredData["@id"]),
+      },
+      creator: {
+        "@id": String(identityPersonStructuredData["@id"]),
+      },
+      image: imageNodes.map((node) => ({
+        "@id": String(node["@id"]),
+      })),
+      mainEntity: {
+        "@type": "ItemList",
+        itemListElement: imageNodes.map((node, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          item: {
+            "@id": String(node["@id"]),
+          },
+        })),
+      },
+    },
+    {
+      "@context": "https://schema.org",
+      ...identityPersonStructuredData,
+    },
+    ...imageNodes.map((node) => ({
+      "@context": "https://schema.org",
+      ...node,
+    })),
+  ];
+};
+
+export const socialPreviewImages = {
+  home: {
+    src: withBase("/images/home-contact-portrait.png"),
+    alt: "Portrait of Mark Jayson Farol holding a glowing globe.",
+    width: 1024,
+    height: 1536,
+  },
+  bio: {
+    src: withBase("/images/bio/mark-jayson-bio-portrait.jpeg"),
+    alt: "Portrait of Mark Jayson Farol.",
+    width: 1856,
+    height: 2046,
+  },
+  profiles: {
+    src: withBase("/images/creative/headshots/headshot-02.jpeg"),
+    alt: "Primary headshot of Mark Jayson Farol.",
+    width: 1024,
+    height: 1536,
+  },
+  creativeLanding: {
+    src: withBase("/images/creative/photoshoots/editorials/editorial-02.jpg"),
+    alt: "Black-and-white editorial portrait of Mark Jayson Farol.",
+  },
+  creativeHeadshots: {
+    src: withBase("/images/creative/headshots/headshot-02.jpeg"),
+    alt: "Studio headshot of Mark Jayson Farol in a dark blazer against a light background.",
+    width: 1024,
+    height: 1536,
+  },
+  creativePhotoshoots: {
+    src: withBase("/images/creative/photoshoots/editorials/editorial-02.jpg"),
+    alt: "Black-and-white editorial portrait of Mark Jayson Farol in sunglasses and a leather jacket.",
+  },
+} satisfies Record<string, SocialPreviewImage>;
+
+export const pageStats = {
+  home: [
+    { value: "1", label: "Published article", note: "Spectra Undergraduate Research Journal" },
+    { value: "5", label: "Economics courses supported", note: "Micro, macro, statistics, econometrics, capstone" },
+    { value: "3", label: "Working papers in motion", note: "Higher-ed finance and pricing dynamics" },
+    { value: "200+", label: "Students supported per term", note: "Lecture, review, tutoring, and office hours" },
+  ],
+  resume: [
+    { value: "4", label: "Core roles featured", note: "Research, teaching, and client-facing operations" },
+    { value: "5", label: "Courses taught and supported", note: "ECON 102, 103, 261, 441, and 495" },
+    { value: "3", label: "Top-seller recognitions", note: "kate spade new york tenure" },
+    { value: "NYC", label: "Relocation target", note: "Open to analyst roles in New York" },
+  ],
+  research: [
+    { value: "2004-2024", label: "IPEDS panel span", note: "Research-ready institution-year infrastructure" },
+    { value: "100th", label: "WEAI conference", note: "Working paper presentation milestone" },
+    { value: "3", label: "Current paper streams", note: "Pricing, aid packaging, and finance" },
+    { value: "NCES", label: "Primary data backbone", note: "IPEDS, CPS-MORG, and local survey work" },
+  ],
+  portfolio: [
+    { value: "5", label: "Featured case studies", note: "From data engineering to forecasting and strategy" },
+    { value: "3.49%", label: "Forecast MAPE", note: "Airline RPM time-series project" },
+    { value: "IV", label: "Causal toolset", note: "Instrumental variables, fixed effects, and panel models" },
+    { value: "End-to-end", label: "Delivery style", note: "Problem framing, data work, analysis, and narrative" },
+  ],
+  artistry: [
+    { value: "Actor", label: "Performance lane", note: "Stage and screen training with live credits" },
+    { value: "Singer", label: "Creative lane", note: "Choir, gala performance, tenor and baritone work" },
+    { value: "Director", label: "Production lane", note: "Creative leadership and ensemble direction" },
+    { value: "UNLV", label: "Training bridge", note: "Economics major with theatre minor" },
+  ],
+  socials: [
+    { value: "Academic", label: "Research identity", note: "Scholar, ORCID, and ResearchGate" },
+    { value: "Professional", label: "Career identity", note: "LinkedIn and portfolio-facing presence" },
+    { value: "Creative", label: "Performance identity", note: "Backstage and legacy creative portfolio" },
+    { value: "Link-only", label: "Contact posture", note: "No phone or home address published" },
+  ],
+} satisfies Record<string, Metric[]>;
+
+export const gatewayCards: GatewayCard[] = [
+  {
+    title: "Read the story",
+    description: "Start with the throughline connecting economics, communication, and performance.",
+    href: "#story",
+    accent: "#67e6c5",
+    audience: "Overview",
+  },
+  {
+    title: "Review the resume",
+    description: "See roles, teaching experience, research work, education, and certifications in progress.",
+    href: withBase("/resume"),
+    accent: "#d6a34e",
+    audience: "Recruiters",
+  },
+  {
+    title: "Open the research",
+    description: "Jump to publications, working papers, methods, datasets, and academic profiles.",
+    href: withBase("/research"),
+    accent: "#8ab4ff",
+    audience: "Faculty and collaborators",
+  },
+  {
+    title: "Explore the portfolio",
+    description: "Read professional case studies on pricing, forecasting, policy analysis, and data engineering.",
+    href: withBase("/portfolio"),
+    accent: "#ef7d72",
+    audience: "Hiring managers",
+  },
+  {
+    title: "Enter the artistry",
+    description: "See performance credits, training, headshots, and the creative side of the work.",
+    href: withBase("/artistry"),
+    accent: "#d98cff",
+    audience: "Creative teams",
+  },
+  {
+    title: "Find the links",
+    description: "Visit the academic, professional, and creative platforms where my work lives online.",
+    href: withBase("/socials"),
+    accent: "#8fd36f",
+    audience: "Connections",
+  },
+];
+
+export const skillClusters: SkillCluster[] = [
+  {
+    title: "Causal inference and econometrics",
+    items: [
+      "Panel data and fixed effects",
+      "Dynamic specifications and difference-GMM",
+      "Instrumental variables and hypothesis testing",
+      "Regression interpretation for decision-makers",
+    ],
+  },
+  {
+    title: "Data engineering and validation",
+    items: [
+      "IPEDS and NCES data harmonization",
+      "Dictionary lakes and schema-aware QC",
+      "Research-ready long and wide panel construction",
+      "Feature engineering and release-drift checks",
+    ],
+  },
+  {
+    title: "Communication and delivery",
+    items: [
+      "Lecture design and large-section instruction",
+      "Executive summaries and policy storytelling",
+      "Slide decks, presentations, and public speaking",
+      "1:1 mentoring and stakeholder-facing interpretation",
+    ],
+  },
+];
+
+export const honors = [
+  "Outstanding Student Commencement Speaker",
+  "Published author in Spectra Undergraduate Research Journal",
+  "WEAI 100th Annual Conference presenter",
+  "Co-builder of the UNLV ECON 495 Undergraduate Working Paper Journal",
+];
+
+export const certifications = {
+  inProgress: [
+    "Financial Modeling and Valuation Analyst (FMVA)",
+    "Commercial Banking and Credit Analyst (CBCA)",
+    "Capital Markets and Securities Analyst (CMSA)",
+    "Business Intelligence and Data Analyst (BIDA)",
+    "Financial Planning and Wealth Management Professional (FPWMP)",
+    "FinTech Industry Professional (FTIP)",
+    "Financial Planning and Analysis Professional (FPAP)",
+  ],
+  inPreparation: ["FINRA Securities Industry Essentials (SIE)"],
+};
+
+export const coursesSupported = [
+  "ECON 102 - Principles of Microeconomics",
+  "ECON 103 - Principles of Macroeconomics",
+  "ECON 261 - Principles of Statistics",
+  "ECON 441 - Econometrics",
+  "ECON 495 - Seminar in Economic Research",
+];
+
+export const experiences: ExperienceItem[] = [
+  {
+    role: "Graduate Teaching Assistant",
+    organization: "University of Nevada, Las Vegas",
+    dateRange: "Aug 2024 - Dec 2025",
+    location: "Las Vegas, Nevada",
+    summary:
+      "Supported five core economics courses through lecture design, student mentorship, tutoring, assessment support, and large-section instruction.",
+    bullets: [
+      "Created lecture slide decks and delivered lectures and review sessions for 200+ students per semester across micro and macro principles.",
+      "Provided quantitative course support in statistics and econometrics, helping students interpret probability, hypothesis tests, and regression output.",
+      "Held high-traffic office hours five days per week and coached students through capstone research design, data work, and final presentations.",
+      "Worked with faculty on pacing, assessment design, and identifying where students consistently got stuck.",
+    ],
+    skills: [
+      "University lecturing",
+      "Instructional design",
+      "Public speaking",
+      "Tutoring and mentoring",
+      "Communication",
+    ],
+  },
+  {
+    role: "Graduate Researcher",
+    organization: "University of Nevada, Las Vegas",
+    dateRange: "Aug 2024 - Dec 2025",
+    location: "Las Vegas, Nevada",
+    summary:
+      "Pursued research beyond degree requirements on higher-education finance, college cost drivers, and causal identification with national administrative data.",
+    bullets: [
+      "Built an IPEDS panel construction pipeline that converts cross-sectional releases into consistent institution-year data suitable for longitudinal analysis.",
+      "Authored three working papers on college pricing dynamics, aid packaging, and institutional behavior using fixed effects and IV strategies.",
+      "Deepened expertise in advanced econometrics, panel methods, and data engineering through self-directed work in Stata, R, and Python.",
+      "Presented one working paper at WEAI's 100th Annual Conference.",
+    ],
+    skills: ["Econometrics", "Panel data analysis", "Causal inference", "Data engineering", "GitHub"],
+  },
+  {
+    role: "Lead Sales Associate",
+    organization: "kate spade new york",
+    dateRange: "Jul 2022 - Jul 2023",
+    location: "Las Vegas, Nevada",
+    summary:
+      "Led floor execution, high-touch clienteling, and store operations while routinely driving five-figure sales shifts and communicating KPIs to the team.",
+    bullets: [
+      "Ranked as the top seller across tenure and earned top-performer recognition for three consecutive years.",
+      "Analyzed selling reports and operational records to forecast performance and communicate daily and weekly metrics to a 15-person team.",
+      "Supported opening and closing leadership, cash controls, bank deposits, and accuracy across roughly $3,600 in daily transactions.",
+      "Built repeat clientele through proactive outreach and handling problems before they escalated.",
+    ],
+    skills: [
+      "Sales operations",
+      "Clienteling and CRM",
+      "KPI reporting",
+      "Team leadership",
+      "Retail operations and cash handling",
+    ],
+  },
+  {
+    role: "Sales Associate",
+    organization: "kate spade new york",
+    dateRange: "Mar 2020 - Jul 2022",
+    location: "Las Vegas, Nevada",
+    summary:
+      "Worked toward sales goals through strong product knowledge, repeat client outreach, and steady floor execution.",
+    bullets: [
+      "Worked toward aggressive sales goals through repeat clientele, outreach, and recommendations matched to each customer.",
+      "Built deep product knowledge across categories and gave recommendations that actually matched what the customer needed.",
+      "Shared floor insights with peers, filled in during peak traffic, and kept the store ready throughout the day.",
+      "Handled objections and tense situations with diplomacy and kept the interaction on good terms.",
+    ],
+    skills: ["Sales", "Clienteling and CRM", "Product knowledge", "Adaptability", "Cashiering"],
+  },
+];
+
+export const education: EducationItem[] = [
+  {
+    degree: "Master of Arts in Quantitative Business Economics",
+    institution: "University of Nevada, Las Vegas",
+    dateRange: "Aug 2024 - Dec 2025",
+    summary:
+      "Completed advanced training in econometrics and applied data analysis while supporting undergraduate teaching and building research infrastructure.",
+    highlights: [
+      "Capstone research included financial literacy and food insecurity among seniors plus a quasi-experimental study of AI diffusion and gender wage inequality.",
+      "Supported microeconomics, macroeconomics, statistics, econometrics, and undergraduate research seminar instruction.",
+      "Authored three working papers, presented at WEAI, and co-built the UNLV ECON 495 Undergraduate Working Paper Journal.",
+      "Affiliations: Western Economic Association International and American Economic Association.",
+    ],
+  },
+  {
+    degree: "Bachelor of Science in Business Administration in Economics, Theatre minor",
+    institution: "University of Nevada, Las Vegas",
+    dateRange: "Aug 2019 - May 2024",
+    summary:
+      "Built the academic base in economics, econometrics, and research methods while maintaining a creative practice through theatre and performance.",
+    highlights: [
+      "Produced applied research using NCES and IPEDS data on the relationship between student aid and college costs.",
+      "Published undergraduate work in Spectra Undergraduate Research Journal and presented at the Undergraduate Research Symposium.",
+      "Theatre training strengthened public speaking, collaboration, storytelling, and fast iteration.",
+      "Activities and societies: Economics Club.",
+    ],
+  },
+];
+
+export const researchItems: ResearchItem[] = [
+  {
+    status: "Published research",
+    title: "Revisiting Bennett's Hypothesis: The Unintended Effects of Student Financial Aid on the Cost of College",
+    outlet: "Spectra Undergraduate Research Journal",
+    date: "May 15, 2025",
+    summary:
+      "Published article examining what drives tuition and total cost of attendance using NCES and IPEDS data, with implications for students and institutions.",
+    methods: ["IPEDS", "Stata", "Econometric modeling", "Public policy"],
+    links: [
+      { label: "DOI", href: "https://doi.org/10.9741/2766-7227.1033" },
+      { label: "Google Scholar", href: "https://scholar.google.com/citations?user=vdr24hsAAAAJ&hl=en" },
+      { label: "ORCID", href: "https://orcid.org/0009-0004-1245-9959" },
+    ],
+  },
+  {
+    status: "Working paper",
+    title: "Packaging Hierarchies in U.S. Higher Education: Pell Exposure and the Composition of Aid",
+    outlet: "Faculty collaboration in progress",
+    date: "Sep 2025 - present",
+    summary:
+      "Maps how U.S. colleges structure aid packages for full-time, first-time undergraduates and tests whether higher Pell exposure shifts the mix of grants, loans, and institutional top-off support.",
+    methods: ["IPEDS", "Fixed effects", "Shift-share IV", "Grant displacement analysis"],
+    links: [],
+  },
+  {
+    status: "Working paper",
+    title: "A Dynamic Structure of the Causal Link Between Federal Student Aid and College Prices",
+    outlet: "Draft in progress",
+    date: "Jan 2025 - present",
+    summary:
+      "Studies whether increases in federal student aid raise published college prices, using institution-year panels, high-dimensional fixed effects, and dynamic difference-GMM.",
+    methods: ["Dynamic panels", "Difference-GMM", "Index construction", "Higher-ed finance"],
+    links: [],
+  },
+  {
+    status: "Research infrastructure",
+    title: "IPEDS Panel Construction Pipeline",
+    outlet: "Research data engineering system",
+    date: "Aug 2025 - present",
+    summary:
+      "Python ETL pipeline that automates IPEDS downloads, harmonization, provenance-safe panel construction, and QC artifact generation from 2004 through 2024.",
+    methods: ["Python", "pandas", "DuckDB", "PyArrow", "ETL and data quality"],
+    links: [],
+  },
+];
+
+export const researchProfiles = [
+  {
+    label: "Google Scholar",
+    href: googleScholarProfileUrl,
+    note: "Citation profile and publication record",
+  },
+  {
+    label: "ORCID",
+    href: orcidProfileUrl,
+    note: "Research identity and verified work metadata",
+  },
+  {
+    label: "ResearchGate",
+    href: researchGateProfileUrl,
+    note: "Academic network profile and research visibility",
+  },
+];
+
+export const portfolioEntries: PortfolioEntry[] = [
+  {
+    title: "IPEDS Panel Construction Pipeline",
+    category: "Data engineering and research infrastructure",
+    timeframe: "2025 - present",
+    problem:
+      "IPEDS releases are largely cross-sectional, which makes longitudinal causal work difficult when identifiers, schemas, and reporting structures drift over time.",
+    approach:
+      "Built a multistage Python workflow for automated downloads, dictionary ingestion, harmonization, long-panel construction, wide exports, and QC outputs with deterministic dedupe logic.",
+    outcome:
+      "Created a reusable institution-year backbone for higher-education finance research that preserves provenance and produces analysis-ready panels.",
+    tools: ["Python", "pandas", "PyArrow", "DuckDB", "requests", "BeautifulSoup"],
+  },
+  {
+    title: "Airline RPM Forecasting",
+    category: "Forecasting and model communication",
+    timeframe: "May 2025",
+    problem:
+      "Forecast Alaska Airlines monthly Revenue Passenger Miles and write it up for a business audience, not just a methods reviewer.",
+    approach:
+      "Ran exploratory analysis, transformation, stationarity testing, seasonal ARIMA selection, residual diagnostics, and a SARIMA plus GARCH refinement for volatility clustering.",
+    outcome:
+      "Produced 12-month forecasts with scenario bands and reported strong out-of-sample accuracy, with MAPE around 3.49 percent.",
+    tools: ["R", "ARIMA", "SARIMA", "GARCH", "Monte Carlo simulation"],
+  },
+  {
+    title: "AI Diffusion and Gender Wage Inequality",
+    category: "Labor economics and quasi-experimental analysis",
+    timeframe: "Jan 2025 - May 2025",
+    problem:
+      "Assess whether the diffusion of generative AI shifted gender wage inequality across tech and non-tech roles after the 2018 acceleration period.",
+    approach:
+      "Built a CPS-MORG analysis sample from IPUMS, estimated pooled OLS with triple-interaction structure, and paired the results with Blinder-Oaxaca decompositions.",
+    outcome:
+      "Found persistent wage gaps in both sectors, with post-2018 AI gains lifting wages modestly without materially changing the gender differential.",
+    tools: ["Stata", "CPS-MORG", "Causal inference", "Decomposition methods"],
+  },
+  {
+    title: "Financial Literacy and Food Insecurity in Seniors",
+    category: "Applied policy research and stakeholder reporting",
+    timeframe: "Jun 2025 - Jul 2025",
+    problem:
+      "Test whether stronger financial literacy reduces food insecurity among seniors in Clark County using original survey data and policy-relevant controls.",
+    approach:
+      "Constructed USDA food insecurity outcomes, built multiple literacy indices, estimated LPM, logit, probit, and IV-probit models, and packaged the findings for stakeholders.",
+    outcome:
+      "Results showed a consistent negative association between financial literacy and food insecurity, with larger causal estimates once endogeneity and SNAP selection were addressed.",
+    tools: ["Stata", "Survey data", "PCA", "IV-probit", "Stakeholder presentation"],
+  },
+  {
+    title: "Potential Expansion for Caesars Entertainment to the Philippines",
+    category: "Strategy and market analysis",
+    timeframe: "Jan 2024 - May 2024",
+    problem:
+      "Evaluate whether Caesars should enter the Philippine market while balancing tourism opportunity, regulatory complexity, and regional alternatives.",
+    approach:
+      "Combined macro indicators, tourism and spending trends, regulatory analysis, and competitor benchmarking across Southeast Asian markets.",
+    outcome:
+      "Delivered an entry memo with scenario-based tradeoffs, risk mitigations, and a practical due-diligence path for decision-makers.",
+    tools: ["Market research", "Competitive analysis", "Scenario planning", "Regulatory analysis"],
+  },
+];
+
+export const artistryProfile = {
+  statement:
+    "The artistic practice is not a side note. It is where voice, presence, empathy, and storytelling were sharpened long before they became part of lectures, presentations, and research delivery.",
+  bio: [
+    "Mark Jayson Farol is an actor, singer, performer, and director whose training spans Liberty High School theatre and choir work, UNLV theatre study, and live performance credits in Nevada.",
+    "That creative background shapes the professional work too: it adds presence to public speaking, rhythm to teaching, and a human layer to the way complex analysis gets communicated.",
+  ],
+  skills: [
+    "Acting",
+    "Singing",
+    "Dance",
+    "Directing",
+    "Acoustic guitar",
+    "Piano and keyboards",
+    "Comedy",
+    "Fashion modeling",
+    "Bilingual performance",
+  ],
+  training: [
+    "Liberty High School - Advanced Theatre Studies",
+    "Liberty High School - Chamber Choir and Show Choir",
+    "University of Nevada, Las Vegas - Theatre study with stage and screen acting concentration",
+  ],
+};
+
+export const galleryImages: GalleryImage[] = [
+  {
+    src: "https://d26oc3sg82pgk3.cloudfront.net/files/media/uploads/casting_call/616a28c4-e219-48d1-8f89-2c5ba62d85f5-bWFpbi1uLW4tMC0wLTAtODcwLTEyMDA.jpg",
+    alt: "Mark Jayson Farol headshot in warm studio lighting",
+    caption: "Backstage headshot",
+  },
+  {
+    src: "https://d26oc3sg82pgk3.cloudfront.net/files/media/uploads/casting_call/54e4686f-0101-471b-9b89-577b2252a045-bWFpbi1uLW4tMC0wLTAtNjQwLTg1Mw.JPG",
+    alt: "Mark Jayson Farol portrait in dark styling",
+    caption: "Performance portrait",
+  },
+  {
+    src: "https://d26oc3sg82pgk3.cloudfront.net/files/media/uploads/casting_call/87fec5b5-ca79-49b6-86d7-4ab3fc32cb5f-bWFpbi1uLW4tMC0wLTAtOTYwLTcyMA.JPG",
+    alt: "Mark Jayson Farol smiling headshot",
+    caption: "Creative profile image",
+  },
+  {
+    src: "https://d26oc3sg82pgk3.cloudfront.net/files/media/uploads/casting_call/84fc1c20-16d2-4731-9885-d1fb1371891e-bWFpbi1uLW4tMC0wLTAtOTYwLTcyMA.JPG",
+    alt: "Mark Jayson Farol in a fashion-forward headshot",
+    caption: "Gallery still",
+  },
+];
+
+export const performanceCredits: PerformanceCredit[] = [
+  {
+    date: "Feb 2018",
+    title: "Radium Girls",
+    role: "Dr. Flinn / C.B. Charlie Lee",
+    venue: "LHS Patriot Theatre",
+  },
+  {
+    date: "Apr 2018",
+    title: "Rock of Ages",
+    role: "Ensemble",
+    venue: "LHS Patriot Theatre",
+  },
+  {
+    date: "Nov 2018",
+    title: "Shattered Stardust",
+    role: "Character ensemble",
+    venue: "LHS Patriot Theatre",
+  },
+  {
+    date: "Dec 2018",
+    title: "Check Please: Take Two",
+    role: "Director",
+    venue: "LHS Patriot Theatre",
+  },
+  {
+    date: "Feb 2019",
+    title: "The Curious Incident of the Dog in the Nighttime",
+    role: "Christopher / Ensemble",
+    venue: "LHS Patriot Theatre",
+  },
+  {
+    date: "Apr 2019",
+    title: "Willy Wonka",
+    role: "Augustus Gloop",
+    venue: "LHS Patriot Theatre",
+  },
+  {
+    date: "Sep 2018",
+    title: "Public Education Foundation Ed Hero Award Gala",
+    role: "Performing artist",
+    venue: "Las Vegas, Nevada",
+  },
+];
+
+export const socialLinks: SocialLink[] = [
+  {
+    label: "LinkedIn",
+    href: linkedInProfileUrl,
+    category: "Professional",
+    note: "Professional profile and current positioning",
+    enabled: true,
+  },
+  {
+    label: "Google Scholar",
+    href: googleScholarProfileUrl,
+    category: "Academic",
+    note: "Publications and citation profile",
+    enabled: true,
+  },
+  {
+    label: "ORCID",
+    href: orcidProfileUrl,
+    category: "Academic",
+    note: "Verified research identity",
+    enabled: true,
+  },
+  {
+    label: "ResearchGate",
+    href: researchGateProfileUrl,
+    category: "Academic",
+    note: "Academic networking profile",
+    enabled: true,
+  },
+  {
+    label: "Backstage",
+    href: backstageProfileUrl,
+    category: "Creative",
+    note: "Performance profile, credits, and headshots",
+    enabled: true,
+  },
+  {
+    label: "Legacy creative portfolio",
+    href: legacyCreativePortfolioUrl,
+    category: "Creative",
+    note: "Earlier artist portfolio and archived material",
+    enabled: true,
+  },
+  {
+    label: "Instagram",
+    href: instagramProfileUrl,
+    category: "Social",
+    note: "Public social presence",
+    enabled: true,
+  },
+  {
+    label: "Facebook",
+    href: facebookProfileUrl,
+    category: "Social",
+    note: "Public social profile",
+    enabled: true,
+  },
+  {
+    label: "X",
+    href: xProfileUrl,
+    category: "Social",
+    note: "Public social profile",
+    enabled: true,
+  },
+];
