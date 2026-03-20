@@ -1,6 +1,6 @@
 import { withBase } from "../utils/paths";
 
-const canonicalSiteUrl = "https://markjayson.com";
+export const canonicalSiteUrl = "https://markjayson.com";
 const githubProfileUrl = "https://github.com/markjayson13";
 const linkedInProfileUrl = "https://www.linkedin.com/in/markjaysonfarol/";
 const googleScholarProfileUrl = "https://scholar.google.com/citations?user=vdr24hsAAAAJ&hl=en";
@@ -25,6 +25,12 @@ export type StructuredDataNode = {
 };
 
 export type StructuredData = StructuredDataNode | StructuredDataNode[];
+
+export type IndexableImage = {
+  src: string;
+  alt: string;
+  caption?: string;
+};
 
 export type NavLink = {
   label: string;
@@ -306,6 +312,72 @@ export const buildProfilePageStructuredData = (
   },
   identityPersonStructuredData,
 ];
+
+const buildImageObjectNode = (pageUrl: string, image: IndexableImage, index = 1): StructuredDataNode => {
+  const imageUrl = new URL(image.src, canonicalSiteUrl).toString();
+
+  return {
+    "@type": "ImageObject",
+    "@id": `${pageUrl}#image-${index}`,
+    contentUrl: imageUrl,
+    url: imageUrl,
+    caption: image.caption ?? image.alt,
+    description: image.alt,
+    creator: {
+      "@id": String(identityPersonStructuredData["@id"]),
+    },
+    creditText: profile.name,
+    copyrightNotice: profile.name,
+  };
+};
+
+export const buildPrimaryImageStructuredData = (pageUrl: string, image: IndexableImage): StructuredDataNode[] => [
+  {
+    "@context": "https://schema.org",
+    ...buildImageObjectNode(pageUrl, image),
+  },
+];
+
+export const buildImageCollectionPageStructuredData = (
+  pageUrl: string,
+  pageName: string,
+  pageDescription: string,
+  images: IndexableImage[],
+): StructuredDataNode[] => {
+  const imageNodes = images.map((image, index) => buildImageObjectNode(pageUrl, image, index + 1));
+
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "@id": `${pageUrl}#webpage`,
+      url: pageUrl,
+      name: pageName,
+      description: pageDescription,
+      about: {
+        "@id": String(identityPersonStructuredData["@id"]),
+      },
+      creator: {
+        "@id": String(identityPersonStructuredData["@id"]),
+      },
+      image: imageNodes.map((node) => ({
+        "@id": String(node["@id"]),
+      })),
+      mainEntity: {
+        "@type": "ItemList",
+        itemListElement: imageNodes.map((node, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          item: {
+            "@id": String(node["@id"]),
+          },
+        })),
+      },
+    },
+    identityPersonStructuredData,
+    ...imageNodes,
+  ];
+};
 
 export const pageStats = {
   home: [

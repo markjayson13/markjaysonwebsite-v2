@@ -2,20 +2,27 @@
 import CreativeClusterNav from "../../components/CreativeClusterNav.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { creativeCluster, replicaFooterCredit } from "../../data/editorial";
+import { buildImageCollectionPageStructuredData } from "../../data/site";
 
 const headshotsPage = creativeCluster.headshots;
 const [primaryHeadshot, ...supportingHeadshots] = headshotsPage.items;
+const pageTitle = "Headshots";
+const pageDescription = "Headshots and portrait studies for Mark Jayson Martinez Farol.";
+const siteOrigin = Astro.site ?? new URL("https://markjayson.com");
+const pageUrl = new URL(Astro.url.pathname, siteOrigin).toString();
+const structuredData = buildImageCollectionPageStructuredData(pageUrl, pageTitle, pageDescription, headshotsPage.items);
 ---
 
 <BaseLayout
-  title="Headshots"
-  description="Headshots and portrait studies for Mark Jayson Martinez Farol."
+  title={pageTitle}
+  description={pageDescription}
   page="creative"
   accent="#ba9838"
   shell="bare"
   footer={false}
   replicaFooter={false}
   replicaMotion={true}
+  structuredData={structuredData}
 >
   <article class="replica-page creative-cluster-page creative-gallery-page">
     <div class="replica-canvas creative-cluster-page__canvas">

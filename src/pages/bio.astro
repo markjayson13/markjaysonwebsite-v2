@@ -1,15 +1,19 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { bioPage, replicaFooterCredit } from "../data/editorial";
-import { buildProfilePageStructuredData } from "../data/site";
+import { buildPrimaryImageStructuredData, buildProfilePageStructuredData } from "../data/site";
 const pageTitle = "About";
 const pageDescription = "Biographical overview for Mark Jayson Martinez Farol.";
 const siteOrigin = Astro.site ?? new URL("https://markjayson.com");
-const structuredData = buildProfilePageStructuredData(
-  new URL(Astro.url.pathname, siteOrigin).toString(),
-  pageTitle,
-  pageDescription,
-);
+const pageUrl = new URL(Astro.url.pathname, siteOrigin).toString();
+const structuredData = [
+  ...buildProfilePageStructuredData(pageUrl, pageTitle, pageDescription),
+  ...buildPrimaryImageStructuredData(pageUrl, {
+    src: bioPage.portraitSrc,
+    alt: "Portrait of Mark Jayson Farol.",
+    caption: "Primary portrait of Mark Jayson Farol",
+  }),
+];
 ---
 
 <BaseLayout
