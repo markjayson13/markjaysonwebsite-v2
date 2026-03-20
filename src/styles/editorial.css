@@ -3952,7 +3952,7 @@ body[data-page="creative-landing"] .creative-landing__statement {
 body[data-page="creative-landing"] .creative-landing__headshots {
   position: relative;
   overflow: hidden;
-  margin-top: 0.2rem;
+  margin-top: 0.1rem;
   border: 1px solid rgba(255, 248, 234, 0.55);
 }
 
@@ -4009,7 +4009,7 @@ body[data-page="creative-landing"] .creative-landing__headshots-link {
 
 body[data-page="creative-landing"] .creative-landing__measurements--stacked {
   gap: 0.5rem;
-  margin-top: 0.2rem;
+  margin-top: 0.15rem;
   padding: 0;
   border: 0;
   background: transparent;
