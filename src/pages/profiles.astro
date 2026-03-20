@@ -83,6 +83,24 @@ const structuredData = [
         }
       </div>
 
+      {
+        profilesPage.secondaryLinks?.length ? (
+          <div class="profiles-page__secondary" data-lift>
+            <p class="profiles-page__secondary-label">Archive</p>
+            <div class="profiles-page__secondary-links">
+              {
+                profilesPage.secondaryLinks.map((link) => (
+                  <a class="profiles-page__secondary-link" href={link.href} target="_blank" rel="noreferrer">
+                    <span>{link.label}</span>
+                    <span class="profiles-page__secondary-note">{link.note}</span>
+                  </a>
+                ))
+              }
+            </div>
+          </div>
+        ) : null
+      }
+
       <p class="page-credit page-credit--light">{replicaFooterCredit}</p>
     </div>
   </article>

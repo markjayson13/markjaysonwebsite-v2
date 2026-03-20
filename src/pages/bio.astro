@@ -41,10 +41,11 @@ const structuredData = [
             ))
           }
 
-          <div class="bio-page__links">
+          <div class="bio-page__links" data-lift>
+            <p class="bio-page__links-label">Explore</p>
             {
               bioPage.links.map((link) => (
-                <a class="replica-black-card" href={link.href} data-lift>
+                <a class="replica-black-card" href={link.href}>
                   {link.label}
                 </a>
               ))

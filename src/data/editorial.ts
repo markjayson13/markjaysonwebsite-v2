@@ -211,6 +211,12 @@ export type ProfileButton = {
   disabled?: boolean;
 };
 
+export type ProfileSecondaryLink = {
+  label: string;
+  href: string;
+  note: string;
+};
+
 const socialLookup = new Map(socialLinks.map((link) => [link.label, link.href]));
 const githubProfile = "https://github.com/markjayson13";
 const backstageHref = socialLookup.get("Backstage");
@@ -944,12 +950,12 @@ export const creativeCluster = {
   landing: {
     eyebrow: "Performance, Modeling & Storytelling",
     title: "Creative",
-    lead: "Music, performance, film, and visual storytelling across my artistic practice.",
+    lead: "Music, performance, film, modeling, and visual storytelling collected into one creative archive.",
     statement:
-      "Arts has been one of my earliest ways of understanding myself and the world around me. I move through music, theatre, film, performance, and visual storytelling as connected forms of expression and exploration.",
+      "Art has always been one of my earliest ways of understanding myself and the world around me. I move through music, theatre, film, performance, and visual storytelling as connected forms of expression and exploration.",
     background: [
-      "My artistic practice has strengthened my discipline, emotional range, confidence, and presence, while deepening the human side of how I think and work.",
-      "Across stage, screen, and sound, I continue to treat art as both expression and exploration. Find out my artistic journey through my performances, music, film, and creative work.",
+      "My artistic practice strengthened my discipline, emotional range, confidence, and presence while deepening the human side of how I think and work.",
+      "Across stage, screen, and sound, I continue to treat art as both expression and exploration. The pages in this cluster collect my performances, images, music, and visual studies in one place.",
     ],
     spotlightVideo: {
       src: withBase("/media/creative/firebook.mov"),
@@ -959,13 +965,13 @@ export const creativeCluster = {
     featuredImage: creativeEditorialSelections[0],
     measurements: [
       { label: "Height", value: "5'7\"" },
-      { label: "Bust", value: "36\"" },
       { label: "Waist", value: "28\"" },
       { label: "Hips", value: "30\"" },
       { label: "Shoes", value: "US 8.5" },
       { label: "Shirt", value: "US S/M" },
       { label: "Hair", value: "Dark Brown" },
       { label: "Eyes", value: "Dark Brown" },
+      { label: "Bust", value: "36\"" },
     ] satisfies CreativeMeasure[],
     skills: artistryProfile.skills,
     headshotsCta: {
@@ -976,14 +982,14 @@ export const creativeCluster = {
       {
         title: "Performing Arts",
         description:
-          "Stage work across musical theatre, plays, and live showcase performance, with strengths in character work, vocals, movement, and stage presence.",
+          "Stage work across musical theatre, straight plays, showcases, and live performance, with strengths in character work, vocals, movement, and stage presence.",
         href: withBase("/creative/artistic-resume"),
         cta: "Open Artistic Resume",
       },
       {
         title: "Music",
         description:
-          "Music practice spanning vocals, songwriting, and performance across pop, musical theatre, and contemporary styles.",
+          "Music practice spanning vocals, songwriting, live delivery, and performance across pop, musical theatre, and contemporary styles.",
         note: "Current work includes vocal performance, rehearsal discipline, and interdisciplinary music-led storytelling.",
       },
       {
@@ -1156,7 +1162,7 @@ export const creativeCluster = {
   headshots: {
     title: "Headshots",
     lead:
-      "A casting-focused set of studio headshots and portrait studies arranged around a primary still, supporting reel, and quieter supporting frames.",
+      "A casting-focused set of studio stills and portrait studies arranged around one primary headshot, a supporting reel, and quieter secondary frames.",
     backstageHref,
     introVideo: {
       src: withBase("/media/creative/headshots-intro.mov"),
@@ -1215,4 +1221,11 @@ export const profilesPage = {
     { label: "Instagram", symbol: "IG", href: socialLookup.get("Instagram") },
     { label: "TikTok", symbol: "TT", disabled: true },
   ] satisfies ProfileButton[],
+  secondaryLinks: [
+    {
+      label: "Legacy creative portfolio",
+      href: socialLookup.get("Legacy creative portfolio") ?? "#",
+      note: "Earlier creative portfolio and archived material.",
+    },
+  ] satisfies ProfileSecondaryLink[],
 };

@@ -21,21 +21,23 @@ const artisticResume = creativeCluster.artisticResume;
       <div class="creative-cluster-page__shell">
         <CreativeClusterNav items={creativeCluster.nav} activeHref={creativeCluster.nav[1].href} />
 
-        <header class="creative-cluster-page__header creative-cluster-page__header--narrow">
-          <p class="creative-page__eyebrow" data-lift>Creative Resume</p>
-          <h1 class="creative-page__title" data-lift>{artisticResume.title}</h1>
-          <p class="creative-cluster-page__lead" data-lift>{artisticResume.lead}</p>
-        </header>
+        <div class="creative-resume-page__intro-shell">
+          <header class="creative-cluster-page__header creative-cluster-page__header--narrow">
+            <p class="creative-page__eyebrow" data-lift>Creative Resume</p>
+            <h1 class="creative-page__title" data-lift>{artisticResume.title}</h1>
+            <p class="creative-cluster-page__lead" data-lift>{artisticResume.lead}</p>
+          </header>
 
-        <nav class="creative-resume-page__jump" aria-label="Artistic resume sections">
-          {
-            artisticResume.sections.map((section) => (
-              <a class="creative-resume-page__jump-link" href={`#${section.id}`}>
-                {section.label}
-              </a>
-            ))
-          }
-        </nav>
+          <nav class="creative-resume-page__jump" aria-label="Artistic resume sections">
+            {
+              artisticResume.sections.map((section) => (
+                <a class="creative-resume-page__jump-link" href={`#${section.id}`}>
+                  {section.label}
+                </a>
+              ))
+            }
+          </nav>
+        </div>
 
         <div class="creative-resume-page__sections">
           {

@@ -88,7 +88,15 @@ const structuredData = buildImageCollectionPageStructuredData(pageUrl, pageTitle
           </div>
         </section>
 
-        <section class="creative-gallery creative-gallery--headshots" aria-label="Headshot gallery">
+        <section class="creative-headshots__gallery-shell" aria-label="Headshot gallery">
+          <div class="creative-headshots__gallery-header" data-lift>
+            <p class="creative-cluster-page__section-label">Supporting Frames</p>
+            <p class="creative-cluster-page__copy">
+              Additional portraits keep the range visible without competing with the primary studio still.
+            </p>
+          </div>
+
+          <div class="creative-gallery creative-gallery--headshots">
           {
             supportingHeadshots.map((item) => (
               <figure class="creative-gallery__figure" data-lift>
@@ -97,6 +105,7 @@ const structuredData = buildImageCollectionPageStructuredData(pageUrl, pageTitle
               </figure>
             ))
           }
+          </div>
         </section>
       </div>
 
