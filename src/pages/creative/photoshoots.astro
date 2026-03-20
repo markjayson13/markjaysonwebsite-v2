@@ -4,17 +4,22 @@ import SectionRail from "../../components/SectionRail.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { creativeCluster, replicaFooterCredit } from "../../data/editorial";
 import { buildImageCollectionPageStructuredData, socialPreviewImages } from "../../data/site";
+import type { CreativeGalleryItem } from "../../data/editorial";
 
 const photoshootsPage = creativeCluster.photoshoots;
 const pageTitle = "Photoshoots";
 const pageDescription = "Categorized photoshoots for Mark Jayson Martinez Farol.";
 const siteOrigin = Astro.site ?? new URL("https://markjayson.com");
 const pageUrl = new URL(Astro.url.pathname, siteOrigin).toString();
+const allPhotoshootItems = photoshootsPage.groups.reduce<CreativeGalleryItem[]>(
+  (items, group) => items.concat(group.items),
+  [],
+);
 const structuredData = buildImageCollectionPageStructuredData(
   pageUrl,
   pageTitle,
   pageDescription,
-  photoshootsPage.groups.flatMap((group) => group.items),
+  allPhotoshootItems,
 );
 ---
 

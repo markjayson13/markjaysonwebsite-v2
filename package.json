@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "description": "Editorial-cinematic personal website for Mark Jayson Farol.",
   "scripts": {
+    "check:node": "node scripts/check-node-version.mjs",
     "postinstall": "node scripts/fix-astro-sitemap.mjs",
+    "predev": "npm run check:node",
     "dev": "astro dev",
+    "prebuild": "npm run check:node",
     "build": "astro build",
+    "prepreview": "npm run check:node",
     "preview": "astro preview",
     "deploy": "wrangler pages deploy dist --project-name markjaysonwebsite"
   },
@@ -24,6 +28,7 @@
     "node": "22.x"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.4",
     "@astrojs/sitemap": "^3.1.6",
     "@types/node": "^25.3.5",
     "astro": "^4.16.19",

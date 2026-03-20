@@ -231,7 +231,7 @@ const setupSectionRails = () => {
 
         return { id, link, panel };
       })
-      .filter(Boolean);
+      .filter((item): item is { id: string; link: HTMLButtonElement; panel: HTMLElement } => item !== null);
 
     if (!panels.length) {
       return;
@@ -269,7 +269,7 @@ const setupSectionRails = () => {
       }
     };
 
-    const moveFocus = (currentIndex: number, nextIndex: number) => {
+    const moveFocus = (nextIndex: number) => {
       const item = panels[nextIndex];
       if (!item) {
         return;
@@ -291,25 +291,25 @@ const setupSectionRails = () => {
 
       if (event.key === "ArrowDown" || event.key === "ArrowRight") {
         event.preventDefault();
-        moveFocus(currentIndex, (currentIndex + 1) % panels.length);
+        moveFocus((currentIndex + 1) % panels.length);
         return;
       }
 
       if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
         event.preventDefault();
-        moveFocus(currentIndex, (currentIndex - 1 + panels.length) % panels.length);
+        moveFocus((currentIndex - 1 + panels.length) % panels.length);
         return;
       }
 
       if (event.key === "Home") {
         event.preventDefault();
-        moveFocus(currentIndex, 0);
+        moveFocus(0);
         return;
       }
 
       if (event.key === "End") {
         event.preventDefault();
-        moveFocus(currentIndex, panels.length - 1);
+        moveFocus(panels.length - 1);
       }
     };
 

@@ -2,8 +2,10 @@
 import CreativeClusterNav from "../../components/CreativeClusterNav.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { creativeCluster, replicaFooterCredit } from "../../data/editorial";
+import type { CreativeResumeSection } from "../../data/editorial";
 
 const artisticResume = creativeCluster.artisticResume;
+const artisticResumeSections: CreativeResumeSection[] = artisticResume.sections;
 ---
 
 <BaseLayout
@@ -30,7 +32,7 @@ const artisticResume = creativeCluster.artisticResume;
 
           <nav class="creative-resume-page__jump" aria-label="Artistic resume sections">
             {
-              artisticResume.sections.map((section) => (
+              artisticResumeSections.map((section) => (
                 <a class="creative-resume-page__jump-link" href={`#${section.id}`}>
                   {section.label}
                 </a>
@@ -41,7 +43,7 @@ const artisticResume = creativeCluster.artisticResume;
 
         <div class="creative-resume-page__sections">
           {
-            artisticResume.sections.map((section) => (
+            artisticResumeSections.map((section) => (
               <section id={section.id} class="creative-resume-page__section">
                 <div class="creative-resume-page__section-shell">
                   <header class="creative-resume-page__section-header" data-lift>
