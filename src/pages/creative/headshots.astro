@@ -45,17 +45,15 @@ const structuredData = buildImageCollectionPageStructuredData(pageUrl, pageTitle
                   decoding="async"
                   fetchpriority={index === 0 ? "high" : undefined}
                 />
-                <details class="creative-media-details creative-media-details--light">
-                  <summary>{item.detailsLabel ?? "Details"}</summary>
-                  <div class="creative-media-details__body">
-                    <p>{item.detailsText ?? item.caption}</p>
-                    {item.instagramHref && (
-                      <a href={item.instagramHref} target="_blank" rel="noreferrer">
-                        Instagram
-                      </a>
-                    )}
-                  </div>
-                </details>
+                <figcaption class="creative-headshots__caption">
+                  <span class="creative-headshots__caption-title">{item.caption}</span>
+                  <span>{item.detailsText ?? item.caption}</span>
+                  {item.instagramHref && (
+                    <a href={item.instagramHref} target="_blank" rel="noreferrer">
+                      Instagram
+                    </a>
+                  )}
+                </figcaption>
               </figure>
             ))
           }

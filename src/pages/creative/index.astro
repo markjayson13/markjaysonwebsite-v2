@@ -39,6 +39,34 @@ const structuredData = buildImageCollectionPageStructuredData(pageUrl, pageTitle
           </div>
         </section>
 
+        <section class="creative-landing__headshots" aria-labelledby="creative-headshots-preview-title" data-lift>
+          <p id="creative-headshots-preview-title" class="sr-only">Headshot preview strip</p>
+          <div class="creative-landing__headshots-grid">
+            {
+              landingPage.headshotPreviews.map((item, index) => (
+                <a class="creative-landing__headshot-link" href={landingPage.headshotsCta.href} aria-label={`Open headshots page: ${item.alt}`}>
+                  <figure class="creative-landing__headshot-card">
+                    <img
+                      class="creative-landing__headshot-image"
+                      src={item.src}
+                      alt=""
+                      loading={index === 0 ? "eager" : "lazy"}
+                      decoding="async"
+                      fetchpriority={index === 0 ? "high" : undefined}
+                    />
+                  </figure>
+                </a>
+              ))
+            }
+          </div>
+
+          <div class="creative-landing__headshots-cta">
+            <a class="creative-landing__headshots-link" href={landingPage.headshotsCta.href}>
+              {landingPage.headshotsCta.label}
+            </a>
+          </div>
+        </section>
+
         <section class="creative-landing__measurements creative-landing__measurements--stacked" aria-labelledby="creative-measurements-title" data-lift>
           <p id="creative-measurements-title" class="sr-only">Measurements</p>
           <div class="creative-landing__measurements-grid">
@@ -51,27 +79,6 @@ const structuredData = buildImageCollectionPageStructuredData(pageUrl, pageTitle
                 </div>
               ))
             }
-          </div>
-        </section>
-
-        <section class="creative-landing__headshots" aria-labelledby="creative-headshots-preview-title" data-lift>
-          <p id="creative-headshots-preview-title" class="sr-only">Headshot preview strip</p>
-          <div class="creative-landing__headshots-grid">
-            {
-              landingPage.headshotPreviews.map((item) => (
-                <a class="creative-landing__headshot-link" href={landingPage.headshotsCta.href} aria-label={`Open headshots page: ${item.alt}`}>
-                  <figure class="creative-landing__headshot-card">
-                    <img class="creative-landing__headshot-image" src={item.src} alt="" loading="lazy" decoding="async" />
-                  </figure>
-                </a>
-              ))
-            }
-          </div>
-
-          <div class="creative-landing__headshots-cta">
-            <a class="creative-landing__headshots-link" href={landingPage.headshotsCta.href}>
-              {landingPage.headshotsCta.label}
-            </a>
           </div>
         </section>
 

@@ -245,8 +245,16 @@ const setupSectionRails = () => {
         item.link.tabIndex = isActive ? 0 : -1;
         item.panel.hidden = !isActive;
         item.panel.setAttribute("aria-hidden", isActive ? "false" : "true");
-        item.panel.tabIndex = isActive ? 0 : -1;
+        item.panel.tabIndex = -1;
         item.panel.toggleAttribute("data-active-panel", isActive);
+
+        if (isActive) {
+          item.link.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+            inline: "nearest",
+          });
+        }
       });
 
       if (updateHash && typeof window.history.replaceState === "function") {

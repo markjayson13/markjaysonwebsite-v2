@@ -2,6 +2,22 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionRail from "../components/SectionRail.astro";
 import { articlesPage, replicaFooterCredit } from "../data/editorial";
+
+const panels = [
+  {
+    id: articlesPage.latest.id,
+    title: articlesPage.latest.label,
+    intro: articlesPage.latest.intro,
+    type: "latest" as const,
+    sections: articlesPage.latest.sections,
+  },
+  ...articlesPage.sections.map((section) => ({
+    id: section.id,
+    title: section.title,
+    intro: section.description,
+    type: "section" as const,
+  })),
+];
 ---
 
 <BaseLayout
@@ -21,15 +37,35 @@ import { articlesPage, replicaFooterCredit } from "../data/editorial";
         <p class="rail-page__lead" data-lift>{articlesPage.lead}</p>
       </header>
 
-      <div class="rail-page__layout rail-page__layout--light" data-section-rail-root>
-        <SectionRail title={articlesPage.title} items={articlesPage.rail} />
+      <div class="rail-page__layout rail-page__layout--light" data-section-rail-root data-default-panel={articlesPage.latest.id}>
+        <SectionRail title={articlesPage.title} items={articlesPage.rail} activeId={articlesPage.latest.id} />
 
         <div class="rail-page__content">
           {
-            articlesPage.sections.map((section) => (
-              <section id={section.id} class="rail-page__group" data-rail-section data-section-id={section.id}>
-                <h2 class="rail-page__group-title">{section.title}</h2>
-                <p class="rail-page__group-intro">{section.description}</p>
+            panels.map((panel) => (
+              <section
+                id={`rail-panel-${panel.id}`}
+                class="rail-page__group"
+                data-rail-panel
+                data-section-id={panel.id}
+                role="tabpanel"
+                aria-labelledby={`rail-tab-${panel.id}`}
+                hidden={panel.id !== articlesPage.latest.id}
+              >
+                <h2 class="rail-page__group-title">{panel.title}</h2>
+                <p class="rail-page__group-intro">{panel.intro}</p>
+                {
+                  panel.type === "latest" && (
+                    <div class="rail-page__entries rail-page__entries--overview">
+                      {panel.sections.map((section) => (
+                        <article class="rail-entry rail-entry--light" data-lift>
+                          <h3>{section.title}</h3>
+                          <p>{section.description}</p>
+                        </article>
+                      ))}
+                    </div>
+                  )
+                }
               </section>
             ))
           }

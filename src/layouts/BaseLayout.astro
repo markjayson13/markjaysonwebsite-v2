@@ -47,6 +47,20 @@ const cornerMenuDefaultLabelMap: Record<string, string> = {
   profiles: "Profiles",
 };
 const cornerMenuDefaultLabel = cornerMenuDefaultLabelMap[pageGroup] ?? "Home";
+const backLinkFallbackMap: Record<string, string> = {
+  bio: withBase("/"),
+  resume: withBase("/"),
+  portfolio: withBase("/"),
+  profiles: withBase("/"),
+  research: withBase("/portfolio"),
+  projects: withBase("/portfolio"),
+  articles: withBase("/portfolio"),
+  "creative-landing": withBase("/portfolio"),
+  "creative-artistic-resume": withBase("/creative"),
+  "creative-headshots": withBase("/creative"),
+  "creative-photoshoots": withBase("/creative"),
+};
+const backLinkHref = page === "home" ? null : backLinkFallbackMap[page] ?? backLinkFallbackMap[pageGroup] ?? withBase("/");
 ---
 
 <!doctype html>
@@ -103,6 +117,14 @@ const cornerMenuDefaultLabel = cornerMenuDefaultLabelMap[pageGroup] ?? "Home";
     data-page-group={pageGroup}
     style={`--page-accent:${accent}; --page-title-measure:${pageTheme.titleMeasure}; --page-lead-measure:${pageTheme.leadMeasure}; --page-copy-measure:${pageTheme.copyMeasure ?? pageTheme.leadMeasure};`}
   >
+    {
+      backLinkHref && (
+        <a class="site-back-link" href={backLinkHref} aria-label="Go back" title="Go back" data-site-back>
+          <span aria-hidden="true">←</span>
+        </a>
+      )
+    }
+
     <main id="main-content" class="site-main site-main--bare">
       <slot />
     </main>
@@ -114,6 +136,7 @@ const cornerMenuDefaultLabel = cornerMenuDefaultLabelMap[pageGroup] ?? "Home";
         type="button"
         aria-label="What do you want to find Out?"
         aria-expanded="false"
+        aria-haspopup="dialog"
         aria-controls="site-corner-menu-panel"
         data-corner-menu-trigger
       >
@@ -350,6 +373,45 @@ const cornerMenuDefaultLabel = cornerMenuDefaultLabelMap[pageGroup] ?? "Home";
         });
       };
 
+      const setupBackLink = () => {
+        const backLink = document.querySelector("[data-site-back]");
+
+        if (!(backLink instanceof HTMLAnchorElement) || backLink.dataset.backReady === "true") {
+          return;
+        }
+
+        backLink.dataset.backReady = "true";
+
+        backLink.addEventListener("click", (event) => {
+          if (
+            event.defaultPrevented ||
+            event.button !== 0 ||
+            event.metaKey ||
+            event.ctrlKey ||
+            event.shiftKey ||
+            event.altKey
+          ) {
+            return;
+          }
+
+          const referrer = document.referrer;
+          const hasSameOriginReferrer =
+            referrer &&
+            (() => {
+              try {
+                return new URL(referrer).origin === window.location.origin;
+              } catch {
+                return false;
+              }
+            })();
+
+          if (window.history.length > 1 && hasSameOriginReferrer) {
+            event.preventDefault();
+            window.history.back();
+          }
+        });
+      };
+
       const setupContactForm = () => {
         const form = document.querySelector(".home-contact-band__form");
         if (!(form instanceof HTMLFormElement) || form.dataset.contactReady === "true") {
@@ -460,6 +522,8 @@ const cornerMenuDefaultLabel = cornerMenuDefaultLabelMap[pageGroup] ?? "Home";
       document.addEventListener("astro:page-load", setupInlinePreviewMenus);
       document.addEventListener("DOMContentLoaded", setupContactForm);
       document.addEventListener("astro:page-load", setupContactForm);
+      document.addEventListener("DOMContentLoaded", setupBackLink);
+      document.addEventListener("astro:page-load", setupBackLink);
     </script>
 
     {replicaMotion && <ReplicaMotion />}

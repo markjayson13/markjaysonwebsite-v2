@@ -416,7 +416,7 @@ export const socialPreviewImages = {
     height: 2046,
   },
   profiles: {
-    src: withBase("/images/creative/headshots/headshot-02.png"),
+    src: withBase("/images/creative/headshots/headshot-02.jpeg"),
     alt: "Primary headshot of Mark Jayson Farol.",
     width: 1024,
     height: 1536,
@@ -426,8 +426,8 @@ export const socialPreviewImages = {
     alt: "Black-and-white editorial portrait of Mark Jayson Farol.",
   },
   creativeHeadshots: {
-    src: withBase("/images/creative/headshots/headshot-02.png"),
-    alt: "Studio headshot of Mark Jayson Farol against a light background.",
+    src: withBase("/images/creative/headshots/headshot-02.jpeg"),
+    alt: "Studio headshot of Mark Jayson Farol in a dark blazer against a light background.",
     width: 1024,
     height: 1536,
   },
