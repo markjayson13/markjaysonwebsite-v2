@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { homePage, replicaFooterCredit } from "../data/editorial";
+import { socialPreviewImages } from "../data/site";
 ---
 
 <BaseLayout
@@ -12,6 +13,7 @@ import { homePage, replicaFooterCredit } from "../data/editorial";
   footer={false}
   replicaFooter={false}
   replicaMotion={true}
+  socialImage={socialPreviewImages.home}
 >
   <div class="replica-page home-page home-replica">
     <section class="home-hero-band" data-home-hero>
@@ -68,6 +70,32 @@ import { homePage, replicaFooterCredit } from "../data/editorial";
 
     <section class="home-discovery-band" data-home-discovery>
       <div class="replica-canvas home-discovery-band__canvas">
+        <div
+          class="replica-menu-sheet replica-menu-sheet--inline replica-menu-sheet--inline-compact"
+          data-preview-menu-root
+          data-default-label={homePage.discovery.defaultLabel}
+          data-home-reveal
+        >
+          <h2 class="replica-menu-sheet__title">{homePage.discovery.title}</h2>
+
+          <nav class="replica-menu-sheet__nav" aria-label="Homepage discovery navigation" data-menu-nav>
+            {
+              homePage.discoveryItems.map((item) => (
+                <a
+                  href={item.href}
+                  class="replica-menu-sheet__link"
+                  data-menu-item
+                  data-title={item.title}
+                  data-description={item.description}
+                  data-label={item.label}
+                >
+                  {item.label}
+                </a>
+              ))
+            }
+          </nav>
+        </div>
+
         <nav class="home-index-nav" aria-label="Primary homepage links" data-home-reveal>
           <p class="home-index-nav__eyebrow">Explore the site</p>
 
@@ -84,39 +112,6 @@ import { homePage, replicaFooterCredit } from "../data/editorial";
             }
           </ul>
         </nav>
-
-        <div
-          class="replica-menu-sheet replica-menu-sheet--inline"
-          data-preview-menu-root
-          data-default-label={homePage.discovery.defaultLabel}
-          data-home-reveal
-        >
-          <h2 class="replica-menu-sheet__title">{homePage.discovery.title}</h2>
-
-          <div class="replica-menu-sheet__layout">
-            <nav class="replica-menu-sheet__nav" aria-label="Homepage discovery navigation" data-menu-nav>
-              {
-                homePage.discoveryItems.map((item) => (
-                  <a
-                    href={item.href}
-                    class="replica-menu-sheet__link"
-                    data-menu-item
-                    data-title={item.title}
-                    data-description={item.description}
-                    data-label={item.label}
-                  >
-                    {item.label}
-                  </a>
-                ))
-              }
-            </nav>
-
-            <div class="replica-menu-sheet__preview">
-              <h3 data-menu-preview-title></h3>
-              <p data-menu-preview-description></p>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 

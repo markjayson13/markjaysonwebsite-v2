@@ -32,6 +32,11 @@ export type IndexableImage = {
   caption?: string;
 };
 
+export type SocialPreviewImage = IndexableImage & {
+  width?: number;
+  height?: number;
+};
+
 export type NavLink = {
   label: string;
   href: string;
@@ -378,6 +383,41 @@ export const buildImageCollectionPageStructuredData = (
     ...imageNodes,
   ];
 };
+
+export const socialPreviewImages = {
+  home: {
+    src: withBase("/images/home-contact-portrait.png"),
+    alt: "Portrait of Mark Jayson Farol holding a glowing globe.",
+    width: 1024,
+    height: 1536,
+  },
+  bio: {
+    src: withBase("/images/bio/mark-jayson-bio-portrait.jpeg"),
+    alt: "Portrait of Mark Jayson Farol.",
+    width: 1856,
+    height: 2046,
+  },
+  profiles: {
+    src: withBase("/images/creative/headshots/headshot-02.png"),
+    alt: "Primary headshot of Mark Jayson Farol.",
+    width: 1024,
+    height: 1536,
+  },
+  creativeLanding: {
+    src: withBase("/images/creative/photoshoots/editorials/editorial-02.jpg"),
+    alt: "Black-and-white editorial portrait of Mark Jayson Farol.",
+  },
+  creativeHeadshots: {
+    src: withBase("/images/creative/headshots/headshot-02.png"),
+    alt: "Studio headshot of Mark Jayson Farol against a light background.",
+    width: 1024,
+    height: 1536,
+  },
+  creativePhotoshoots: {
+    src: withBase("/images/creative/photoshoots/editorials/editorial-02.jpg"),
+    alt: "Black-and-white editorial portrait of Mark Jayson Farol in sunglasses and a leather jacket.",
+  },
+} satisfies Record<string, SocialPreviewImage>;
 
 export const pageStats = {
   home: [

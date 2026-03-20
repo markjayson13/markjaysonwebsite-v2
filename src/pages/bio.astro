@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { bioPage, replicaFooterCredit } from "../data/editorial";
-import { buildPrimaryImageStructuredData, buildProfilePageStructuredData } from "../data/site";
+import { buildPrimaryImageStructuredData, buildProfilePageStructuredData, socialPreviewImages } from "../data/site";
 const pageTitle = "About";
 const pageDescription = "Biographical overview for Mark Jayson Martinez Farol.";
 const siteOrigin = Astro.site ?? new URL("https://markjayson.com");
@@ -26,6 +26,7 @@ const structuredData = [
   replicaFooter={false}
   replicaMotion={true}
   structuredData={structuredData}
+  socialImage={socialPreviewImages.bio}
 >
   <article class="replica-page bio-page">
     <div class="replica-canvas bio-page__canvas">

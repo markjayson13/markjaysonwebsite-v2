@@ -1,17 +1,22 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { profilesPage, replicaFooterCredit } from "../data/editorial";
-import { buildProfilePageStructuredData } from "../data/site";
+import { buildPrimaryImageStructuredData, buildProfilePageStructuredData, socialPreviewImages } from "../data/site";
 import { withBase } from "../utils/paths";
 
 const pageTitle = "Profiles";
 const pageDescription = "Profile links for Mark Jayson Martinez Farol.";
 const siteOrigin = Astro.site ?? new URL("https://markjayson.com");
-const structuredData = buildProfilePageStructuredData(
-  new URL(Astro.url.pathname, siteOrigin).toString(),
-  pageTitle,
-  pageDescription,
-);
+const pageUrl = new URL(Astro.url.pathname, siteOrigin).toString();
+const profilesHeadshot = socialPreviewImages.profiles;
+const structuredData = [
+  ...buildProfilePageStructuredData(pageUrl, pageTitle, pageDescription),
+  ...buildPrimaryImageStructuredData(pageUrl, {
+    src: profilesHeadshot.src,
+    alt: profilesHeadshot.alt,
+    caption: "Primary headshot of Mark Jayson Farol",
+  }),
+];
 ---
 
 <BaseLayout
@@ -24,6 +29,7 @@ const structuredData = buildProfilePageStructuredData(
   replicaFooter={false}
   replicaMotion={true}
   structuredData={structuredData}
+  socialImage={profilesHeadshot}
 >
   <article class="replica-page profiles-page">
     <div class="profiles-page__media">
@@ -49,6 +55,15 @@ const structuredData = buildProfilePageStructuredData(
         <h1 class="profiles-page__title" data-lift>{profilesPage.title}</h1>
         <p class="profiles-page__lead" data-lift>{profilesPage.lead}</p>
       </header>
+
+      <figure class="profiles-page__headshot" data-lift>
+        <img
+          class="profiles-page__headshot-image"
+          src={profilesHeadshot.src}
+          alt={profilesHeadshot.alt}
+          loading="eager"
+        />
+      </figure>
 
       <div class="profiles-page__grid">
         {

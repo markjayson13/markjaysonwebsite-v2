@@ -1,12 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
   <title>Mark Jayson Farol</title>
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0f6d63" />
-      <stop offset="50%" stop-color="#092929" />
-      <stop offset="100%" stop-color="#d5a34d" />
-    </linearGradient>
+    <radialGradient id="accent" cx="40%" cy="38%" r="72%">
+      <stop offset="0%" stop-color="#f7dd8f" />
+      <stop offset="58%" stop-color="#d0a545" />
+      <stop offset="100%" stop-color="#8d6a1f" />
+    </radialGradient>
   </defs>
-  <rect width="128" height="128" rx="28" fill="url(#bg)" />
-  <path d="M28 96V32h12l24 32 24-32h12v64H88V53L66 81H62L40 53v43H28z" fill="#f7f1e6" />
+
+  <rect width="128" height="128" rx="26" fill="#050505" />
+  <rect x="9" y="9" width="110" height="110" rx="18" fill="none" stroke="#f3efe3" stroke-opacity="0.74" stroke-width="2.25" />
+
+  <path
+    d="M25 95V33h12.5L64 68.5 90.5 33H103v62H88.6V53.8L68.4 81H59.6L39.4 53.8V95H25Z"
+    fill="#f3efe3"
+  />
+
+  <circle cx="95" cy="95" r="10.5" fill="url(#accent)" />
+  <circle cx="95" cy="95" r="3.15" fill="#050505" fill-opacity="0.24" />
 </svg>

@@ -2,7 +2,7 @@
 import CreativeClusterNav from "../../components/CreativeClusterNav.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { creativeCluster, replicaFooterCredit } from "../../data/editorial";
-import { buildImageCollectionPageStructuredData } from "../../data/site";
+import { buildImageCollectionPageStructuredData, socialPreviewImages } from "../../data/site";
 
 const landingPage = creativeCluster.landing;
 const pageTitle = "Creative";
@@ -23,6 +23,7 @@ const structuredData = buildImageCollectionPageStructuredData(pageUrl, pageTitle
   replicaFooter={false}
   replicaMotion={true}
   structuredData={structuredData}
+  socialImage={socialPreviewImages.creativeLanding}
 >
   <article class="replica-page creative-cluster-page creative-cluster-page--landing">
     <div class="replica-canvas creative-cluster-page__canvas">

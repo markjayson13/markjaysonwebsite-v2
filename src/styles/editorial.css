@@ -1652,6 +1652,23 @@ body[data-page="creative"] .section-rail__link[aria-current] {
   line-height: 1.28;
 }
 
+.profiles-page__headshot {
+  width: min(13.5rem, 36vw);
+  margin: 0.45rem auto 0;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(7, 7, 7, 0.42);
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.28);
+  overflow: hidden;
+}
+
+.profiles-page__headshot-image {
+  width: 100%;
+  aspect-ratio: 0.78;
+  object-fit: cover;
+  object-position: center 16%;
+  display: block;
+}
+
 .profiles-page__grid {
   width: min(41.5rem, 100%);
   margin: 1.15rem auto 0;
@@ -1825,6 +1842,10 @@ body[data-page="creative"] .section-rail__link[aria-current] {
 
   .profiles-page__media {
     width: min(30rem, 68vw);
+  }
+
+  .profiles-page__headshot {
+    width: min(12rem, 42vw);
   }
 }
 
@@ -2094,6 +2115,10 @@ body[data-page="creative"] .section-rail__link[aria-current] {
 
   .profiles-page__button {
     min-height: 3.3rem;
+  }
+
+  .profiles-page__headshot {
+    width: min(11rem, 52vw);
   }
 }
 
