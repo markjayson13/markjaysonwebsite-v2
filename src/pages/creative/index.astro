@@ -1,5 +1,4 @@
 ---
-import CreativeClusterNav from "../../components/CreativeClusterNav.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { creativeCluster, replicaFooterCredit } from "../../data/editorial";
 import { buildImageCollectionPageStructuredData, socialPreviewImages } from "../../data/site";
@@ -28,41 +27,47 @@ const structuredData = buildImageCollectionPageStructuredData(pageUrl, pageTitle
   <article class="replica-page creative-cluster-page creative-cluster-page--landing">
     <div class="replica-canvas creative-cluster-page__canvas">
       <div class="creative-cluster-page__shell">
-        <CreativeClusterNav items={creativeCluster.nav} activeHref={creativeCluster.nav[0].href} />
-
         <header class="creative-cluster-page__header">
           <h1 class="creative-page__title" data-lift>{landingPage.title}</h1>
           <p class="creative-cluster-page__lead" data-lift>{landingPage.lead}</p>
         </header>
 
-        <section class="creative-cluster-page__spotlight creative-landing__spotlight" aria-label="Creative spotlight">
-          <figure class="creative-cluster-page__spotlight-figure creative-cluster-page__spotlight-figure--video creative-landing__video-frame" data-lift>
-            <video
-              class="creative-cluster-page__spotlight-video"
-              src={landingPage.spotlightVideo.src}
-              poster={landingPage.spotlightVideo.posterSrc}
-              autoplay
-              muted
-              loop
-              playsinline
-              preload="metadata"
-              aria-hidden="true"
-              tabindex="-1"
-            ></video>
-          </figure>
-
-          <div class="creative-cluster-page__spotlight-copy creative-landing__story" data-lift>
-            <p class="creative-cluster-page__section-label">Artistic Background</p>
+        <section class="creative-landing__story-shell creative-landing__story-shell--stacked" aria-labelledby="creative-spotlight-title">
+          <div class="creative-landing__story-column creative-landing__story-column--full" data-lift>
+            <p id="creative-spotlight-title" class="creative-cluster-page__section-label">Artistic Background</p>
             <p class="creative-cluster-page__statement creative-landing__statement">{landingPage.statement}</p>
           </div>
         </section>
 
-        <section class="creative-landing__measurements" aria-label="Creative measurements" data-lift>
+        <section class="creative-landing__headshots" aria-labelledby="creative-headshots-preview-title" data-lift>
+          <p id="creative-headshots-preview-title" class="sr-only">Headshot preview strip</p>
+          <div class="creative-landing__headshots-grid">
+            {
+              landingPage.headshotPreviews.map((item) => (
+                <a class="creative-landing__headshot-link" href={landingPage.headshotsCta.href} aria-label={`Open headshots page: ${item.alt}`}>
+                  <figure class="creative-landing__headshot-card">
+                    <img class="creative-landing__headshot-image" src={item.src} alt="" loading="lazy" decoding="async" />
+                  </figure>
+                </a>
+              ))
+            }
+          </div>
+
+          <div class="creative-landing__headshots-cta">
+            <a class="creative-landing__headshots-link" href={landingPage.headshotsCta.href}>
+              {landingPage.headshotsCta.label}
+            </a>
+          </div>
+        </section>
+
+        <section class="creative-landing__measurements creative-landing__measurements--stacked" aria-labelledby="creative-measurements-title" data-lift>
+          <p id="creative-measurements-title" class="creative-cluster-page__section-label">Measurements</p>
           <div class="creative-landing__measurements-grid">
             {
               landingPage.measurements.map((item) => (
                 <div class="creative-landing__measurement">
                   <span class="creative-landing__measurement-label">{item.label}</span>
+                  <span class="creative-landing__measurement-arrow" aria-hidden="true">→</span>
                   <span class="creative-landing__measurement-value">{item.value}</span>
                 </div>
               ))
@@ -70,32 +75,23 @@ const structuredData = buildImageCollectionPageStructuredData(pageUrl, pageTitle
           </div>
         </section>
 
-        <section class="creative-landing__headshots" aria-labelledby="creative-headshots-preview-title">
-          <div class="creative-landing__headshots-header" data-lift>
-            <p id="creative-headshots-preview-title" class="creative-cluster-page__section-label">Headshots</p>
-            <a class="creative-landing__headshots-link" href={landingPage.headshotsCta.href}>
-              {landingPage.headshotsCta.label}
-            </a>
-          </div>
-
-          <div class="creative-landing__headshots-grid">
-            {
-              landingPage.headshotPreviews.map((item) => (
-                <figure class="creative-landing__headshot-card" data-lift>
-                  <img class="creative-landing__headshot-image" src={item.src} alt={item.alt} loading="lazy" />
-                </figure>
-              ))
-            }
-          </div>
-        </section>
-
-        <section class="creative-cluster-page__grid creative-landing__grid" aria-label="Creative areas">
-          <p class="creative-cluster-page__section-label">Creative Roles</p>
+        <section class="creative-cluster-page__grid creative-landing__grid" aria-labelledby="creative-roles-title">
+          <p id="creative-roles-title" class="sr-only">Creative roles</p>
           {
             landingPage.featureCards.map((card) => (
-              <article class="creative-feature-card creative-landing__card" data-lift>
+              <article class:list={["creative-feature-card", "creative-landing__card", card.href && "creative-feature-card--linked"]} data-lift>
                 <div class="creative-feature-card__copy">
-                  <h2>{card.title}</h2>
+                  <h2>
+                    {
+                      card.href ? (
+                        <a class="creative-feature-card__title-link" href={card.href}>
+                          {card.title}
+                        </a>
+                      ) : (
+                        card.title
+                      )
+                    }
+                  </h2>
                   <p>{card.description}</p>
                 </div>
 

@@ -1,12 +1,9 @@
 ---
-import CreativeClusterNav from "../../components/CreativeClusterNav.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { creativeCluster, replicaFooterCredit } from "../../data/editorial";
 import { buildImageCollectionPageStructuredData, socialPreviewImages } from "../../data/site";
 
 const headshotsPage = creativeCluster.headshots;
-const primaryHeadshot = headshotsPage.items.find((item) => item.featured) ?? headshotsPage.items[0];
-const supportingHeadshots = headshotsPage.items.filter((item) => item.src !== primaryHeadshot?.src);
 const pageTitle = "Headshots";
 const pageDescription = "Headshots and portrait studies for Mark Jayson Martinez Farol.";
 const siteOrigin = Astro.site ?? new URL("https://markjayson.com");
@@ -29,35 +26,39 @@ const structuredData = buildImageCollectionPageStructuredData(pageUrl, pageTitle
   <article class="replica-page creative-cluster-page creative-gallery-page">
     <div class="replica-canvas creative-cluster-page__canvas">
       <div class="creative-cluster-page__shell">
-        <CreativeClusterNav items={creativeCluster.nav} activeHref={creativeCluster.nav[2].href} />
-
-        <header class="creative-cluster-page__header creative-cluster-page__header--centered creative-headshots__header">
-          <h1 class="creative-page__title" data-lift>{headshotsPage.title}</h1>
+        <header class="creative-headshots__hero" aria-labelledby="creative-headshots-hero-title" data-lift>
+          <div class="creative-headshots__hero-copy">
+            <h1 id="creative-headshots-hero-title" class="creative-page__title">{headshotsPage.title}</h1>
+          </div>
         </header>
 
-        <section class="creative-headshots__stage" aria-label="Headshot gallery">
+        <section class="creative-headshots__stage" aria-labelledby="creative-headshots-gallery-title">
+          <h2 id="creative-headshots-gallery-title" class="sr-only">Headshot gallery</h2>
           {
-            primaryHeadshot && (
-              <figure class="creative-headshots__primary" data-lift>
+            headshotsPage.items.map((item, index) => (
+              <figure class="creative-gallery__figure creative-headshots__card" data-lift>
                 <img
-                  class="creative-headshots__primary-image"
-                  src={primaryHeadshot.src}
-                  alt={primaryHeadshot.alt}
-                  loading="eager"
+                  class="creative-gallery__image creative-headshots__gallery-image"
+                  src={item.src}
+                  alt={item.alt}
+                  loading={index === 0 ? "eager" : "lazy"}
+                  decoding="async"
+                  fetchpriority={index === 0 ? "high" : undefined}
                 />
+                <details class="creative-media-details creative-media-details--light">
+                  <summary>{item.detailsLabel ?? "Details"}</summary>
+                  <div class="creative-media-details__body">
+                    <p>{item.detailsText ?? item.caption}</p>
+                    {item.instagramHref && (
+                      <a href={item.instagramHref} target="_blank" rel="noreferrer">
+                        Instagram
+                      </a>
+                    )}
+                  </div>
+                </details>
               </figure>
-            )
+            ))
           }
-
-          <div class="creative-headshots__supporting">
-            {
-              supportingHeadshots.map((item) => (
-                <figure class="creative-gallery__figure creative-headshots__supporting-card" data-lift>
-                  <img class="creative-gallery__image creative-headshots__supporting-image" src={item.src} alt={item.alt} loading="lazy" />
-                </figure>
-              ))
-            }
-          </div>
         </section>
       </div>
 

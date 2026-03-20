@@ -1,6 +1,4 @@
 ---
-import CreativeClusterNav from "../../components/CreativeClusterNav.astro";
-import SectionRail from "../../components/SectionRail.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { creativeCluster, replicaFooterCredit } from "../../data/editorial";
 import { buildImageCollectionPageStructuredData, socialPreviewImages } from "../../data/site";
@@ -38,73 +36,91 @@ const structuredData = buildImageCollectionPageStructuredData(
   <article class="replica-page creative-cluster-page creative-photos-page">
     <div class="replica-canvas creative-cluster-page__canvas">
       <div class="creative-cluster-page__shell">
-        <CreativeClusterNav items={creativeCluster.nav} activeHref={creativeCluster.nav[3].href} />
-
-        <header class="creative-cluster-page__header creative-cluster-page__header--narrow">
-          <h1 class="creative-page__title" data-lift>{photoshootsPage.title}</h1>
+        <header class="creative-photos-page__hero" data-lift>
+          <div class="creative-photos-page__hero-copy">
+            <p class="creative-photos-page__eyebrow">Mark Jayson Farol</p>
+            <h1 class="creative-page__title">{photoshootsPage.title}</h1>
+          </div>
         </header>
 
-        <div class="rail-page__layout rail-page__layout--light creative-photos-page__layout" data-section-rail-root data-default-panel={photoshootsPage.defaultId}>
-          <SectionRail title={photoshootsPage.title} items={photoshootsPage.rail} activeId={photoshootsPage.defaultId} />
+        <div class="creative-photos-page__layout" data-section-rail-root data-default-panel={photoshootsPage.defaultId}>
+          <nav class="creative-photos-page__tabs" aria-label="Photoshoot categories">
+            <div class="creative-photos-page__tabs-inner" role="tablist" aria-label="Photoshoot filters" aria-orientation="horizontal">
+              {
+                photoshootsPage.rail.map((item) => (
+                  <button
+                    type="button"
+                    id={`rail-tab-${item.id}`}
+                    class:list={["creative-photos-page__tab", item.id === photoshootsPage.defaultId && "is-active"]}
+                    data-rail-link
+                    data-target={item.id}
+                    role="tab"
+                    aria-controls={`rail-panel-${item.id}`}
+                    aria-selected={item.id === photoshootsPage.defaultId ? "true" : "false"}
+                    tabindex={item.id === photoshootsPage.defaultId ? "0" : "-1"}
+                  >
+                    {item.label}
+                  </button>
+                ))
+              }
+            </div>
+          </nav>
 
           <div class="rail-page__content creative-photos-page__content">
             {
               photoshootsPage.groups.map((group) => {
-                const leadItem = group.items.find((item) => item.featured) ?? group.items[0];
-                const supportingItems = group.items.filter((item) => item.src !== leadItem?.src);
-
                 return (
                   <section
                     id={`rail-panel-${group.id}`}
-                    class="rail-page__group"
+                    class="rail-page__group creative-photos-page__panel"
                     data-rail-panel
                     data-section-id={group.id}
                     role="tabpanel"
                     aria-labelledby={`rail-tab-${group.id}`}
                     hidden={group.id !== photoshootsPage.defaultId}
                   >
-                    <div class="creative-photos-page__panel-hero">
-                      <div class="creative-photos-page__panel-copy" data-lift>
-                        <p class="creative-cluster-page__section-label">Series</p>
-                        <h2 class="rail-page__group-title">{group.label}</h2>
-                        <p class="rail-page__group-intro">{group.intro}</p>
-                      </div>
+                    <div class="creative-photos-page__panel-copy" data-lift>
+                      <p class="creative-cluster-page__section-label">Series</p>
+                      <h2 class="rail-page__group-title">{group.label}</h2>
+                      <p class="rail-page__group-intro">{group.intro}</p>
+                    </div>
 
+                    <div class="creative-gallery creative-gallery--photos creative-photos-page__gallery">
                       {
-                        leadItem && (
+                        group.items.map((item, index) => (
                           <figure
                             class:list={[
                               "creative-gallery__figure",
-                              "creative-gallery__figure--lead",
-                              "creative-photos-page__lead",
-                              leadItem.aspect === "landscape" && "creative-gallery__figure--landscape",
-                              leadItem.aspect === "portrait" && "creative-gallery__figure--portrait",
+                              "creative-photos-page__figure",
+                              item.aspect === "landscape" && "creative-gallery__figure--landscape",
+                              item.aspect === "portrait" && "creative-gallery__figure--portrait",
                             ]}
                             data-lift
                           >
                             <img
                               class:list={[
                                 "creative-gallery__image",
-                                "creative-gallery__image--lead",
-                                leadItem.aspect === "landscape" && "creative-gallery__image--landscape",
-                                leadItem.aspect === "portrait" && "creative-gallery__image--portrait",
+                                "creative-photos-page__image",
+                                item.aspect === "landscape" && "creative-gallery__image--landscape",
+                                item.aspect === "portrait" && "creative-gallery__image--portrait",
                               ]}
-                              src={leadItem.src}
-                              alt={leadItem.alt}
-                              loading="eager"
+                              src={item.src}
+                              alt={item.alt}
+                              loading={index === 0 && group.id === photoshootsPage.defaultId ? "eager" : "lazy"}
+                              decoding="async"
+                              fetchpriority={index === 0 && group.id === photoshootsPage.defaultId ? "high" : undefined}
                             />
-                            <figcaption class="creative-gallery__caption">{leadItem.caption}</figcaption>
-                          </figure>
-                        )
-                      }
-                    </div>
-
-                    <div class="creative-gallery creative-gallery--photos">
-                      {
-                        supportingItems.map((item) => (
-                          <figure class="creative-gallery__figure" data-lift>
-                            <img class="creative-gallery__image" src={item.src} alt={item.alt} loading="lazy" />
-                            <figcaption class="creative-gallery__caption">{item.caption}</figcaption>
+                            <details class="creative-media-details">
+                              <summary>{item.detailsLabel ?? "Details"}</summary>
+                              <div class="creative-media-details__body">
+                                <p>{item.detailsText ?? item.caption}</p>
+                                {item.instagramHref && (
+                                  <a href={item.instagramHref} target="_blank" rel="noreferrer">
+                                    Instagram
+                                  </a>
+                                )}
+                              </div>
+                            </details>
                           </figure>
                         ))
                       }

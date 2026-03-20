@@ -1,5 +1,4 @@
 ---
-import CreativeClusterNav from "../../components/CreativeClusterNav.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { creativeCluster, replicaFooterCredit } from "../../data/editorial";
 import type { CreativeResumeSection } from "../../data/editorial";
@@ -21,14 +20,13 @@ const artisticResumeSections: CreativeResumeSection[] = artisticResume.sections;
   <article class="replica-page creative-cluster-page creative-resume-page">
     <div class="replica-canvas creative-cluster-page__canvas">
       <div class="creative-cluster-page__shell">
-        <CreativeClusterNav items={creativeCluster.nav} activeHref={creativeCluster.nav[1].href} />
-
-        <div class="creative-resume-page__intro-shell">
-          <header class="creative-cluster-page__header creative-cluster-page__header--narrow">
-            <h1 class="creative-page__title" data-lift>{artisticResume.title}</h1>
-            <p class="creative-cluster-page__lead" data-lift>{artisticResume.lead}</p>
-          </header>
-
+        <header class="creative-resume-page__masthead" data-lift>
+          <div class="creative-resume-page__masthead-copy">
+            <p class="creative-page__eyebrow">Artistic Resume</p>
+            <h1 class="creative-resume-page__name">
+              <a href="#summary">{artisticResume.title}</a>
+            </h1>
+          </div>
           <nav class="creative-resume-page__jump" aria-label="Artistic resume sections">
             {
               artisticResumeSections.map((section) => (
@@ -38,27 +36,26 @@ const artisticResumeSections: CreativeResumeSection[] = artisticResume.sections;
               ))
             }
           </nav>
-        </div>
+        </header>
 
         <div class="creative-resume-page__sections">
           {
             artisticResumeSections.map((section) => (
-              <section id={section.id} class="creative-resume-page__section">
+              <section id={section.id} class="creative-resume-page__section" aria-labelledby={`${section.id}-title`}>
                 <div class="creative-resume-page__section-shell">
                   <header class="creative-resume-page__section-header" data-lift>
-                    <p class="creative-cluster-page__section-label">{section.label}</p>
-                    <h2 class="creative-resume-page__section-title">{section.label}</h2>
+                    <h2 id={`${section.id}-title`} class="creative-resume-page__section-title">{section.label}</h2>
                     <p class="creative-resume-page__section-intro">{section.intro}</p>
                   </header>
 
                   <div class="creative-resume-page__entries">
                     {
                       section.entries.map((entry) => (
-                        <article class="creative-resume-card" data-lift>
-                          <h3>{entry.title}</h3>
+                        <article class="creative-resume-entry" data-lift>
+                          <h3 class="creative-resume-entry__title">{entry.title}</h3>
                           {entry.subtitle && <p class="creative-resume-card__subtitle">{entry.subtitle}</p>}
                           {entry.meta && <p class="creative-resume-card__meta">{entry.meta}</p>}
-                          {entry.description && <p>{entry.description}</p>}
+                          {entry.description && <p class="creative-resume-entry__description">{entry.description}</p>}
                         </article>
                       ))
                     }

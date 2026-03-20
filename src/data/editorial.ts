@@ -195,6 +195,9 @@ export type CreativeGalleryItem = {
   caption: string;
   featured?: boolean;
   aspect?: "portrait" | "landscape";
+  detailsLabel?: string;
+  detailsText?: string;
+  instagramHref?: string;
 };
 
 export type CreativeGalleryGroup = {
@@ -770,22 +773,25 @@ export const articlesPage = {
 
 const creativeHeadshotSelections = [
   {
-    src: withBase("/images/creative/headshots/headshot-02.png"),
-    alt: "Studio headshot of Mark Jayson Farol against a light background.",
-    caption: "Studio headshot",
-    featured: true,
-    aspect: "portrait",
-  },
-  {
     src: withBase("/images/creative/headshots/headshot-01.jpeg"),
     alt: "Cinematic seated portrait of Mark Jayson Farol in officewear.",
     caption: "Cinematic portrait",
+    detailsText: "Officewear portrait study with a cinematic seated composition.",
+    aspect: "portrait",
+  },
+  {
+    src: withBase("/images/creative/headshots/headshot-02.png"),
+    alt: "Studio headshot of Mark Jayson Farol against a light background.",
+    caption: "Studio headshot",
+    detailsText: "Clean studio headshot with a neutral background and direct gaze.",
+    featured: true,
     aspect: "portrait",
   },
   {
     src: withBase("/images/creative/headshots/headshot-03.jpeg"),
     alt: "Angled portrait study of Mark Jayson Farol in a dark jacket.",
     caption: "Angled portrait study",
+    detailsText: "Three-quarter portrait with a darker jacket and softer side angle.",
     aspect: "portrait",
   },
 ] satisfies CreativeGalleryItem[];
@@ -795,6 +801,7 @@ const creativeEditorialSelections = [
     src: withBase("/images/creative/photoshoots/editorials/editorial-02.jpg"),
     alt: "Black-and-white editorial portrait of Mark Jayson Farol in sunglasses and a leather jacket.",
     caption: "Black-and-white editorial portrait",
+    detailsText: "Monochrome editorial image with leather outerwear and a stronger fashion-forward silhouette.",
     featured: true,
     aspect: "landscape",
   },
@@ -802,30 +809,35 @@ const creativeEditorialSelections = [
     src: withBase("/images/creative/photoshoots/editorials/editorial-01.jpeg"),
     alt: "Editorial portrait of Mark Jayson Farol from the creative archive.",
     caption: "Editorial portrait I",
+    detailsText: "Black-and-white editorial frame with a looser gesture and softer movement.",
     aspect: "portrait",
   },
   {
     src: withBase("/images/creative/photoshoots/editorials/editorial-03.jpg"),
     alt: "Styled editorial portrait of Mark Jayson Farol.",
     caption: "Editorial portrait II",
+    detailsText: "Low-key editorial portrait built around contrast, posture, and mood.",
     aspect: "portrait",
   },
   {
     src: withBase("/images/creative/photoshoots/editorials/editorial-04.jpeg"),
     alt: "Editorial study of Mark Jayson Farol with fashion-forward styling.",
     caption: "Editorial portrait III",
+    detailsText: "Color editorial portrait with floral styling and a cleaner front-facing composition.",
     aspect: "portrait",
   },
   {
     src: withBase("/images/creative/photoshoots/editorials/editorial-05.jpeg"),
     alt: "Creative editorial image of Mark Jayson Farol.",
     caption: "Editorial portrait IV",
+    detailsText: "Softly lit portrait with floral styling and a lighter tonal treatment.",
     aspect: "portrait",
   },
   {
     src: withBase("/images/creative/photoshoots/editorials/editorial-06.jpeg"),
     alt: "Editorial close portrait of Mark Jayson Farol.",
     caption: "Editorial portrait V",
+    detailsText: "Tighter editorial frame focused on pose, facial expression, and tonal contrast.",
     aspect: "portrait",
   },
 ] satisfies CreativeGalleryItem[];
@@ -835,6 +847,7 @@ const creativeCommencementSelections = [
     src: withBase("/images/creative/photoshoots/commencement/commencement-08.jpg"),
     alt: "Commencement portrait of Mark Jayson Farol in graduation regalia against the Las Vegas skyline.",
     caption: "Commencement portrait I",
+    detailsText: "Graduation portrait with skyline framing and a wider commemorative composition.",
     featured: true,
     aspect: "landscape",
   },
@@ -842,42 +855,49 @@ const creativeCommencementSelections = [
     src: withBase("/images/creative/photoshoots/commencement/commencement-01.jpeg"),
     alt: "Graduation portrait of Mark Jayson Farol.",
     caption: "Commencement portrait II",
+    detailsText: "Formal graduation portrait from the commencement portrait set.",
     aspect: "portrait",
   },
   {
     src: withBase("/images/creative/photoshoots/commencement/commencement-02.jpeg"),
     alt: "Formal graduation image of Mark Jayson Farol.",
     caption: "Commencement portrait III",
+    detailsText: "Studio-style commencement image with cap-and-gown focus.",
     aspect: "portrait",
   },
   {
     src: withBase("/images/creative/photoshoots/commencement/commencement-03.jpeg"),
     alt: "Graduation photo study of Mark Jayson Farol.",
     caption: "Commencement portrait IV",
+    detailsText: "Commencement portrait built around posture and celebratory detail.",
     aspect: "portrait",
   },
   {
     src: withBase("/images/creative/photoshoots/commencement/commencement-04.jpeg"),
     alt: "Commencement image of Mark Jayson Farol with a cap and gown.",
     caption: "Commencement portrait V",
+    detailsText: "Cap-and-gown portrait from the main graduation image sequence.",
     aspect: "portrait",
   },
   {
     src: withBase("/images/creative/photoshoots/commencement/commencement-05.jpeg"),
     alt: "Graduation portrait of Mark Jayson Farol from the local creative archive.",
     caption: "Commencement portrait VI",
+    detailsText: "Graduation image with a quieter portrait framing and softer expression.",
     aspect: "portrait",
   },
   {
     src: withBase("/images/creative/photoshoots/commencement/commencement-06.jpeg"),
     alt: "Commencement portrait of Mark Jayson Farol in evening light.",
     caption: "Commencement portrait VII",
+    detailsText: "Evening-light commencement image with a warmer outdoor atmosphere.",
     aspect: "portrait",
   },
   {
     src: withBase("/images/creative/photoshoots/commencement/commencement-07.jpeg"),
     alt: "Graduation portrait of Mark Jayson Farol in a formal pose.",
     caption: "Commencement portrait VIII",
+    detailsText: "Formal graduation pose from the commencement archive.",
     aspect: "portrait",
   },
 ] satisfies CreativeGalleryItem[];
@@ -887,6 +907,7 @@ const creativeHalloweenSelections = [
     src: withBase("/images/creative/photoshoots/halloween/halloween-03.jpeg"),
     alt: "Halloween character portrait of Mark Jayson Farol inside a library aisle.",
     caption: "Character portrait I",
+    detailsText: "Clark Kent and Superman-inspired character portrait set in a library aisle.",
     featured: true,
     aspect: "portrait",
   },
@@ -894,48 +915,56 @@ const creativeHalloweenSelections = [
     src: withBase("/images/creative/photoshoots/halloween/halloween-01.jpeg"),
     alt: "Halloween portrait of Mark Jayson Farol from the costume archive.",
     caption: "Character portrait II",
+    detailsText: "Costume portrait with a stronger theatrical makeup and character styling treatment.",
     aspect: "portrait",
   },
   {
     src: withBase("/images/creative/photoshoots/halloween/halloween-02.jpeg"),
     alt: "Costumed Halloween study of Mark Jayson Farol.",
     caption: "Character portrait III",
+    detailsText: "Superman-inspired image study with a cinematic fantasy-composite treatment.",
     aspect: "portrait",
   },
   {
     src: withBase("/images/creative/photoshoots/halloween/halloween-04.jpeg"),
     alt: "Halloween portrait of Mark Jayson Farol in a staged scene.",
     caption: "Character portrait IV",
+    detailsText: "Villain-inspired costume portrait with a darker forest-set composition.",
     aspect: "portrait",
   },
   {
     src: withBase("/images/creative/photoshoots/halloween/halloween-05.jpeg"),
     alt: "Costume-based portrait of Mark Jayson Farol.",
     caption: "Character portrait V",
+    detailsText: "Character image built around costume, pose, and a more dramatic stylized mood.",
     aspect: "portrait",
   },
   {
     src: withBase("/images/creative/photoshoots/halloween/halloween-06.jpeg"),
     alt: "Halloween portrait from the current creative archive.",
     caption: "Character portrait VI",
+    detailsText: "Costume portrait from the broader Halloween archive.",
     aspect: "portrait",
   },
   {
     src: withBase("/images/creative/photoshoots/halloween/halloween-07.jpeg"),
     alt: "Dramatic Halloween image of Mark Jayson Farol.",
     caption: "Character portrait VII",
+    detailsText: "Dramatic costume image with a darker tonal palette and character emphasis.",
     aspect: "portrait",
   },
   {
     src: withBase("/images/creative/photoshoots/halloween/halloween-08.jpeg"),
     alt: "Halloween portrait of Mark Jayson Farol in costume.",
     caption: "Character portrait VIII",
+    detailsText: "Costume portrait with a stylized performance-oriented frame.",
     aspect: "portrait",
   },
   {
     src: withBase("/images/creative/photoshoots/halloween/halloween-09.jpeg"),
     alt: "Styled Halloween portrait of Mark Jayson Farol.",
     caption: "Character portrait IX",
+    detailsText: "Styled Halloween portrait from the extended character archive.",
     aspect: "portrait",
   },
 ] satisfies CreativeGalleryItem[];
