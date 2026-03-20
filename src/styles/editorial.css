@@ -725,8 +725,8 @@ body[data-page="creative"] {
 
 .bio-page__body {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(34rem, 40rem);
-  gap: 0.35rem;
+  grid-template-columns: minmax(0, 0.96fr) minmax(36rem, 44rem);
+  gap: 1rem;
   align-items: start;
 }
 
@@ -759,10 +759,10 @@ body[data-page="creative"] {
 .bio-page__portrait {
   justify-self: end;
   align-self: end;
-  width: min(42rem, 100%);
-  min-height: 52rem;
+  width: min(46rem, 100%);
+  min-height: 58rem;
   margin-top: 0;
-  margin-right: -3.2rem;
+  margin-right: -1.6rem;
   display: flex;
   align-items: end;
   overflow: hidden;
@@ -770,10 +770,10 @@ body[data-page="creative"] {
 
 .bio-page__portrait img {
   width: 100%;
-  height: min(50rem, 90vh);
+  height: min(56rem, 92vh);
   object-fit: cover;
-  object-position: center 16%;
-  transform: scale(1.04);
+  object-position: center 11%;
+  transform: scale(1.08);
   transform-origin: center bottom;
 }
 
@@ -1305,9 +1305,9 @@ body[data-page="articles"] .articles-page__canvas {
 
 .creative-cluster-page__spotlight {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.8fr);
-  gap: 1.6rem;
-  padding: 1.55rem;
+  grid-template-columns: minmax(0, 1.04fr) minmax(20rem, 0.96fr);
+  gap: 1.35rem 1.55rem;
+  padding: 1.55rem 1.55rem 1.35rem;
   border: 1px solid rgba(255, 248, 234, 0.24);
   background: rgba(0, 0, 0, 0.16);
 }
@@ -1325,6 +1325,10 @@ body[data-page="articles"] .articles-page__canvas {
   margin: 0;
 }
 
+.creative-cluster-page__spotlight-figure--video {
+  gap: 0.7rem;
+}
+
 .creative-cluster-page__spotlight-image {
   width: 100%;
   aspect-ratio: 0.82;
@@ -1333,12 +1337,39 @@ body[data-page="articles"] .articles-page__canvas {
   background: rgba(0, 0, 0, 0.24);
 }
 
+.creative-cluster-page__spotlight-video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center 28%;
+  background: rgba(0, 0, 0, 0.24);
+}
+
+.creative-cluster-page__spotlight-figure--supporting {
+  max-width: min(18rem, 100%);
+  justify-self: end;
+}
+
 .creative-cluster-page__statement {
   font-family: var(--replica-font-ui);
   font-size: clamp(1.38rem, 1.75vw, 1.9rem);
   font-weight: 600;
   letter-spacing: -0.04em;
   line-height: 1.06;
+}
+
+.creative-cluster-page__practice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 1.4rem;
+  padding-top: 0.15rem;
+}
+
+.creative-cluster-page__practice-copy {
+  display: grid;
+  gap: 0.7rem;
+  max-width: min(48rem, 100%);
 }
 
 .creative-cluster-page__skills {
@@ -1502,22 +1533,67 @@ body[data-page="articles"] .articles-page__canvas {
   object-position: center 18%;
 }
 
-.creative-gallery--headshots {
-  grid-template-columns: minmax(0, 1.2fr) repeat(2, minmax(0, 1fr));
+.creative-gallery__figure--lead {
+  width: 100%;
+  margin: 0 0 1.35rem;
 }
 
-.creative-gallery--headshots .creative-gallery__figure:first-child {
-  grid-column: span 2;
+.creative-gallery__figure--portrait {
+  max-width: min(24rem, 100%);
+}
+
+.creative-gallery__image--lead {
+  height: auto;
+}
+
+.creative-gallery__image--lead.creative-gallery__image--landscape {
+  aspect-ratio: 1.44;
+  object-position: center 24%;
+}
+
+.creative-gallery__image--lead.creative-gallery__image--portrait {
+  aspect-ratio: 0.78;
+  object-position: center 18%;
+}
+
+.creative-headshots__lead {
+  display: grid;
+  grid-template-columns: minmax(0, 0.96fr) minmax(18rem, 0.84fr);
+  gap: 1.2rem;
+  align-items: start;
+  margin-top: 0.2rem;
+}
+
+.creative-headshots__video,
+.creative-headshots__primary {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0;
+}
+
+.creative-headshots__video-element {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  object-position: center 18%;
+  background: rgba(0, 0, 0, 0.22);
+}
+
+.creative-headshots__primary-image {
+  width: 100%;
+  aspect-ratio: 0.8;
+  object-fit: cover;
+  object-position: center 16%;
+  background: rgba(0, 0, 0, 0.22);
+}
+
+.creative-gallery--headshots {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .creative-gallery--headshots .creative-gallery__image {
   aspect-ratio: 0.78;
   object-position: center 14%;
-}
-
-.creative-gallery--headshots .creative-gallery__figure:first-child .creative-gallery__image {
-  aspect-ratio: 1.08;
-  object-position: center 20%;
 }
 
 .creative-photos-page__layout {
@@ -1724,6 +1800,17 @@ body[data-page="creative"] .section-rail__link[aria-current] {
     grid-template-columns: 1fr;
   }
 
+  .creative-cluster-page__practice,
+  .creative-headshots__lead {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .creative-cluster-page__spotlight-figure--supporting {
+    justify-self: start;
+  }
+
   .creative-gallery {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1889,8 +1976,8 @@ body[data-page="creative"] .section-rail__link[aria-current] {
     grid-template-columns: 1fr;
   }
 
-  .creative-gallery--headshots .creative-gallery__figure:first-child {
-    grid-column: auto;
+  .creative-gallery__figure--portrait {
+    max-width: 100%;
   }
 
   .home-contact-band__form-shell {

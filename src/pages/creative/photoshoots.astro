@@ -33,31 +33,63 @@ const photoshootsPage = creativeCluster.photoshoots;
 
           <div class="rail-page__content creative-photos-page__content">
             {
-              photoshootsPage.groups.map((group) => (
-                <section
-                  id={`rail-panel-${group.id}`}
-                  class="rail-page__group"
-                  data-rail-panel
-                  data-section-id={group.id}
-                  role="tabpanel"
-                  aria-labelledby={`rail-tab-${group.id}`}
-                  hidden={group.id !== photoshootsPage.defaultId}
-                >
-                  <h2 class="rail-page__group-title">{group.label}</h2>
-                  <p class="rail-page__group-intro">{group.intro}</p>
+              photoshootsPage.groups.map((group) => {
+                const leadItem = group.items.find((item) => item.featured) ?? group.items[0];
+                const supportingItems = group.items.filter((item) => item.src !== leadItem?.src);
 
-                  <div class="creative-gallery creative-gallery--photos">
+                return (
+                  <section
+                    id={`rail-panel-${group.id}`}
+                    class="rail-page__group"
+                    data-rail-panel
+                    data-section-id={group.id}
+                    role="tabpanel"
+                    aria-labelledby={`rail-tab-${group.id}`}
+                    hidden={group.id !== photoshootsPage.defaultId}
+                  >
+                    <h2 class="rail-page__group-title">{group.label}</h2>
+                    <p class="rail-page__group-intro">{group.intro}</p>
+
                     {
-                      group.items.map((item) => (
-                        <figure class="creative-gallery__figure" data-lift>
-                          <img class="creative-gallery__image" src={item.src} alt={item.alt} loading="lazy" />
-                          <figcaption class="creative-gallery__caption">{item.caption}</figcaption>
+                      leadItem && (
+                        <figure
+                          class:list={[
+                            "creative-gallery__figure",
+                            "creative-gallery__figure--lead",
+                            leadItem.aspect === "landscape" && "creative-gallery__figure--landscape",
+                            leadItem.aspect === "portrait" && "creative-gallery__figure--portrait",
+                          ]}
+                          data-lift
+                        >
+                          <img
+                            class:list={[
+                              "creative-gallery__image",
+                              "creative-gallery__image--lead",
+                              leadItem.aspect === "landscape" && "creative-gallery__image--landscape",
+                              leadItem.aspect === "portrait" && "creative-gallery__image--portrait",
+                            ]}
+                            src={leadItem.src}
+                            alt={leadItem.alt}
+                            loading="eager"
+                          />
+                          <figcaption class="creative-gallery__caption">{leadItem.caption}</figcaption>
                         </figure>
-                      ))
+                      )
                     }
-                  </div>
-                </section>
-              ))
+
+                    <div class="creative-gallery creative-gallery--photos">
+                      {
+                        supportingItems.map((item) => (
+                          <figure class="creative-gallery__figure" data-lift>
+                            <img class="creative-gallery__image" src={item.src} alt={item.alt} loading="lazy" />
+                            <figcaption class="creative-gallery__caption">{item.caption}</figcaption>
+                          </figure>
+                        ))
+                      }
+                    </div>
+                  </section>
+                );
+              })
             }
           </div>
         </div>

@@ -4,6 +4,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { creativeCluster, replicaFooterCredit } from "../../data/editorial";
 
 const headshotsPage = creativeCluster.headshots;
+const [primaryHeadshot, ...supportingHeadshots] = headshotsPage.items;
 ---
 
 <BaseLayout
@@ -37,16 +38,42 @@ const headshotsPage = creativeCluster.headshots;
           }
         </header>
 
+        <section class="creative-headshots__lead" aria-label="Headshot spotlight">
+          <figure class="creative-headshots__video" data-lift>
+            <video
+              class="creative-headshots__video-element"
+              src={headshotsPage.introVideo.src}
+              poster={headshotsPage.introVideo.posterSrc}
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              aria-label={headshotsPage.introVideo.alt}
+            ></video>
+            <figcaption class="creative-gallery__caption">Portrait reel</figcaption>
+          </figure>
+
+          {
+            primaryHeadshot && (
+              <figure class="creative-headshots__primary" data-lift>
+                <img
+                  class="creative-headshots__primary-image"
+                  src={primaryHeadshot.src}
+                  alt={primaryHeadshot.alt}
+                  loading="eager"
+                />
+                <figcaption class="creative-gallery__caption">{primaryHeadshot.caption}</figcaption>
+              </figure>
+            )
+          }
+        </section>
+
         <section class="creative-gallery creative-gallery--headshots" aria-label="Headshot gallery">
           {
-            headshotsPage.items.map((item, index) => (
+            supportingHeadshots.map((item) => (
               <figure class="creative-gallery__figure" data-lift>
-                <img
-                  class="creative-gallery__image"
-                  src={item.src}
-                  alt={item.alt}
-                  loading={index === 0 ? "eager" : "lazy"}
-                />
+                <img class="creative-gallery__image" src={item.src} alt={item.alt} loading="lazy" />
                 <figcaption class="creative-gallery__caption">{item.caption}</figcaption>
               </figure>
             ))

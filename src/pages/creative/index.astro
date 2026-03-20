@@ -39,9 +39,24 @@ const landingPage = creativeCluster.landing;
           </div>
 
           <aside class="creative-cluster-page__spotlight-side">
+            <figure class="creative-cluster-page__spotlight-figure creative-cluster-page__spotlight-figure--video" data-lift>
+              <video
+                class="creative-cluster-page__spotlight-video"
+                src={landingPage.spotlightVideo.src}
+                poster={landingPage.spotlightVideo.posterSrc}
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                aria-label={landingPage.spotlightVideo.alt}
+              ></video>
+              <figcaption class="creative-gallery__caption">Creative spotlight reel</figcaption>
+            </figure>
+
             {
               landingPage.featuredImage && (
-                <figure class="creative-cluster-page__spotlight-figure" data-lift>
+                <figure class="creative-cluster-page__spotlight-figure creative-cluster-page__spotlight-figure--supporting" data-lift>
                   <img
                     class="creative-cluster-page__spotlight-image"
                     src={landingPage.featuredImage.src}
@@ -52,7 +67,11 @@ const landingPage = creativeCluster.landing;
                 </figure>
               )
             }
+          </aside>
+        </section>
 
+        <section class="creative-cluster-page__practice" data-lift>
+          <div class="creative-cluster-page__practice-copy">
             <p class="creative-cluster-page__section-label">Practice</p>
             <div class="creative-cluster-page__skills">
               {
@@ -61,11 +80,11 @@ const landingPage = creativeCluster.landing;
                 ))
               }
             </div>
+          </div>
 
-            <a class="replica-outline-button" href={landingPage.headshotsCta.href}>
-              {landingPage.headshotsCta.label}
-            </a>
-          </aside>
+          <a class="replica-outline-button" href={landingPage.headshotsCta.href}>
+            {landingPage.headshotsCta.label}
+          </a>
         </section>
 
         <section class="creative-cluster-page__grid" aria-label="Creative areas">
