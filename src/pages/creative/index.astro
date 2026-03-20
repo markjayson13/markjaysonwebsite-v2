@@ -39,6 +39,20 @@ const landingPage = creativeCluster.landing;
           </div>
 
           <aside class="creative-cluster-page__spotlight-side">
+            {
+              landingPage.featuredImage && (
+                <figure class="creative-cluster-page__spotlight-figure" data-lift>
+                  <img
+                    class="creative-cluster-page__spotlight-image"
+                    src={landingPage.featuredImage.src}
+                    alt={landingPage.featuredImage.alt}
+                    loading="eager"
+                  />
+                  <figcaption class="creative-gallery__caption">{landingPage.featuredImage.caption}</figcaption>
+                </figure>
+              )
+            }
+
             <p class="creative-cluster-page__section-label">Practice</p>
             <div class="creative-cluster-page__skills">
               {

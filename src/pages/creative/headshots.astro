@@ -37,11 +37,16 @@ const headshotsPage = creativeCluster.headshots;
           }
         </header>
 
-        <section class="creative-gallery" aria-label="Headshot gallery">
+        <section class="creative-gallery creative-gallery--headshots" aria-label="Headshot gallery">
           {
-            headshotsPage.items.map((item) => (
+            headshotsPage.items.map((item, index) => (
               <figure class="creative-gallery__figure" data-lift>
-                <img class="creative-gallery__image" src={item.src} alt={item.alt} loading="lazy" />
+                <img
+                  class="creative-gallery__image"
+                  src={item.src}
+                  alt={item.alt}
+                  loading={index === 0 ? "eager" : "lazy"}
+                />
                 <figcaption class="creative-gallery__caption">{item.caption}</figcaption>
               </figure>
             ))

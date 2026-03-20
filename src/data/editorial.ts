@@ -1,4 +1,4 @@
-import { artistryProfile, galleryImages, homeDiscoveryItems, performanceCredits, socialLinks } from "./site";
+import { artistryProfile, homeDiscoveryItems, performanceCredits, socialLinks } from "./site";
 import { withBase } from "../utils/paths";
 
 export type HomeLink = {
@@ -255,6 +255,7 @@ export const homePage = {
 
 export const bioPage = {
   title: "Mark Jayson Martinez Farol",
+  portraitSrc: withBase("/images/bio/mark-jayson-bio-portrait.jpeg"),
   paragraphs: [
     "I’m Mark Jayson Farol, an economist, artist, scientist, musician, and statistician working at the intersection of data, policy, and creative expression.",
     "I grew up in a rural community in the Philippines, close to both the sea and the jungle, and I now live in Las Vegas. I earned my master’s degree in Quantitative Business Economics from the University of Nevada, Las Vegas, where I served as a graduate assistant and research collaborator in the Department of Economics, mentored undergraduates on empirical research projects, and represented my class as a student speaker at commencement. My academic work centers on higher education, finance, and access, and my paper, Revisiting Bennett’s Hypothesis: The Unintended Effects of Student Financial Aid on the Cost of College, was published in Spectra Undergraduate Research Journal in 2025.",
@@ -725,31 +726,145 @@ export const articlesPage = {
   sections: articleSections,
 };
 
-const creativePortraitSelections = [
+const creativeHeadshotSelections = [
   {
-    src: withBase("/images/canva-home-portrait.png"),
-    alt: "Mark Jayson Farol portrait in a dark editorial frame",
-    caption: "Homepage portrait study",
+    src: withBase("/images/creative/headshots/headshot-02.png"),
+    alt: "Studio headshot of Mark Jayson Farol against a light background.",
+    caption: "Studio headshot",
   },
   {
-    src: withBase("/images/home-contact-portrait.png"),
-    alt: "Mark Jayson Farol portrait used in the contact band",
-    caption: "Contact portrait",
+    src: withBase("/images/creative/headshots/headshot-01.jpeg"),
+    alt: "Cinematic seated portrait of Mark Jayson Farol in officewear.",
+    caption: "Cinematic portrait",
   },
   {
-    src: withBase("/images/canva-bio-portrait.png"),
-    alt: "Mark Jayson Farol portrait used on the about page",
-    caption: "Biography portrait",
+    src: withBase("/images/creative/headshots/headshot-03.jpeg"),
+    alt: "Angled portrait study of Mark Jayson Farol in a dark jacket.",
+    caption: "Angled portrait study",
+  },
+] satisfies CreativeGalleryItem[];
+
+const creativeEditorialSelections = [
+  {
+    src: withBase("/images/creative/photoshoots/editorials/editorial-02.jpg"),
+    alt: "Black-and-white editorial portrait of Mark Jayson Farol in sunglasses and a leather jacket.",
+    caption: "Black-and-white editorial portrait",
   },
   {
-    src: withBase("/images/bio-portrait-proof.png"),
-    alt: "Mark Jayson Farol studio proof portrait",
-    caption: "Studio proof",
+    src: withBase("/images/creative/photoshoots/editorials/editorial-01.jpeg"),
+    alt: "Editorial portrait of Mark Jayson Farol from the creative archive.",
+    caption: "Editorial portrait I",
   },
   {
-    src: withBase("/images/bio-portrait-cutout.png"),
-    alt: "Mark Jayson Farol cutout portrait",
-    caption: "Cutout portrait",
+    src: withBase("/images/creative/photoshoots/editorials/editorial-03.jpg"),
+    alt: "Styled editorial portrait of Mark Jayson Farol.",
+    caption: "Editorial portrait II",
+  },
+  {
+    src: withBase("/images/creative/photoshoots/editorials/editorial-04.jpeg"),
+    alt: "Editorial study of Mark Jayson Farol with fashion-forward styling.",
+    caption: "Editorial portrait III",
+  },
+  {
+    src: withBase("/images/creative/photoshoots/editorials/editorial-05.jpeg"),
+    alt: "Creative editorial image of Mark Jayson Farol.",
+    caption: "Editorial portrait IV",
+  },
+  {
+    src: withBase("/images/creative/photoshoots/editorials/editorial-06.jpeg"),
+    alt: "Editorial close portrait of Mark Jayson Farol.",
+    caption: "Editorial portrait V",
+  },
+] satisfies CreativeGalleryItem[];
+
+const creativeCommencementSelections = [
+  {
+    src: withBase("/images/creative/photoshoots/commencement/commencement-08.jpg"),
+    alt: "Commencement portrait of Mark Jayson Farol in graduation regalia against the Las Vegas skyline.",
+    caption: "Commencement portrait I",
+  },
+  {
+    src: withBase("/images/creative/photoshoots/commencement/commencement-01.jpeg"),
+    alt: "Graduation portrait of Mark Jayson Farol.",
+    caption: "Commencement portrait II",
+  },
+  {
+    src: withBase("/images/creative/photoshoots/commencement/commencement-02.jpeg"),
+    alt: "Formal graduation image of Mark Jayson Farol.",
+    caption: "Commencement portrait III",
+  },
+  {
+    src: withBase("/images/creative/photoshoots/commencement/commencement-03.jpeg"),
+    alt: "Graduation photo study of Mark Jayson Farol.",
+    caption: "Commencement portrait IV",
+  },
+  {
+    src: withBase("/images/creative/photoshoots/commencement/commencement-04.jpeg"),
+    alt: "Commencement image of Mark Jayson Farol with a cap and gown.",
+    caption: "Commencement portrait V",
+  },
+  {
+    src: withBase("/images/creative/photoshoots/commencement/commencement-05.jpeg"),
+    alt: "Graduation portrait of Mark Jayson Farol from the local creative archive.",
+    caption: "Commencement portrait VI",
+  },
+  {
+    src: withBase("/images/creative/photoshoots/commencement/commencement-06.jpeg"),
+    alt: "Commencement portrait of Mark Jayson Farol in evening light.",
+    caption: "Commencement portrait VII",
+  },
+  {
+    src: withBase("/images/creative/photoshoots/commencement/commencement-07.jpeg"),
+    alt: "Graduation portrait of Mark Jayson Farol in a formal pose.",
+    caption: "Commencement portrait VIII",
+  },
+] satisfies CreativeGalleryItem[];
+
+const creativeHalloweenSelections = [
+  {
+    src: withBase("/images/creative/photoshoots/halloween/halloween-03.jpeg"),
+    alt: "Halloween character portrait of Mark Jayson Farol inside a library aisle.",
+    caption: "Character portrait I",
+  },
+  {
+    src: withBase("/images/creative/photoshoots/halloween/halloween-01.jpeg"),
+    alt: "Halloween portrait of Mark Jayson Farol from the costume archive.",
+    caption: "Character portrait II",
+  },
+  {
+    src: withBase("/images/creative/photoshoots/halloween/halloween-02.jpeg"),
+    alt: "Costumed Halloween study of Mark Jayson Farol.",
+    caption: "Character portrait III",
+  },
+  {
+    src: withBase("/images/creative/photoshoots/halloween/halloween-04.jpeg"),
+    alt: "Halloween portrait of Mark Jayson Farol in a staged scene.",
+    caption: "Character portrait IV",
+  },
+  {
+    src: withBase("/images/creative/photoshoots/halloween/halloween-05.jpeg"),
+    alt: "Costume-based portrait of Mark Jayson Farol.",
+    caption: "Character portrait V",
+  },
+  {
+    src: withBase("/images/creative/photoshoots/halloween/halloween-06.jpeg"),
+    alt: "Halloween portrait from the current creative archive.",
+    caption: "Character portrait VI",
+  },
+  {
+    src: withBase("/images/creative/photoshoots/halloween/halloween-07.jpeg"),
+    alt: "Dramatic Halloween image of Mark Jayson Farol.",
+    caption: "Character portrait VII",
+  },
+  {
+    src: withBase("/images/creative/photoshoots/halloween/halloween-08.jpeg"),
+    alt: "Halloween portrait of Mark Jayson Farol in costume.",
+    caption: "Character portrait VIII",
+  },
+  {
+    src: withBase("/images/creative/photoshoots/halloween/halloween-09.jpeg"),
+    alt: "Styled Halloween portrait of Mark Jayson Farol.",
+    caption: "Character portrait IX",
   },
 ] satisfies CreativeGalleryItem[];
 
@@ -772,6 +887,7 @@ export const creativeCluster = {
     lead: "Music, performance, film, and visual storytelling across my artistic practice.",
     statement: artistryProfile.statement,
     background: artistryProfile.bio,
+    featuredImage: creativeEditorialSelections[0],
     skills: artistryProfile.skills,
     headshotsCta: {
       label: "View Headshots",
@@ -963,19 +1079,14 @@ export const creativeCluster = {
   headshots: {
     title: "Headshots",
     lead:
-      "Selected headshots and portrait studies gathered from the current site assets and the existing performance-profile archive.",
+      "Selected headshots and portrait studies from the updated creative archive, arranged as a cleaner casting and portrait set.",
     backstageHref,
-    items: [
-      creativePortraitSelections[0],
-      creativePortraitSelections[1],
-      creativePortraitSelections[2],
-      ...galleryImages,
-    ] satisfies CreativeGalleryItem[],
+    items: creativeHeadshotSelections,
   },
   photoshoots: {
     title: "Photoshoots",
     lead:
-      "Categorized photo studies from the current creative archive. This first pass organizes the available assets into the same clusters introduced on the updated Canva site.",
+      "Categorized image studies from the updated creative archive, grouped into editorial, commencement, and Halloween sets.",
     defaultId: "editorials",
     rail: [
       { id: "editorials", label: "Editorials" },
@@ -987,22 +1098,22 @@ export const creativeCluster = {
         id: "editorials",
         label: "Editorials",
         intro:
-          "Styled portraits, dramatic lighting, and portfolio-ready frames that carry the strongest editorial energy in the current archive.",
-        items: [galleryImages[0], galleryImages[1], galleryImages[3], creativePortraitSelections[0]],
+          "Styled portraits, monochrome fashion studies, and portfolio-ready frames that carry the strongest editorial energy in the current archive.",
+        items: creativeEditorialSelections,
       },
       {
         id: "commencement",
         label: "Commencement",
         intro:
-          "More formal portraiture and milestone imagery from the existing local portrait set while the full commencement gallery is synced from Canva.",
-        items: [creativePortraitSelections[2], creativePortraitSelections[1], creativePortraitSelections[3]],
+          "Formal graduation portraiture and milestone imagery from the current commencement gallery.",
+        items: creativeCommencementSelections,
       },
       {
         id: "halloween",
         label: "Halloween",
         intro:
-          "Character-forward styling and moodier image studies from the current archive, standing in for the dedicated costume set in this first pass.",
-        items: [creativePortraitSelections[4], galleryImages[2], galleryImages[1]],
+          "Character-forward styling, costume work, and moodier image studies from the Halloween archive.",
+        items: creativeHalloweenSelections,
       },
     ] satisfies CreativeGalleryGroup[],
   },

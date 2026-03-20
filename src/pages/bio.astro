@@ -2,8 +2,6 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { bioPage, replicaFooterCredit } from "../data/editorial";
 import { buildProfilePageStructuredData } from "../data/site";
-import { withBase } from "../utils/paths";
-
 const pageTitle = "About";
 const pageDescription = "Biographical overview for Mark Jayson Martinez Farol.";
 const siteOrigin = Astro.site ?? new URL("https://markjayson.com");
@@ -49,7 +47,7 @@ const structuredData = buildProfilePageStructuredData(
         </div>
 
         <div class="bio-page__portrait" data-lift>
-          <img src={withBase("/images/canva-bio-portrait.png")} alt="Portrait of Mark Jayson Farol." loading="eager" />
+          <img src={bioPage.portraitSrc} alt="Portrait of Mark Jayson Farol." loading="eager" />
         </div>
       </div>
 

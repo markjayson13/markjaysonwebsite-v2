@@ -156,31 +156,7 @@ export const cornerMenuItems: CornerMenuItem[] = [
     label: "Portfolio",
     href: withBase("/portfolio"),
     title: "Portfolio",
-    description: "A gateway to research papers, data projects, public writing, and creative work.",
-  },
-  {
-    label: "Research",
-    href: withBase("/research"),
-    title: "Research",
-    description: "Academic papers, working research, and quantitative higher-education analysis.",
-  },
-  {
-    label: "Projects",
-    href: withBase("/projects"),
-    title: "Projects",
-    description: "Applied data, panel-building, and analytics projects translated into concrete outputs.",
-  },
-  {
-    label: "Articles",
-    href: withBase("/articles"),
-    title: "Articles",
-    description: "Public writing, essays, commentary, and accessible scholarship.",
-  },
-  {
-    label: "Creative",
-    href: withBase("/creative"),
-    title: "Creative",
-    description: "Performance, music, and creative practice presented through the same editorial shell.",
+    description: "A gateway to research, projects, articles, and creative work from one portfolio hub.",
   },
   {
     label: "Profiles",
@@ -297,7 +273,7 @@ export const identityPersonStructuredData: StructuredDataNode = {
   url: `${canonicalSiteUrl}/`,
   description: profile.summary,
   jobTitle: profile.title,
-  image: new URL(withBase("/images/canva-bio-portrait.png"), canonicalSiteUrl).toString(),
+  image: new URL(withBase("/images/bio/mark-jayson-bio-portrait.jpeg"), canonicalSiteUrl).toString(),
   homeLocation: {
     "@type": "Place",
     name: profile.location,
