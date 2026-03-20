@@ -53,32 +53,48 @@ const structuredData = buildImageCollectionPageStructuredData(pageUrl, pageTitle
             <figcaption class="creative-gallery__caption">Creative spotlight reel</figcaption>
           </figure>
 
-          <div class="creative-cluster-page__spotlight-copy creative-landing__story">
-            <p class="creative-cluster-page__section-label">Artistic Background</p>
-            <p class="creative-cluster-page__statement">{landingPage.statement}</p>
-            {
-              landingPage.background.map((paragraph) => (
-                <p class="creative-cluster-page__copy">{paragraph}</p>
-              ))
-            }
-          </div>
-        </section>
-
-        <section class="creative-cluster-page__practice creative-landing__practice" data-lift>
-          <div class="creative-cluster-page__practice-copy creative-landing__practice-copy">
-            <p class="creative-cluster-page__section-label">Practice</p>
-            <div class="creative-cluster-page__skills">
+            <div class="creative-cluster-page__spotlight-copy creative-landing__story">
+              <p class="creative-cluster-page__section-label">Artistic Background</p>
+              <p class="creative-cluster-page__statement">{landingPage.statement}</p>
               {
-                landingPage.skills.map((skill) => (
-                  <span class="creative-cluster-page__skill">{skill}</span>
+                landingPage.background.map((paragraph) => (
+                  <p class="creative-cluster-page__copy">{paragraph}</p>
                 ))
               }
             </div>
+        </section>
 
-            <div class="creative-landing__actions">
-              <a class="replica-outline-button" href={landingPage.headshotsCta.href}>
-                {landingPage.headshotsCta.label}
-              </a>
+        <section class="creative-cluster-page__practice creative-landing__practice" data-lift>
+          <div class="creative-landing__details" data-lift>
+            <div class="creative-landing__measurements">
+              <p class="creative-cluster-page__section-label">Measurements</p>
+              <div class="creative-landing__measurements-grid">
+                {
+                  landingPage.measurements.map((item) => (
+                    <div class="creative-landing__measurement">
+                      <span class="creative-landing__measurement-label">{item.label}</span>
+                      <span class="creative-landing__measurement-value">{item.value}</span>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+
+            <div class="creative-cluster-page__practice-copy creative-landing__practice-copy">
+              <p class="creative-cluster-page__section-label">Practice</p>
+              <div class="creative-cluster-page__skills">
+                {
+                  landingPage.skills.map((skill) => (
+                    <span class="creative-cluster-page__skill">{skill}</span>
+                  ))
+                }
+              </div>
+
+              <div class="creative-landing__actions">
+                <a class="replica-outline-button" href={landingPage.headshotsCta.href}>
+                  {landingPage.headshotsCta.label}
+                </a>
+              </div>
             </div>
           </div>
 
@@ -98,6 +114,7 @@ const structuredData = buildImageCollectionPageStructuredData(pageUrl, pageTitle
         </section>
 
         <section class="creative-cluster-page__grid creative-landing__grid" aria-label="Creative areas">
+          <p class="creative-cluster-page__section-label">Creative Areas</p>
           {
             landingPage.featureCards.map((card) => (
               <article class="creative-feature-card creative-landing__card" data-lift>

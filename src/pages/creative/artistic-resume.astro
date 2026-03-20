@@ -41,23 +41,25 @@ const artisticResume = creativeCluster.artisticResume;
           {
             artisticResume.sections.map((section) => (
               <section id={section.id} class="creative-resume-page__section">
-                <header class="creative-resume-page__section-header" data-lift>
-                  <p class="creative-cluster-page__section-label">{section.label}</p>
-                  <h2 class="creative-resume-page__section-title">{section.label}</h2>
-                  <p class="creative-resume-page__section-intro">{section.intro}</p>
-                </header>
+                <div class="creative-resume-page__section-shell">
+                  <header class="creative-resume-page__section-header" data-lift>
+                    <p class="creative-cluster-page__section-label">{section.label}</p>
+                    <h2 class="creative-resume-page__section-title">{section.label}</h2>
+                    <p class="creative-resume-page__section-intro">{section.intro}</p>
+                  </header>
 
-                <div class="creative-resume-page__entries">
-                  {
-                    section.entries.map((entry) => (
-                      <article class="creative-resume-card" data-lift>
-                        <h3>{entry.title}</h3>
-                        {entry.subtitle && <p class="creative-resume-card__subtitle">{entry.subtitle}</p>}
-                        {entry.meta && <p class="creative-resume-card__meta">{entry.meta}</p>}
-                        {entry.description && <p>{entry.description}</p>}
-                      </article>
-                    ))
-                  }
+                  <div class="creative-resume-page__entries">
+                    {
+                      section.entries.map((entry) => (
+                        <article class="creative-resume-card" data-lift>
+                          <h3>{entry.title}</h3>
+                          {entry.subtitle && <p class="creative-resume-card__subtitle">{entry.subtitle}</p>}
+                          {entry.meta && <p class="creative-resume-card__meta">{entry.meta}</p>}
+                          {entry.description && <p>{entry.description}</p>}
+                        </article>
+                      ))
+                    }
+                  </div>
                 </div>
               </section>
             ))

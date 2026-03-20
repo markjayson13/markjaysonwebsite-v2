@@ -36,7 +36,7 @@ const previewImage = socialImage ?? socialPreviewImages.home;
 const previewImageUrl = new URL(previewImage.src, siteOrigin).toString();
 const pageTheme = pageThemes[page] ?? pageThemes.home;
 const cornerMenuDefaultLabelMap: Record<string, string> = {
-  home: "Home",
+  home: "About",
   bio: "About",
   resume: "Resume/CV",
   portfolio: "Portfolio",
@@ -107,6 +107,7 @@ const cornerMenuDefaultLabel = cornerMenuDefaultLabelMap[page] ?? "Home";
     </main>
 
     <div class="corner-menu" data-corner-menu-root data-default-label={cornerMenuDefaultLabel}>
+      <span class="corner-menu__trigger-label" aria-hidden="true">What do you want to find Out?</span>
       <button
         class="corner-menu__trigger"
         type="button"
@@ -115,7 +116,6 @@ const cornerMenuDefaultLabel = cornerMenuDefaultLabelMap[page] ?? "Home";
         aria-controls="site-corner-menu-panel"
         data-corner-menu-trigger
       >
-        <span class="corner-menu__trigger-label">What do you want to find Out?</span>
         <span class="corner-menu__trigger-icon" aria-hidden="true">
           <span class="corner-menu__trigger-bar"></span>
           <span class="corner-menu__trigger-bar"></span>

@@ -12,7 +12,7 @@ const { title, items, activeId = items[0]?.id } = Astro.props;
 
 <nav class="section-rail" aria-label={`${title} section navigation`} data-section-rail>
   <p class="section-rail__title">{title}</p>
-  <div class="section-rail__items" role="tablist" aria-label={`${title} filters`}>
+  <div class="section-rail__items" role="tablist" aria-label={`${title} filters`} aria-orientation="horizontal">
     {
       items.map((item) => (
         <button

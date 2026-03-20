@@ -245,6 +245,7 @@ const setupSectionRails = () => {
         item.link.tabIndex = isActive ? 0 : -1;
         item.panel.hidden = !isActive;
         item.panel.setAttribute("aria-hidden", isActive ? "false" : "true");
+        item.panel.tabIndex = isActive ? 0 : -1;
         item.panel.toggleAttribute("data-active-panel", isActive);
       });
 

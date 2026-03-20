@@ -36,6 +36,19 @@ export type HomeContact = {
   submitLabel: string;
 };
 
+export type BioPage = {
+  title: string;
+  portraitSrc: string;
+  visiblePortraitSrc: string;
+  paragraphs: string[];
+  links: BioLink[];
+};
+
+export type BioLink = {
+  label: string;
+  href: string;
+};
+
 export type ResumeJumpLink = {
   label: string;
   href: string;
@@ -151,6 +164,11 @@ export type CreativeFeatureCard = {
   note?: string;
 };
 
+export type CreativeMeasure = {
+  label: string;
+  value: string;
+};
+
 export type CreativeVideoAsset = {
   src: string;
   posterSrc?: string;
@@ -264,21 +282,25 @@ export const homePage = {
 export const bioPage = {
   title: "Mark Jayson Martinez Farol",
   portraitSrc: withBase("/images/bio/mark-jayson-bio-portrait.jpeg"),
+  visiblePortraitSrc: withBase("/images/bio-portrait-cutout.png"),
   paragraphs: [
     "I’m Mark Jayson Farol, an economist, artist, scientist, musician, and statistician working at the intersection of data, policy, and creative expression.",
-    "I grew up in a rural community in the Philippines, close to both the sea and the jungle, and I now live in Las Vegas. I earned my master’s degree in Quantitative Business Economics from the University of Nevada, Las Vegas, where I served as a graduate assistant and research collaborator in the Department of Economics, mentored undergraduates on empirical research projects, and represented my class as a student speaker at commencement. My academic work centers on higher education, finance, and access, and my paper, Revisiting Bennett’s Hypothesis: The Unintended Effects of Student Financial Aid on the Cost of College, was published in Spectra Undergraduate Research Journal in 2025.",
-    "My work moves across research, teaching, and the arts. Alongside economics and quantitative analysis, I maintain an active creative practice in music, film, and performance, with public work that includes acting, singing, and dancing.",
-    "I care about understanding how systems shape human lives, then translating that understanding into work that is rigorous, expressive, and useful. Whether I’m building research, mentoring students, or creating art, I’m driven by the same goal: to connect logic with humanity and turn complexity into meaning.",
+    "My work lives at the intersection of economics, data, and human expression. I study higher education, finance, and access through quantitative research, while also maintaining an active creative practice in music, performance, and storytelling.",
+    "I grew up in a rural community in the Philippines and now live in Las Vegas, a journey that shaped how I see ambition, adaptation, and opportunity. I earned my master’s degree in Quantitative Business Economics from the University of Nevada, Las Vegas, where I worked as a graduate assistant, research collaborator, and mentor to students developing empirical research projects.",
+    "Across research, teaching, and the arts, I care about turning complexity into meaning and building work that is rigorous, expressive, and useful. Whether I’m building evidence, mentoring students, or creating art, I’m driven by the same goal: to connect logic with humanity.",
   ],
   links: [
     { label: "Education", href: withBase("/resume#education") },
     { label: "Experience", href: withBase("/resume#experience") },
-    { label: "Profiles", href: withBase("/profiles") },
     { label: "Skills", href: withBase("/resume#skills") },
+    { label: "Profiles", href: withBase("/profiles") },
     { label: "Portfolio", href: withBase("/portfolio") },
     { label: "Certifications", href: withBase("/resume#certifications") },
+    { label: "Artistic", href: withBase("/creative/artistic-resume") },
+    { label: "Photos", href: withBase("/creative/photoshoots") },
+    { label: "Media", href: withBase("/creative/headshots") },
   ],
-};
+} satisfies BioPage;
 
 export const resumePage = {
   title: "Mark Jayson M. Farol",
@@ -923,14 +945,28 @@ export const creativeCluster = {
     eyebrow: "Performance, Modeling & Storytelling",
     title: "Creative",
     lead: "Music, performance, film, and visual storytelling across my artistic practice.",
-    statement: artistryProfile.statement,
-    background: artistryProfile.bio,
+    statement:
+      "Arts has been one of my earliest ways of understanding myself and the world around me. I move through music, theatre, film, performance, and visual storytelling as connected forms of expression and exploration.",
+    background: [
+      "My artistic practice has strengthened my discipline, emotional range, confidence, and presence, while deepening the human side of how I think and work.",
+      "Across stage, screen, and sound, I continue to treat art as both expression and exploration. Find out my artistic journey through my performances, music, film, and creative work.",
+    ],
     spotlightVideo: {
-      src: withBase("/media/creative/landing-spotlight.mov"),
+      src: withBase("/media/creative/firebook.mov"),
       posterSrc: creativeEditorialSelections[0].src,
       alt: "Landscape creative spotlight reel featuring Mark Jayson Farol.",
     } satisfies CreativeVideoAsset,
     featuredImage: creativeEditorialSelections[0],
+    measurements: [
+      { label: "Height", value: "5'7\"" },
+      { label: "Bust", value: "36\"" },
+      { label: "Waist", value: "28\"" },
+      { label: "Hips", value: "30\"" },
+      { label: "Shoes", value: "US 8.5" },
+      { label: "Shirt", value: "US S/M" },
+      { label: "Hair", value: "Dark Brown" },
+      { label: "Eyes", value: "Dark Brown" },
+    ] satisfies CreativeMeasure[],
     skills: artistryProfile.skills,
     headshotsCta: {
       label: "View Headshots",
@@ -940,37 +976,35 @@ export const creativeCluster = {
       {
         title: "Performing Arts",
         description:
-          "Theatre, live performance, directing, and the stage work that sharpened voice, timing, and public presence.",
+          "Stage work across musical theatre, plays, and live showcase performance, with strengths in character work, vocals, movement, and stage presence.",
         href: withBase("/creative/artistic-resume"),
         cta: "Open Artistic Resume",
       },
       {
-        title: "Modeling & Photography",
-        description:
-          "Editorial portraits, portfolio images, and styled visual work collected into categorized shoots and image studies.",
-        href: withBase("/creative/photoshoots"),
-        cta: "Browse Photoshoots",
-      },
-      {
         title: "Music",
         description:
-          "Choir training, solo performance, acoustic practice, and musical-theatre work continue to shape phrasing, rhythm, and emotional delivery.",
-        note:
-          "Featured through live performance, rehearsal work, and interdisciplinary creative collaborations.",
+          "Music practice spanning vocals, songwriting, and performance across pop, musical theatre, and contemporary styles.",
+        note: "Current work includes vocal performance, rehearsal discipline, and interdisciplinary music-led storytelling.",
       },
       {
         title: "Film",
         description:
-          "Screen-facing storytelling and camera-ready performance extend the theatre foundation into visual media and scene work.",
-        note:
-          "This remains an informational block in the first pass while the dedicated visual archive is expanded.",
+          "On-camera performance and screen-based storytelling centered on character, presence, and emotional clarity.",
+        note: "Film remains part of the broader creative practice while the moving-image archive continues to expand.",
+      },
+      {
+        title: "Modeling and Photography",
+        description:
+          "Editorial, portrait, and character-based visual work focused on camera presence, range, styling, and expressive storytelling.",
+        href: withBase("/creative/photoshoots"),
+        cta: "Browse Photoshoots",
       },
     ] satisfies CreativeFeatureCard[],
   },
   artisticResume: {
-    title: "Artistic Resume",
+    title: "Mark Jayson M. Farol",
     lead:
-      "A creative CV distinct from the academic resume, centered on performance, stage training, music, directing, and visual storytelling.",
+      "Artist, performer, musician, and storyteller with experience across musical theatre, plays, live performance, and on-camera work.",
     sections: [
       {
         id: "summary",
@@ -1122,7 +1156,7 @@ export const creativeCluster = {
   headshots: {
     title: "Headshots",
     lead:
-      "Selected headshots and portrait studies from the updated creative archive, arranged as a cleaner casting and portrait set.",
+      "A casting-focused set of studio headshots and portrait studies arranged around a primary still, supporting reel, and quieter supporting frames.",
     backstageHref,
     introVideo: {
       src: withBase("/media/creative/headshots-intro.mov"),
@@ -1134,7 +1168,7 @@ export const creativeCluster = {
   photoshoots: {
     title: "Photoshoots",
     lead:
-      "Categorized image studies from the updated creative archive, grouped into editorial, commencement, and Halloween sets.",
+      "Categorized image studies from the updated creative archive, organized into editorials, commencement portraits, and Halloween character work.",
     defaultId: "editorials",
     rail: [
       { id: "editorials", label: "Editorials" },

@@ -146,34 +146,32 @@ export const cornerMenuItems: CornerMenuItem[] = [
     label: "Home",
     href: withBase("/"),
     title: "Home",
-    description:
-      "The homepage composition with the hero frame, discovery prompts, and contact band.",
+    description: "The homepage composition with the hero frame, discovery prompts, explore links, and contact band.",
   },
   {
     label: "About",
     href: withBase("/bio"),
     title: "About",
     description:
-      "Economics, performance, data, and public-facing work arranged around one interdisciplinary story.",
+      "Economist, artist, and multidisciplinary creator working across data, policy, performance, and storytelling.",
   },
   {
     label: "Resume/CV",
     href: withBase("/resume"),
     title: "Resume/CV",
-    description:
-      "Education, experience, certifications, projects, and technical skills in a tighter CV format.",
+    description: "Education, experience, certifications, skills, and selected achievements.",
   },
   {
     label: "Portfolio",
     href: withBase("/portfolio"),
     title: "Portfolio",
-    description: "A gateway to research, projects, articles, and creative work from one portfolio hub.",
+    description: "Research, projects, public writing, and creative work.",
   },
   {
     label: "Profiles",
     href: withBase("/profiles"),
     title: "Profiles",
-    description: "A curated hub of academic, professional, technical, and creative profiles.",
+    description: "A curated hub of my academic, professional, technical, and creative presence across the web.",
   },
 ];
 

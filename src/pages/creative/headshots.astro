@@ -33,7 +33,7 @@ const structuredData = buildImageCollectionPageStructuredData(pageUrl, pageTitle
 
         <header class="creative-cluster-page__header creative-cluster-page__header--split">
           <div class="creative-cluster-page__header-copy">
-            <p class="creative-page__eyebrow" data-lift>Portrait Archive</p>
+            <p class="creative-page__eyebrow" data-lift>Casting Archive</p>
             <h1 class="creative-page__title" data-lift>{headshotsPage.title}</h1>
             <p class="creative-cluster-page__lead" data-lift>{headshotsPage.lead}</p>
           </div>
@@ -48,7 +48,28 @@ const structuredData = buildImageCollectionPageStructuredData(pageUrl, pageTitle
         </header>
 
         <section class="creative-headshots__lead" aria-label="Headshot spotlight">
+          {
+            primaryHeadshot && (
+              <figure class="creative-headshots__primary" data-lift>
+                <img
+                  class="creative-headshots__primary-image"
+                  src={primaryHeadshot.src}
+                  alt={primaryHeadshot.alt}
+                  loading="eager"
+                />
+                <figcaption class="creative-gallery__caption">{primaryHeadshot.caption}</figcaption>
+              </figure>
+            )
+          }
+
           <div class="creative-headshots__intro-stack">
+            <div class="creative-headshots__intro-copy" data-lift>
+              <p class="creative-cluster-page__section-label">Casting First</p>
+              <p class="creative-cluster-page__copy">
+                The primary still anchors the page first. The supporting reel and quieter portraits sit behind it to show range, tone, and camera presence without crowding the lead image.
+              </p>
+            </div>
+
             <figure class="creative-headshots__video" data-lift>
               <video
                 class="creative-headshots__video-element"
@@ -64,28 +85,7 @@ const structuredData = buildImageCollectionPageStructuredData(pageUrl, pageTitle
               ></video>
               <figcaption class="creative-gallery__caption">Portrait reel</figcaption>
             </figure>
-
-            <div class="creative-headshots__intro-copy" data-lift>
-              <p class="creative-cluster-page__section-label">Casting First</p>
-              <p class="creative-cluster-page__copy">
-                A cleaner headshot archive led by one primary still, followed by supporting portraits for range, mood, and presentation.
-              </p>
-            </div>
           </div>
-
-          {
-            primaryHeadshot && (
-              <figure class="creative-headshots__primary" data-lift>
-                <img
-                  class="creative-headshots__primary-image"
-                  src={primaryHeadshot.src}
-                  alt={primaryHeadshot.alt}
-                  loading="eager"
-                />
-                <figcaption class="creative-gallery__caption">{primaryHeadshot.caption}</figcaption>
-              </figure>
-            )
-          }
         </section>
 
         <section class="creative-gallery creative-gallery--headshots" aria-label="Headshot gallery">
