@@ -37,48 +37,50 @@ const structuredData = buildImageCollectionPageStructuredData(pageUrl, pageTitle
             <p id="creative-spotlight-title" class="creative-cluster-page__section-label">Artistic Background</p>
             <p class="creative-cluster-page__statement creative-landing__statement">{landingPage.statement}</p>
           </div>
-        </section>
 
-        <section class="creative-landing__headshots" aria-labelledby="creative-headshots-preview-title" data-lift>
-          <p id="creative-headshots-preview-title" class="sr-only">Headshot preview strip</p>
-          <div class="creative-landing__headshots-grid">
-            {
-              landingPage.headshotPreviews.map((item, index) => (
-                <a class="creative-landing__headshot-link" href={landingPage.headshotsCta.href} aria-label={`Open headshots page: ${item.alt}`}>
-                  <figure class="creative-landing__headshot-card">
-                    <img
-                      class="creative-landing__headshot-image"
-                      src={item.src}
-                      alt=""
-                      loading={index === 0 ? "eager" : "lazy"}
-                      decoding="async"
-                      fetchpriority={index === 0 ? "high" : undefined}
-                    />
-                  </figure>
+          <div class="creative-landing__utility-column" data-lift>
+            <section class="creative-landing__headshots" aria-labelledby="creative-headshots-preview-title">
+              <p id="creative-headshots-preview-title" class="sr-only">Headshot preview strip</p>
+              <div class="creative-landing__headshots-grid">
+                {
+                  landingPage.headshotPreviews.map((item, index) => (
+                    <a class="creative-landing__headshot-link" href={landingPage.headshotsCta.href} aria-label={`Open headshots page: ${item.alt}`}>
+                      <figure class="creative-landing__headshot-card">
+                        <img
+                          class="creative-landing__headshot-image"
+                          src={item.src}
+                          alt=""
+                          loading={index === 0 ? "eager" : "lazy"}
+                          decoding="async"
+                          fetchpriority={index === 0 ? "high" : undefined}
+                        />
+                      </figure>
+                    </a>
+                  ))
+                }
+              </div>
+
+              <div class="creative-landing__headshots-cta">
+                <a class="creative-landing__headshots-link" href={landingPage.headshotsCta.href}>
+                  {landingPage.headshotsCta.label}
                 </a>
-              ))
-            }
-          </div>
+              </div>
+            </section>
 
-          <div class="creative-landing__headshots-cta">
-            <a class="creative-landing__headshots-link" href={landingPage.headshotsCta.href}>
-              {landingPage.headshotsCta.label}
-            </a>
-          </div>
-        </section>
-
-        <section class="creative-landing__measurements creative-landing__measurements--stacked" aria-labelledby="creative-measurements-title" data-lift>
-          <p id="creative-measurements-title" class="sr-only">Measurements</p>
-          <div class="creative-landing__measurements-grid">
-            {
-              landingPage.measurements.map((item) => (
-                <div class="creative-landing__measurement">
-                  <span class="creative-landing__measurement-label">{item.label}</span>
-                  <span class="creative-landing__measurement-arrow" aria-hidden="true">→</span>
-                  <span class="creative-landing__measurement-value">{item.value}</span>
-                </div>
-              ))
-            }
+            <section class="creative-landing__measurements creative-landing__measurements--stacked" aria-labelledby="creative-measurements-title">
+              <p id="creative-measurements-title" class="sr-only">Measurements</p>
+              <div class="creative-landing__measurements-grid">
+                {
+                  landingPage.measurements.map((item) => (
+                    <div class="creative-landing__measurement">
+                      <span class="creative-landing__measurement-label">{item.label}</span>
+                      <span class="creative-landing__measurement-arrow" aria-hidden="true">→</span>
+                      <span class="creative-landing__measurement-value">{item.value}</span>
+                    </div>
+                  ))
+                }
+              </div>
+            </section>
           </div>
         </section>
 

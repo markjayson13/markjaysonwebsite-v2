@@ -2,6 +2,7 @@
 import { cornerMenuItems, pageThemes, profile, socialPreviewImages } from "../data/site";
 import type { SocialPreviewImage, StructuredData } from "../data/site";
 import ReplicaMotion from "../components/ReplicaMotion.astro";
+import SiteFooter from "../components/SiteFooter.astro";
 import { withBase } from "../utils/paths";
 import "../styles/global.css";
 import "../styles/editorial.css";
@@ -45,6 +46,8 @@ const cornerMenuDefaultLabelMap: Record<string, string> = {
   projects: "Portfolio",
   articles: "Portfolio",
   profiles: "Profiles",
+  privacy: "Home",
+  terms: "Home",
 };
 const cornerMenuDefaultLabel = cornerMenuDefaultLabelMap[pageGroup] ?? "Home";
 const backLinkFallbackMap: Record<string, string> = {
@@ -52,6 +55,8 @@ const backLinkFallbackMap: Record<string, string> = {
   resume: withBase("/"),
   portfolio: withBase("/"),
   profiles: withBase("/"),
+  privacy: withBase("/"),
+  terms: withBase("/"),
   research: withBase("/portfolio"),
   projects: withBase("/portfolio"),
   articles: withBase("/portfolio"),
@@ -113,6 +118,7 @@ const backLinkHref = page === "home" ? null : backLinkFallbackMap[page] ?? backL
   </head>
 
   <body
+    class="has-site-footer"
     data-page={page}
     data-page-group={pageGroup}
     style={`--page-accent:${accent}; --page-title-measure:${pageTheme.titleMeasure}; --page-lead-measure:${pageTheme.leadMeasure}; --page-copy-measure:${pageTheme.copyMeasure ?? pageTheme.leadMeasure};`}
@@ -128,6 +134,8 @@ const backLinkHref = page === "home" ? null : backLinkFallbackMap[page] ?? backL
     <main id="main-content" class="site-main site-main--bare">
       <slot />
     </main>
+
+    <SiteFooter />
 
     <div class="corner-menu" data-corner-menu-root data-default-label={cornerMenuDefaultLabel}>
       <span class="corner-menu__trigger-label" aria-hidden="true">What do you want to find Out?</span>

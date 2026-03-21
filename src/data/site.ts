@@ -42,6 +42,30 @@ export type NavLink = {
   href: string;
 };
 
+export type FooterContact = {
+  email: string;
+  location: string;
+  buttonLabel: string;
+  buttonHref: string;
+};
+
+export type FooterSocialLink = {
+  label: string;
+  href?: string;
+  icon:
+    | "linkedin"
+    | "github"
+    | "scholar"
+    | "orcid"
+    | "researchgate"
+    | "backstage"
+    | "instagram"
+    | "facebook"
+    | "x"
+    | "tiktok";
+  enabled: boolean;
+};
+
 export type CornerMenuItem = {
   label: string;
   href: string;
@@ -139,6 +163,43 @@ export const navLinks: NavLink[] = [
   { label: "Resume", href: withBase("/resume") },
   { label: "Portfolio", href: withBase("/portfolio") },
   { label: "Profiles", href: withBase("/profiles") },
+];
+
+export const footerSecondaryLinks: NavLink[] = [
+  { label: "Home", href: withBase("/") },
+  { label: "About", href: withBase("/bio") },
+  { label: "Resume/CV", href: withBase("/resume") },
+  { label: "Portfolio", href: withBase("/portfolio") },
+  { label: "Research", href: withBase("/research") },
+  { label: "Projects", href: withBase("/projects") },
+  { label: "Articles", href: withBase("/articles") },
+  { label: "Creative", href: withBase("/creative") },
+  { label: "Profiles", href: withBase("/profiles") },
+];
+
+export const footerLegalLinks: NavLink[] = [
+  { label: "Privacy Policy", href: withBase("/privacy") },
+  { label: "Terms of Use", href: withBase("/terms") },
+];
+
+export const footerContact: FooterContact = {
+  email: "markjayson@markjayson.com",
+  location: "Las Vegas, Nevada, United States",
+  buttonLabel: "Get in Touch",
+  buttonHref: withBase("/#contact"),
+};
+
+export const footerSocialLinks: FooterSocialLink[] = [
+  { label: "LinkedIn", href: linkedInProfileUrl, icon: "linkedin", enabled: true },
+  { label: "GitHub", href: githubProfileUrl, icon: "github", enabled: true },
+  { label: "Google Scholar", href: googleScholarProfileUrl, icon: "scholar", enabled: true },
+  { label: "ORCID", href: orcidProfileUrl, icon: "orcid", enabled: true },
+  { label: "ResearchGate", href: researchGateProfileUrl, icon: "researchgate", enabled: true },
+  { label: "Backstage", href: backstageProfileUrl, icon: "backstage", enabled: true },
+  { label: "Instagram", href: instagramProfileUrl, icon: "instagram", enabled: true },
+  { label: "Facebook", href: facebookProfileUrl, icon: "facebook", enabled: true },
+  { label: "X", href: xProfileUrl, icon: "x", enabled: true },
+  { label: "TikTok", icon: "tiktok", enabled: false },
 ];
 
 export const cornerMenuItems: CornerMenuItem[] = [
@@ -270,10 +331,21 @@ export const pageThemes: Record<string, PageTheme> = {
     leadMeasure: "44rem",
     copyMeasure: "48rem",
   },
+  privacy: {
+    titleMeasure: "34rem",
+    leadMeasure: "48rem",
+    copyMeasure: "56rem",
+  },
+  terms: {
+    titleMeasure: "34rem",
+    leadMeasure: "48rem",
+    copyMeasure: "56rem",
+  },
 };
 
 export const profile = {
   name: "Mark Jayson Farol",
+  fullName: "Mark Jayson Martinez Farol",
   shortName: "MJF",
   title: "Economist with a creative edge",
   headline:

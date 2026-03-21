@@ -1,0 +1,60 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const sections = [
+  {
+    title: "Information We Collect",
+    body:
+      "This site collects only the information you intentionally provide through the contact form, such as your name, email address, subject, and message. Standard hosting and analytics logs may also capture technical details such as browser type, IP address, and page requests for security and performance monitoring.",
+  },
+  {
+    title: "How Information Is Used",
+    body:
+      "Any information submitted through the site is used only to review, respond to, and manage direct inquiries related to research, collaboration, creative work, speaking, or professional contact. Information is not sold and is not used for unrelated marketing campaigns.",
+  },
+  {
+    title: "Third-Party Links",
+    body:
+      "This site links to third-party platforms such as LinkedIn, GitHub, Google Scholar, ResearchGate, Backstage, Instagram, Facebook, and X. Those services operate under their own privacy practices and policies.",
+  },
+  {
+    title: "Contact",
+    body:
+      "Questions about privacy or data handling can be sent through the homepage contact form or by email at markjayson@markjayson.com.",
+  },
+];
+---
+
+<BaseLayout
+  title="Privacy Policy"
+  description="Privacy Policy for markjayson.com."
+  page="privacy"
+  accent="#050505"
+  shell="bare"
+  footer={false}
+  replicaFooter={false}
+  replicaMotion={true}
+>
+  <article class="replica-page legal-page">
+    <div class="replica-canvas legal-page__canvas">
+      <header class="legal-page__header">
+        <p class="legal-page__eyebrow">Legal</p>
+        <h1 class="legal-page__title" data-lift>Privacy Policy</h1>
+        <p class="legal-page__lead" data-lift>
+          This policy explains what information may be collected through markjayson.com and how it is handled.
+        </p>
+      </header>
+
+      <div class="legal-page__sections">
+        {
+          sections.map((section) => (
+            <section class="legal-page__section" data-lift>
+              <h2>{section.title}</h2>
+              <p>{section.body}</p>
+            </section>
+          ))
+        }
+      </div>
+    </div>
+  </article>
+</BaseLayout>
