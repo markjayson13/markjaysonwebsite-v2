@@ -1014,6 +1014,13 @@ export const creativeCluster = {
         cta: "Artistic Resume",
       },
       {
+        title: "Modeling and Photography",
+        description:
+          "Editorial, portrait, and character-based visual work focused on camera presence, range, styling, and expressive storytelling.",
+        href: withBase("/creative/photoshoots"),
+        cta: "Photoshoots",
+      },
+      {
         title: "Music",
         description:
           "Music practice spanning vocals, songwriting, and performance across pop, musical theatre, and contemporary styles.",
@@ -1022,13 +1029,6 @@ export const creativeCluster = {
         title: "Film",
         description:
           "On-camera performance and screen-based storytelling centered on character, presence, and emotional clarity.",
-      },
-      {
-        title: "Modeling and Photography",
-        description:
-          "Editorial, portrait, and character-based visual work focused on camera presence, range, styling, and expressive storytelling.",
-        href: withBase("/creative/photoshoots"),
-        cta: "Photoshoots",
       },
     ] satisfies CreativeFeatureCard[],
   },
