@@ -234,7 +234,7 @@ p {
 .site-footer__social,
 .site-footer__legal {
   display: grid;
-  gap: 0.62rem;
+  gap: 0.72rem;
 }
 
 .site-footer__brand {
@@ -245,10 +245,10 @@ p {
 .site-footer__eyebrow,
 .site-footer__section-title {
   font-family: var(--font-footer);
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.14em;
-  line-height: 1;
+  line-height: 1.1;
   text-transform: uppercase;
   color: rgba(245, 244, 237, 0.6);
 }
@@ -264,7 +264,7 @@ p {
 .site-footer__copyright,
 .site-footer__contact-copy {
   font-family: var(--font-footer);
-  font-size: 0.88rem;
+  font-size: 0.94rem;
   line-height: 1.45;
   color: rgba(245, 244, 237, 0.76);
 }
@@ -273,7 +273,7 @@ p {
 .site-footer__link {
   width: max-content;
   font-family: var(--font-footer);
-  font-size: 0.94rem;
+  font-size: 1rem;
   font-weight: 500;
   line-height: 1.3;
   color: #f5f4ed;
@@ -302,7 +302,7 @@ p {
   background: transparent;
   color: #f5f4ed;
   font-family: var(--font-footer);
-  font-size: 0.76rem;
+  font-size: 0.82rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   line-height: 1;
@@ -335,8 +335,8 @@ p {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.35rem;
-  height: 2.35rem;
+  width: 2.45rem;
+  height: 2.45rem;
   border: 1px solid rgba(245, 244, 237, 0.2);
   background: rgba(255, 255, 255, 0.03);
   color: #f5f4ed;
@@ -360,8 +360,8 @@ p {
 
 .site-footer__social-icon {
   display: inline-flex;
-  width: 1.08rem;
-  height: 1.08rem;
+  width: 1.14rem;
+  height: 1.14rem;
 }
 
 .site-footer__social-icon :is(svg) {

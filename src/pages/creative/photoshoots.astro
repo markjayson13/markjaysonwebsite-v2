@@ -44,6 +44,7 @@ const structuredData = buildImageCollectionPageStructuredData(
           <div class="creative-photos-page__hero-copy">
             <p class="creative-photos-page__eyebrow">Mark Jayson Farol</p>
             <h1 class="creative-page__title">{photoshootsPage.title}</h1>
+            <p class="creative-cluster-page__lead creative-photos-page__lead">{photoshootsPage.lead}</p>
           </div>
         </header>
 
@@ -96,6 +97,7 @@ const structuredData = buildImageCollectionPageStructuredData(
                             class:list={[
                               "creative-gallery__figure",
                               "creative-photos-page__figure",
+                              index === 0 && "creative-photos-page__figure--lead",
                               item.aspect === "landscape" && "creative-gallery__figure--landscape",
                               item.aspect === "portrait" && "creative-gallery__figure--portrait",
                             ]}
@@ -105,6 +107,7 @@ const structuredData = buildImageCollectionPageStructuredData(
                               class:list={[
                                 "creative-gallery__image",
                                 "creative-photos-page__image",
+                                index === 0 && "creative-photos-page__image--lead",
                                 item.aspect === "landscape" && "creative-gallery__image--landscape",
                                 item.aspect === "portrait" && "creative-gallery__image--portrait",
                               ]}
