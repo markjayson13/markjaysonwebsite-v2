@@ -1,7 +1,8 @@
 ---
-import { footerContact, footerLegalLinks, footerSecondaryLinks, footerSocialLinks, profile } from "../data/site";
+import { canonicalSiteUrl, footerContact, footerLegalLinks, footerSecondaryLinks, footerSocialLinks, profile } from "../data/site";
 
 const currentYear = new Date().getFullYear();
+const siteLabel = canonicalSiteUrl.replace(/^https?:\/\//, "");
 
 const footerIconMarkup: Record<(typeof footerSocialLinks)[number]["icon"], string> = {
   linkedin:
@@ -30,7 +31,7 @@ const footerIconMarkup: Record<(typeof footerSocialLinks)[number]["icon"], strin
 <footer class="site-footer" aria-labelledby="site-footer-title">
   <div class="site-footer__inner">
     <div class="site-footer__brand">
-      <p class="site-footer__eyebrow">Footer</p>
+      <p class="site-footer__eyebrow">{siteLabel}</p>
       <h2 id="site-footer-title" class="site-footer__title">{profile.fullName}</h2>
       <p class="site-footer__copyright">© {currentYear} {profile.fullName}</p>
     </div>

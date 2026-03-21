@@ -96,7 +96,7 @@ const backLinkHref = page === "home" ? null : backLinkFallbackMap[page] ?? backL
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content={previewImageUrl} />
     <meta name="twitter:image:alt" content={previewImage.alt} />
-    {structuredDataJson && <script type="application/ld+json" set:html={structuredDataJson}></script>}
+    {structuredDataJson && <script is:inline type="application/ld+json" set:html={structuredDataJson}></script>}
     <link rel="preload" href={withBase("/fonts/arimo-regular.woff2")} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={withBase("/fonts/arimo-bold.woff2")} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={withBase("/fonts/itc-franklin-gothic-lt-regular.woff2")} as="font" type="font/woff2" crossorigin />
