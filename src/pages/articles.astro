@@ -1,78 +1,21 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import SectionRail from "../components/SectionRail.astro";
-import { articlesPage, replicaFooterCredit } from "../data/editorial";
-
-const panels = [
-  {
-    id: articlesPage.latest.id,
-    title: articlesPage.latest.label,
-    intro: articlesPage.latest.intro,
-    type: "latest" as const,
-    sections: articlesPage.latest.sections,
-  },
-  ...articlesPage.sections.map((section) => ({
-    id: section.id,
-    title: section.title,
-    intro: section.description,
-    type: "section" as const,
-  })),
-];
+const destination = "/portfolio#publications";
+const canonical = `https://markjayson.com${destination}`;
 ---
 
-<BaseLayout
-  title="Articles"
-  description="Articles page for Mark Jayson Martinez Farol."
-  page="articles"
-  accent="#0b3b0b"
-  shell="bare"
-  footer={false}
-  replicaFooter={false}
-  replicaMotion={true}
->
-  <article class="replica-page articles-page">
-    <div class="replica-canvas articles-page__canvas">
-      <header class="rail-page__header rail-page__header--light">
-        <h1 class="rail-page__title" data-lift>{articlesPage.title}</h1>
-        <p class="rail-page__lead" data-lift>{articlesPage.lead}</p>
-      </header>
-
-      <div class="rail-page__layout rail-page__layout--light" data-section-rail-root data-default-panel={articlesPage.latest.id}>
-        <SectionRail title={articlesPage.title} items={articlesPage.rail} activeId={articlesPage.latest.id} />
-
-        <div class="rail-page__content">
-          {
-            panels.map((panel) => (
-              <section
-                id={`rail-panel-${panel.id}`}
-                class="rail-page__group"
-                data-rail-panel
-                data-section-id={panel.id}
-                role="tabpanel"
-                aria-labelledby={`rail-tab-${panel.id}`}
-                hidden={panel.id !== articlesPage.latest.id}
-              >
-                <h2 class="rail-page__group-title">{panel.title}</h2>
-                <p class="rail-page__group-intro">{panel.intro}</p>
-                {
-                  panel.type === "latest" && (
-                    <div class="rail-page__entries rail-page__entries--overview">
-                      {panel.sections.map((section) => (
-                        <article class="rail-entry rail-entry--light" data-lift>
-                          <h3>{section.title}</h3>
-                          <p>{section.description}</p>
-                        </article>
-                      ))}
-                    </div>
-                  )
-                }
-              </section>
-            ))
-          }
-        </div>
-      </div>
-
-      <p class="page-credit page-credit--light">{replicaFooterCredit}</p>
-    </div>
-  </article>
-</BaseLayout>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting to Portfolio Publications</title>
+    <meta name="robots" content="noindex,follow" />
+    <link rel="canonical" href={canonical} />
+    <meta http-equiv="refresh" content={`0;url=${destination}`} />
+    <script is:inline>
+      window.location.replace("/portfolio#publications");
+    </script>
+  </head>
+  <body>
+    <p>Redirecting to <a href={destination}>Portfolio Publications</a>.</p>
+  </body>
+</html>

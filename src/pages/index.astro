@@ -5,8 +5,8 @@ import { socialPreviewImages } from "../data/site";
 ---
 
 <BaseLayout
-  title="Homepage"
-  description="Homepage for Mark Jayson Martinez Farol."
+  title="Economist & Data Scientist"
+  description="Mark Jayson Martinez Farol is an economist and data scientist specializing in econometrics, causal inference, data engineering, and evidence-based financial and policy analysis."
   page="home"
   accent="#050505"
   shell="bare"
@@ -25,8 +25,8 @@ import { socialPreviewImages } from "../data/site";
             {homePage.hero.headlineTop}
           </p>
 
-          <a class="home-hero-band__contact" href="#contact" data-contact-trigger data-home-stagger>
-            {homePage.hero.ctaLabel}
+          <a class="home-hero-band__contact" href={homePage.hero.primaryCtaHref} data-home-stagger>
+            {homePage.hero.primaryCtaLabel}
           </a>
         </div>
 
@@ -57,12 +57,13 @@ import { socialPreviewImages } from "../data/site";
             <div class="home-hero-band__shade"></div>
           </div>
 
-          <div class="home-hero-band__roles" data-home-stagger>
-            {
-              homePage.hero.roles.map((role) => (
-                <span class="home-hero-band__role">{role}</span>
-              ))
-            }
+          <div class="home-hero-band__roles home-hero-band__summary" data-home-stagger>
+            <p class="home-hero-band__subheadline">{homePage.hero.subheadline}</p>
+            <div class="home-hero-band__hero-actions">
+              <a class="home-hero-band__secondary-cta" href={homePage.hero.secondaryCtaHref}>
+                {homePage.hero.secondaryCtaLabel}
+              </a>
+            </div>
           </div>
         </div>
       </div>

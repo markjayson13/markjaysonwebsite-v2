@@ -1,96 +1,21 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import SectionRail from "../components/SectionRail.astro";
-import { replicaFooterCredit, researchPage } from "../data/editorial";
-
-const groupedYears = researchPage.rail
-  .filter((item) => item.id !== researchPage.latest.id)
-  .map((item) => ({
-    id: item.id,
-    label: item.label,
-    intro: `Research and writing from ${item.label}.`,
-    entries: researchPage.entries.filter((entry) => entry.year === item.label),
-  }));
-
-const panels = [
-  {
-    id: researchPage.latest.id,
-    label: researchPage.latest.label,
-    intro: researchPage.latest.intro,
-    entries: researchPage.latest.entries,
-  },
-  ...groupedYears,
-];
+const destination = "/portfolio#research";
+const canonical = `https://markjayson.com${destination}`;
 ---
 
-<BaseLayout
-  title="Research"
-  description="Research page for Mark Jayson Martinez Farol."
-  page="research"
-  accent="#edf0f2"
-  shell="bare"
-  footer={false}
-  replicaFooter={false}
-  replicaMotion={true}
->
-  <article class="replica-page research-page">
-    <div class="replica-canvas research-page__canvas">
-      <header class="rail-page__header">
-        <h1 class="rail-page__title" data-lift>{researchPage.title}</h1>
-        <p class="rail-page__lead" data-lift>{researchPage.lead} <span class="rail-page__legend">{researchPage.legend}</span></p>
-      </header>
-
-      <div class="rail-page__layout" data-section-rail-root data-default-panel={researchPage.latest.id}>
-        <SectionRail title={researchPage.title} items={researchPage.rail} activeId={researchPage.latest.id} />
-
-        <div class="rail-page__content">
-          {
-            panels.map((group) => (
-              <section
-                id={`rail-panel-${group.id}`}
-                class="rail-page__group"
-                data-rail-panel
-                data-section-id={group.id}
-                role="tabpanel"
-                aria-labelledby={`rail-tab-${group.id}`}
-                hidden={group.id !== researchPage.latest.id}
-              >
-                <h2 class="rail-page__group-title">{group.label}</h2>
-                <p class="rail-page__group-intro">{group.intro}</p>
-
-                <div class="rail-page__entries">
-                  {
-                    group.entries.map((entry) => (
-                      <article class="rail-entry" data-lift>
-                        <div class="rail-entry__meta">
-                          <span>{entry.year}</span>
-                          <span>{entry.status}</span>
-                        </div>
-                        <h3>{entry.title}</h3>
-                        <p>{entry.summary}</p>
-                        {
-                          entry.ctaLabel &&
-                            (entry.href ? (
-                              <a class="replica-outline-button replica-outline-button--dark" href={entry.href} target="_blank" rel="noreferrer">
-                                {entry.ctaLabel}
-                              </a>
-                            ) : (
-                              <span class="replica-outline-button replica-outline-button--dark is-disabled">{entry.ctaLabel}</span>
-                            ))
-                        }
-                      </article>
-                    ))
-                  }
-                </div>
-              </section>
-            ))
-          }
-        </div>
-      </div>
-
-      <footer class="rail-page__footer rail-page__footer--dark">
-        <p class="page-credit page-credit--dark">{replicaFooterCredit}</p>
-      </footer>
-    </div>
-  </article>
-</BaseLayout>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting to Portfolio Research</title>
+    <meta name="robots" content="noindex,follow" />
+    <link rel="canonical" href={canonical} />
+    <meta http-equiv="refresh" content={`0;url=${destination}`} />
+    <script is:inline>
+      window.location.replace("/portfolio#research");
+    </script>
+  </head>
+  <body>
+    <p>Redirecting to <a href={destination}>Portfolio Research</a>.</p>
+  </body>
+</html>

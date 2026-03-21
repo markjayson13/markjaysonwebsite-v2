@@ -158,23 +158,17 @@ export type GalleryImage = {
 };
 
 export const navLinks: NavLink[] = [
-  { label: "Home", href: withBase("/") },
-  { label: "Bio", href: withBase("/bio") },
-  { label: "Resume", href: withBase("/resume") },
+  { label: "About", href: withBase("/bio") },
   { label: "Portfolio", href: withBase("/portfolio") },
-  { label: "Profiles", href: withBase("/profiles") },
+  { label: "Resume", href: withBase("/resume") },
+  { label: "Contact", href: withBase("/#contact") },
 ];
 
 export const footerSecondaryLinks: NavLink[] = [
-  { label: "Home", href: withBase("/") },
   { label: "About", href: withBase("/bio") },
-  { label: "Resume/CV", href: withBase("/resume") },
   { label: "Portfolio", href: withBase("/portfolio") },
-  { label: "Research", href: withBase("/research") },
-  { label: "Projects", href: withBase("/projects") },
-  { label: "Articles", href: withBase("/articles") },
-  { label: "Creative", href: withBase("/creative") },
-  { label: "Profiles", href: withBase("/profiles") },
+  { label: "Resume", href: withBase("/resume") },
+  { label: "Contact", href: withBase("/#contact") },
 ];
 
 export const footerLegalLinks: NavLink[] = [
@@ -195,44 +189,32 @@ export const footerSocialLinks: FooterSocialLink[] = [
   { label: "Google Scholar", href: googleScholarProfileUrl, icon: "scholar", enabled: true },
   { label: "ORCID", href: orcidProfileUrl, icon: "orcid", enabled: true },
   { label: "ResearchGate", href: researchGateProfileUrl, icon: "researchgate", enabled: true },
-  { label: "Backstage", href: backstageProfileUrl, icon: "backstage", enabled: true },
-  { label: "Instagram", href: instagramProfileUrl, icon: "instagram", enabled: true },
-  { label: "Facebook", href: facebookProfileUrl, icon: "facebook", enabled: true },
-  { label: "X", href: xProfileUrl, icon: "x", enabled: true },
-  { label: "TikTok", icon: "tiktok", enabled: false },
 ];
 
 export const cornerMenuItems: CornerMenuItem[] = [
   {
-    label: "Home",
-    href: withBase("/"),
-    title: "Home",
-    description: "The homepage composition with the hero frame, discovery prompts, explore links, and contact band.",
-  },
-  {
     label: "About",
     href: withBase("/bio"),
     title: "About",
-    description:
-      "Economist, artist, and multidisciplinary creator working across data, policy, performance, and storytelling.",
-  },
-  {
-    label: "Resume/CV",
-    href: withBase("/resume"),
-    title: "Resume/CV",
-    description: "Education, experience, certifications, skills, and selected achievements.",
+    description: "Professional profile, training, and the core analytical focus across economics, data, and policy.",
   },
   {
     label: "Portfolio",
     href: withBase("/portfolio"),
     title: "Portfolio",
-    description: "Research, projects, public writing, and creative work.",
+    description: "Selected research, data engineering work, and public writing organized into one evidence hub.",
   },
   {
-    label: "Profiles",
-    href: withBase("/profiles"),
-    title: "Profiles",
-    description: "A curated hub of my academic, professional, technical, and creative presence across the web.",
+    label: "Resume",
+    href: withBase("/resume"),
+    title: "Resume",
+    description: "Education, experience, certifications, and technical strengths for economist and data scientist roles.",
+  },
+  {
+    label: "Contact",
+    href: withBase("/#contact"),
+    title: "Contact",
+    description: "Direct contact for research collaboration, data work, and professional opportunities.",
   },
 ];
 
@@ -241,27 +223,25 @@ export const homeDiscoveryItems: CornerMenuItem[] = [
     label: "About",
     href: withBase("/bio"),
     title: "About",
-    description:
-      "Economics, performance, data, and public-facing work arranged around one interdisciplinary story.",
-  },
-  {
-    label: "Resume/CV",
-    href: withBase("/resume"),
-    title: "Resume/CV",
-    description:
-      "Education, experience, certifications, projects, and technical skills in a tighter CV format.",
+    description: "Concise background, training, and current focus across economics, data science, and policy analysis.",
   },
   {
     label: "Portfolio",
     href: withBase("/portfolio"),
     title: "Portfolio",
-    description: "Research papers, data projects, public writing, and creative work.",
+    description: "Research, data systems, and public writing translated into outcome-focused portfolio entries.",
   },
   {
-    label: "Profiles",
-    href: withBase("/profiles"),
-    title: "Profiles",
-    description: "A curated hub of academic, professional, technical, and creative profiles.",
+    label: "Resume",
+    href: withBase("/resume"),
+    title: "Resume",
+    description: "Professional experience, credentials, and tools summarized in a cleaner recruiter-readable format.",
+  },
+  {
+    label: "Contact",
+    href: withBase("/#contact"),
+    title: "Contact",
+    description: "Reach out directly for analyst, data science, econometrics, and research opportunities.",
   },
 ];
 
@@ -347,21 +327,21 @@ export const profile = {
   name: "Mark Jayson Farol",
   fullName: "Mark Jayson Martinez Farol",
   shortName: "MJF",
-  title: "Economist with a creative edge",
+  title: "Economist & Data Scientist",
   headline:
-    "Data Scientist (Econometrics) | Pricing Analytics and Financial Economics | Causal Inference | High-Dimensional Administrative Data",
+    "Economist and data scientist specializing in econometrics, causal inference, data engineering, and evidence-based policy and financial analysis.",
   degreeLine:
     "M.A. in Quantitative Business Economics graduate from the University of Nevada, Las Vegas",
   location: "Las Vegas, Nevada, United States",
   relocation: "Relocating to New York, NY",
   summary:
-    "I pair rigorous economics with the arts because real impact needs both analytical precision and human connection.",
+    "I build research and analytical systems that turn complex data into decision-ready evidence for finance, policy, and institutional strategy.",
   mission:
-    "My work turns messy, high-volume data into clean, decision-ready evidence and then translates the analysis into clear stories stakeholders can act on.",
+    "My work connects econometric reasoning, high-dimensional data, and plain-language communication so technical results can guide real decisions.",
   audience:
-    "I am exploring analyst roles where quantitative depth meets real-world decisions, especially across financial services, economic research, pricing, strategy, risk, and policy analysis.",
+    "I am pursuing economist, data scientist, and analytical roles where quantitative depth supports pricing, policy, research, strategy, and financial decision-making.",
   distinction:
-    "Selected as an Outstanding Student Commencement Speaker for translating complex analysis into persuasive takeaways.",
+    "Selected as an Outstanding Student Commencement Speaker for translating technical analysis into persuasive, public-facing communication.",
   languages: ["English", "Tagalog"],
   tools: ["Stata", "R", "Python", "Excel", "DuckDB", "PyArrow", "GitHub"],
 };

@@ -12,6 +12,7 @@ interface Props {
   description: string;
   page: string;
   accent?: string;
+  robots?: string;
   shell?: "bare";
   footer?: boolean;
   replicaFooter?: boolean;
@@ -25,6 +26,7 @@ const {
   description,
   page,
   accent = "#0f6d63",
+  robots,
   replicaMotion = true,
   structuredData,
   socialImage,
@@ -37,19 +39,21 @@ const previewImage = socialImage ?? socialPreviewImages.home;
 const previewImageUrl = new URL(previewImage.src, siteOrigin).toString();
 const pageGroup = page.startsWith("creative-") ? "creative" : page;
 const pageTheme = pageThemes[page] ?? pageThemes[pageGroup] ?? pageThemes.home;
+const defaultRobots = "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1";
+const robotsContent = robots ?? (pageGroup === "creative" ? `noindex,follow,${defaultRobots.split(",").slice(2).join(",")}` : defaultRobots);
 const cornerMenuDefaultLabelMap: Record<string, string> = {
   home: "About",
   bio: "About",
-  resume: "Resume/CV",
+  resume: "Resume",
   portfolio: "Portfolio",
   research: "Portfolio",
   projects: "Portfolio",
   articles: "Portfolio",
-  profiles: "Profiles",
-  privacy: "Home",
-  terms: "Home",
+  profiles: "About",
+  privacy: "About",
+  terms: "About",
 };
-const cornerMenuDefaultLabel = cornerMenuDefaultLabelMap[pageGroup] ?? "Home";
+const cornerMenuDefaultLabel = cornerMenuDefaultLabelMap[pageGroup] ?? "About";
 const backLinkFallbackMap: Record<string, string> = {
   bio: withBase("/"),
   resume: withBase("/"),
@@ -75,8 +79,8 @@ const backLinkHref = page === "home" ? null : backLinkFallbackMap[page] ?? backL
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title} | {profile.name}</title>
     <meta name="description" content={description} />
-    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
-    <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+    <meta name="robots" content={robotsContent} />
+    <meta name="googlebot" content={robotsContent} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href={withBase("/favicon.svg")} type="image/svg+xml" />
     <link rel="icon" href={withBase("/favicon.ico")} sizes="any" />

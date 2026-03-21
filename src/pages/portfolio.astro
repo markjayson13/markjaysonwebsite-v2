@@ -1,19 +1,29 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionRail from "../components/SectionRail.astro";
 import { portfolioPage, replicaFooterCredit } from "../data/editorial";
+import { socialPreviewImages } from "../data/site";
+
+const panels = portfolioPage.sections.map((section) => ({
+  ...section,
+  entries: portfolioPage.entries.filter((entry) => entry.sectionId === section.id),
+}));
+
+const defaultPanel = panels[0]?.id ?? "research";
 ---
 
 <BaseLayout
-  title="Portfolio"
-  description="Portfolio hub for Mark Jayson Martinez Farol."
+  title="Econometrics, Data Engineering, and Policy Portfolio"
+  description="Professional portfolio for Mark Jayson Martinez Farol covering econometrics, causal inference, data engineering, and public-facing analytical work."
   page="portfolio"
   accent="#050505"
   shell="bare"
   footer={false}
   replicaFooter={false}
   replicaMotion={true}
+  socialImage={socialPreviewImages.bio}
 >
-  <article class="replica-page portfolio-page">
+  <article class="replica-page portfolio-page portfolio-page--hub">
     <div class="replica-canvas portfolio-page__canvas">
       <div class="portfolio-page__shell">
         <header class="portfolio-page__header">
@@ -21,22 +31,132 @@ import { portfolioPage, replicaFooterCredit } from "../data/editorial";
           <p class="portfolio-page__lead" data-lift>{portfolioPage.lead}</p>
         </header>
 
-        <div class="portfolio-page__grid">
-          {
-            portfolioPage.tiles.map((tile) => (
-              <a class:list={["portfolio-tile", `portfolio-tile--${tile.tone}`]} href={tile.href} data-lift>
-                <div class="portfolio-tile__copy">
-                  <h2>{tile.title}</h2>
-                  <p>{tile.description}</p>
-                </div>
-                <span class="portfolio-tile__cta">{tile.cta}</span>
-              </a>
-            ))
-          }
+        <div class="rail-page__layout portfolio-page__layout" data-section-rail-root data-default-panel={defaultPanel}>
+          <SectionRail title={portfolioPage.title} items={portfolioPage.sections} activeId={defaultPanel} />
+
+          <div class="rail-page__content portfolio-page__content">
+            {
+              panels.map((panel) => (
+                <section
+                  id={`rail-panel-${panel.id}`}
+                  class="rail-page__group portfolio-page__panel"
+                  data-rail-panel
+                  data-section-id={panel.id}
+                  data-portfolio-panel
+                  role="tabpanel"
+                  aria-labelledby={`rail-tab-${panel.id}`}
+                  hidden={panel.id !== defaultPanel}
+                >
+                  <h2 class="rail-page__group-title">{panel.label}</h2>
+                  <p class="rail-page__group-intro">{panel.intro}</p>
+
+                  <div class="portfolio-page__tag-row" role="toolbar" aria-label={`${panel.label} topic filters`}>
+                    {
+                      portfolioPage.tags.map((tag) => (
+                        <button
+                          type="button"
+                          class:list={["portfolio-page__tag", tag.id === "all" && "is-active"]}
+                          data-portfolio-tag
+                          data-tag={tag.id}
+                          aria-pressed={tag.id === "all" ? "true" : "false"}
+                        >
+                          {tag.label}
+                        </button>
+                      ))
+                    }
+                  </div>
+
+                  <div class="portfolio-page__entries" data-portfolio-entry-grid>
+                    {
+                      panel.entries.map((entry) => (
+                        <article class="portfolio-entry" data-portfolio-entry data-tags={entry.tags.join(" ")} data-lift>
+                          <p class="portfolio-entry__eyebrow">{entry.eyebrow}</p>
+                          <h3>{entry.title}</h3>
+
+                          <div class="portfolio-entry__body">
+                            <p><strong>Problem:</strong> {entry.problem}</p>
+                            <p><strong>Action:</strong> {entry.action}</p>
+                            <p><strong>Result:</strong> {entry.result}</p>
+                          </div>
+
+                          <div class="portfolio-entry__footer">
+                            <ul class="portfolio-entry__tags" aria-label="Portfolio tags">
+                              {
+                                entry.tags.map((tag) => {
+                                  const label = portfolioPage.tags.find((item) => item.id === tag)?.label ?? tag;
+                                  return <li>{label}</li>;
+                                })
+                              }
+                            </ul>
+
+                            {
+                              entry.href && entry.ctaLabel && (
+                                <a class="replica-outline-button replica-outline-button--dark" href={entry.href} target="_blank" rel="noreferrer">
+                                  {entry.ctaLabel}
+                                </a>
+                              )
+                            }
+                          </div>
+                        </article>
+                      ))
+                    }
+                  </div>
+                </section>
+              ))
+            }
+          </div>
         </div>
       </div>
 
       <p class="page-credit page-credit--light">{replicaFooterCredit}</p>
     </div>
   </article>
+
+  <script is:inline>
+    const setupPortfolioFilters = () => {
+      const panels = document.querySelectorAll("[data-portfolio-panel]");
+
+      panels.forEach((panel) => {
+        if (!(panel instanceof HTMLElement) || panel.dataset.portfolioBound === "true") {
+          return;
+        }
+
+        panel.dataset.portfolioBound = "true";
+        const tagButtons = Array.from(panel.querySelectorAll("[data-portfolio-tag]")).filter(
+          (button) => button instanceof HTMLButtonElement,
+        );
+        const entries = Array.from(panel.querySelectorAll("[data-portfolio-entry]")).filter(
+          (entry) => entry instanceof HTMLElement,
+        );
+
+        const activateTag = (tagId) => {
+          tagButtons.forEach((button) => {
+            const isActive = button.dataset.tag === tagId;
+            button.classList.toggle("is-active", isActive);
+            button.setAttribute("aria-pressed", isActive ? "true" : "false");
+          });
+
+          entries.forEach((entry) => {
+            const tags = (entry.dataset.tags ?? "").split(/\s+/).filter(Boolean);
+            const isVisible = tagId === "all" || tags.includes(tagId);
+            entry.hidden = !isVisible;
+          });
+        };
+
+        tagButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            activateTag(button.dataset.tag ?? "all");
+          });
+        });
+
+        activateTag("all");
+      });
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", setupPortfolioFilters, { once: true });
+    } else {
+      setupPortfolioFilters();
+    }
+  </script>
 </BaseLayout>

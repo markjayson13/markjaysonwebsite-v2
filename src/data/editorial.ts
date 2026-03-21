@@ -16,8 +16,11 @@ export type HomeField = {
 export type HomeHero = {
   headlineTop: string;
   headlineFrame: string[];
-  roles: string[];
-  ctaLabel: string;
+  subheadline: string;
+  primaryCtaLabel: string;
+  primaryCtaHref: string;
+  secondaryCtaLabel: string;
+  secondaryCtaHref: string;
   videoSrc: string;
 };
 
@@ -92,6 +95,30 @@ export type PortfolioTile = {
   href?: string;
   cta: string;
   tone: "light" | "blue" | "green" | "mustard";
+};
+
+export type PortfolioHubSection = {
+  id: string;
+  label: string;
+  intro: string;
+};
+
+export type PortfolioHubTag = {
+  id: string;
+  label: string;
+};
+
+export type PortfolioHubEntry = {
+  id: string;
+  sectionId: string;
+  eyebrow: string;
+  title: string;
+  problem: string;
+  action: string;
+  result: string;
+  tags: string[];
+  href?: string;
+  ctaLabel?: string;
 };
 
 export type RailItem = {
@@ -233,10 +260,14 @@ export const replicaFooterCredit = "© Mark Jayson Martinez Farol";
 
 export const homePage = {
   hero: {
-    headlineTop: "Mark Jayson",
-    headlineFrame: ["Martinez", "Farol"],
-    roles: ["Economist", "Artist", "Scientist", "Musician", "Statistician", "Data Scientist", "Data Engineer", "Actor", "Singer"],
-    ctaLabel: "Contact",
+    headlineTop: "Economist &",
+    headlineFrame: ["Data Scientist"],
+    subheadline:
+      "Specializing in econometrics, causal inference, and data engineering for evidence-based financial and policy decisions.",
+    primaryCtaLabel: "View Portfolio",
+    primaryCtaHref: withBase("/portfolio"),
+    secondaryCtaLabel: "View Resume",
+    secondaryCtaHref: withBase("/resume"),
     videoSrc: withBase("/media/canva-home-hero.mp4"),
   } satisfies HomeHero,
   discovery: {
@@ -245,42 +276,32 @@ export const homePage = {
   } satisfies HomeDiscovery,
   crawlLinks: [
     {
-      label: "About Mark Jayson Farol",
+      label: "About",
       href: withBase("/bio"),
-      description: "Biography, background, and the interdisciplinary story behind the work.",
+      description: "Technical background, current focus, and the problem areas I work on.",
     },
     {
-      label: "Research papers and academic work",
-      href: withBase("/research"),
-      description: "Published research, working papers, methods, and higher-education analysis.",
+      label: "Portfolio",
+      href: withBase("/portfolio"),
+      description: "Selected research, data engineering work, and public writing in one evidence hub.",
     },
     {
-      label: "Publications and writing",
-      href: withBase("/articles"),
-      description: "Articles, commentaries, essays, and public-facing scholarship.",
-    },
-    {
-      label: "CV and resume",
+      label: "Resume",
       href: withBase("/resume"),
-      description: "Education, experience, technical skills, and current certifications.",
+      description: "Experience, education, certifications, and technical strengths summarized clearly.",
     },
     {
-      label: "Media and official profiles",
-      href: withBase("/profiles"),
-      description: "Professional, academic, and creative profile links collected in one place.",
-    },
-    {
-      label: "Contact Mark Jayson",
-      href: "#contact",
-      description: "Jump directly to the homepage contact form and send a message.",
+      label: "Contact",
+      href: withBase("/#contact"),
+      description: "Reach out directly for economist, data science, and research opportunities.",
     },
   ] satisfies HomeLink[],
   discoveryItems: homeDiscoveryItems,
   contact: {
     label: "Get in Touch",
     title: "Get in Touch",
-    copy: "Reach out for research, data work, performance, speaking, or interdisciplinary collaboration.",
-    note: "Use the form below to send a direct message.",
+    copy: "Reach out for econometrics, data engineering, policy analysis, pricing work, or research collaboration.",
+    note: "Use the form below for professional inquiries and academic collaborations.",
     portraitSrc: withBase("/images/home-contact-portrait.png"),
     videoSrc: withBase("/media/canva-home-contact.mp4"),
     submitLabel: "Submit",
@@ -299,21 +320,17 @@ export const bioPage = {
   portraitSrc: withBase("/images/bio/mark-jayson-bio-portrait.jpeg"),
   visiblePortraitSrc: withBase("/images/bio-portrait-cutout.png"),
   paragraphs: [
-    "I’m Mark Jayson Farol, an economist, artist, scientist, musician, and statistician working at the intersection of data, policy, and creative expression.",
-    "My work lives at the intersection of economics, data, and human expression. I study higher education, finance, and access through quantitative research, while also maintaining an active creative practice in music, performance, and storytelling.",
-    "I grew up in a rural community in the Philippines and now live in Las Vegas, a journey that shaped how I see ambition, adaptation, and opportunity. I earned my master’s degree in Quantitative Business Economics from the University of Nevada, Las Vegas, where I worked as a graduate assistant, research collaborator, and mentor to students developing empirical research projects.",
-    "Across research, teaching, and the arts, I care about turning complexity into meaning and building work that is rigorous, expressive, and useful. Whether I’m building evidence, mentoring students, or creating art, I’m driven by the same goal: to connect logic with humanity.",
+    "I am an economist and data scientist trained in quantitative business economics at the University of Nevada, Las Vegas, where I built a foundation in econometrics, empirical research, and large-scale data analysis.",
+    "My work focuses on higher-education finance, pricing, policy, and institutional behavior, with an emphasis on turning complex administrative data into clear evidence through reproducible pipelines, panel methods, and causal inference.",
+    "I am pursuing roles where analytical depth, data engineering, and plain-language communication matter at the same time, especially across financial services, policy analysis, pricing, and research environments that need decision-ready insight.",
   ],
   links: [
-    { label: "Education", href: withBase("/resume#education") },
-    { label: "Experience", href: withBase("/resume#experience") },
-    { label: "Skills", href: withBase("/resume#skills") },
+    { label: "Resume", href: withBase("/resume") },
+    { label: "Research", href: withBase("/portfolio#research") },
+    { label: "Projects", href: withBase("/portfolio#projects") },
+    { label: "Publications", href: withBase("/portfolio#publications") },
     { label: "Profiles", href: withBase("/profiles") },
-    { label: "Portfolio", href: withBase("/portfolio") },
-    { label: "Certifications", href: withBase("/resume#certifications") },
-    { label: "Artistic", href: withBase("/creative/artistic-resume") },
-    { label: "Photos", href: withBase("/creative/photoshoots") },
-    { label: "Media", href: withBase("/creative/headshots") },
+    { label: "Contact", href: withBase("/#contact") },
   ],
 } satisfies BioPage;
 
@@ -328,13 +345,12 @@ export const resumePage = {
     { label: "Skills", href: "#skills" },
   ] satisfies ResumeJumpLink[],
   summary: [
-    "I was born in a rural area in the Philippines, where ambition often grows alongside uncertainty and where education can feel deeply personal because of what it makes possible. Moving to the United States and continuing my education here reshaped my world. It demanded adaptation, resilience, and the ability to keep building even while learning a new environment, a new academic culture, and a new sense of what my future could become.",
-    "Over time, that journey became the foundation of who I am today. I grew into someone who moves across disciplines with purpose: economics, statistics, research, teaching, music, performance, and creative expression. My path through high school in the United States, undergraduate study at UNLV, and graduate training in quantitative economics gave me more than credentials. It gave me a way of thinking grounded in rigor, curiosity, communication, and a strong belief that analytical work should stay connected to human lives. This page tells that story through the experiences, education, and roles that shaped me.",
+    "Economist and data scientist with graduate training in quantitative business economics, applied econometrics, and large-scale administrative data analysis.",
+    "Experienced in research design, panel-data workflows, data engineering, and stakeholder-facing communication across higher-education finance, policy analysis, and analytical decision support.",
   ],
   educationNarrative: [
-    "My educational journey began in the Philippines and continued in the United States, where attending high school marked a major turning point in my life. That transition carried more than a change in geography. It meant adjusting to a different culture, a different school system, and a different set of expectations while learning how to carry my own story with confidence.",
-    "At the University of Nevada, Las Vegas, I pursued my Bachelor of Science in Business Administration while also completing a minor in Theatre. My undergraduate years allowed both sides of me to grow at the same time: the analytical side drawn to economics, data, and systems, and the creative side that found meaning in performance, storytelling, and expression.",
-    "I was later admitted to UNLV’s Master of Arts in Quantitative Business Economics, a program that sharpened my abilities across economic theory, statistics, applied quantitative analysis, and econometric methods. Graduate study strengthened both my technical foundation and my professional maturity.",
+    "My academic training centered on economics, quantitative analysis, and empirical research, with coursework and applied work that strengthened my ability to move from theory to operational data systems.",
+    "At UNLV, I developed depth in econometrics, statistics, higher-education finance, and research communication while working on projects that required both technical rigor and practical interpretation.",
   ],
   credentials: [
     {
@@ -353,7 +369,7 @@ export const resumePage = {
       title: "Minor in Theatre",
       subtitle: "University of Nevada, Las Vegas",
       summary:
-        "Strengthened storytelling, public-facing confidence, collaboration, and performance discipline alongside analytical training in economics and research.",
+        "Supplementary training that strengthened presentation skills, public-facing confidence, and communication discipline alongside economics coursework.",
     },
     {
       title: "Advanced Diploma",
@@ -363,9 +379,8 @@ export const resumePage = {
     },
   ] satisfies ResumeCredential[],
   experienceNarrative: [
-    "My labor force experience began while I was a full-time undergraduate student working part-time at kate spade new york. That role taught me accountability, consistency, and what it meant to perform inside a fast-moving environment where expectations were measurable and where your contribution affected the team immediately.",
-    "As I grew into the role and was promoted to Lead Sales Associate, my responsibilities expanded significantly. I continued handling client-facing work while also taking on greater responsibility in training, coaching, team support, and operational execution.",
-    "As my academic work became more rigorous and demanding, I made the decision to step away from retail and devote myself fully to being a student and developing as a scholar. That decision opened doors that later shaped my work through research presentations, publication, and graduate study.",
+    "My experience combines academic research, teaching support, and customer-facing leadership. Across those roles, the common thread has been translating complexity into clear action, whether that meant mentoring students, structuring data workflows, or supporting operational performance.",
+    "The strongest through-line in my work is analytical communication: building evidence carefully, organizing it responsibly, and presenting it in ways that people can understand and use.",
   ],
   roles: [
     {
@@ -433,53 +448,39 @@ export const resumePage = {
     },
   ] satisfies CertificationEntry[],
   projectsIntro:
-    "My projects bring together the different ways I build. Some projects begin with a technical problem: messy data, disconnected sources, weak infrastructure, or a missing tool that slows serious research down. Others begin with a question about education, behavior, opportunity, or communication.",
+    "My project work centers on research infrastructure, data engineering, and practical analytical tools. Each build is designed to reduce friction, improve data quality, or make economic evidence easier to produce and use.",
   projectCards: [
     {
-      title: "Data Engineering",
+      title: "Research",
       description:
-        "Longitudinal data pipelines, panel construction, variable harmonization, and reproducible workflows built to turn complex raw datasets into research-ready systems.",
-      href: withBase("/projects#data-engineering"),
-      cta: "Read more",
+        "Working papers and empirical studies on higher-education finance, pricing, aid, and policy analysis.",
+      href: withBase("/portfolio#research"),
+      cta: "Open portfolio",
     },
     {
-      title: "Research Papers",
+      title: "Projects",
       description:
-        "Empirical and policy-driven writing on higher education, financial aid, affordability, and institutional behavior grounded in quantitative methods and econometric analysis.",
-      href: withBase("/research"),
-      cta: "Read more",
+        "Data pipelines, utilities, and tooling built to support reproducible econometric and institutional analysis.",
+      href: withBase("/portfolio#projects"),
+      cta: "Open portfolio",
     },
     {
-      title: "Economic Tools",
+      title: "Publications",
       description:
-        "Applied tools, interfaces, and research utilities designed to make economic data, variable selection, and analytical workflows more usable, transparent, and efficient.",
-      href: withBase("/projects#economic-tools"),
-      cta: "Read more",
-    },
-    {
-      title: "Other Publications",
-      description:
-        "Additional written work including essays, working papers, commentary, and public-facing scholarship beyond formal research manuscripts.",
-      href: withBase("/articles"),
-      cta: "Read more",
-    },
-    {
-      title: "Creative Roles",
-      description:
-        "Performance, music, theatre, and interdisciplinary creative work that strengthens storytelling, communication, presence, and the human side of analytical practice.",
-      href: withBase("/creative/artistic-resume"),
-      cta: "View resume",
+        "Published work and public-facing writing that translate technical analysis into accessible takeaways.",
+      href: withBase("/portfolio#publications"),
+      cta: "Open portfolio",
     },
     {
       title: "Profiles",
       description:
-        "A curated hub of academic, professional, technical, and creative presence across the web.",
+        "Professional and academic profiles collected in a secondary archive.",
       href: withBase("/profiles"),
-      cta: "Read more",
+      cta: "View profiles",
     },
   ] satisfies ResumeProjectCard[],
   skillsIntro:
-    "My skills were built across research, education, professional work, and the arts, which is why they function less like separate categories and more like connected branches of the same system.",
+    "My skill set combines econometric research, analytical communication, and data engineering. The strongest overlap is where technical depth meets usable decision support.",
   skillGroups: [
     {
       title: "Economics, Finance & Policy",
@@ -497,46 +498,176 @@ export const resumePage = {
       title: "Communication, Teaching & Leadership",
       items: ["Lecture design", "Student mentoring", "Public speaking", "Stakeholder translation"],
     },
-    {
-      title: "Creative & Performance Practice",
-      items: ["Music", "Acting", "Storytelling", "Stage presence", "Interdisciplinary collaboration"],
-    },
   ] satisfies SkillGroup[],
 };
 
 export const portfolioPage = {
   title: "Portfolio",
-  lead: "Research, projects, public writing, and creative work.",
-  tiles: [
+  lead:
+    "Selected research, data systems, and public-facing writing focused on econometrics, causal inference, higher-education finance, and analytical decision support.",
+  sections: [
     {
-      title: "Research",
-      description: "Empirical and policy-driven research on higher education, pricing, and financial aid.",
-      href: withBase("/research"),
-      cta: "Read more",
-      tone: "light",
+      id: "research",
+      label: "Research",
+      intro: "Working papers and empirical studies that use econometric methods to answer policy and institutional questions.",
     },
     {
-      title: "Projects",
-      description: "Data engineering, economic tools, and infrastructure built for durable analytical work.",
-      href: withBase("/projects"),
-      cta: "Read more",
-      tone: "blue",
+      id: "projects",
+      label: "Projects",
+      intro: "Data engineering systems and analytical tools built to reduce friction, improve quality, and support decision-ready research.",
     },
     {
-      title: "Articles",
-      description: "Public-facing writing that translates research and systems thinking for wider audiences.",
-      href: withBase("/articles"),
-      cta: "Read more",
-      tone: "green",
+      id: "publications",
+      label: "Publications",
+      intro: "Published and public-facing work that translates technical analysis into readable evidence and argument.",
+    },
+  ] satisfies PortfolioHubSection[],
+  tags: [
+    { id: "all", label: "All" },
+    { id: "econometrics-causal", label: "Econometrics & Causal Inference" },
+    { id: "data-engineering", label: "Data Engineering" },
+    { id: "higher-ed-policy", label: "Higher Education & Policy" },
+    { id: "finance-pricing", label: "Finance & Pricing" },
+    { id: "public-writing", label: "Public Writing" },
+  ] satisfies PortfolioHubTag[],
+  entries: [
+    {
+      id: "portfolio-packaging-hierarchies",
+      sectionId: "research",
+      eyebrow: "Working paper",
+      title: "Packaging Hierarchies in U.S. Higher Education",
+      problem:
+        "Colleges package grants, loans, and aid components differently, but those structures are hard to compare consistently across institutions and years.",
+      action:
+        "Built institution-year measures from IPEDS student-aid and cost data to compare how packaging changes with Pell exposure and sector differences.",
+      result:
+        "Created a cleaner way to evaluate grant-first, Pell-anchor, and institutional top-off strategies across the higher-education landscape.",
+      tags: ["econometrics-causal", "higher-ed-policy", "finance-pricing"],
     },
     {
-      title: "Creative",
-      description: "Music, performance, film, and storytelling across my artistic practice.",
-      href: withBase("/creative"),
-      cta: "Explore cluster",
-      tone: "mustard",
+      id: "portfolio-costs-define-aid",
+      sectionId: "research",
+      eyebrow: "Working paper",
+      title: "When Costs Define Aid",
+      problem:
+        "Cost-of-attendance caps shape how institutions price attendance, but the response differs by sector and is often discussed without strong institution-level evidence.",
+      action:
+        "Estimated panel models of tuition, cost-of-attendance components, and borrowing margins to study how institutions adjust when federal rules bind.",
+      result:
+        "Showed that publics and private nonprofits respond through different pricing and non-tuition channels, making policy effects more interpretable.",
+      tags: ["econometrics-causal", "finance-pricing", "higher-ed-policy"],
     },
-  ] satisfies PortfolioTile[],
+    {
+      id: "portfolio-ai-gender-wage",
+      sectionId: "research",
+      eyebrow: "Working paper",
+      title: "AI Diffusion and Gender Wage Inequality",
+      problem:
+        "Public discussion about AI and labor markets often lacks causal evidence on whether diffusion changes wage gaps across different kinds of work.",
+      action:
+        "Used CPS-MORG data in a quasi-experimental design with interaction terms and decomposition methods to compare tech and non-tech labor-market outcomes.",
+      result:
+        "Built an empirical framework that isolates how AI exposure may shift wage inequality instead of relying on broad speculation.",
+      tags: ["econometrics-causal", "finance-pricing"],
+    },
+    {
+      id: "portfolio-ipeds-panel-builder",
+      sectionId: "projects",
+      eyebrow: "Data engineering",
+      title: "IPEDS Harmonized Panel Builder",
+      problem:
+        "IPEDS releases are fragmented across yearly access databases, which makes longitudinal analysis slow, error-prone, and difficult to reproduce.",
+      action:
+        "Built a Python and SQL pipeline that harmonizes variables, preserves provenance, cleans parent-child relationships, and produces auditable institution-year panels.",
+      result:
+        "Reduced manual preparation overhead and made multi-year higher-education analysis faster to validate and reuse.",
+      tags: ["data-engineering", "higher-ed-policy"],
+      href: githubProfile,
+      ctaLabel: "GitHub Repo",
+    },
+    {
+      id: "portfolio-fsa-panel-pipeline",
+      sectionId: "projects",
+      eyebrow: "Data engineering",
+      title: "Federal Student Aid Volume Reports Panel Pipeline",
+      problem:
+        "Federal Student Aid volume reports are useful for analysis, but the raw files are not structured for fast, consistent institution-year comparisons.",
+      action:
+        "Built a reproducible panel workflow keyed by OPEID8 and award year, with QA checks for duplicates, coverage, year gaps, and descriptor conflicts.",
+      result:
+        "Turned an awkward reporting archive into a dependable analytical dataset for tracking aid trends over time.",
+      tags: ["data-engineering", "higher-ed-policy", "finance-pricing"],
+      href: githubProfile,
+      ctaLabel: "GitHub Repo",
+    },
+    {
+      id: "portfolio-variable-browser",
+      sectionId: "projects",
+      eyebrow: "Analytical tooling",
+      title: "IPEDS Variable Browser",
+      problem:
+        "Researchers lose time digging through metadata and annual dictionaries just to identify the right variables for a project.",
+      action:
+        "Created a browsing utility that organizes variable names, definitions, and release differences into a faster lookup workflow.",
+      result:
+        "Made project scoping and variable selection easier for repeated institutional-data analysis.",
+      tags: ["data-engineering", "higher-ed-policy"],
+    },
+    {
+      id: "portfolio-econometric-workflows",
+      sectionId: "projects",
+      eyebrow: "Analytical tooling",
+      title: "Econometric Workflow Utilities",
+      problem:
+        "Repeated research tasks become inconsistent when filtering, validation, and model-prep steps are rebuilt from scratch across projects.",
+      action:
+        "Built reusable utilities for dataset checks, variable selection, and model-ready outputs across recurring econometric workflows.",
+      result:
+        "Improved consistency, reduced setup time, and made recurring analytical work easier to audit and extend.",
+      tags: ["data-engineering", "econometrics-causal"],
+    },
+    {
+      id: "portfolio-bennett-publication",
+      sectionId: "publications",
+      eyebrow: "Published research",
+      title: "Revisiting Bennett’s Hypothesis",
+      problem:
+        "Debates about whether student aid raises college costs often rely on broad claims without clearly communicating the institutional mechanisms involved.",
+      action:
+        "Studied public and private nonprofit colleges with National Center for Education Statistics data to evaluate how aid and cost of attendance move together.",
+      result:
+        "Produced a published paper that translates a contested policy debate into clearer empirical evidence.",
+      tags: ["higher-ed-policy", "finance-pricing", "public-writing"],
+      href: "https://doi.org/10.9741/2766-7227.1033",
+      ctaLabel: "Read publication",
+    },
+    {
+      id: "portfolio-public-commentary",
+      sectionId: "publications",
+      eyebrow: "Public writing",
+      title: "Commentary and Public Scholarship",
+      problem:
+        "Technical economic work often loses influence when it is not rewritten for readers outside academic or specialist settings.",
+      action:
+        "Developed public-facing commentary formats that translate institutional incentives, policy tradeoffs, and research findings into direct language.",
+      result:
+        "Created a clearer bridge between technical analysis and broader audiences who need the implications, not just the methods.",
+      tags: ["public-writing", "higher-ed-policy"],
+    },
+    {
+      id: "portfolio-essays-notes",
+      sectionId: "publications",
+      eyebrow: "Public writing",
+      title: "Essays and Notes",
+      problem:
+        "Not every useful analytical idea belongs in a formal paper; some insights are better published as shorter, more accessible pieces.",
+      action:
+        "Structured essays and notes around concrete observations, institutional behavior, and policy relevance instead of method-heavy framing.",
+      result:
+        "Made analytical thinking easier to share, reference, and build on outside formal publication channels.",
+      tags: ["public-writing"],
+    },
+  ] satisfies PortfolioHubEntry[],
 };
 
 const researchEntries = [
@@ -1256,17 +1387,13 @@ export const creativeCluster = {
 
 export const profilesPage = {
   title: "Profiles",
-  lead: "A curated hub of my academic, professional, technical, and creative presence across the web.",
+  lead: "A secondary archive of my academic and professional profiles across the web.",
   buttons: [
     { label: "LinkedIn", symbol: "in", href: socialLookup.get("LinkedIn") },
     { label: "GitHub", symbol: "{ }", href: githubProfile },
-    { label: "Backstage", symbol: "B", href: socialLookup.get("Backstage") },
     { label: "ORCID", symbol: "iD", href: socialLookup.get("ORCID") },
     { label: "ResearchGate", symbol: "RG", href: socialLookup.get("ResearchGate") },
     { label: "Google Scholar", symbol: "GS", href: socialLookup.get("Google Scholar") },
-    { label: "Facebook", symbol: "f", href: socialLookup.get("Facebook") },
-    { label: "Instagram", symbol: "IG", href: socialLookup.get("Instagram") },
-    { label: "TikTok", symbol: "TT", disabled: true },
   ] satisfies ProfileButton[],
   secondaryLinks: [
     {

@@ -1,3 +1,9 @@
 https://www.markjayson.com/* https://markjayson.com/:splat 301!
 http://www.markjayson.com/* https://markjayson.com/:splat 301!
 http://markjayson.com/* https://markjayson.com/:splat 301!
+/research /portfolio#research 301
+/research/ /portfolio#research 301
+/projects /portfolio#projects 301
+/projects/ /portfolio#projects 301
+/articles /portfolio#publications 301
+/articles/ /portfolio#publications 301

@@ -361,7 +361,7 @@ body[data-page="creative-photoshoots"] {
 
 .home-hero-band__frame {
   display: grid;
-  grid-template-columns: minmax(19rem, 29rem) minmax(29rem, 1fr) minmax(14rem, 16.5rem);
+  grid-template-columns: minmax(18rem, 24rem) minmax(24rem, 1fr) minmax(18rem, 22rem);
   align-items: stretch;
   width: 100%;
   min-height: clamp(34.5rem, 52vw, 39.5rem);
@@ -408,11 +408,56 @@ body[data-page="creative-photoshoots"] {
 
 .home-hero-band__roles {
   display: grid;
-  align-content: center;
-  justify-items: end;
+  align-content: end;
+  justify-items: stretch;
   gap: 0.95rem;
   padding: 1.35rem 1.3rem 1.2rem;
   background: rgba(0, 0, 0, 0.92);
+}
+
+.home-hero-band__summary {
+  gap: 1.1rem;
+}
+
+.home-hero-band__subheadline {
+  max-width: 17.5rem;
+  font-size: clamp(1rem, 1.14vw, 1.12rem);
+  line-height: 1.46;
+  color: rgba(245, 244, 237, 0.88);
+  text-wrap: balance;
+}
+
+.home-hero-band__hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.home-hero-band__secondary-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.65rem;
+  padding: 0.62rem 1rem 0.58rem;
+  border: 1px solid rgba(245, 244, 237, 0.42);
+  color: #f5f4ed;
+  font-family: var(--replica-font-ui);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.home-hero-band__secondary-cta:hover,
+.home-hero-band__secondary-cta:focus-visible {
+  background: rgba(245, 244, 237, 0.1);
+  border-color: rgba(245, 244, 237, 0.78);
+  transform: translateY(-1px);
 }
 
 .home-hero-band__role {
@@ -458,7 +503,7 @@ body[data-page="creative-photoshoots"] {
 
 .home-index-nav__list {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.8rem;
   list-style: none;
   margin: 0;
@@ -1140,14 +1185,143 @@ body[data-page="creative-photoshoots"] {
 }
 
 .portfolio-page__lead {
-  max-width: 37rem;
-  font-size: clamp(1.08rem, 1.25vw, 1.22rem);
-  line-height: 1.32;
+  max-width: 44rem;
+  font-size: clamp(1.05rem, 1.16vw, 1.18rem);
+  line-height: 1.4;
   color: rgba(255, 255, 255, 0.88);
 }
 
 .portfolio-page__title {
   font-size: clamp(4.5rem, 7vw, 6rem);
+}
+
+.portfolio-page__layout {
+  gap: clamp(2rem, 4vw, 3.6rem);
+}
+
+.portfolio-page__content {
+  gap: 1.65rem;
+}
+
+.portfolio-page__panel {
+  gap: 1.2rem;
+}
+
+.portfolio-page__tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.58rem;
+  max-width: 54rem;
+}
+
+.portfolio-page__tag {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.2rem;
+  padding: 0.45rem 0.78rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.82);
+  font-family: var(--replica-font-ui);
+  font-size: 0.73rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  text-transform: uppercase;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.portfolio-page__tag:hover,
+.portfolio-page__tag:focus-visible,
+.portfolio-page__tag.is-active {
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.portfolio-page__entries {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem 1.5rem;
+}
+
+.portfolio-entry {
+  display: grid;
+  gap: 0.9rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.portfolio-entry__eyebrow {
+  font-family: var(--replica-font-ui);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.56);
+}
+
+.portfolio-entry h3 {
+  font-family: var(--replica-font-ui);
+  font-size: clamp(1.45rem, 1.9vw, 2.05rem);
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  line-height: 1.02;
+}
+
+.portfolio-entry__body {
+  display: grid;
+  gap: 0.62rem;
+}
+
+.portfolio-entry__body p {
+  font-size: 0.98rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.portfolio-entry__body strong {
+  font-family: var(--replica-font-ui);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.portfolio-entry__footer {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.portfolio-entry__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  list-style: none;
+}
+
+.portfolio-entry__tags li {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.8rem;
+  padding: 0.32rem 0.58rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.76);
+  font-family: var(--replica-font-ui);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 .portfolio-page__grid {
@@ -2247,6 +2421,10 @@ body[data-page="creative"] .section-rail__link[aria-selected="true"] {
   .portfolio-page__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .portfolio-page__entries {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 1040px) {
@@ -2293,8 +2471,12 @@ body[data-page="creative"] .section-rail__link[aria-selected="true"] {
   .home-hero-band__roles {
     grid-column: 1;
     justify-items: start;
-    align-content: start;
+    align-content: end;
     padding: 0.9rem 0.95rem 1rem;
+  }
+
+  .home-hero-band__subheadline {
+    max-width: 24rem;
   }
 
   .home-contact-band__form {
@@ -2526,6 +2708,10 @@ body[data-page="creative"] .section-rail__link[aria-selected="true"] {
     gap: 0.5rem;
   }
 
+  .home-hero-band__summary {
+    gap: 0.78rem;
+  }
+
   .home-hero-band__role {
     font-size: clamp(1.2rem, 5vw, 1.75rem);
   }
@@ -2576,11 +2762,14 @@ body[data-page="creative"] .section-rail__link[aria-selected="true"] {
   .resume-page__project-grid,
   .bio-page__links,
   .profiles-page__grid,
-  .portfolio-page__grid {
+  .portfolio-page__grid,
+  .portfolio-page__entries {
     grid-template-columns: 1fr;
   }
 
   .portfolio-page__header {
+    justify-items: start;
+    text-align: left;
     margin-bottom: 1rem;
   }
 

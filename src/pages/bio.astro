@@ -3,7 +3,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { bioPage, replicaFooterCredit } from "../data/editorial";
 import { buildPrimaryImageStructuredData, buildProfilePageStructuredData, socialPreviewImages } from "../data/site";
 const pageTitle = "About";
-const pageDescription = "Biographical overview for Mark Jayson Martinez Farol.";
+const pageDescription =
+  "Professional overview for Mark Jayson Martinez Farol, an economist and data scientist focused on econometrics, causal inference, and data engineering.";
 const siteOrigin = Astro.site ?? new URL("https://markjayson.com");
 const pageUrl = new URL(Astro.url.pathname, siteOrigin).toString();
 const structuredData = [

@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { bioPage, creativeCluster, homePage } from "../data/editorial";
+import { bioPage, homePage } from "../data/editorial";
 import { canonicalSiteUrl, socialPreviewImages } from "../data/site";
 
 type ImageSitemapEntry = {
@@ -19,18 +19,6 @@ const imageEntries: ImageSitemapEntry[] = [
   {
     page: `${canonicalSiteUrl}/profiles/`,
     images: [socialPreviewImages.profiles.src],
-  },
-  {
-    page: `${canonicalSiteUrl}/creative/`,
-    images: creativeCluster.landing.headshotPreviews.map((item) => item.src),
-  },
-  {
-    page: `${canonicalSiteUrl}/creative/headshots/`,
-    images: creativeCluster.headshots.items.map((item) => item.src),
-  },
-  {
-    page: `${canonicalSiteUrl}/creative/photoshoots/`,
-    images: creativeCluster.photoshoots.groups.flatMap((group) => group.items.map((item) => item.src)),
   },
 ];
 

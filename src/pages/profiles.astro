@@ -5,7 +5,7 @@ import { buildPrimaryImageStructuredData, buildProfilePageStructuredData, social
 import { withBase } from "../utils/paths";
 
 const pageTitle = "Profiles";
-const pageDescription = "Profile links for Mark Jayson Martinez Farol.";
+const pageDescription = "Secondary archive of professional and academic profile links for Mark Jayson Martinez Farol.";
 const siteOrigin = Astro.site ?? new URL("https://markjayson.com");
 const pageUrl = new URL(Astro.url.pathname, siteOrigin).toString();
 const profilesHeadshot = socialPreviewImages.profiles;
@@ -59,7 +59,7 @@ const structuredData = [
       <div class="profiles-page__grid">
         {
           profilesPage.buttons.map((button) =>
-            button.href && !button.disabled ? (
+            button.href ? (
               <a class="profiles-page__button" href={button.href} target="_blank" rel="noreferrer" data-lift>
                 <span class="profiles-page__symbol">{button.symbol}</span>
                 <span>{button.label}</span>
