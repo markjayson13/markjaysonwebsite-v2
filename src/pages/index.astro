@@ -20,18 +20,38 @@ import { socialPreviewImages } from "../data/site";
       <div class="replica-canvas home-hero-band__canvas">
         <h1 class="sr-only">Mark Jayson Martinez Farol</h1>
 
-        <div class="home-hero-band__headline-row">
+        <nav class="home-hero-band__top-nav" aria-label="Homepage sections" data-home-stagger>
+          {
+            homePage.hero.topLinks.map((link) =>
+              link.menuTrigger ? (
+                <button class="home-hero-band__top-link" type="button" data-home-menu-trigger>
+                  {link.label}
+                </button>
+              ) : (
+                <a class="home-hero-band__top-link" href={link.href} aria-current={link.label === "Home" ? "page" : undefined}>
+                  {link.label}
+                </a>
+              ),
+            )
+          }
+        </nav>
+
+        <div class="home-hero-band__headline-row home-hero-band__headline-row--canva">
           <p class="home-hero-band__headline-top" aria-hidden="true" data-home-stagger>
             {homePage.hero.headlineTop}
           </p>
 
-          <a class="home-hero-band__contact" href={homePage.hero.primaryCtaHref} data-home-stagger>
-            {homePage.hero.primaryCtaLabel}
-          </a>
+          <div class="home-hero-band__role-strip" aria-label="Disciplines" data-home-stagger>
+            {
+              homePage.hero.roleLabels.map((label) => (
+                <span class="home-hero-band__role-chip">{label}</span>
+              ))
+            }
+          </div>
         </div>
 
-        <div class="home-hero-band__frame" data-home-stagger>
-          <div class="home-hero-band__frame-title" aria-hidden="true">
+        <div class="home-hero-band__frame home-hero-band__frame--canva" data-home-stagger>
+          <div class="home-hero-band__frame-title home-hero-band__frame-title--canva" aria-hidden="true">
             {
               homePage.hero.headlineFrame.map((line) => (
                 <span class="home-hero-band__frame-line">{line}</span>
@@ -56,21 +76,14 @@ import { socialPreviewImages } from "../data/site";
             </video>
             <div class="home-hero-band__shade"></div>
           </div>
-
-          <div class="home-hero-band__roles home-hero-band__summary" data-home-stagger>
-            <p class="home-hero-band__subheadline">{homePage.hero.subheadline}</p>
-            <div class="home-hero-band__hero-actions">
-              <a class="home-hero-band__secondary-cta" href={homePage.hero.secondaryCtaHref}>
-                {homePage.hero.secondaryCtaLabel}
-              </a>
-            </div>
-          </div>
         </div>
       </div>
     </section>
 
     <section class="home-discovery-band" data-home-discovery>
       <div class="replica-canvas home-discovery-band__canvas">
+        <p class="home-discovery-band__latest" data-home-reveal>Latest and News</p>
+
         <div
           class="replica-menu-sheet replica-menu-sheet--inline replica-menu-sheet--inline-compact"
           data-preview-menu-root
@@ -140,10 +153,7 @@ import { socialPreviewImages } from "../data/site";
 
           <div class="home-contact-band__panel">
             <div class="home-contact-band__heading">
-              <p class="home-contact-band__eyebrow">{homePage.contact.label}</p>
               <h2><span>{homePage.contact.title}</span></h2>
-              <p>{homePage.contact.copy}</p>
-              <p class="home-contact-band__note">{homePage.contact.note}</p>
             </div>
 
             <div class="home-contact-band__form-shell">
@@ -201,4 +211,30 @@ import { socialPreviewImages } from "../data/site";
       </div>
     </section>
   </div>
+
+  <script is:inline>
+    const bindHomeMenuLaunch = () => {
+      const launchers = document.querySelectorAll("[data-home-menu-trigger]");
+      const trigger = document.querySelector("[data-corner-menu-trigger]");
+
+      if (!(trigger instanceof HTMLButtonElement)) {
+        return;
+      }
+
+      launchers.forEach((launcher) => {
+        if (!(launcher instanceof HTMLButtonElement) || launcher.dataset.bound === "true") {
+          return;
+        }
+
+        launcher.dataset.bound = "true";
+        launcher.addEventListener("click", () => trigger.click());
+      });
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", bindHomeMenuLaunch, { once: true });
+    } else {
+      bindHomeMenuLaunch();
+    }
+  </script>
 </BaseLayout>

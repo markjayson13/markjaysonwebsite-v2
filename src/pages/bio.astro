@@ -33,33 +33,37 @@ const structuredData = [
     <div class="replica-canvas bio-page__canvas">
       <h1 class="bio-page__title" data-lift>{bioPage.title}</h1>
 
-      <div class="bio-page__body">
-        <div class="bio-page__copy">
-          <p class="bio-page__eyebrow" data-lift>About</p>
-          {
-            bioPage.paragraphs.map((paragraph) => (
-              <p data-lift>{paragraph}</p>
-            ))
-          }
+      <div class="bio-page__story" data-lift>
+        {
+          bioPage.sections.slice(0, 3).map((section) => (
+            <section class="bio-page__section">
+              <h2 class="bio-page__section-title">{section.title}</h2>
+              {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+            </section>
+          ))
+        }
 
-          <div class="bio-page__links" data-lift>
-            <p class="bio-page__links-label">Explore</p>
-            {
-              bioPage.links.map((link) => (
-                <a class="replica-black-card" href={link.href}>
-                  {link.label}
-                </a>
-              ))
-            }
-          </div>
-        </div>
+        <figure
+          class="bio-page__portrait-float"
+          style={`--bio-portrait-shape: url(${bioPage.visiblePortraitSrc});`}
+          aria-hidden="true"
+        >
+          <img src={bioPage.visiblePortraitSrc} alt="" loading="eager" />
+        </figure>
 
-        <div class="bio-page__portrait" data-lift>
-          <img src={bioPage.visiblePortraitSrc} alt="Cutout portrait of Mark Jayson Farol." loading="eager" />
-        </div>
+        {
+          bioPage.sections.slice(3).map((section) => (
+            <section class="bio-page__section">
+              <h2 class="bio-page__section-title">{section.title}</h2>
+              {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+            </section>
+          ))
+        }
       </div>
 
-      <p class="page-credit page-credit--dark">{replicaFooterCredit}</p>
+      <div class="bio-page__footer-band">
+        <p class="page-credit page-credit--dark">{replicaFooterCredit}</p>
+      </div>
     </div>
   </article>
 </BaseLayout>

@@ -1,10 +1,16 @@
-import { homeDiscoveryItems, socialLinks } from "./site";
+import { homeDiscoveryItems, socialLinks, withCreativeSite } from "./site";
 import { withBase } from "../utils/paths";
 
 export type HomeLink = {
   label: string;
   href: string;
   description: string;
+};
+
+export type HomeTopLink = {
+  label: string;
+  href?: string;
+  menuTrigger?: boolean;
 };
 
 export type HomeField = {
@@ -16,11 +22,8 @@ export type HomeField = {
 export type HomeHero = {
   headlineTop: string;
   headlineFrame: string[];
-  subheadline: string;
-  primaryCtaLabel: string;
-  primaryCtaHref: string;
-  secondaryCtaLabel: string;
-  secondaryCtaHref: string;
+  roleLabels: string[];
+  topLinks: HomeTopLink[];
   videoSrc: string;
 };
 
@@ -43,13 +46,12 @@ export type BioPage = {
   title: string;
   portraitSrc: string;
   visiblePortraitSrc: string;
-  paragraphs: string[];
-  links: BioLink[];
+  sections: BioSection[];
 };
 
-export type BioLink = {
-  label: string;
-  href: string;
+export type BioSection = {
+  title: string;
+  paragraphs: string[];
 };
 
 export type ResumeJumpLink = {
@@ -101,6 +103,7 @@ export type PortfolioHubSection = {
   id: string;
   label: string;
   intro: string;
+  summaryLabel?: string;
 };
 
 export type PortfolioHubTag = {
@@ -108,11 +111,20 @@ export type PortfolioHubTag = {
   label: string;
 };
 
+export type PortfolioHubMenuItem = {
+  id: string;
+  label: string;
+  href?: string;
+  external?: boolean;
+};
+
 export type PortfolioHubEntry = {
   id: string;
   sectionId: string;
+  year: string;
   eyebrow: string;
   title: string;
+  abstract: string;
   problem: string;
   action: string;
   result: string;
@@ -260,14 +272,21 @@ export const replicaFooterCredit = "© Mark Jayson Martinez Farol";
 
 export const homePage = {
   hero: {
-    headlineTop: "Economist &",
-    headlineFrame: ["Data Scientist"],
-    subheadline:
-      "Specializing in econometrics, causal inference, and data engineering for evidence-based financial and policy decisions.",
-    primaryCtaLabel: "View Portfolio",
-    primaryCtaHref: withBase("/portfolio"),
-    secondaryCtaLabel: "View Resume",
-    secondaryCtaHref: withBase("/resume"),
+    headlineTop: "Mark Jayson",
+    headlineFrame: ["Martinez", "Farol"],
+    roleLabels: ["Economist", "Data Scientist", "Creative"],
+    topLinks: [
+      { label: "Home", href: withBase("/") },
+      { label: "About", href: withBase("/bio") },
+      { label: "Resume/CV", href: withBase("/resume") },
+      { label: "Portfolio", href: withBase("/portfolio") },
+      { label: "Creative", href: withCreativeSite("/") },
+      { label: "Artistic Resume", href: withCreativeSite("/artistic-resume") },
+      { label: "Headshots", href: withCreativeSite("/headshots") },
+      { label: "Photoshoots", href: withCreativeSite("/photoshoots") },
+      { label: "Profiles", href: withBase("/profiles") },
+      { label: "Menu Bar", menuTrigger: true },
+    ],
     videoSrc: withBase("/media/canva-home-hero.mp4"),
   } satisfies HomeHero,
   discovery: {
@@ -278,22 +297,22 @@ export const homePage = {
     {
       label: "About",
       href: withBase("/bio"),
-      description: "Technical background, current focus, and the problem areas I work on.",
+      description: "Professional background, current focus, and the analytical perspective behind the work.",
+    },
+    {
+      label: "Resume/CV",
+      href: withBase("/resume"),
+      description: "Education, experience, credentials, and tools in a cleaner professional summary.",
     },
     {
       label: "Portfolio",
       href: withBase("/portfolio"),
-      description: "Selected research, data engineering work, and public writing in one evidence hub.",
+      description: "Research, projects, and publications organized into one evidence-driven hub.",
     },
     {
-      label: "Resume",
-      href: withBase("/resume"),
-      description: "Experience, education, certifications, and technical strengths summarized clearly.",
-    },
-    {
-      label: "Contact",
-      href: withBase("/#contact"),
-      description: "Reach out directly for economist, data science, and research opportunities.",
+      label: "Profiles",
+      href: withBase("/profiles"),
+      description: "Academic, professional, technical, and archive profile surfaces in one place.",
     },
   ] satisfies HomeLink[],
   discoveryItems: homeDiscoveryItems,
@@ -319,18 +338,41 @@ export const bioPage = {
   title: "Mark Jayson Martinez Farol",
   portraitSrc: withBase("/images/bio/mark-jayson-bio-portrait.jpeg"),
   visiblePortraitSrc: withBase("/images/bio-portrait-cutout.png"),
-  paragraphs: [
-    "I am an economist and data scientist trained in quantitative business economics at the University of Nevada, Las Vegas, where I built a foundation in econometrics, empirical research, and large-scale data analysis.",
-    "My work focuses on higher-education finance, pricing, policy, and institutional behavior, with an emphasis on turning complex administrative data into clear evidence through reproducible pipelines, panel methods, and causal inference.",
-    "I am pursuing roles where analytical depth, data engineering, and plain-language communication matter at the same time, especially across financial services, policy analysis, pricing, and research environments that need decision-ready insight.",
-  ],
-  links: [
-    { label: "Resume", href: withBase("/resume") },
-    { label: "Research", href: withBase("/portfolio#research") },
-    { label: "Projects", href: withBase("/portfolio#projects") },
-    { label: "Publications", href: withBase("/portfolio#publications") },
-    { label: "Profiles", href: withBase("/profiles") },
-    { label: "Contact", href: withBase("/#contact") },
+  sections: [
+    {
+      title: "My Foundation: The Quantitative Economist",
+      paragraphs: [
+        "My name is Mark Jayson Farol. I am a quantitative economist with a Master of Arts in Quantitative Business Economics. My training includes econometric analysis, causal inference, and decision-based problem solving. While many data scientists focus only on predicting the future accurately, my training pushes me to understand why a result appears in the first place.",
+        "I am a structural model thinker. In practice, that means disciplining intuition and judgment with evidence. I want to know that any pattern I identify is real, useful, and actionable rather than noise.",
+      ],
+    },
+    {
+      title: "The Engine: Data Engineering & Statistical Programming",
+      paragraphs: [
+        "When complex economic questions meet messy real-world data, I find myself working at the point where modeling and infrastructure have to support each other. I have extensive experience transforming large, high-dimensional, and disorganized administrative datasets into usable resources for causal analysis.",
+        "That work has required strong skills in statistical programming, data architecture, and reproducible ETL design. I do not just analyze data. I build the pipeline that makes rigorous analysis possible.",
+      ],
+    },
+    {
+      title: "The Interdisciplinary Mindset",
+      paragraphs: [
+        "From the start, I have been driven by a multi-passionate curiosity to understand how real systems behave and how their patterns can be verified. I am especially interested in the places where human behavior, incentive structures, and data converge.",
+        "I chose economics because it offered a rigorous mathematical framework for understanding decision-making. That perspective is also shaped by formal training in mathematics, programming, and modern data science.",
+      ],
+    },
+    {
+      title: "Leadership and Translation",
+      paragraphs: [
+        "Technical depth matters, but my broader goal has always been to translate complex theory into practical use. Whether I am working with Difference GMM, dynamic panels, or large-scale administrative data, I care about making those ideas useful for non-technical stakeholders.",
+        "That same instinct carries into my work as an educator. I regularly teach and mentor students in drawing valid economic inferences, evaluating their findings, and choosing the clearest path forward.",
+      ],
+    },
+    {
+      title: "What Lies Ahead",
+      paragraphs: [
+        "I am now focused on applying these quantitative frameworks in real-world business settings, especially across analytics, financial economics, pricing, and strategic operations. I am seeking work that requires both analytical rigor and the ability to turn ambiguous data into a structured narrative that supports better decisions.",
+      ],
+    },
   ],
 } satisfies BioPage;
 
@@ -505,21 +547,37 @@ export const portfolioPage = {
   title: "Portfolio",
   lead:
     "Selected research, data systems, and public-facing writing focused on econometrics, causal inference, higher-education finance, and analytical decision support.",
+  menu: [
+    { id: "research", label: "Research" },
+    { id: "projects", label: "Projects" },
+    { id: "publications", label: "Publications" },
+    { id: "public-writing", label: "Public Writing" },
+    { id: "creative", label: "Creative", href: withCreativeSite("/"), external: true },
+  ] satisfies PortfolioHubMenuItem[],
   sections: [
     {
       id: "research",
       label: "Research",
       intro: "Working papers and empirical studies that use econometric methods to answer policy and institutional questions.",
+      summaryLabel: "Abstract",
     },
     {
       id: "projects",
       label: "Projects",
       intro: "Data engineering systems and analytical tools built to reduce friction, improve quality, and support decision-ready research.",
+      summaryLabel: "Overview",
     },
     {
       id: "publications",
       label: "Publications",
-      intro: "Published and public-facing work that translates technical analysis into readable evidence and argument.",
+      intro: "Published and formal outputs that translate technical analysis into readable evidence and argument.",
+      summaryLabel: "Abstract",
+    },
+    {
+      id: "public-writing",
+      label: "Public Writing",
+      intro: "Shorter commentary, essays, and public scholarship that make technical ideas easier to read and use.",
+      summaryLabel: "Overview",
     },
   ] satisfies PortfolioHubSection[],
   tags: [
@@ -534,8 +592,11 @@ export const portfolioPage = {
     {
       id: "portfolio-packaging-hierarchies",
       sectionId: "research",
+      year: "2026",
       eyebrow: "Working paper",
       title: "Packaging Hierarchies in U.S. Higher Education",
+      abstract:
+        "Maps how U.S. colleges structure financial-aid packages for full-time, first-time undergraduates and how those hierarchies vary with Pell exposure using institution-year IPEDS measures built from 2009 through 2023.",
       problem:
         "Colleges package grants, loans, and aid components differently, but those structures are hard to compare consistently across institutions and years.",
       action:
@@ -547,8 +608,11 @@ export const portfolioPage = {
     {
       id: "portfolio-costs-define-aid",
       sectionId: "research",
+      year: "2026",
       eyebrow: "Working paper",
       title: "When Costs Define Aid",
+      abstract:
+        "Studies how institutions adjust cost-of-attendance components when federal rules bind, showing that publics and private nonprofits respond through different pricing and non-tuition channels.",
       problem:
         "Cost-of-attendance caps shape how institutions price attendance, but the response differs by sector and is often discussed without strong institution-level evidence.",
       action:
@@ -560,8 +624,11 @@ export const portfolioPage = {
     {
       id: "portfolio-ai-gender-wage",
       sectionId: "research",
+      year: "2025",
       eyebrow: "Working paper",
       title: "AI Diffusion and Gender Wage Inequality",
+      abstract:
+        "Builds a quasi-experimental framework using CPS-MORG data to test whether AI diffusion changed wage gaps across tech and non-tech labor-market outcomes instead of relying on broad speculation.",
       problem:
         "Public discussion about AI and labor markets often lacks causal evidence on whether diffusion changes wage gaps across different kinds of work.",
       action:
@@ -571,10 +638,29 @@ export const portfolioPage = {
       tags: ["econometrics-causal", "finance-pricing"],
     },
     {
+      id: "portfolio-financial-literacy-food",
+      sectionId: "research",
+      year: "2025",
+      eyebrow: "Master's capstone",
+      title: "Financial Literacy and Food Insecurity in Seniors",
+      abstract:
+        "Examines how financial literacy relates to food insecurity among older adults in Clark County using multiple probability-based models and locally collected survey data.",
+      problem:
+        "Food insecurity among older adults is often discussed without enough locally grounded evidence about how financial literacy changes risk.",
+      action:
+        "Built food-security and literacy indices from local survey responses and estimated the relationship across linear probability, probit, logit, and IV-style specifications.",
+      result:
+        "Produced a clearer local evidence base showing that stronger financial literacy aligns with lower food-insecurity risk and supports intervention design.",
+      tags: ["econometrics-causal", "higher-ed-policy"],
+    },
+    {
       id: "portfolio-ipeds-panel-builder",
       sectionId: "projects",
+      year: "2026",
       eyebrow: "Data engineering",
       title: "IPEDS Harmonized Panel Builder",
+      abstract:
+        "A reproducible Python and SQL pipeline that converts fragmented NCES IPEDS releases into auditable institution-year panels with provenance, harmonization, and release checks built in.",
       problem:
         "IPEDS releases are fragmented across yearly access databases, which makes longitudinal analysis slow, error-prone, and difficult to reproduce.",
       action:
@@ -588,8 +674,11 @@ export const portfolioPage = {
     {
       id: "portfolio-fsa-panel-pipeline",
       sectionId: "projects",
+      year: "2026",
       eyebrow: "Data engineering",
       title: "Federal Student Aid Volume Reports Panel Pipeline",
+      abstract:
+        "Transforms Federal Student Aid volume reports into dependable institution-year panels keyed by OPEID8 and award year, with QA checks for coverage, duplicates, gaps, and descriptor conflicts.",
       problem:
         "Federal Student Aid volume reports are useful for analysis, but the raw files are not structured for fast, consistent institution-year comparisons.",
       action:
@@ -603,8 +692,11 @@ export const portfolioPage = {
     {
       id: "portfolio-variable-browser",
       sectionId: "projects",
+      year: "2025",
       eyebrow: "Analytical tooling",
       title: "IPEDS Variable Browser",
+      abstract:
+        "A browser-style utility that organizes variables, definitions, and release differences so repeated institutional-data analysis starts faster and with less manual metadata hunting.",
       problem:
         "Researchers lose time digging through metadata and annual dictionaries just to identify the right variables for a project.",
       action:
@@ -616,8 +708,11 @@ export const portfolioPage = {
     {
       id: "portfolio-econometric-workflows",
       sectionId: "projects",
+      year: "2025",
       eyebrow: "Analytical tooling",
       title: "Econometric Workflow Utilities",
+      abstract:
+        "Reusable utilities for filtering, validation, and model-prep steps that make recurring econometric work easier to audit, standardize, and extend.",
       problem:
         "Repeated research tasks become inconsistent when filtering, validation, and model-prep steps are rebuilt from scratch across projects.",
       action:
@@ -629,8 +724,11 @@ export const portfolioPage = {
     {
       id: "portfolio-bennett-publication",
       sectionId: "publications",
+      year: "2025",
       eyebrow: "Published research",
       title: "Revisiting Bennett’s Hypothesis",
+      abstract:
+        "A published paper using National Center for Education Statistics data to explain how student aid and cost-of-attendance dynamics interact across public and private nonprofit colleges.",
       problem:
         "Debates about whether student aid raises college costs often rely on broad claims without clearly communicating the institutional mechanisms involved.",
       action:
@@ -642,10 +740,29 @@ export const portfolioPage = {
       ctaLabel: "Read publication",
     },
     {
-      id: "portfolio-public-commentary",
+      id: "portfolio-race-college-costs",
       sectionId: "publications",
+      year: "2024",
+      eyebrow: "Research paper",
+      title: "The Race for Increasing College Costs",
+      abstract:
+        "A cross-sectional paper on tuition growth, aid, and institutional behavior that revisits Bennett’s Hypothesis through accessible empirical framing.",
+      problem:
+        "Tuition growth debates often flatten institutional differences and fail to connect cost changes with the structure of aid and pricing decisions.",
+      action:
+        "Used National Center for Education Statistics data to study tuition, aid, and institutional charging behavior through a Bennett’s Hypothesis lens.",
+      result:
+        "Produced a readable empirical paper that grounds the cost-growth debate in institution-level evidence rather than broad assumption.",
+      tags: ["higher-ed-policy", "finance-pricing"],
+    },
+    {
+      id: "portfolio-public-commentary",
+      sectionId: "public-writing",
+      year: "2025",
       eyebrow: "Public writing",
       title: "Commentary and Public Scholarship",
+      abstract:
+        "Shorter public-facing commentary that translates institutional incentives, policy tradeoffs, and research findings into direct language for non-specialist readers.",
       problem:
         "Technical economic work often loses influence when it is not rewritten for readers outside academic or specialist settings.",
       action:
@@ -656,9 +773,12 @@ export const portfolioPage = {
     },
     {
       id: "portfolio-essays-notes",
-      sectionId: "publications",
+      sectionId: "public-writing",
+      year: "2024",
       eyebrow: "Public writing",
       title: "Essays and Notes",
+      abstract:
+        "Analytical essays and notes that move between economic observation, institutional critique, and public-facing interpretation without the format constraints of a formal paper.",
       problem:
         "Not every useful analytical idea belongs in a formal paper; some insights are better published as shorter, more accessible pieces.",
       action:
@@ -1101,10 +1221,10 @@ const creativeHalloweenSelections = [
 
 export const creativeCluster = {
   nav: [
-    { label: "Creative", href: withBase("/creative") },
-    { label: "Artistic Resume", href: withBase("/creative/artistic-resume") },
-    { label: "Headshots", href: withBase("/creative/headshots") },
-    { label: "Photoshoots", href: withBase("/creative/photoshoots") },
+    { label: "Creative", href: withCreativeSite("/") },
+    { label: "Artistic Resume", href: withCreativeSite("/artistic-resume") },
+    { label: "Headshots", href: withCreativeSite("/headshots") },
+    { label: "Photoshoots", href: withCreativeSite("/photoshoots") },
   ] satisfies CreativeClusterNavItem[],
   landing: {
     theme: {
@@ -1134,21 +1254,21 @@ export const creativeCluster = {
     headshotPreviews: creativeHeadshotSelections.slice(0, 3),
     headshotsCta: {
       label: "View Headshots",
-      href: withBase("/creative/headshots"),
+      href: withCreativeSite("/headshots"),
     },
     featureCards: [
       {
         title: "Performing Arts",
         description:
           "Stage work across musical theatre, plays, and live showcase performances, with strengths in character work, vocals, movement, and stage presence.",
-        href: withBase("/creative/artistic-resume"),
+        href: withCreativeSite("/artistic-resume"),
         cta: "Artistic Resume",
       },
       {
         title: "Modeling and Photography",
         description:
           "Editorial, portrait, and character-based visual work focused on camera presence, range, styling, and expressive storytelling.",
-        href: withBase("/creative/photoshoots"),
+        href: withCreativeSite("/photoshoots"),
         cta: "Photoshoots",
       },
       {

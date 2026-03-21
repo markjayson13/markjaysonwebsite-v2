@@ -1,6 +1,7 @@
 import { withBase } from "../utils/paths";
 
 export const canonicalSiteUrl = "https://markjayson.com";
+export const creativeSiteUrl = "https://creative.markjayson.com";
 const githubProfileUrl = "https://github.com/markjayson13";
 const linkedInProfileUrl = "https://www.linkedin.com/in/markjaysonfarol/";
 const googleScholarProfileUrl = "https://scholar.google.com/citations?user=vdr24hsAAAAJ&hl=en";
@@ -157,6 +158,8 @@ export type GalleryImage = {
   caption: string;
 };
 
+export const withCreativeSite = (path = "/") => new URL(path, creativeSiteUrl).toString();
+
 export const navLinks: NavLink[] = [
   { label: "About", href: withBase("/bio") },
   { label: "Portfolio", href: withBase("/portfolio") },
@@ -205,6 +208,12 @@ export const cornerMenuItems: CornerMenuItem[] = [
     description: "Selected research, data engineering work, and public writing organized into one evidence hub.",
   },
   {
+    label: "Creative",
+    href: withCreativeSite("/"),
+    title: "Creative",
+    description: "Creative archive with artistic resume, headshots, and photoshoots on the dedicated creative site.",
+  },
+  {
     label: "Resume",
     href: withBase("/resume"),
     title: "Resume",
@@ -223,25 +232,25 @@ export const homeDiscoveryItems: CornerMenuItem[] = [
     label: "About",
     href: withBase("/bio"),
     title: "About",
-    description: "Concise background, training, and current focus across economics, data science, and policy analysis.",
+    description: "Quantitative economics background, technical foundation, and current professional direction.",
+  },
+  {
+    label: "Resume/CV",
+    href: withBase("/resume"),
+    title: "Resume/CV",
+    description: "Education, experience, certifications, skills, and selected professional highlights.",
   },
   {
     label: "Portfolio",
     href: withBase("/portfolio"),
     title: "Portfolio",
-    description: "Research, data systems, and public writing translated into outcome-focused portfolio entries.",
+    description: "Research, projects, and publications organized into one clearer evidence hub.",
   },
   {
-    label: "Resume",
-    href: withBase("/resume"),
-    title: "Resume",
-    description: "Professional experience, credentials, and tools summarized in a cleaner recruiter-readable format.",
-  },
-  {
-    label: "Contact",
-    href: withBase("/#contact"),
-    title: "Contact",
-    description: "Reach out directly for analyst, data science, econometrics, and research opportunities.",
+    label: "Profiles",
+    href: withBase("/profiles"),
+    title: "Profiles",
+    description: "Curated academic, professional, technical, and archive profile surfaces.",
   },
 ];
 

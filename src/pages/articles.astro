@@ -1,5 +1,5 @@
 ---
-const destination = "/portfolio#publications";
+const destination = "/portfolio#public-writing";
 const canonical = `https://markjayson.com${destination}`;
 ---
 
@@ -12,10 +12,10 @@ const canonical = `https://markjayson.com${destination}`;
     <link rel="canonical" href={canonical} />
     <meta http-equiv="refresh" content={`0;url=${destination}`} />
     <script is:inline>
-      window.location.replace("/portfolio#publications");
+      window.location.replace("/portfolio#public-writing");
     </script>
   </head>
   <body>
-    <p>Redirecting to <a href={destination}>Portfolio Publications</a>.</p>
+    <p>Redirecting to <a href={destination}>Portfolio Public Writing</a>.</p>
   </body>
 </html>

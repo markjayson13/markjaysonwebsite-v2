@@ -1,5 +1,5 @@
 ---
-import { cornerMenuItems, pageThemes, profile, socialPreviewImages } from "../data/site";
+import { cornerMenuItems, creativeSiteUrl, pageThemes, profile, socialPreviewImages, withCreativeSite } from "../data/site";
 import type { SocialPreviewImage, StructuredData } from "../data/site";
 import ReplicaMotion from "../components/ReplicaMotion.astro";
 import SiteFooter from "../components/SiteFooter.astro";
@@ -33,14 +33,21 @@ const {
 } = Astro.props;
 
 const siteOrigin = Astro.site ?? new URL("https://markjayson.com");
-const canonical = new URL(Astro.url.pathname, siteOrigin).toString();
+const creativeOrigin = new URL(creativeSiteUrl);
+const pageGroup = page.startsWith("creative-") ? "creative" : page;
+const isCreativeHost = siteOrigin.hostname === creativeOrigin.hostname;
+const canonicalOrigin = pageGroup === "creative" ? creativeOrigin : siteOrigin;
+const canonical = new URL(Astro.url.pathname, canonicalOrigin).toString();
 const structuredDataJson = structuredData ? JSON.stringify(structuredData, null, 2) : null;
 const previewImage = socialImage ?? socialPreviewImages.home;
 const previewImageUrl = new URL(previewImage.src, siteOrigin).toString();
-const pageGroup = page.startsWith("creative-") ? "creative" : page;
 const pageTheme = pageThemes[page] ?? pageThemes[pageGroup] ?? pageThemes.home;
 const defaultRobots = "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1";
-const robotsContent = robots ?? (pageGroup === "creative" ? `noindex,follow,${defaultRobots.split(",").slice(2).join(",")}` : defaultRobots);
+const robotsContent =
+  robots ??
+  (pageGroup === "creative" && !isCreativeHost
+    ? `noindex,follow,${defaultRobots.split(",").slice(2).join(",")}`
+    : defaultRobots);
 const cornerMenuDefaultLabelMap: Record<string, string> = {
   home: "About",
   bio: "About",
@@ -65,9 +72,9 @@ const backLinkFallbackMap: Record<string, string> = {
   projects: withBase("/portfolio"),
   articles: withBase("/portfolio"),
   "creative-landing": withBase("/portfolio"),
-  "creative-artistic-resume": withBase("/creative"),
-  "creative-headshots": withBase("/creative"),
-  "creative-photoshoots": withBase("/creative"),
+  "creative-artistic-resume": withCreativeSite("/"),
+  "creative-headshots": withCreativeSite("/"),
+  "creative-photoshoots": withCreativeSite("/"),
 };
 const backLinkHref = page === "home" ? null : backLinkFallbackMap[page] ?? backLinkFallbackMap[pageGroup] ?? withBase("/");
 ---

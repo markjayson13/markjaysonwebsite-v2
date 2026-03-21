@@ -4,7 +4,6 @@
   "description": "Editorial-cinematic personal website for Mark Jayson Farol.",
   "scripts": {
     "check:node": "node scripts/check-node-version.mjs",
-    "postinstall": "node scripts/fix-astro-sitemap.mjs",
     "predev": "npm run check:node",
     "dev": "astro dev",
     "prebuild": "npm run check:node",
@@ -28,10 +27,10 @@
     "node": "22.x"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.4",
-    "@astrojs/sitemap": "^3.1.6",
+    "@astrojs/check": "^0.9.8",
+    "@astrojs/sitemap": "^3.7.1",
     "@types/node": "^25.3.5",
-    "astro": "^4.16.19",
+    "astro": "^6.0.8",
     "typescript": "^5.9.3",
     "wrangler": "^4.71.0"
   }
