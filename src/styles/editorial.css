@@ -4556,7 +4556,13 @@ body[data-page="creative-landing"] .creative-landing__headshots {
   margin-top: -0.5rem;
 }
 
+body[data-page="creative-landing"] .creative-landing__headshot-card {
+  background: rgba(255, 248, 234, 0.03);
+}
+
 body[data-page="creative-landing"] .creative-landing__headshot-image {
+  opacity: 0.92;
+  filter: brightness(0.93) saturate(0.82) contrast(0.94);
   object-position: center 10%;
 }
 
