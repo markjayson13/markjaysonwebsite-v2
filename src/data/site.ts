@@ -386,7 +386,21 @@ export const identityPersonStructuredData: StructuredDataNode = {
     orcidProfileUrl,
     researchGateProfileUrl,
     backstageProfileUrl,
+    instagramProfileUrl,
+    facebookProfileUrl,
+    xProfileUrl,
   ],
+};
+
+const profilePageMainEntity: StructuredDataNode = {
+  "@type": "Person",
+  "@id": String(identityPersonStructuredData["@id"]),
+  name: String(identityPersonStructuredData.name),
+  alternateName: identityPersonStructuredData.alternateName,
+  url: String(identityPersonStructuredData.url),
+  description: String(identityPersonStructuredData.description),
+  image: identityPersonStructuredData.image,
+  sameAs: identityPersonStructuredData.sameAs,
 };
 
 export const buildProfilePageStructuredData = (
@@ -401,9 +415,7 @@ export const buildProfilePageStructuredData = (
     url: pageUrl,
     name: pageName,
     description: pageDescription,
-    mainEntity: {
-      "@id": String(identityPersonStructuredData["@id"]),
-    },
+    mainEntity: profilePageMainEntity,
   },
   identityPersonStructuredData,
 ];
