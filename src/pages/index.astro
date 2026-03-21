@@ -158,7 +158,13 @@ import { socialPreviewImages } from "../data/site";
 
                 {
                   homePage.contactFields.map((field) => (
-                    <label class:list={["home-contact-band__field", field.full && "home-contact-band__field--message"]}>
+                    <label
+                      class:list={[
+                        "home-contact-band__field",
+                        `home-contact-band__field--${field.name}`,
+                        field.full && "home-contact-band__field--message",
+                      ]}
+                    >
                       <span>{field.label}</span>
                       {
                         field.name === "message" ? (

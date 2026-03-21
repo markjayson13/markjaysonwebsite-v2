@@ -371,6 +371,7 @@ export const identityPersonStructuredData: StructuredDataNode = {
   "@id": `${canonicalSiteUrl}/#person`,
   name: "Mark Jayson Martinez Farol",
   alternateName: [profile.name, "Mark Jayson M. Farol"],
+  identifier: "mark-jayson-martinez-farol",
   url: `${canonicalSiteUrl}/`,
   description: profile.summary,
   jobTitle: profile.title,
@@ -392,33 +393,36 @@ export const identityPersonStructuredData: StructuredDataNode = {
   ],
 };
 
-const profilePageMainEntity: StructuredDataNode = {
-  "@type": "Person",
-  "@id": String(identityPersonStructuredData["@id"]),
-  name: String(identityPersonStructuredData.name),
-  alternateName: identityPersonStructuredData.alternateName,
-  url: String(identityPersonStructuredData.url),
-  description: String(identityPersonStructuredData.description),
-  image: identityPersonStructuredData.image,
-  sameAs: identityPersonStructuredData.sameAs,
-};
+const buildProfilePageMainEntity = (pageUrl: string): StructuredDataNode => ({
+  ...identityPersonStructuredData,
+  mainEntityOfPage: {
+    "@id": `${pageUrl}#webpage`,
+  },
+});
 
 export const buildProfilePageStructuredData = (
   pageUrl: string,
   pageName: string,
   pageDescription: string,
-): StructuredDataNode[] => [
-  {
-    "@context": "https://schema.org",
-    "@type": "ProfilePage",
-    "@id": `${pageUrl}#webpage`,
-    url: pageUrl,
-    name: pageName,
-    description: pageDescription,
-    mainEntity: profilePageMainEntity,
-  },
-  identityPersonStructuredData,
-];
+): StructuredDataNode[] => {
+  const mainEntity = buildProfilePageMainEntity(pageUrl);
+
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      "@id": `${pageUrl}#webpage`,
+      url: pageUrl,
+      name: pageName,
+      description: pageDescription,
+      mainEntity,
+    },
+    {
+      "@context": "https://schema.org",
+      ...mainEntity,
+    },
+  ];
+};
 
 const buildImageObjectNode = (pageUrl: string, image: IndexableImage, index = 1): StructuredDataNode => {
   const imageUrl = new URL(image.src, canonicalSiteUrl).toString();
@@ -481,8 +485,14 @@ export const buildImageCollectionPageStructuredData = (
         })),
       },
     },
-    identityPersonStructuredData,
-    ...imageNodes,
+    {
+      "@context": "https://schema.org",
+      ...identityPersonStructuredData,
+    },
+    ...imageNodes.map((node) => ({
+      "@context": "https://schema.org",
+      ...node,
+    })),
   ];
 };
 

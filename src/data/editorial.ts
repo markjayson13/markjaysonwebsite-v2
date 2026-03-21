@@ -286,8 +286,8 @@ export const homePage = {
     submitLabel: "Submit",
   } satisfies HomeContact,
   contactFields: [
-    { label: "Last Name*", name: "last-name" },
     { label: "First Name*", name: "first-name" },
+    { label: "Last Name*", name: "last-name" },
     { label: "EMAIL*", name: "email" },
     { label: "Subject", name: "subject" },
     { label: "Message", name: "message", full: true },
