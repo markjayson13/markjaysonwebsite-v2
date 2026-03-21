@@ -2,13 +2,15 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { creativeCluster, replicaFooterCredit } from "../../data/editorial";
 import { buildImageCollectionPageStructuredData, socialPreviewImages } from "../../data/site";
+import type { CreativeGalleryItem } from "../../data/editorial";
 
 const headshotsPage = creativeCluster.headshots;
+const headshotItems: readonly CreativeGalleryItem[] = headshotsPage.items;
 const pageTitle = "Headshots";
 const pageDescription = "Headshots and portrait studies for Mark Jayson Martinez Farol.";
 const siteOrigin = Astro.site ?? new URL("https://markjayson.com");
 const pageUrl = new URL(Astro.url.pathname, siteOrigin).toString();
-const structuredData = buildImageCollectionPageStructuredData(pageUrl, pageTitle, pageDescription, headshotsPage.items);
+const structuredData = buildImageCollectionPageStructuredData(pageUrl, pageTitle, pageDescription, Array.from(headshotItems));
 ---
 
 <BaseLayout
@@ -35,7 +37,7 @@ const structuredData = buildImageCollectionPageStructuredData(pageUrl, pageTitle
         <section class="creative-headshots__stage" aria-labelledby="creative-headshots-gallery-title">
           <h2 id="creative-headshots-gallery-title" class="sr-only">Headshot gallery</h2>
           {
-            headshotsPage.items.map((item, index) => (
+            headshotItems.map((item, index) => (
               <figure class="creative-gallery__figure creative-headshots__card" data-lift>
                 <img
                   class="creative-gallery__image creative-headshots__gallery-image"

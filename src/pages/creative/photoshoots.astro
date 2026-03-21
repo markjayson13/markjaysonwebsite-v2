@@ -5,11 +5,15 @@ import { buildImageCollectionPageStructuredData, socialPreviewImages } from "../
 import type { CreativeGalleryItem } from "../../data/editorial";
 
 const photoshootsPage = creativeCluster.photoshoots;
+const photoshootGroups = photoshootsPage.groups.map((group) => ({
+  ...group,
+  items: group.items as CreativeGalleryItem[],
+}));
 const pageTitle = "Photoshoots";
 const pageDescription = "Categorized photoshoots for Mark Jayson Martinez Farol.";
 const siteOrigin = Astro.site ?? new URL("https://markjayson.com");
 const pageUrl = new URL(Astro.url.pathname, siteOrigin).toString();
-const allPhotoshootItems = photoshootsPage.groups.reduce<CreativeGalleryItem[]>(
+const allPhotoshootItems = photoshootGroups.reduce<CreativeGalleryItem[]>(
   (items, group) => items.concat(group.items),
   [],
 );
@@ -68,7 +72,7 @@ const structuredData = buildImageCollectionPageStructuredData(
 
           <div class="rail-page__content creative-photos-page__content">
             {
-              photoshootsPage.groups.map((group) => {
+              photoshootGroups.map((group) => {
                 return (
                   <section
                     id={`rail-panel-${group.id}`}
