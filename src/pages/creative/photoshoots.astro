@@ -114,17 +114,6 @@ const structuredData = buildImageCollectionPageStructuredData(
                               decoding="async"
                               fetchpriority={index === 0 && group.id === photoshootsPage.defaultId ? "high" : undefined}
                             />
-                            <details class="creative-media-details">
-                              <summary>{item.detailsLabel ?? "Details"}</summary>
-                              <div class="creative-media-details__body">
-                                <p>{item.detailsText ?? item.caption}</p>
-                                {item.instagramHref && (
-                                  <a href={item.instagramHref} target="_blank" rel="noreferrer">
-                                    Instagram
-                                  </a>
-                                )}
-                              </div>
-                            </details>
                           </figure>
                         ))
                       }

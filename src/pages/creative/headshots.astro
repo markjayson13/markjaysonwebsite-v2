@@ -47,15 +47,6 @@ const structuredData = buildImageCollectionPageStructuredData(pageUrl, pageTitle
                   decoding="async"
                   fetchpriority={index === 0 ? "high" : undefined}
                 />
-                <figcaption class="creative-headshots__caption">
-                  <span class="creative-headshots__caption-title">{item.caption}</span>
-                  <span>{item.detailsText ?? item.caption}</span>
-                  {item.instagramHref && (
-                    <a href={item.instagramHref} target="_blank" rel="noreferrer">
-                      Instagram
-                    </a>
-                  )}
-                </figcaption>
               </figure>
             ))
           }
