@@ -56,11 +56,17 @@ export type BioPage = {
   visiblePortraitSrc: string;
   footerCredit: string;
   sections: BioSection[];
+  exploreLinks: BioExploreLink[];
 };
 
 export type BioSection = {
   title: string;
   paragraphs: string[];
+};
+
+export type BioExploreLink = {
+  label: string;
+  href: string;
 };
 
 export type ResumeJumpLink = {
@@ -398,6 +404,12 @@ export const bioPage = {
         "Currently, I am focusing on utilizing these quantitative frameworks in real-world business contexts, particularly in areas such as analytics, financial economics, and strategic operations. I am seeking opportunities that require both a high level of analytical rigor and the ability to transform ambiguous, noisy data into a structured narrative that ultimately drives profitability.",
       ],
     },
+  ],
+  exploreLinks: [
+    { label: "Resume/CV", href: withBase("/resume") },
+    { label: "Portfolio", href: withBase("/portfolio") },
+    { label: "Profiles", href: withBase("/profiles") },
+    { label: "Contact", href: withBase("/#contact") },
   ],
 } satisfies BioPage;
 

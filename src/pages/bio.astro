@@ -31,37 +31,47 @@ const structuredData = [
 >
   <article class="replica-page bio-page">
     <div class="replica-canvas bio-page__canvas">
-      <h1 class="bio-page__title" data-lift>{bioPage.title}</h1>
+      <div class="bio-page__story">
+        <h1 class="bio-page__title" data-lift>{bioPage.title}</h1>
 
-      <div class="bio-page__story" data-lift>
-        {
-          bioPage.sections.slice(0, 3).map((section) => (
-            <section class="bio-page__section">
-              <h2 class="bio-page__section-title">{section.title}</h2>
-              {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-            </section>
-          ))
-        }
+        <div class="bio-page__upper" data-lift>
+          {
+            bioPage.sections.slice(0, 3).map((section) => (
+              <section class="bio-page__section">
+                <h2 class="bio-page__section-title">{section.title}</h2>
+                {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+              </section>
+            ))
+          }
+        </div>
 
-        <figure
-          class="bio-page__portrait-float"
-          style={`--bio-portrait-shape: url(${bioPage.visiblePortraitSrc});`}
-          aria-hidden="true"
-        >
+        <div class="bio-page__lower-copy" data-lift>
+          {
+            bioPage.sections.slice(3).map((section) => (
+              <section class="bio-page__section">
+                <h2 class="bio-page__section-title">{section.title}</h2>
+                {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+              </section>
+            ))
+          }
+
+          <section class="bio-page__explore" data-lift aria-label="Explore">
+            <h2 class="bio-page__explore-title">Explore</h2>
+            <div class="bio-page__explore-links">
+              {
+                bioPage.exploreLinks.map((link) => (
+                  <a class="bio-page__explore-link" href={link.href}>
+                    {link.label}
+                  </a>
+                ))
+              }
+            </div>
+          </section>
+        </div>
+
+        <figure class="bio-page__portrait-panel" aria-hidden="true">
           <img src={bioPage.visiblePortraitSrc} alt="" loading="eager" />
         </figure>
-
-        {
-          bioPage.sections.slice(3).map((section) => (
-            <section class="bio-page__section">
-              <h2 class="bio-page__section-title">{section.title}</h2>
-              {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-            </section>
-          ))
-        }
-      </div>
-      <div class="bio-page__footer-band">
-        <p class="bio-page__footer-credit">{bioPage.footerCredit}</p>
       </div>
     </div>
   </article>
