@@ -6018,88 +6018,50 @@ body[data-page="home"] .home-hero-band__canvas {
 }
 
 body[data-page="bio"] .bio-page__canvas {
-  width: min(950px, calc(100vw - 2.2rem));
-  padding-top: 0.55rem;
+  width: min(900px, calc(100vw - 2.2rem));
+  padding-top: 0.42rem;
 }
 
 body[data-page="bio"] .bio-page__title {
-  margin-bottom: 0.78rem;
-  font-size: clamp(4.3rem, 7vw, 6.05rem);
+  margin-bottom: 0.62rem;
+  font-size: clamp(3.85rem, 6vw, 5.45rem);
+  line-height: 0.9;
 }
 
 body[data-page="bio"] .bio-page__section {
-  gap: 0.22rem;
-  max-width: min(42rem, 100%);
-  margin-bottom: 0.82rem;
+  gap: 0.16rem;
+  max-width: min(38.5rem, 100%);
+  margin-bottom: 0.72rem;
 }
 
 body[data-page="bio"] .bio-page__section-title {
-  font-size: clamp(1.32rem, 1.62vw, 1.7rem);
+  font-size: clamp(1.22rem, 1.34vw, 1.48rem);
+  line-height: 1.06;
 }
 
 body[data-page="bio"] .bio-page__section p {
-  max-width: min(42rem, 100%);
-  font-size: clamp(0.9rem, 0.88vw, 0.97rem);
-  line-height: 1.22;
+  max-width: min(38.5rem, 100%);
+  font-size: clamp(0.86rem, 0.8vw, 0.92rem);
+  line-height: 1.28;
 }
 
 body[data-page="bio"] .bio-page__portrait-float {
-  width: clamp(20rem, 33vw, 26rem);
-  margin: -0.35rem -0.6rem -1rem 1.2rem;
-  shape-margin: 0.65rem;
-}
-
-body[data-page="bio"] .bio-page__explore {
-  display: grid;
-  clear: both;
-  gap: 0.18rem;
-  width: min(42rem, 100%);
-  margin-top: 0.72rem;
-}
-
-body[data-page="bio"] .bio-page__explore-label {
-  margin: 0;
-  font-family: var(--replica-font-ui);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  line-height: 1;
-  text-transform: uppercase;
-}
-
-body[data-page="bio"] .bio-page__explore-links {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.35rem 1.1rem;
-  padding: 0.48rem 0.7rem 0.52rem;
-  background: #000000;
-}
-
-body[data-page="bio"] .bio-page__explore-links a {
-  color: rgba(246, 244, 236, 0.94);
-  font-family: var(--replica-font-ui);
-  font-size: 0.96rem;
-  font-weight: 600;
-  line-height: 1.2;
-  text-decoration: none;
-}
-
-body[data-page="bio"] .bio-page__explore-links a:hover,
-body[data-page="bio"] .bio-page__explore-links a:focus-visible {
-  text-decoration: underline;
-  text-underline-offset: 0.16em;
+  width: clamp(18.8rem, 30vw, 23.6rem);
+  margin: 0.35rem -0.35rem -0.8rem 1rem;
+  shape-margin: 0.48rem;
 }
 
 body[data-page="bio"] .bio-page__footer-band {
   clear: both;
-  min-height: 2.85rem;
-  margin-top: 0.35rem;
+  min-height: 2.35rem;
+  margin-top: 0.08rem;
+  padding-inline: 0.8rem;
 }
 
 body[data-page="bio"] .bio-page__footer-credit {
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
 }
 
 body[data-page="resume"] .resume-page__canvas {

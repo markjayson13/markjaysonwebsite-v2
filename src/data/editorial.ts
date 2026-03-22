@@ -54,6 +54,7 @@ export type BioPage = {
   title: string;
   portraitSrc: string;
   visiblePortraitSrc: string;
+  footerCredit: string;
   sections: BioSection[];
 };
 
@@ -361,6 +362,7 @@ export const bioPage = {
   title: "Mark Jayson Martinez Farol",
   portraitSrc: withBase("/images/bio/mark-jayson-bio-portrait.jpeg"),
   visiblePortraitSrc: withBase("/images/bio-portrait-cutout.png"),
+  footerCredit: "© MARK JAYSON M. FAROL",
   sections: [
     {
       title: "My Foundation: The Quantitative Economist",
