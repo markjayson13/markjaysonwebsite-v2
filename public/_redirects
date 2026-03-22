@@ -7,3 +7,6 @@ http://markjayson.com/* https://markjayson.com/:splat 301!
 /projects/ /portfolio#projects 301
 /articles /portfolio#public-writing 301
 /articles/ /portfolio#public-writing 301
+/creative https://creative.markjayson.com/ 301
+/creative/ https://creative.markjayson.com/ 301
+/creative/* https://creative.markjayson.com/:splat 301

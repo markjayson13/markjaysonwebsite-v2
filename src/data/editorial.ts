@@ -1,4 +1,4 @@
-import { homeDiscoveryItems, socialLinks, withCreativeSite } from "./site";
+import { homeDiscoveryItems, mainSiteTopLinks, socialLinks, withCreativeSite } from "./site";
 import { withBase } from "../utils/paths";
 
 export type HomeLink = {
@@ -283,18 +283,7 @@ export const homePage = {
     headlineTop: "Mark Jayson",
     headlineFrame: ["Martinez", "Farol"],
     roleLabels: ["Economist", "Data Scientist", "Creative"],
-    topLinks: [
-      { label: "Home", href: withBase("/") },
-      { label: "About", href: withBase("/bio") },
-      { label: "Resume/CV", href: withBase("/resume") },
-      { label: "Portfolio", href: withBase("/portfolio") },
-      { label: "Creative", href: withCreativeSite("/") },
-      { label: "Artistic Resume", href: withCreativeSite("/artistic-resume") },
-      { label: "Headshots", href: withCreativeSite("/headshots") },
-      { label: "Photoshoots", href: withCreativeSite("/photoshoots") },
-      { label: "Profiles", href: withBase("/profiles") },
-      { label: "Menu Bar", menuTrigger: true },
-    ],
+    topLinks: mainSiteTopLinks,
     videoSrc: withBase("/media/canva-home-hero.mp4"),
   } satisfies HomeHero,
   discovery: {
@@ -413,12 +402,12 @@ export const bioPage = {
 export const resumePage = {
   title: "Mark Jayson M. Farol",
   jumpLinks: [
-    { label: "Summary", href: "#summary" },
     { label: "Education", href: "#education" },
-    { label: "Experience", href: "#experience" },
     { label: "Certifications", href: "#certifications" },
-    { label: "Projects", href: "#projects" },
     { label: "Skills", href: "#skills" },
+    { label: "Projects", href: "#projects" },
+    { label: "Experience", href: "#experience" },
+    { label: "Summary", href: "#summary" },
   ] satisfies ResumeJumpLink[],
   summary: [
     "Economist and data scientist with graduate training in quantitative business economics, applied econometrics, and large-scale administrative data analysis.",
@@ -1542,19 +1531,23 @@ export const creativeCluster = {
 
 export const profilesPage = {
   title: "Profiles",
-  lead: "A secondary archive of my academic and professional profiles across the web.",
+  lead: "A curated hub of my academic, professional, technical, and creative presence across the web.",
   buttons: [
     { label: "LinkedIn", symbol: "in", href: socialLookup.get("LinkedIn") },
+    { label: "Instagram", symbol: "@", href: socialLookup.get("Instagram") },
     { label: "GitHub", symbol: "{ }", href: githubProfile },
     { label: "ORCID", symbol: "iD", href: socialLookup.get("ORCID") },
-    { label: "ResearchGate", symbol: "RG", href: socialLookup.get("ResearchGate") },
+    { label: "Research Gate", symbol: "RG", href: socialLookup.get("ResearchGate") },
     { label: "Google Scholar", symbol: "GS", href: socialLookup.get("Google Scholar") },
+    { label: "Facebook", symbol: "f", href: socialLookup.get("Facebook") },
+    { label: "Backstage", symbol: "B", href: socialLookup.get("Backstage") },
+    { label: "X", symbol: "X", href: socialLookup.get("X") },
   ] satisfies ProfileButton[],
   secondaryLinks: [
     {
       label: "Legacy creative portfolio",
       href: socialLookup.get("Legacy creative portfolio") ?? "#",
-      note: "Earlier creative portfolio and archived material.",
+      note: "Earlier portfolio archive and legacy material.",
     },
   ] satisfies ProfileSecondaryLink[],
 };

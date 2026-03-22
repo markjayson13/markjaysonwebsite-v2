@@ -74,6 +74,12 @@ export type CornerMenuItem = {
   description: string;
 };
 
+export type MainSiteTopLink = {
+  label: string;
+  href?: string;
+  menuTrigger?: boolean;
+};
+
 export type PageTheme = {
   titleMeasure: string;
   leadMeasure: string;
@@ -160,6 +166,19 @@ export type GalleryImage = {
 
 export const withCreativeSite = (path = "/") => new URL(path, creativeSiteUrl).toString();
 
+export const mainSiteTopLinks: MainSiteTopLink[] = [
+  { label: "Home", href: withBase("/") },
+  { label: "About", href: withBase("/bio") },
+  { label: "Resume/CV", href: withBase("/resume") },
+  { label: "Portfolio", href: withBase("/portfolio") },
+  { label: "Creative", href: withCreativeSite("/") },
+  { label: "Artistic Resume", href: withCreativeSite("/artistic-resume") },
+  { label: "Headshots", href: withCreativeSite("/headshots") },
+  { label: "Photoshoots", href: withCreativeSite("/photoshoots") },
+  { label: "Profiles", href: withBase("/profiles") },
+  { label: "Menu Bar", menuTrigger: true },
+] satisfies MainSiteTopLink[];
+
 export const navLinks: NavLink[] = [
   { label: "About", href: withBase("/bio") },
   { label: "Portfolio", href: withBase("/portfolio") },
@@ -196,28 +215,58 @@ export const footerSocialLinks: FooterSocialLink[] = [
 
 export const cornerMenuItems: CornerMenuItem[] = [
   {
+    label: "Home",
+    href: withBase("/"),
+    title: "Home",
+    description: "Main landing page with the current site overview, latest work, and direct paths across the site.",
+  },
+  {
     label: "About",
     href: withBase("/bio"),
     title: "About",
-    description: "Professional profile, training, and the core analytical focus across economics, data, and policy.",
+    description: "About page with the full background narrative, economist foundation, data-engineering focus, and current direction.",
+  },
+  {
+    label: "Resume/CV",
+    href: withBase("/resume"),
+    title: "Resume/CV",
+    description: "Long-form resume page covering education, experience, certifications, projects, and skills.",
   },
   {
     label: "Portfolio",
     href: withBase("/portfolio"),
     title: "Portfolio",
-    description: "Selected research, data engineering work, and public writing organized into one evidence hub.",
+    description: "Selected research, projects, publications, and public writing organized inside the portfolio hub.",
   },
   {
     label: "Creative",
     href: withCreativeSite("/"),
     title: "Creative",
-    description: "Creative archive with artistic resume, headshots, and photoshoots on the dedicated creative site.",
+    description: "Dedicated creative site with the creative landing page and the active creative archive.",
   },
   {
-    label: "Resume",
-    href: withBase("/resume"),
-    title: "Resume",
-    description: "Education, experience, certifications, and technical strengths for economist and data scientist roles.",
+    label: "Artistic Resume",
+    href: withCreativeSite("/artistic-resume"),
+    title: "Artistic Resume",
+    description: "Artistic resume on the creative site covering performance, training, awards, and creative skills.",
+  },
+  {
+    label: "Headshots",
+    href: withCreativeSite("/headshots"),
+    title: "Headshots",
+    description: "Dedicated headshots page on the creative site.",
+  },
+  {
+    label: "Photoshoots",
+    href: withCreativeSite("/photoshoots"),
+    title: "Photoshoots",
+    description: "Photoshoots archive on the creative site with editorials and other active sets.",
+  },
+  {
+    label: "Profiles",
+    href: withBase("/profiles"),
+    title: "Profiles",
+    description: "Curated academic, professional, technical, and social destinations across the web.",
   },
   {
     label: "Contact",

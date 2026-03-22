@@ -1,5 +1,13 @@
 ---
-import { cornerMenuItems, creativeSiteUrl, pageThemes, profile, socialPreviewImages, withCreativeSite } from "../data/site";
+import {
+  cornerMenuItems,
+  creativeSiteUrl,
+  mainSiteTopLinks,
+  pageThemes,
+  profile,
+  socialPreviewImages,
+  withCreativeSite,
+} from "../data/site";
 import type { SocialPreviewImage, StructuredData } from "../data/site";
 import ReplicaMotion from "../components/ReplicaMotion.astro";
 import SiteFooter from "../components/SiteFooter.astro";
@@ -51,16 +59,18 @@ const robotsContent =
 const cornerMenuDefaultLabelMap: Record<string, string> = {
   home: "About",
   bio: "About",
-  resume: "Resume",
+  resume: "Resume/CV",
   portfolio: "Portfolio",
   research: "Portfolio",
   projects: "Portfolio",
   articles: "Portfolio",
-  profiles: "About",
+  profiles: "Profiles",
   privacy: "About",
   terms: "About",
 };
 const cornerMenuDefaultLabel = cornerMenuDefaultLabelMap[pageGroup] ?? "About";
+const mainSiteTopRowPages = new Set(["home", "bio", "resume", "portfolio", "profiles"]);
+const showMainSiteTopRow = mainSiteTopRowPages.has(page);
 const backLinkFallbackMap: Record<string, string> = {
   bio: withBase("/"),
   resume: withBase("/"),
@@ -76,7 +86,20 @@ const backLinkFallbackMap: Record<string, string> = {
   "creative-headshots": withCreativeSite("/"),
   "creative-photoshoots": withCreativeSite("/"),
 };
-const backLinkHref = page === "home" ? null : backLinkFallbackMap[page] ?? backLinkFallbackMap[pageGroup] ?? withBase("/");
+const backLinkHref =
+  page === "home" || showMainSiteTopRow ? null : backLinkFallbackMap[page] ?? backLinkFallbackMap[pageGroup] ?? withBase("/");
+const isActiveMainSiteLink = (href?: string) => {
+  if (!href) {
+    return false;
+  }
+
+  try {
+    const linkUrl = new URL(href, canonicalOrigin);
+    return linkUrl.origin === siteOrigin.origin && linkUrl.pathname === Astro.url.pathname;
+  } catch {
+    return false;
+  }
+};
 ---
 
 <!doctype html>
@@ -134,6 +157,30 @@ const backLinkHref = page === "home" ? null : backLinkFallbackMap[page] ?? backL
     data-page-group={pageGroup}
     style={`--page-accent:${accent}; --page-title-measure:${pageTheme.titleMeasure}; --page-lead-measure:${pageTheme.leadMeasure}; --page-copy-measure:${pageTheme.copyMeasure ?? pageTheme.leadMeasure};`}
   >
+    {
+      showMainSiteTopRow && (
+        <header class="site-top-row-shell" data-site-top-row>
+          <div class="site-top-row-shell__inner">
+            <nav class="site-top-row" aria-label="Main site sections">
+              {
+                mainSiteTopLinks.map((link) =>
+                  link.menuTrigger ? (
+                    <button class="site-top-row__link" type="button" data-site-menu-launch>
+                      {link.label}
+                    </button>
+                  ) : (
+                    <a class="site-top-row__link" href={link.href} aria-current={isActiveMainSiteLink(link.href) ? "page" : undefined}>
+                      {link.label}
+                    </a>
+                  ),
+                )
+              }
+            </nav>
+          </div>
+        </header>
+      )
+    }
+
     {
       backLinkHref && (
         <a class="site-back-link" href={backLinkHref} aria-label="Go back" title="Go back" data-site-back>
@@ -535,6 +582,24 @@ const backLinkHref = page === "home" ? null : backLinkFallbackMap[page] ?? backL
         }
       };
 
+      const setupSiteTopRowMenuLaunch = () => {
+        const launchers = document.querySelectorAll("[data-site-menu-launch]");
+        const trigger = document.querySelector("[data-corner-menu-trigger]");
+
+        if (!(trigger instanceof HTMLButtonElement)) {
+          return;
+        }
+
+        launchers.forEach((launcher) => {
+          if (!(launcher instanceof HTMLButtonElement) || launcher.dataset.bound === "true") {
+            return;
+          }
+
+          launcher.dataset.bound = "true";
+          launcher.addEventListener("click", () => trigger.click());
+        });
+      };
+
       document.addEventListener("DOMContentLoaded", setupCornerMenu);
       document.addEventListener("astro:page-load", setupCornerMenu);
       document.addEventListener("DOMContentLoaded", setupInlinePreviewMenus);
@@ -543,6 +608,8 @@ const backLinkHref = page === "home" ? null : backLinkFallbackMap[page] ?? backL
       document.addEventListener("astro:page-load", setupContactForm);
       document.addEventListener("DOMContentLoaded", setupBackLink);
       document.addEventListener("astro:page-load", setupBackLink);
+      document.addEventListener("DOMContentLoaded", setupSiteTopRowMenuLaunch);
+      document.addEventListener("astro:page-load", setupSiteTopRowMenuLaunch);
     </script>
 
     {replicaMotion && <ReplicaMotion />}

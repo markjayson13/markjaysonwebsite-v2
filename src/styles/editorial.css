@@ -5995,3 +5995,304 @@ body[data-page="portfolio"] .portfolio-page__empty {
   }
 
 }
+
+/* Strict Canva main-site pass */
+body[data-page="home"] .home-hero-band {
+  padding-top: 0;
+}
+
+body[data-page="home"] .home-hero-band__canvas {
+  padding-top: 0.2rem;
+}
+
+body[data-page="bio"] .bio-page__canvas {
+  width: min(950px, calc(100vw - 2.2rem));
+  padding-top: 0.55rem;
+}
+
+body[data-page="bio"] .bio-page__title {
+  margin-bottom: 0.78rem;
+  font-size: clamp(4.3rem, 7vw, 6.05rem);
+}
+
+body[data-page="bio"] .bio-page__section {
+  gap: 0.22rem;
+  max-width: min(42rem, 100%);
+  margin-bottom: 0.82rem;
+}
+
+body[data-page="bio"] .bio-page__section-title {
+  font-size: clamp(1.32rem, 1.62vw, 1.7rem);
+}
+
+body[data-page="bio"] .bio-page__section p {
+  max-width: min(42rem, 100%);
+  font-size: clamp(0.9rem, 0.88vw, 0.97rem);
+  line-height: 1.22;
+}
+
+body[data-page="bio"] .bio-page__portrait-float {
+  width: clamp(20rem, 33vw, 26rem);
+  margin: -0.55rem -0.85rem -2.35rem 1.25rem;
+  shape-margin: 0.65rem;
+}
+
+body[data-page="resume"] .resume-page__canvas {
+  width: min(1030px, calc(100vw - 2.2rem));
+  padding-top: 0.6rem;
+}
+
+body[data-page="resume"] .resume-page__header {
+  justify-items: start;
+  gap: 0.72rem;
+  margin-bottom: 2.35rem;
+}
+
+body[data-page="resume"] .resume-page__title {
+  max-width: 26rem;
+  font-size: clamp(3.65rem, 6vw, 5.25rem);
+  text-align: left;
+  letter-spacing: -0.08em;
+}
+
+body[data-page="resume"] .resume-page__jump-row {
+  justify-content: flex-start;
+  width: min(72rem, 100%);
+  gap: 0.3rem 1rem;
+  padding: 0.58rem 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.74);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.74);
+}
+
+body[data-page="resume"] .resume-page__jump-link {
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+body[data-page="resume"] .resume-page__sections {
+  gap: 2.4rem;
+}
+
+body[data-page="resume"] .resume-page__section {
+  gap: 0.8rem;
+}
+
+body[data-page="resume"] .resume-page__section-heading {
+  font-size: clamp(2.2rem, 3.15vw, 3rem);
+  letter-spacing: -0.055em;
+  line-height: 0.94;
+}
+
+body[data-page="resume"] .resume-page__section-body {
+  gap: 1rem;
+  padding-top: 0.82rem;
+}
+
+body[data-page="resume"] .resume-page__copy p,
+body[data-page="resume"] .resume-page__card p {
+  font-size: clamp(0.98rem, 1.02vw, 1.06rem);
+  line-height: 1.4;
+}
+
+body[data-page="resume"] .resume-page__grid {
+  grid-template-columns: 1fr;
+  gap: 0.9rem;
+}
+
+body[data-page="resume"] .resume-page__card {
+  gap: 0.35rem;
+  padding-top: 0.8rem;
+}
+
+body[data-page="resume"] .resume-page__card h3,
+body[data-page="resume"] .resume-page__project-card h3 {
+  font-size: clamp(1.28rem, 1.72vw, 1.8rem);
+  letter-spacing: -0.045em;
+}
+
+body[data-page="resume"] .resume-page__card strong {
+  color: rgba(0, 0, 0, 0.64);
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+body[data-page="resume"] .resume-page__project-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem 1rem;
+}
+
+body[data-page="resume"] .resume-page__project-card {
+  gap: 0.56rem;
+  padding-top: 0.82rem;
+}
+
+body[data-page="resume"] .resume-page__project-card span {
+  font-size: 0.72rem;
+}
+
+body[data-page="resume"] .resume-page__skill-list {
+  gap: 0.34rem;
+}
+
+body[data-page="resume"] .resume-page .page-credit {
+  justify-content: flex-start;
+  margin-top: 1.1rem;
+}
+
+body[data-page="profiles"] .profiles-page__media {
+  inset: 0;
+  width: 100%;
+  transform: none;
+}
+
+body[data-page="profiles"] .profiles-page__video {
+  object-position: center 18%;
+  transform: scale(1.08);
+  filter: brightness(0.72) saturate(0.92) contrast(1.02);
+}
+
+body[data-page="profiles"] .profiles-page__shade {
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0.54) 58%, rgba(0, 0, 0, 0.78) 100%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.26) 0%, rgba(0, 0, 0, 0.1) 34%, rgba(0, 0, 0, 0.52) 100%);
+}
+
+body[data-page="profiles"] .profiles-page__canvas {
+  width: min(1060px, calc(100vw - 2.2rem));
+  min-height: auto;
+  align-content: start;
+  gap: 0.9rem;
+  padding: 0.45rem 0 2.2rem;
+}
+
+body[data-page="profiles"] .profiles-page__header {
+  justify-items: start;
+  gap: 0.45rem;
+  text-align: left;
+}
+
+body[data-page="profiles"] .profiles-page__title {
+  font-size: clamp(4rem, 6.6vw, 5.85rem);
+}
+
+body[data-page="profiles"] .profiles-page__lead {
+  max-width: 39rem;
+  font-size: clamp(1rem, 1.08vw, 1.14rem);
+  line-height: 1.34;
+}
+
+body[data-page="profiles"] .profiles-page__grid {
+  width: min(63rem, 100%);
+  margin: 0.45rem 0 0;
+  grid-template-columns: repeat(3, minmax(0, max-content));
+  gap: 0.6rem 2rem;
+  justify-content: start;
+}
+
+body[data-page="profiles"] .profiles-page__button {
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #f5f4ed;
+  font-size: clamp(1rem, 1.22vw, 1.22rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  text-transform: none;
+  justify-content: flex-start;
+}
+
+body[data-page="profiles"] .profiles-page__button:hover,
+body[data-page="profiles"] .profiles-page__button:focus-visible {
+  transform: none;
+  background: transparent;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+body[data-page="profiles"] .profiles-page__symbol {
+  display: none;
+}
+
+body[data-page="profiles"] .profiles-page__secondary {
+  width: auto;
+  margin: 0.25rem 0 0;
+  gap: 0.22rem;
+  justify-items: start;
+  text-align: left;
+}
+
+body[data-page="profiles"] .profiles-page__secondary-label,
+body[data-page="profiles"] .profiles-page__secondary-note {
+  font-size: 0.66rem;
+}
+
+body[data-page="profiles"] .profiles-page__secondary-links {
+  gap: 0.18rem;
+}
+
+body[data-page="profiles"] .profiles-page__secondary-link {
+  justify-items: start;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
+  line-height: 1.25;
+  text-transform: none;
+}
+
+body[data-page="profiles"] .profiles-page__secondary-link:hover,
+body[data-page="profiles"] .profiles-page__secondary-link:focus-visible {
+  background: transparent;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+body[data-page="profiles"] .profiles-page .page-credit {
+  justify-self: start;
+  margin-top: 0.9rem;
+}
+
+@media (max-width: 900px) {
+  body[data-page="bio"] .bio-page__canvas,
+  body[data-page="resume"] .resume-page__canvas,
+  body[data-page="profiles"] .profiles-page__canvas {
+    width: min(1060px, calc(100vw - 1.4rem));
+  }
+
+  body[data-page="profiles"] .profiles-page__grid {
+    grid-template-columns: repeat(2, minmax(0, max-content));
+    gap: 0.55rem 1.4rem;
+  }
+}
+
+@media (max-width: 760px) {
+  body[data-page="resume"] .resume-page__project-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  body[data-page="bio"] .bio-page__canvas,
+  body[data-page="resume"] .resume-page__canvas,
+  body[data-page="profiles"] .profiles-page__canvas {
+    width: 100%;
+  }
+
+  body[data-page="home"] .home-hero-band__canvas {
+    padding-top: 0;
+  }
+
+  body[data-page="profiles"] .profiles-page__grid {
+    grid-template-columns: 1fr;
+    gap: 0.45rem;
+  }
+
+  body[data-page="profiles"] .profiles-page__button {
+    font-size: 1rem;
+  }
+}

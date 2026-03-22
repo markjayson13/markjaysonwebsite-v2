@@ -170,6 +170,74 @@ p {
   display: none !important;
 }
 
+.site-top-row-shell {
+  position: relative;
+  z-index: 24;
+  width: 100%;
+}
+
+.site-top-row-shell__inner {
+  width: min(1188px, calc(100vw - 2.2rem));
+  margin: 0 auto;
+  padding: 0.95rem 0 0.85rem;
+}
+
+.site-top-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.8rem 1.75rem;
+  padding-right: clamp(6.6rem, 7vw, 8.8rem);
+}
+
+.site-top-row__link {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: rgba(5, 5, 5, 0.72);
+  cursor: pointer;
+  font-family: var(--replica-font-ui);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.site-top-row__link[aria-current="page"] {
+  color: #050505;
+}
+
+.site-top-row__link:hover,
+.site-top-row__link:focus-visible {
+  color: #050505;
+}
+
+body[data-page="home"] .site-top-row-shell,
+body[data-page="portfolio"] .site-top-row-shell,
+body[data-page="profiles"] .site-top-row-shell {
+  background: #000000;
+}
+
+body[data-page="home"] .site-top-row__link,
+body[data-page="portfolio"] .site-top-row__link,
+body[data-page="profiles"] .site-top-row__link {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+body[data-page="home"] .site-top-row__link[aria-current="page"],
+body[data-page="home"] .site-top-row__link:hover,
+body[data-page="home"] .site-top-row__link:focus-visible,
+body[data-page="portfolio"] .site-top-row__link[aria-current="page"],
+body[data-page="portfolio"] .site-top-row__link:hover,
+body[data-page="portfolio"] .site-top-row__link:focus-visible,
+body[data-page="profiles"] .site-top-row__link[aria-current="page"],
+body[data-page="profiles"] .site-top-row__link:hover,
+body[data-page="profiles"] .site-top-row__link:focus-visible {
+  color: #ffffff;
+}
+
 .site-back-link {
   position: fixed;
   top: 0.9rem;
@@ -716,6 +784,15 @@ body[data-page="profiles"] .corner-menu__trigger-label {
 }
 
 @media (max-width: 900px) {
+  .site-top-row-shell__inner {
+    width: min(1188px, calc(100vw - 1.4rem));
+  }
+
+  .site-top-row {
+    justify-content: flex-start;
+    padding-right: 0;
+  }
+
   .site-footer__inner {
     width: min(1280px, calc(100vw - 2rem));
     gap: 1.2rem 1.4rem;
@@ -773,6 +850,18 @@ body[data-page="profiles"] .corner-menu__trigger-label {
 @media (max-width: 640px) {
   html {
     scroll-padding-top: 5rem;
+  }
+
+  .site-top-row-shell__inner {
+    width: 100%;
+  }
+
+  .site-top-row {
+    gap: 0.55rem 0.95rem;
+  }
+
+  .site-top-row__link {
+    font-size: 0.84rem;
   }
 
   .site-footer__inner {

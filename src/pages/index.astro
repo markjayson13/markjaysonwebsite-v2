@@ -20,22 +20,6 @@ import { socialPreviewImages } from "../data/site";
       <div class="replica-canvas home-hero-band__canvas">
         <h1 class="sr-only">Mark Jayson Martinez Farol</h1>
 
-        <nav class="home-hero-band__top-nav" aria-label="Homepage sections" data-home-stagger>
-          {
-            homePage.hero.topLinks.map((link) =>
-              link.menuTrigger ? (
-                <button class="home-hero-band__top-link" type="button" data-home-menu-trigger>
-                  {link.label}
-                </button>
-              ) : (
-                <a class="home-hero-band__top-link" href={link.href} aria-current={link.label === "Home" ? "page" : undefined}>
-                  {link.label}
-                </a>
-              ),
-            )
-          }
-        </nav>
-
         <div class="home-hero-band__headline-row home-hero-band__headline-row--canva">
           <p class="home-hero-band__headline-top" aria-hidden="true" data-home-stagger>
             {homePage.hero.headlineTop}
@@ -207,30 +191,4 @@ import { socialPreviewImages } from "../data/site";
       </div>
     </section>
   </div>
-
-  <script is:inline>
-    const bindHomeMenuLaunch = () => {
-      const launchers = document.querySelectorAll("[data-home-menu-trigger]");
-      const trigger = document.querySelector("[data-corner-menu-trigger]");
-
-      if (!(trigger instanceof HTMLButtonElement)) {
-        return;
-      }
-
-      launchers.forEach((launcher) => {
-        if (!(launcher instanceof HTMLButtonElement) || launcher.dataset.bound === "true") {
-          return;
-        }
-
-        launcher.dataset.bound = "true";
-        launcher.addEventListener("click", () => trigger.click());
-      });
-    };
-
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", bindHomeMenuLaunch, { once: true });
-    } else {
-      bindHomeMenuLaunch();
-    }
-  </script>
 </BaseLayout>
