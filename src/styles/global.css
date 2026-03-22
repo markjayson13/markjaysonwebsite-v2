@@ -214,19 +214,14 @@ p {
   color: #050505;
 }
 
-body[data-page="home"] .site-top-row-shell,
 body[data-page="portfolio"] .site-top-row-shell {
   background: #000000;
 }
 
-body[data-page="home"] .site-top-row__link,
 body[data-page="portfolio"] .site-top-row__link {
   color: rgba(255, 255, 255, 0.72);
 }
 
-body[data-page="home"] .site-top-row__link[aria-current="page"],
-body[data-page="home"] .site-top-row__link:hover,
-body[data-page="home"] .site-top-row__link:focus-visible,
 body[data-page="portfolio"] .site-top-row__link[aria-current="page"],
 body[data-page="portfolio"] .site-top-row__link:hover,
 body[data-page="portfolio"] .site-top-row__link:focus-visible {

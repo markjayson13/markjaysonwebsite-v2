@@ -76,7 +76,7 @@ const cornerMenuDefaultLabelMap: Record<string, string> = {
   terms: "About",
 };
 const cornerMenuDefaultLabel = cornerMenuDefaultLabelMap[pageGroup] ?? "About";
-const mainSiteTopRowPages = new Set(["home", "bio", "resume", "portfolio", "profiles"]);
+const mainSiteTopRowPages = new Set(["bio", "resume", "portfolio", "profiles"]);
 const showMainSiteTopRow = mainSiteTopRowPages.has(page);
 const backLinkFallbackMap: Record<string, string> = {
   bio: withBase("/"),
