@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { bioPage, replicaFooterCredit } from "../data/editorial";
 import { buildPrimaryImageStructuredData, buildProfilePageStructuredData, socialPreviewImages } from "../data/site";
+import { withBase } from "../utils/paths";
 const pageTitle = "About";
 const pageDescription =
   "Professional overview for Mark Jayson Martinez Farol, an economist and data scientist focused on econometrics, causal inference, and data engineering.";
@@ -61,8 +62,18 @@ const structuredData = [
         }
       </div>
 
+      <section class="bio-page__explore" aria-labelledby="bio-explore-title" data-lift>
+        <p class="bio-page__explore-label" id="bio-explore-title">Explore</p>
+        <nav class="bio-page__explore-links" aria-label="About page links">
+          <a href={withBase("/resume")}>Resume/CV</a>
+          <a href={withBase("/portfolio")}>Portfolio</a>
+          <a href={withBase("/profiles")}>Profiles</a>
+          <a href={withBase("/#contact")}>Contact</a>
+        </nav>
+      </section>
+
       <div class="bio-page__footer-band">
-        <p class="page-credit page-credit--dark">{replicaFooterCredit}</p>
+        <p class="bio-page__footer-credit">{replicaFooterCredit}</p>
       </div>
     </div>
   </article>

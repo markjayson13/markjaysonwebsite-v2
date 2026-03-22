@@ -410,12 +410,14 @@ export const resumePage = {
     { label: "Summary", href: "#summary" },
   ] satisfies ResumeJumpLink[],
   summary: [
-    "Economist and data scientist with graduate training in quantitative business economics, applied econometrics, and large-scale administrative data analysis.",
-    "Experienced in research design, panel-data workflows, data engineering, and stakeholder-facing communication across higher-education finance, policy analysis, and analytical decision support.",
+    "I was born in a rural area in the Philippines, where ambition often grows alongside uncertainty and where education can feel deeply personal because of what it makes possible. Moving to the United States and continuing my education here reshaped my world. It demanded adaptation, resilience, and the ability to keep building while learning a new environment, a new academic culture, and a new sense of what my future could become.",
+    "Over time, that journey became the foundation of who I am today. I grew into someone who moves across disciplines with purpose: economics, statistics, research, teaching, and communication. My path through high school in the United States, undergraduate study at UNLV, and graduate training in quantitative economics gave me more than credentials. It gave me a way of thinking grounded in rigor, curiosity, communication, and a strong belief that analytical work should stay connected to human lives.",
+    "This page tells that story through the experiences, education, and roles that shaped me.",
   ],
   educationNarrative: [
-    "My academic training centered on economics, quantitative analysis, and empirical research, with coursework and applied work that strengthened my ability to move from theory to operational data systems.",
-    "At UNLV, I developed depth in econometrics, statistics, higher-education finance, and research communication while working on projects that required both technical rigor and practical interpretation.",
+    "My educational journey began in the Philippines and continued in the United States, where attending high school marked a major turning point in my life. That transition meant adjusting to a different culture, a different school system, and a different set of expectations while learning how to carry my own story with confidence. Those early experiences built the resilience, adaptability, and drive that would later define how I approached college, research, and professional life.",
+    "At the University of Nevada, Las Vegas, I pursued my Bachelor of Science in Business Administration while also completing a minor in Theatre. My undergraduate years were formative because they allowed both sides of me to grow at the same time: the analytical side drawn to economics, data, and systems, and the public-facing side that found meaning in communication, performance, and expression.",
+    "Graduate study in Quantitative Business Economics deepened that foundation through economic theory, statistics, applied quantitative analysis, and econometric methods. It also gave me more experience lecturing, supporting students one-on-one, collaborating with faculty, participating in conferences, and carrying research into broader academic and professional settings.",
   ],
   credentials: [
     {
@@ -444,8 +446,8 @@ export const resumePage = {
     },
   ] satisfies ResumeCredential[],
   experienceNarrative: [
-    "My experience combines academic research, teaching support, and customer-facing leadership. Across those roles, the common thread has been translating complexity into clear action, whether that meant mentoring students, structuring data workflows, or supporting operational performance.",
-    "The strongest through-line in my work is analytical communication: building evidence carefully, organizing it responsibly, and presenting it in ways that people can understand and use.",
+    "My experience combines academic research, teaching support, and customer-facing leadership. Across those roles, the common thread has been translating complexity into clear action, whether that meant mentoring students, structuring data workflows, supporting operational performance, or helping others understand what evidence actually means.",
+    "That through-line sharpened further as my faculty began to recognize my academic strength, research ability, and discipline. I presented work at symposiums, achieved my first publication, expanded smaller-scale analyses into larger empirical projects, and developed the habits that later supported my transition into graduate study and long-form research infrastructure building.",
   ],
   roles: [
     {
@@ -474,7 +476,7 @@ export const resumePage = {
     },
   ] satisfies ResumeRole[],
   certificationsIntro:
-    "My certifications reflect a broader habit of mine: I treat learning as something continuous, applied, and alive beyond the classroom. After building a strong academic foundation through economics, statistics, and quantitative research, I continued developing my technical skills through structured training in data science, analytics, finance, and evidence-based problem solving.",
+    "My certifications reflect a broader habit of mine: I treat learning as something continuous, applied, and alive beyond the classroom. After building a strong academic foundation through economics, statistics, and quantitative research, I continued developing my technical skills through structured training in data science, analytics, finance, and evidence-based problem solving. They extend the applied side of my background and help me keep building a toolkit that stays current, disciplined, and usable.",
   certifications: [
     {
       title: "The Securities Industry Essentials (SIE)",
@@ -545,7 +547,7 @@ export const resumePage = {
     },
   ] satisfies ResumeProjectCard[],
   skillsIntro:
-    "My skill set combines econometric research, analytical communication, and data engineering. The strongest overlap is where technical depth meets usable decision support.",
+    "My skills were built across research, education, professional work, and communication, which is why they function less like separate categories and more like connected branches of the same system. Economics, finance, statistics, and econometrics give me the analytical foundation to ask strong questions; programming, data engineering, and research tools help me investigate them; and teaching, leadership, and communication help me translate them.",
   skillGroups: [
     {
       title: "Economics, Finance & Policy",
@@ -1541,7 +1543,7 @@ export const profilesPage = {
     { label: "Google Scholar", symbol: "GS", href: socialLookup.get("Google Scholar") },
     { label: "Facebook", symbol: "f", href: socialLookup.get("Facebook") },
     { label: "Backstage", symbol: "B", href: socialLookup.get("Backstage") },
-    { label: "X", symbol: "X", href: socialLookup.get("X") },
+    { label: "Tik Tok", symbol: "♪" },
   ] satisfies ProfileButton[],
   secondaryLinks: [
     {
