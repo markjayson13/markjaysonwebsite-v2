@@ -44,8 +44,15 @@ const siteOrigin = Astro.site ?? new URL("https://markjayson.com");
 const creativeOrigin = new URL(creativeSiteUrl);
 const pageGroup = page.startsWith("creative-") ? "creative" : page;
 const isCreativeHost = siteOrigin.hostname === creativeOrigin.hostname;
+const creativeCanonicalPathMap: Record<string, string> = {
+  "creative-landing": "/",
+  "creative-artistic-resume": "/artistic-resume",
+  "creative-headshots": "/headshots",
+  "creative-photoshoots": "/photoshoots",
+};
 const canonicalOrigin = pageGroup === "creative" ? creativeOrigin : siteOrigin;
-const canonical = new URL(Astro.url.pathname, canonicalOrigin).toString();
+const canonicalPath = pageGroup === "creative" ? creativeCanonicalPathMap[page] ?? Astro.url.pathname : Astro.url.pathname;
+const canonical = new URL(canonicalPath, canonicalOrigin).toString();
 const structuredDataJson = structuredData ? JSON.stringify(structuredData, null, 2) : null;
 const previewImage = socialImage ?? socialPreviewImages.home;
 const previewImageUrl = new URL(previewImage.src, siteOrigin).toString();

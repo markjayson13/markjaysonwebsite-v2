@@ -23,15 +23,15 @@
 }
 
 body[data-page="home"],
-body[data-page="portfolio"],
-body[data-page="profiles"] {
+body[data-page="portfolio"] {
   background: var(--replica-black);
   color: #f3f1ea;
 }
 
 body[data-page="bio"],
 body[data-page="resume"],
-body[data-page="research"] {
+body[data-page="research"],
+body[data-page="profiles"] {
   background: var(--replica-light);
   color: #080808;
 }
@@ -5652,7 +5652,7 @@ body[data-page="portfolio"] .portfolio-page--canva {
 }
 
 body[data-page="portfolio"] .portfolio-page__hero {
-  padding: 5.35rem 0 0;
+  padding: 3.45rem 0 0.55rem;
   background: #000000;
   color: #f5f2eb;
 }
@@ -5670,6 +5670,7 @@ body[data-page="portfolio"] .portfolio-page__workspace-canvas {
 
 body[data-page="portfolio"] .portfolio-page__shell {
   gap: 1.15rem;
+  min-height: auto;
 }
 
 body[data-page="portfolio"] .portfolio-page__header--canva {
@@ -5720,7 +5721,7 @@ body[data-page="portfolio"] .portfolio-page__menu-link {
   background: transparent;
   color: rgba(245, 242, 235, 0.92);
   font-family: var(--replica-font-ui);
-  font-size: 0.82rem;
+  font-size: 0.88rem;
   font-weight: 500;
   letter-spacing: 0.04em;
   line-height: 1;
@@ -6044,15 +6045,16 @@ body[data-page="bio"] .bio-page__section p {
 
 body[data-page="bio"] .bio-page__portrait-float {
   width: clamp(20rem, 33vw, 26rem);
-  margin: -0.55rem -0.85rem -2.35rem 1.25rem;
+  margin: -0.35rem -0.6rem -1rem 1.2rem;
   shape-margin: 0.65rem;
 }
 
 body[data-page="bio"] .bio-page__explore {
   display: grid;
-  gap: 0.35rem;
+  clear: both;
+  gap: 0.18rem;
   width: min(42rem, 100%);
-  margin-top: 0.45rem;
+  margin-top: 0.72rem;
 }
 
 body[data-page="bio"] .bio-page__explore-label {
@@ -6068,11 +6070,14 @@ body[data-page="bio"] .bio-page__explore-label {
 body[data-page="bio"] .bio-page__explore-links {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 0.35rem 1.1rem;
+  padding: 0.48rem 0.7rem 0.52rem;
+  background: #000000;
 }
 
 body[data-page="bio"] .bio-page__explore-links a {
-  color: #111111;
+  color: rgba(246, 244, 236, 0.94);
   font-family: var(--replica-font-ui);
   font-size: 0.96rem;
   font-weight: 600;
@@ -6084,6 +6089,17 @@ body[data-page="bio"] .bio-page__explore-links a:hover,
 body[data-page="bio"] .bio-page__explore-links a:focus-visible {
   text-decoration: underline;
   text-underline-offset: 0.16em;
+}
+
+body[data-page="bio"] .bio-page__footer-band {
+  clear: both;
+  min-height: 2.85rem;
+  margin-top: 0.35rem;
+}
+
+body[data-page="bio"] .bio-page__footer-credit {
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
 }
 
 body[data-page="resume"] .resume-page__canvas {
@@ -6194,8 +6210,12 @@ body[data-page="profiles"] .profiles-page__canvas {
   width: min(980px, calc(100vw - 2.2rem));
   min-height: auto;
   align-content: start;
-  gap: 0.75rem;
-  padding: 0.65rem 0 2rem;
+  gap: 0.95rem;
+  padding: 1rem 0 2.2rem;
+}
+
+body[data-page="profiles"] .profiles-page {
+  min-height: auto;
 }
 
 body[data-page="profiles"] .profiles-page__header {
@@ -6220,7 +6240,7 @@ body[data-page="profiles"] .profiles-page__grid {
   width: min(48rem, 100%);
   margin: 0.15rem 0 0;
   grid-template-columns: repeat(3, minmax(0, max-content));
-  gap: 0.55rem 1.4rem;
+  gap: 0.7rem 1.75rem;
   justify-content: start;
 }
 
@@ -6230,8 +6250,8 @@ body[data-page="profiles"] .profiles-page__button {
   border: 0;
   background: transparent;
   color: #050505;
-  font-size: clamp(0.98rem, 1.08vw, 1.12rem);
-  font-weight: 500;
+  font-size: clamp(1.02rem, 1.14vw, 1.18rem);
+  font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.1;
   text-transform: none;
@@ -6256,8 +6276,8 @@ body[data-page="profiles"] .profiles-page__symbol {
 
 body[data-page="profiles"] .profiles-page__secondary {
   width: auto;
-  margin: 0.1rem 0 0;
-  gap: 0.22rem;
+  margin: 0.32rem 0 0;
+  gap: 0.3rem;
   justify-items: start;
   text-align: left;
 }
@@ -6278,7 +6298,7 @@ body[data-page="profiles"] .profiles-page__secondary-link {
   border: 0;
   background: transparent;
   color: rgba(5, 5, 5, 0.74);
-  font-size: 0.74rem;
+  font-size: 0.8rem;
   letter-spacing: 0.04em;
   line-height: 1.25;
   text-transform: none;

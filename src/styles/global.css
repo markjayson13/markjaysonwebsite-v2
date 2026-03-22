@@ -177,17 +177,17 @@ p {
 }
 
 .site-top-row-shell__inner {
-  width: min(1188px, calc(100vw - 2.2rem));
+  width: min(1328px, calc(100vw - 2rem));
   margin: 0 auto;
-  padding: 0.95rem 0 0.85rem;
+  padding: 0.88rem 0 0.8rem;
 }
 
 .site-top-row {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 0.8rem 1.75rem;
-  padding-right: clamp(6.6rem, 7vw, 8.8rem);
+  justify-content: flex-start;
+  gap: 0.58rem 1.18rem;
+  padding-right: clamp(4.75rem, 5vw, 6.1rem);
 }
 
 .site-top-row__link {
@@ -197,10 +197,10 @@ p {
   color: rgba(5, 5, 5, 0.72);
   cursor: pointer;
   font-family: var(--replica-font-ui);
-  font-size: 0.9rem;
+  font-size: 0.82rem;
   font-weight: 600;
   letter-spacing: -0.01em;
-  line-height: 1;
+  line-height: 1.08;
   text-decoration: none;
   transition: color 180ms ease;
 }
@@ -308,7 +308,7 @@ body[data-page="portfolio"] .site-top-row__link:focus-visible {
 .site-footer__eyebrow,
 .site-footer__section-title {
   font-family: var(--font-footer);
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   font-weight: 600;
   letter-spacing: 0.14em;
   line-height: 1.1;
@@ -327,7 +327,7 @@ body[data-page="portfolio"] .site-top-row__link:focus-visible {
 .site-footer__copyright,
 .site-footer__contact-copy {
   font-family: var(--font-footer);
-  font-size: 0.94rem;
+  font-size: 0.98rem;
   line-height: 1.45;
   color: rgba(245, 244, 237, 0.76);
 }
@@ -336,7 +336,7 @@ body[data-page="portfolio"] .site-top-row__link:focus-visible {
 .site-footer__link {
   width: max-content;
   font-family: var(--font-footer);
-  font-size: 1rem;
+  font-size: 1.04rem;
   font-weight: 500;
   line-height: 1.3;
   color: #f5f4ed;
@@ -365,7 +365,7 @@ body[data-page="portfolio"] .site-top-row__link:focus-visible {
   background: transparent;
   color: #f5f4ed;
   font-family: var(--font-footer);
-  font-size: 0.82rem;
+  font-size: 0.86rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   line-height: 1;
@@ -848,15 +848,29 @@ body[data-page="profiles"] .corner-menu__trigger-label {
   }
 
   .site-top-row-shell__inner {
-    width: 100%;
+    width: calc(100vw - 1rem);
+    padding: 0.72rem 0 0.68rem;
   }
 
   .site-top-row {
-    gap: 0.55rem 0.95rem;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.4rem 0.85rem;
+    justify-content: flex-start;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-right: 4rem;
   }
 
   .site-top-row__link {
-    font-size: 0.84rem;
+    flex: 0 0 auto;
+    font-size: 0.76rem;
+    line-height: 1.15;
+    white-space: nowrap;
+  }
+
+  .site-top-row::-webkit-scrollbar {
+    display: none;
   }
 
   .site-footer__inner {
