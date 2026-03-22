@@ -32,6 +32,14 @@ export type HomeDiscovery = {
   defaultLabel: string;
 };
 
+export type HomeLatestItem = {
+  label: string;
+  title: string;
+  summary: string;
+  href: string;
+  cta: string;
+};
+
 export type HomeContact = {
   label: string;
   title: string;
@@ -293,6 +301,32 @@ export const homePage = {
     title: "What do you want to find Out?",
     defaultLabel: "About",
   } satisfies HomeDiscovery,
+  latestItems: [
+    {
+      label: "Latest Work",
+      title: "Packaging Hierarchies in U.S. Higher Education",
+      summary:
+        "Current working-paper progress on how colleges structure grant, Pell, and institutional aid packages across institution-year panels.",
+      href: withBase("/portfolio#research"),
+      cta: "View research",
+    },
+    {
+      label: "Current Submission",
+      title: "Building a Quality-Assured IPEDS Institution-Year Panel",
+      summary:
+        "Ongoing workflow and paper packaging around a reproducible IPEDS panel build for faster, auditable higher-education analysis.",
+      href: withBase("/portfolio#projects"),
+      cta: "View project",
+    },
+    {
+      label: "Latest Publication",
+      title: "Revisiting Bennett’s Hypothesis",
+      summary:
+        "Published work on student aid, cost of attendance, and institutional pricing behavior across public and private nonprofit colleges.",
+      href: "https://doi.org/10.9741/2766-7227.1033",
+      cta: "Read publication",
+    },
+  ] satisfies HomeLatestItem[],
   crawlLinks: [
     {
       label: "About",
@@ -342,35 +376,35 @@ export const bioPage = {
     {
       title: "My Foundation: The Quantitative Economist",
       paragraphs: [
-        "My name is Mark Jayson Farol. I am a quantitative economist with a Master of Arts in Quantitative Business Economics. My training includes econometric analysis, causal inference, and decision-based problem solving. While many data scientists focus only on predicting the future accurately, my training pushes me to understand why a result appears in the first place.",
-        "I am a structural model thinker. In practice, that means disciplining intuition and judgment with evidence. I want to know that any pattern I identify is real, useful, and actionable rather than noise.",
+        "My name is Mark Jayson Farol. I am a quantitative economist who has earned a Master of Arts in Quantitative Business Economics. My training includes economic analysis, causal inference, and decision-based problem solving. While many data scientists focus on simply predicting the future accurately, my training teaches me to understand why I get the results I do.",
+        "I am a structural model thinker. In other words, I discipline my own intuition and judgment based upon evidence. I want to be sure that any pattern I identify is real and provides some form of actionability rather than mere noise.",
       ],
     },
     {
       title: "The Engine: Data Engineering & Statistical Programming",
       paragraphs: [
-        "When complex economic questions meet messy real-world data, I find myself working at the point where modeling and infrastructure have to support each other. I have extensive experience transforming large, high-dimensional, and disorganized administrative datasets into usable resources for causal analysis.",
-        "That work has required strong skills in statistical programming, data architecture, and reproducible ETL design. I do not just analyze data. I build the pipeline that makes rigorous analysis possible.",
+        "When working with complex economic issues in practice, I find myself grappling with reality. With that said, I have extensive experience transforming large, highly dimensional, and generally disorganized administrative datasets into usable resources for causal analysis.",
+        "That process of getting the data ready has required me to develop strong skills in both statistical programming and data architecture. Through my experience in creating robust ETL pipelines using a variety of tools, I am able to construct the data pipeline safely from a provenance standpoint before running a single econometric model. I do not just analyze data. I create the pipeline that enables the analysis.",
       ],
     },
     {
       title: "The Interdisciplinary Mindset",
       paragraphs: [
-        "From the start, I have been driven by a multi-passionate curiosity to understand how real systems behave and how their patterns can be verified. I am especially interested in the places where human behavior, incentive structures, and data converge.",
-        "I chose economics because it offered a rigorous mathematical framework for understanding decision-making. That perspective is also shaped by formal training in mathematics, programming, and modern data science.",
+        "From day one I was driven by a multipassionate curiosity to understand what happens in reality and to verify actual world patterns. From a natural point of view, I have long been interested in the complex places where human behavior, systemic incentive structures, and data converge.",
+        "I chose economics because it provided a rigorous mathematical framework through which I could evaluate human decision making. This perspective has also been heavily influenced by my formal scientific background, including pure mathematics, advanced programming, and modern data science.",
       ],
     },
     {
       title: "Leadership and Translation",
       paragraphs: [
-        "Technical depth matters, but my broader goal has always been to translate complex theory into practical use. Whether I am working with Difference GMM, dynamic panels, or large-scale administrative data, I care about making those ideas useful for non-technical stakeholders.",
-        "That same instinct carries into my work as an educator. I regularly teach and mentor students in drawing valid economic inferences, evaluating their findings, and choosing the clearest path forward.",
+        "While there are many people who can execute technically complex tasks well, my overall goal has always been to translate complex theories into practical application. Whether I am using advanced techniques like Difference GMM to study higher education finance or modeling dynamic panels, I believe strongly in translating technical ideas into practical applications for non-technical stakeholders.",
+        "That same desire to translate complex ideas into tangible value carries over to my role as an educator. I regularly teach and mentor students in drawing valid economic inferences, evaluating their own findings, and seeing the best path forward.",
       ],
     },
     {
       title: "What Lies Ahead",
       paragraphs: [
-        "I am now focused on applying these quantitative frameworks in real-world business settings, especially across analytics, financial economics, pricing, and strategic operations. I am seeking work that requires both analytical rigor and the ability to turn ambiguous data into a structured narrative that supports better decisions.",
+        "Currently, I am focusing on utilizing these quantitative frameworks in real-world business contexts, particularly in areas such as analytics, financial economics, and strategic operations. I am seeking opportunities that require both a high level of analytical rigor and the ability to transform ambiguous, noisy data into a structured narrative that ultimately drives profitability.",
       ],
     },
   ],
@@ -558,7 +592,8 @@ export const portfolioPage = {
     {
       id: "research",
       label: "Research",
-      intro: "Working papers and empirical studies that use econometric methods to answer policy and institutional questions.",
+      intro:
+        "My research investigates the systems, incentives, and institutions that influence economic and social life, using quantitative analysis and large-scale data to uncover meaningful patterns.",
       summaryLabel: "Abstract",
     },
     {

@@ -32,25 +32,36 @@ const defaultPanel = panels.find((panel) => panel.id === "research")?.id ?? pane
           </header>
 
           <nav class="portfolio-page__menu" aria-label="Portfolio sections" data-portfolio-menu>
+            <div class="portfolio-page__menu-tabs" role="tablist" aria-label="Portfolio tabs">
+              {
+                portfolioPage.menu
+                  .filter((item) => !item.external)
+                  .map((item) => (
+                    <button
+                      type="button"
+                      id={`portfolio-menu-${item.id}`}
+                      class:list={["portfolio-page__menu-link", item.id === defaultPanel && "is-active"]}
+                      data-portfolio-menu-link
+                      data-target={item.id}
+                      role="tab"
+                      aria-selected={item.id === defaultPanel ? "true" : "false"}
+                      aria-controls={`portfolio-panel-${item.id}`}
+                      tabindex={item.id === defaultPanel ? 0 : -1}
+                    >
+                      {item.label}
+                    </button>
+                  ))
+              }
+            </div>
+
             {
-              portfolioPage.menu.map((item) =>
-                item.external ? (
+              portfolioPage.menu
+                .filter((item) => item.external && item.href)
+                .map((item) => (
                   <a class="portfolio-page__menu-link" href={item.href}>
                     {item.label}
                   </a>
-                ) : (
-                  <button
-                    type="button"
-                    id={`portfolio-menu-${item.id}`}
-                    class:list={["portfolio-page__menu-link", item.id === defaultPanel && "is-active"]}
-                    data-portfolio-menu-link
-                    data-target={item.id}
-                    aria-pressed={item.id === defaultPanel ? "true" : "false"}
-                  >
-                    {item.label}
-                  </button>
-                ),
-              )
+                ))
             }
           </nav>
         </div>
@@ -73,29 +84,35 @@ const defaultPanel = panels.find((panel) => panel.id === "research")?.id ?? pane
                 class="portfolio-page__panel"
                 data-portfolio-panel
                 data-section-id={panel.id}
+                role="tabpanel"
+                aria-labelledby={`portfolio-menu-${panel.id}`}
+                tabindex={panel.id === defaultPanel ? 0 : -1}
                 hidden={panel.id !== defaultPanel}
               >
                 <header class="portfolio-page__panel-header">
                   <h2 class="portfolio-page__panel-title">{panel.label}</h2>
-                  <p class="portfolio-page__panel-intro">{panel.intro}</p>
                 </header>
 
-                <div class="portfolio-page__controls" aria-label={`${panel.label} organization controls`}>
-                  <label class="portfolio-page__control">
-                    <span>Year</span>
-                    <select data-portfolio-year>
-                      <option value="all">All</option>
-                      {yearOptions.map((year) => <option value={year}>{year}</option>)}
-                    </select>
-                  </label>
+                <div class="portfolio-page__panel-topbar">
+                  <p class="portfolio-page__panel-intro">{panel.intro}</p>
 
-                  <label class="portfolio-page__control">
-                    <span>Category</span>
-                    <select data-portfolio-category>
-                      <option value="all">All</option>
-                      {categoryOptions.map((tag) => <option value={tag.id}>{tag.label}</option>)}
-                    </select>
-                  </label>
+                  <div class="portfolio-page__controls" aria-label={`${panel.label} organization controls`}>
+                    <label class="portfolio-page__control">
+                      <span>Year</span>
+                      <select data-portfolio-year>
+                        <option value="all">All</option>
+                        {yearOptions.map((year) => <option value={year}>{year}</option>)}
+                      </select>
+                    </label>
+
+                    <label class="portfolio-page__control">
+                      <span>Category</span>
+                      <select data-portfolio-category>
+                        <option value="all">All</option>
+                        {categoryOptions.map((tag) => <option value={tag.id}>{tag.label}</option>)}
+                      </select>
+                    </label>
+                  </div>
                 </div>
 
                 <div class="portfolio-page__entries" data-portfolio-entry-grid>
@@ -108,10 +125,11 @@ const defaultPanel = panels.find((panel) => panel.id === "research")?.id ?? pane
                         data-tags={entry.tags.join(" ")}
                         data-lift
                       >
-                        <div class="portfolio-entry__year">{entry.year}</div>
-
                         <div class="portfolio-entry__content">
-                          <p class="portfolio-entry__eyebrow">{entry.eyebrow}</p>
+                          <div class="portfolio-entry__meta-row">
+                            <p class="portfolio-entry__year">{entry.year}</p>
+                            <p class="portfolio-entry__eyebrow">{entry.eyebrow}</p>
+                          </div>
                           <h3>{entry.title}</h3>
                           <p class="portfolio-entry__summary-label">{panel.summaryLabel ?? "Overview"}</p>
                           <p class="portfolio-entry__abstract">{entry.abstract}</p>
@@ -245,9 +263,11 @@ const defaultPanel = panels.find((panel) => panel.id === "research")?.id ?? pane
         panels.forEach(({ button, panel, id }) => {
           const active = id === panelId;
           button.classList.toggle("is-active", active);
-          button.setAttribute("aria-pressed", active ? "true" : "false");
+          button.setAttribute("aria-selected", active ? "true" : "false");
+          button.tabIndex = active ? 0 : -1;
           panel.hidden = !active;
           panel.toggleAttribute("data-active-panel", active);
+          panel.tabIndex = active ? 0 : -1;
 
           if (active) {
             applyFilters(panel);

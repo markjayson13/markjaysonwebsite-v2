@@ -82,33 +82,29 @@ import { socialPreviewImages } from "../data/site";
 
     <section class="home-discovery-band" data-home-discovery>
       <div class="replica-canvas home-discovery-band__canvas">
-        <p class="home-discovery-band__latest" data-home-reveal>Latest and News</p>
+        <section class="home-latest-band" aria-labelledby="home-latest-title" data-home-reveal>
+          <div class="home-latest-band__header">
+            <p class="home-discovery-band__latest">Latest and News</p>
+            <h2 class="home-latest-band__title" id="home-latest-title">
+              Latest work, submissions, and publications.
+            </h2>
+          </div>
 
-        <div
-          class="replica-menu-sheet replica-menu-sheet--inline replica-menu-sheet--inline-compact"
-          data-preview-menu-root
-          data-default-label={homePage.discovery.defaultLabel}
-          data-home-reveal
-        >
-          <h2 class="replica-menu-sheet__title">{homePage.discovery.title}</h2>
-
-          <nav class="replica-menu-sheet__nav" aria-label="Homepage discovery navigation" data-menu-nav>
+          <div class="home-latest-band__grid">
             {
-              homePage.discoveryItems.map((item) => (
-                <a
-                  href={item.href}
-                  class="replica-menu-sheet__link"
-                  data-menu-item
-                  data-title={item.title}
-                  data-description={item.description}
-                  data-label={item.label}
-                >
-                  {item.label}
-                </a>
+              homePage.latestItems.map((item, index) => (
+                <article class:list={["home-latest-band__card", index === 0 && "is-featured"]}>
+                  <p class="home-latest-band__label">{item.label}</p>
+                  <h3 class="home-latest-band__card-title">{item.title}</h3>
+                  <p class="home-latest-band__summary">{item.summary}</p>
+                  <a class="home-latest-band__cta" href={item.href}>
+                    {item.cta}
+                  </a>
+                </article>
               ))
             }
-          </nav>
-        </div>
+          </div>
+        </section>
 
         <nav class="home-index-nav" aria-label="Primary homepage links" data-home-reveal>
           <p class="home-index-nav__eyebrow">Explore the site</p>
