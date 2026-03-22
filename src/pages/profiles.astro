@@ -4,7 +4,7 @@ import { profilesPage } from "../data/editorial";
 import { buildPrimaryImageStructuredData, buildProfilePageStructuredData, socialPreviewImages } from "../data/site";
 
 const pageTitle = "Profiles";
-const pageDescription = "Curated profile directory for Mark Jayson Martinez Farol across academic, professional, technical, and creative platforms.";
+const pageDescription = "Curated profile directory for Mark Jayson Martinez Farol across academic, professional, and technical platforms.";
 const siteOrigin = Astro.site ?? new URL("https://markjayson.com");
 const pageUrl = new URL(Astro.url.pathname, siteOrigin).toString();
 const profilesHeadshot = socialPreviewImages.profiles;
@@ -31,6 +31,19 @@ const structuredData = [
   socialImage={profilesHeadshot}
 >
   <article class="replica-page profiles-page profiles-page--canva">
+    <video
+      class="profiles-page__video"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      aria-hidden="true"
+    >
+      <source src={profilesPage.videoSrc} type="video/mp4" />
+    </video>
+    <div class="profiles-page__shade" aria-hidden="true"></div>
+
     <div class="replica-canvas profiles-page__canvas">
       <header class="profiles-page__header">
         <h1 class="profiles-page__title" data-lift>{profilesPage.title}</h1>
@@ -54,24 +67,6 @@ const structuredData = [
           )
         }
       </div>
-
-      {
-        profilesPage.secondaryLinks?.length ? (
-          <div class="profiles-page__secondary" data-lift>
-            <p class="profiles-page__secondary-label">Archive</p>
-            <div class="profiles-page__secondary-links">
-              {
-                profilesPage.secondaryLinks.map((link) => (
-                  <a class="profiles-page__secondary-link" href={link.href} target="_blank" rel="noreferrer">
-                    <span>{link.label}</span>
-                    <span class="profiles-page__secondary-note">{link.note}</span>
-                  </a>
-                ))
-              }
-            </div>
-          </div>
-        ) : null
-      }
     </div>
   </article>
 </BaseLayout>

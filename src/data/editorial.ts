@@ -280,6 +280,14 @@ export type ProfileSecondaryLink = {
   note: string;
 };
 
+export type ProfilesPage = {
+  title: string;
+  lead: string;
+  videoSrc: string;
+  buttons: ProfileButton[];
+  secondaryLinks?: ProfileSecondaryLink[];
+};
+
 const socialLookup = new Map(socialLinks.map((link) => [link.label, link.href]));
 const githubProfile = "https://github.com/markjayson13";
 const backstageHref = socialLookup.get("Backstage");
@@ -342,7 +350,7 @@ export const homePage = {
     {
       label: "Profiles",
       href: withBase("/profiles"),
-      description: "Academic, professional, technical, and archive profile surfaces in one place.",
+      description: "Academic, professional, and technical profile surfaces in one place.",
     },
   ] satisfies HomeLink[],
   discoveryItems: homeDiscoveryItems,
@@ -1547,23 +1555,13 @@ export const creativeCluster = {
 
 export const profilesPage = {
   title: "Profiles",
-  lead: "A curated hub of my academic, professional, technical, and creative presence across the web.",
+  lead: "A curated hub of my academic, professional, and technical presence across the web.",
+  videoSrc: withBase("/media/canva-profiles.mp4"),
   buttons: [
     { label: "LinkedIn", symbol: "in", href: socialLookup.get("LinkedIn") },
-    { label: "Instagram", symbol: "@", href: socialLookup.get("Instagram") },
     { label: "GitHub", symbol: "{ }", href: githubProfile },
     { label: "ORCID", symbol: "iD", href: socialLookup.get("ORCID") },
     { label: "Research Gate", symbol: "RG", href: socialLookup.get("ResearchGate") },
     { label: "Google Scholar", symbol: "GS", href: socialLookup.get("Google Scholar") },
-    { label: "Facebook", symbol: "f", href: socialLookup.get("Facebook") },
-    { label: "Backstage", symbol: "B", href: socialLookup.get("Backstage") },
-    { label: "Tik Tok", symbol: "♪" },
   ] satisfies ProfileButton[],
-  secondaryLinks: [
-    {
-      label: "Legacy creative portfolio",
-      href: socialLookup.get("Legacy creative portfolio") ?? "#",
-      note: "Earlier portfolio archive and legacy material.",
-    },
-  ] satisfies ProfileSecondaryLink[],
-};
+} satisfies ProfilesPage;

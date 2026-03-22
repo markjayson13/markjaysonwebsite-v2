@@ -299,7 +299,7 @@ export const homeDiscoveryItems: CornerMenuItem[] = [
     label: "Profiles",
     href: withBase("/profiles"),
     title: "Profiles",
-    description: "Curated academic, professional, technical, and archive profile surfaces.",
+    description: "Curated academic, professional, and technical profile surfaces.",
   },
 ];
 
