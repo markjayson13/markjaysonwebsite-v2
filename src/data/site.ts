@@ -171,11 +171,8 @@ export const mainSiteTopLinks: MainSiteTopLink[] = [
   { label: "About", href: withBase("/bio") },
   { label: "Resume/CV", href: withBase("/resume") },
   { label: "Portfolio", href: withBase("/portfolio") },
-  { label: "Creative", href: withCreativeSite("/") },
-  { label: "Artistic Resume", href: withCreativeSite("/artistic-resume") },
-  { label: "Headshots", href: withCreativeSite("/headshots") },
-  { label: "Photoshoots", href: withCreativeSite("/photoshoots") },
   { label: "Profiles", href: withBase("/profiles") },
+  { label: "Contact", href: withBase("/#contact") },
   { label: "Menu Bar", menuTrigger: true },
 ] satisfies MainSiteTopLink[];
 
@@ -239,34 +236,10 @@ export const cornerMenuItems: CornerMenuItem[] = [
     description: "Selected research, projects, publications, and public writing organized inside the portfolio hub.",
   },
   {
-    label: "Creative",
-    href: withCreativeSite("/"),
-    title: "Creative",
-    description: "Dedicated creative site with the creative landing page and the active creative archive.",
-  },
-  {
-    label: "Artistic Resume",
-    href: withCreativeSite("/artistic-resume"),
-    title: "Artistic Resume",
-    description: "Artistic resume on the creative site covering performance, training, awards, and creative skills.",
-  },
-  {
-    label: "Headshots",
-    href: withCreativeSite("/headshots"),
-    title: "Headshots",
-    description: "Dedicated headshots page on the creative site.",
-  },
-  {
-    label: "Photoshoots",
-    href: withCreativeSite("/photoshoots"),
-    title: "Photoshoots",
-    description: "Photoshoots archive on the creative site with editorials and other active sets.",
-  },
-  {
     label: "Profiles",
     href: withBase("/profiles"),
     title: "Profiles",
-    description: "Curated academic, professional, technical, and social destinations across the web.",
+    description: "Curated academic, professional, and technical destinations across the web.",
   },
   {
     label: "Contact",
