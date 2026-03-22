@@ -2,6 +2,11 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { homePage, replicaFooterCredit } from "../data/editorial";
 import { socialPreviewImages } from "../data/site";
+
+const heroQuickLinkOrder = ["Resume/CV", "Portfolio", "Profiles", "About", "Contact"];
+const heroQuickLinks = heroQuickLinkOrder
+  .map((label) => homePage.hero.topLinks.find((link) => link.label === label && link.href))
+  .filter((link): link is { label: string; href: string } => Boolean(link?.href));
 ---
 
 <BaseLayout
@@ -60,6 +65,16 @@ import { socialPreviewImages } from "../data/site";
             </video>
             <div class="home-hero-band__shade"></div>
           </div>
+
+          <nav class="home-hero-band__quicklinks" aria-label="Homepage quick links">
+            {
+              heroQuickLinks.map((link) => (
+                <a class="home-hero-band__quicklink" href={link.href}>
+                  {link.label}
+                </a>
+              ))
+            }
+          </nav>
         </div>
       </div>
     </section>
@@ -68,10 +83,7 @@ import { socialPreviewImages } from "../data/site";
       <div class="replica-canvas home-discovery-band__canvas">
         <section class="home-latest-band" aria-labelledby="home-latest-title" data-home-reveal>
           <div class="home-latest-band__header">
-            <p class="home-discovery-band__latest">Latest and News</p>
-            <h2 class="home-latest-band__title" id="home-latest-title">
-              Latest work, submissions, and publications.
-            </h2>
+            <h2 class="home-latest-band__eyebrow" id="home-latest-title">Latest and News</h2>
           </div>
 
           <div class="home-latest-band__grid">
