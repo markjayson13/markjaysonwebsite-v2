@@ -569,8 +569,8 @@ body[data-page="profiles"] .corner-menu__trigger-label {
   top: 3.5rem;
   left: 50%;
   transform: translateX(-50%);
-  width: min(37rem, calc(100vw - 1.5rem));
-  padding: 1rem 1rem 1.05rem;
+  width: min(43.5rem, calc(100vw - 1.5rem));
+  padding: 1.15rem 1.25rem 1.2rem;
   border: 1px solid rgba(17, 17, 17, 0.13);
   background: rgba(251, 250, 245, 0.99);
   color: #0d0d0d;
@@ -579,41 +579,41 @@ body[data-page="profiles"] .corner-menu__trigger-label {
 
 .corner-menu__panel-close {
   position: absolute;
-  top: 0.9rem;
-  right: 0.95rem;
+  top: 1rem;
+  right: 1.1rem;
   border: 0;
   background: transparent;
   color: rgba(17, 17, 17, 0.65);
   font-family: var(--font-ui);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   letter-spacing: 0.08em;
   line-height: 1;
   text-transform: uppercase;
 }
 
 .replica-menu-sheet__title {
-  margin: 0 0 0.82rem;
+  margin: 0 0 1rem;
   text-align: center;
   font-family: var(--font-ui);
-  font-size: clamp(0.96rem, 1.35vw, 1.22rem);
+  font-size: clamp(0.94rem, 1.2vw, 1.12rem);
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   line-height: 1;
   text-transform: uppercase;
 }
 
 .replica-menu-sheet__layout {
   display: grid;
-  grid-template-columns: minmax(8.2rem, 9.4rem) minmax(0, 1fr);
-  gap: clamp(0.8rem, 1.55vw, 1.18rem);
+  grid-template-columns: minmax(11.2rem, 13rem) minmax(0, 1fr);
+  gap: clamp(1rem, 1.9vw, 1.45rem);
   align-items: start;
 }
 
 .replica-menu-sheet__nav {
   display: grid;
-  gap: 0.34rem;
+  gap: 0.42rem;
   justify-items: start;
-  padding-right: 0.82rem;
+  padding-right: 1rem;
   border-right: 1px solid rgba(17, 17, 17, 0.22);
   text-align: left;
 }
@@ -621,12 +621,14 @@ body[data-page="profiles"] .corner-menu__trigger-label {
 .replica-menu-sheet__link {
   display: block;
   font-family: var(--font-ui);
-  font-size: clamp(0.92rem, 1.08vw, 1.04rem);
+  width: 100%;
+  font-size: clamp(0.86rem, 0.95vw, 0.96rem);
   font-weight: 500;
-  letter-spacing: 0.02em;
-  line-height: 1.05;
+  letter-spacing: 0.015em;
+  line-height: 1.12;
   text-transform: uppercase;
   color: rgba(17, 17, 17, 0.72);
+  white-space: nowrap;
   transition:
     color 160ms ease,
     transform 160ms ease;
@@ -640,24 +642,24 @@ body[data-page="profiles"] .corner-menu__trigger-label {
 }
 
 .replica-menu-sheet__preview {
-  max-width: 16.8rem;
-  min-height: 4.65rem;
-  padding-top: 0.05rem;
+  max-width: 21rem;
+  min-height: 5.15rem;
+  padding-top: 0.18rem;
 }
 
 .replica-menu-sheet__preview h3 {
-  margin: 0 0 0.4rem;
+  margin: 0 0 0.48rem;
   font-family: var(--font-ui);
-  font-size: clamp(1.02rem, 1.32vw, 1.18rem);
+  font-size: clamp(1.05rem, 1.16vw, 1.18rem);
   font-weight: 600;
-  line-height: 1.04;
+  line-height: 1.08;
 }
 
 .replica-menu-sheet__preview p {
   margin: 0;
-  max-width: 18rem;
-  font-size: clamp(0.84rem, 0.92vw, 0.92rem);
-  line-height: 1.48;
+  max-width: 20rem;
+  font-size: clamp(0.88rem, 0.88vw, 0.93rem);
+  line-height: 1.58;
   color: rgba(17, 17, 17, 0.78);
 }
 
@@ -805,8 +807,8 @@ body[data-page="profiles"] .corner-menu__trigger-label {
     top: 4rem;
     left: 50%;
     transform: translateX(-50%);
-    width: min(37rem, calc(100vw - 1.25rem));
-    padding: 1.05rem 1rem 1.12rem;
+    width: min(41rem, calc(100vw - 1.25rem));
+    padding: 1.1rem 1.05rem 1.16rem;
   }
 
   .replica-menu-sheet__layout {
@@ -824,7 +826,8 @@ body[data-page="profiles"] .corner-menu__trigger-label {
   }
 
   .replica-menu-sheet__link {
-    font-size: clamp(1.15rem, 5vw, 1.55rem);
+    font-size: clamp(1.05rem, 4.6vw, 1.35rem);
+    white-space: normal;
   }
 
   .replica-menu-sheet--inline .replica-menu-sheet__layout {
@@ -900,6 +903,29 @@ body[data-page="profiles"] .corner-menu__trigger-label {
     top: 3.75rem;
     width: calc(100vw - 1.6rem);
     padding: 1.1rem 1rem 1.2rem;
+  }
+
+  .replica-menu-sheet__title {
+    margin-bottom: 0.82rem;
+    font-size: 0.92rem;
+  }
+
+  .replica-menu-sheet__nav {
+    gap: 0.34rem;
+  }
+
+  .replica-menu-sheet__link {
+    font-size: 0.98rem;
+    line-height: 1.08;
+  }
+
+  .replica-menu-sheet__preview h3 {
+    font-size: 1rem;
+  }
+
+  .replica-menu-sheet__preview p {
+    font-size: 0.88rem;
+    line-height: 1.5;
   }
 
   .corner-menu__trigger-label {
