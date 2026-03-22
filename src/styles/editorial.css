@@ -5715,23 +5715,23 @@ body[data-page="portfolio"] .portfolio-page--canva {
 }
 
 body[data-page="portfolio"] .portfolio-page__hero {
-  padding: 3.45rem 0 0.55rem;
+  padding: 3.35rem 0 0.5rem;
   background: #000000;
   color: #f5f2eb;
 }
 
 body[data-page="portfolio"] .portfolio-page__canvas {
-  width: min(1660px, calc(100vw - 0.4rem));
+  width: min(1720px, calc(100vw - 0.12rem));
 }
 
 body[data-page="portfolio"] .portfolio-page__workspace {
   background: #edf0f2;
   color: #050505;
-  padding: 1.6rem 0 5.8rem;
+  padding: 1.6rem 0 7rem;
 }
 
 body[data-page="portfolio"] .portfolio-page__workspace-canvas {
-  width: min(1660px, calc(100vw - 0.4rem));
+  width: min(1720px, calc(100vw - 0.12rem));
   margin: 0 auto;
 }
 
@@ -5818,7 +5818,7 @@ body[data-page="portfolio"] .portfolio-page__menu-link:focus-visible {
 body[data-page="portfolio"] .portfolio-page__panel {
   display: grid;
   gap: 1.45rem;
-  padding-bottom: 1.1rem;
+  padding-bottom: 2rem;
 }
 
 body[data-page="portfolio"] .portfolio-page__panel[hidden] {
@@ -5911,7 +5911,7 @@ body[data-page="portfolio"] .portfolio-entry {
   gap: 0.9rem;
   align-items: start;
   height: 100%;
-  padding: 1.18rem 0 1.28rem;
+  padding: 1.22rem 0 1.6rem;
   border-bottom: 1px solid rgba(5, 5, 5, 0.12);
 }
 
@@ -6167,7 +6167,7 @@ body[data-page="bio"] .bio-page__explore-link {
 }
 
 body[data-page="resume"] .resume-page__canvas {
-  width: min(1660px, calc(100vw - 0.4rem));
+  width: min(1720px, calc(100vw - 0.12rem));
   padding-top: 0.85rem;
   padding-bottom: 2.6rem;
 }
