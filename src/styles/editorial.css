@@ -6156,12 +6156,12 @@ body[data-page="bio"] .bio-page__section p {
 
 body[data-page="bio"] .bio-page__portrait-panel {
   float: right;
-  width: clamp(31rem, 36vw, 41rem);
+  width: clamp(34rem, 39vw, 45rem);
   aspect-ratio: 1540 / 1546;
-  margin: 1.8rem 0 0.35rem 3rem;
+  margin: 0.55rem 0 0.5rem 2.8rem;
   shape-outside: url("/images/bio-portrait-cutout.png");
-  shape-margin: 1.75rem;
-  shape-image-threshold: 0.08;
+  shape-margin: 1.1rem;
+  shape-image-threshold: 0.14;
 }
 
 body[data-page="bio"] .bio-page__portrait-panel img {
@@ -6171,11 +6171,11 @@ body[data-page="bio"] .bio-page__portrait-panel img {
 }
 
 body[data-page="bio"] .bio-page__explore {
-  clear: both;
-  width: min(21.5rem, 100%);
-  margin-top: 1.1rem;
-  padding: 0.78rem 0.84rem 0.9rem;
-  gap: 0.46rem;
+  clear: none;
+  width: min(20rem, 100%);
+  margin-top: 0.7rem;
+  padding: 0.72rem 0.8rem 0.82rem;
+  gap: 0.42rem;
 }
 
 body[data-page="bio"] .bio-page__explore-title {
