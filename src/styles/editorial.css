@@ -6156,12 +6156,11 @@ body[data-page="bio"] .bio-page__section p {
 
 body[data-page="bio"] .bio-page__portrait-panel {
   float: right;
-  width: clamp(34rem, 39vw, 45rem);
+  width: clamp(31rem, 35vw, 39rem);
   aspect-ratio: 1540 / 1546;
-  margin: 0.55rem 0 0.5rem 2.8rem;
-  shape-outside: url("/images/bio-portrait-cutout.png");
-  shape-margin: 1.1rem;
-  shape-image-threshold: 0.14;
+  margin: 0.95rem 0 0.55rem 2.8rem;
+  shape-outside: margin-box;
+  shape-margin: 0.7rem;
 }
 
 body[data-page="bio"] .bio-page__portrait-panel img {
