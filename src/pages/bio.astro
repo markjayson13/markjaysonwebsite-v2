@@ -34,44 +34,39 @@ const structuredData = [
       <div class="bio-page__story">
         <h1 class="bio-page__title" data-lift>{bioPage.title}</h1>
 
-        <div class="bio-page__upper" data-lift>
+        <div class="bio-page__flow" data-lift>
           {
-            bioPage.sections.slice(0, 3).map((section) => (
-              <section class="bio-page__section">
-                <h2 class="bio-page__section-title">{section.title}</h2>
-                {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-              </section>
+            bioPage.sections.map((section, index) => (
+              <>
+                {
+                  index === 0 && (
+                    <figure class="bio-page__portrait-panel" aria-hidden="true">
+                      <img src={bioPage.visiblePortraitSrc} alt="" loading="eager" />
+                    </figure>
+                  )
+                }
+
+                <section class="bio-page__section">
+                  <h2 class="bio-page__section-title">{section.title}</h2>
+                  {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+                </section>
+              </>
             ))
           }
         </div>
 
-        <div class="bio-page__lower-copy" data-lift>
-          {
-            bioPage.sections.slice(3).map((section) => (
-              <section class="bio-page__section">
-                <h2 class="bio-page__section-title">{section.title}</h2>
-                {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-              </section>
-            ))
-          }
-
-          <section class="bio-page__explore" data-lift aria-label="Explore">
-            <h2 class="bio-page__explore-title">Explore</h2>
-            <div class="bio-page__explore-links">
-              {
-                bioPage.exploreLinks.map((link) => (
-                  <a class="bio-page__explore-link" href={link.href}>
-                    {link.label}
-                  </a>
-                ))
-              }
-            </div>
-          </section>
-        </div>
-
-        <figure class="bio-page__portrait-panel" aria-hidden="true">
-          <img src={bioPage.visiblePortraitSrc} alt="" loading="eager" />
-        </figure>
+        <section class="bio-page__explore" data-lift aria-label="Explore">
+          <h2 class="bio-page__explore-title">Explore</h2>
+          <div class="bio-page__explore-links">
+            {
+              bioPage.exploreLinks.map((link) => (
+                <a class="bio-page__explore-link" href={link.href}>
+                  {link.label}
+                </a>
+              ))
+            }
+          </div>
+        </section>
       </div>
     </div>
   </article>

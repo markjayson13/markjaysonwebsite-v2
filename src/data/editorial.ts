@@ -561,11 +561,11 @@ export const resumePage = {
       cta: "Open portfolio",
     },
     {
-      title: "Profiles",
+      title: "Public Writing",
       description:
-        "Professional and academic profiles collected in a secondary archive.",
-      href: withBase("/profiles"),
-      cta: "View profiles",
+        "Public-facing essays and analysis that translate technical work into readable argument.",
+      href: withBase("/portfolio#public-writing"),
+      cta: "Open portfolio",
     },
   ] satisfies ResumeProjectCard[],
   skillsIntro:

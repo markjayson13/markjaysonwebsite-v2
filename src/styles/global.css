@@ -956,3 +956,48 @@ body[data-page="profiles"] .corner-menu__trigger-label {
     scroll-behavior: auto !important;
   }
 }
+
+
+/* Shared interior-page inset standard */
+body[data-page="bio"],
+body[data-page="resume"],
+body[data-page="portfolio"] {
+  --strict-main-inset: clamp(4.25rem, 6.6vw, 6.9rem);
+}
+
+body[data-page="bio"] .site-top-row-shell__inner,
+body[data-page="resume"] .site-top-row-shell__inner,
+body[data-page="portfolio"] .site-top-row-shell__inner {
+  width: 100%;
+  margin: 0;
+  padding: 1.05rem var(--strict-main-inset) 0.88rem;
+}
+
+body[data-page="bio"] .site-top-row,
+body[data-page="resume"] .site-top-row,
+body[data-page="portfolio"] .site-top-row {
+  gap: 0.78rem 1.42rem;
+  padding-right: clamp(4.2rem, 5vw, 5.6rem);
+}
+
+@media (max-width: 1080px) {
+  body[data-page="bio"],
+  body[data-page="resume"],
+  body[data-page="portfolio"] {
+    --strict-main-inset: clamp(2.6rem, 4vw, 3.8rem);
+  }
+}
+
+@media (max-width: 640px) {
+  body[data-page="bio"],
+  body[data-page="resume"],
+  body[data-page="portfolio"] {
+    --strict-main-inset: 1rem;
+  }
+
+  body[data-page="bio"] .site-top-row-shell__inner,
+  body[data-page="resume"] .site-top-row-shell__inner,
+  body[data-page="portfolio"] .site-top-row-shell__inner {
+    padding-inline: 1rem;
+  }
+}
