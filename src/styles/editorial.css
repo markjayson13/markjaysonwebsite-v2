@@ -6110,7 +6110,7 @@ body[data-page="portfolio"] {
 body[data-page="bio"] .bio-page__canvas {
   width: 100%;
   max-width: none;
-  padding: 0.95rem var(--strict-main-inset) 3.1rem;
+  padding: 1.15rem var(--strict-main-inset) 3.75rem;
 }
 
 body[data-page="bio"] .bio-page__story {
@@ -6119,9 +6119,9 @@ body[data-page="bio"] .bio-page__story {
 }
 
 body[data-page="bio"] .bio-page__title {
-  max-width: min(74rem, 100%);
-  margin: 0 0 1.35rem;
-  font-size: clamp(5.1rem, 6.4vw, 7.25rem);
+  max-width: min(78rem, 100%);
+  margin: 0 0 1.55rem;
+  font-size: clamp(5.35rem, 6.6vw, 7.45rem);
   line-height: 0.9;
 }
 
@@ -6156,12 +6156,12 @@ body[data-page="bio"] .bio-page__section p {
 
 body[data-page="bio"] .bio-page__portrait-panel {
   float: right;
-  width: clamp(39rem, 45vw, 62rem);
+  width: clamp(31rem, 36vw, 41rem);
   aspect-ratio: 1540 / 1546;
-  margin: 6.1rem 0 0.1rem 2.65rem;
+  margin: 1.8rem 0 0.35rem 3rem;
   shape-outside: url("/images/bio-portrait-cutout.png");
-  shape-margin: 1.45rem;
-  shape-image-threshold: 0.14;
+  shape-margin: 1.75rem;
+  shape-image-threshold: 0.08;
 }
 
 body[data-page="bio"] .bio-page__portrait-panel img {
@@ -6172,10 +6172,10 @@ body[data-page="bio"] .bio-page__portrait-panel img {
 
 body[data-page="bio"] .bio-page__explore {
   clear: both;
-  width: min(24rem, 100%);
-  margin-top: 0.85rem;
-  padding: 1.05rem 1rem 1.15rem;
-  gap: 0.58rem;
+  width: min(21.5rem, 100%);
+  margin-top: 1.1rem;
+  padding: 0.78rem 0.84rem 0.9rem;
+  gap: 0.46rem;
 }
 
 body[data-page="bio"] .bio-page__explore-title {
@@ -6188,9 +6188,9 @@ body[data-page="bio"] .bio-page__explore-links {
 }
 
 body[data-page="bio"] .bio-page__explore-link {
-  min-height: 2.15rem;
-  padding: 0.42rem 0.72rem;
-  font-size: clamp(0.84rem, 0.86vw, 0.92rem);
+  min-height: 1.95rem;
+  padding: 0.34rem 0.6rem;
+  font-size: clamp(0.8rem, 0.82vw, 0.88rem);
 }
 
 body[data-page="resume"] .resume-page__canvas {
@@ -6403,8 +6403,8 @@ body[data-page="resume"] .resume-page .page-credit {
 }
 
 body[data-page="portfolio"] .portfolio-page__hero {
-  padding: 4.35rem 0 1.45rem;
-  background: #000000;
+  padding: 2.5rem var(--strict-main-inset) 0;
+  background: transparent;
 }
 
 body[data-page="portfolio"] .portfolio-page__canvas,
@@ -6412,12 +6412,23 @@ body[data-page="portfolio"] .portfolio-page__workspace-canvas {
   width: 100%;
   max-width: none;
   margin: 0 auto;
-  padding-inline: var(--strict-main-inset);
+  padding-inline: 2.35rem;
   box-sizing: border-box;
 }
 
+body[data-page="portfolio"] .portfolio-page__hero > .portfolio-page__canvas {
+  background: #000000;
+  padding-block: 3.65rem 1.45rem;
+}
+
+body[data-page="portfolio"] .portfolio-page__workspace-canvas {
+  background: var(--replica-light);
+  padding-block: 2.45rem 0;
+}
+
 body[data-page="portfolio"] .portfolio-page__workspace {
-  padding: 2.1rem 0 9.75rem;
+  padding: 0 var(--strict-main-inset) 8.9rem;
+  background: transparent;
 }
 
 body[data-page="portfolio"] .portfolio-page__shell {
@@ -6524,17 +6535,17 @@ body[data-page="profiles"] .profiles-page {
 }
 
 body[data-page="profiles"] .profiles-page__video {
-  object-position: center 46%;
-  transform: scale(0.94);
-  filter: brightness(0.8);
+  object-position: center 50%;
+  transform: scale(0.88);
+  filter: brightness(0.72);
 }
 
 body[data-page="profiles"] .profiles-page__canvas {
-  width: min(1180px, calc(100vw - 2rem));
-  min-height: clamp(44rem, calc(100svh - 4rem), 54rem);
+  width: min(1100px, calc(100vw - 4rem));
+  min-height: clamp(42rem, calc(100svh - 5rem), 50rem);
   align-content: center;
-  gap: 1.85rem;
-  padding: 5.15rem 0 3.6rem;
+  gap: 1.95rem;
+  padding: 6rem 0 4.25rem;
 }
 
 body[data-page="profiles"] .profiles-page__header {
