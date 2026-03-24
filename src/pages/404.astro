@@ -1,0 +1,53 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { withBase } from "../utils/paths";
+
+const recoveryLinks = [
+  { label: "Return Home", href: withBase("/") },
+  { label: "Open Portfolio", href: withBase("/portfolio") },
+  { label: "View Resume", href: withBase("/resume") },
+  { label: "Contact", href: withBase("/#contact") },
+];
+---
+
+<BaseLayout
+  title="Page Not Found"
+  description="The page you requested could not be found on markjayson.com."
+  page="404"
+  accent="#050505"
+  robots="noindex,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+  shell="bare"
+  footer={false}
+  replicaFooter={false}
+  replicaMotion={true}
+>
+  <article class="replica-page legal-page">
+    <div class="replica-canvas legal-page__canvas">
+      <header class="legal-page__header">
+        <p class="legal-page__eyebrow">404</p>
+        <h1 class="legal-page__title" data-lift>Page Not Found</h1>
+        <p class="legal-page__lead" data-lift>
+          That route does not exist or is no longer public. Use one of the primary paths below to continue.
+        </p>
+      </header>
+
+      <div class="legal-page__sections">
+        <section class="legal-page__section" data-lift>
+          <h2>Go Somewhere Useful</h2>
+          <p>
+            The strongest recovery paths are the homepage, portfolio, resume, and the main contact section.
+          </p>
+          <div style="display:flex; flex-wrap:wrap; gap:0.75rem;">
+            {
+              recoveryLinks.map((link) => (
+                <a class="replica-outline-button replica-outline-button--dark" href={link.href}>
+                  {link.label}
+                </a>
+              ))
+            }
+          </div>
+        </section>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

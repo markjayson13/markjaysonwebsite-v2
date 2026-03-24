@@ -1,0 +1,209 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { homePage } from "../data/editorial";
+import { socialPreviewImages } from "../data/site";
+
+const heroQuickLinkOrder = ["Resume/CV", "Portfolio", "Profiles", "About", "Contact"];
+const heroQuickLinks = heroQuickLinkOrder
+  .map((label) => homePage.hero.topLinks.find((link) => link.label === label && link.href))
+  .filter((link): link is { label: string; href: string } => Boolean(link?.href));
+---
+
+<BaseLayout
+  title="Economist & Data Scientist"
+  description="Mark Jayson Martinez Farol is an economist and data scientist specializing in econometrics, causal inference, data engineering, and evidence-based financial and policy analysis."
+  page="home"
+  accent="#050505"
+  shell="bare"
+  footer={false}
+  replicaFooter={false}
+  replicaMotion={true}
+  socialImage={socialPreviewImages.home}
+>
+  <div class="replica-page home-page home-replica">
+    <section class="home-hero-band" data-home-hero>
+      <div class="replica-canvas home-hero-band__canvas">
+        <h1 class="sr-only">Mark Jayson Martinez Farol</h1>
+
+        <div class="home-hero-band__headline-row home-hero-band__headline-row--canva">
+          <p class="home-hero-band__headline-top" aria-hidden="true" data-home-stagger>
+            {homePage.hero.headlineTop}
+          </p>
+        </div>
+
+        <div class="home-hero-band__frame home-hero-band__frame--canva" data-home-stagger>
+          <div class="home-hero-band__frame-title home-hero-band__frame-title--canva" aria-hidden="true">
+            {
+              homePage.hero.headlineFrame.map((line, index) => (
+                <>
+                  <span class="home-hero-band__frame-line">{line}</span>
+                  {index < homePage.hero.headlineFrame.length - 1 && " "}
+                </>
+              ))
+            }
+          </div>
+
+          <div class="home-hero-band__media">
+            <video
+              class="home-hero-band__video"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="auto"
+              data-start-time="1.65"
+              disablepictureinpicture
+              disableRemotePlayback
+              aria-hidden="true"
+            >
+              <source src={homePage.hero.videoSrc} type="video/mp4" />
+            </video>
+            <div class="home-hero-band__shade"></div>
+          </div>
+
+          <div class="home-hero-band__role-strip home-hero-band__role-strip--frame" aria-label="Disciplines" data-home-stagger>
+            {
+              homePage.hero.roles.map((role) => (
+                <a class="home-hero-band__role-chip" href={role.href}>
+                  {role.label}
+                </a>
+              ))
+            }
+          </div>
+
+          <nav class="home-hero-band__quicklinks" aria-label="Homepage quick links">
+            {
+              heroQuickLinks.map((link) => (
+                <a class="home-hero-band__quicklink" href={link.href}>
+                  {link.label}
+                </a>
+              ))
+            }
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-discovery-band" data-home-discovery>
+      <div class="replica-canvas home-discovery-band__canvas">
+        <section class="home-latest-band" aria-labelledby="home-latest-title" data-home-reveal>
+          <div class="home-latest-band__header">
+            <h2 class="home-latest-band__eyebrow" id="home-latest-title">Latest News</h2>
+          </div>
+
+          <div class="home-latest-band__grid">
+            {
+              homePage.latestItems.map((item, index) => (
+                <article class:list={["home-latest-band__card", index === 0 && "is-featured"]}>
+                  <p class="home-latest-band__label">{item.label}</p>
+                  <h3 class="home-latest-band__card-title">{item.title}</h3>
+                  <p class="home-latest-band__summary">{item.summary}</p>
+                  <a class="home-latest-band__cta" href={item.href}>
+                    {item.cta}
+                  </a>
+                </article>
+              ))
+            }
+          </div>
+        </section>
+
+        <nav class="home-index-nav" aria-label="Primary homepage links" data-home-reveal>
+          <p class="home-index-nav__eyebrow">Explore the site</p>
+
+          <ul class="home-index-nav__list">
+            {
+              homePage.crawlLinks.map((link) => (
+                <li class="home-index-nav__item">
+                  <a class="home-index-nav__link" href={link.href}>
+                    <span class="home-index-nav__label">{link.label}</span>
+                    <span class="home-index-nav__description">{link.description}</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </div>
+    </section>
+
+    <section class="home-contact-band" id="contact" data-home-contact>
+      <video
+        class="home-contact-band__video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        disablepictureinpicture
+        disableRemotePlayback
+        aria-hidden="true"
+      >
+        <source src={homePage.contact.videoSrc} type="video/mp4" />
+      </video>
+      <div class="home-contact-band__shade"></div>
+
+      <div class="replica-canvas home-contact-band__canvas">
+        <div class="home-contact-band__content" data-home-reveal>
+          <div class="home-contact-band__portrait">
+            <img src={homePage.contact.portraitSrc} alt="Mark Jayson Farol holding a glowing globe." loading="eager" />
+          </div>
+
+          <div class="home-contact-band__panel">
+            <div class="home-contact-band__heading">
+              <h2><span>{homePage.contact.title}</span></h2>
+            </div>
+
+            <div class="home-contact-band__form-shell">
+              <form
+                class="home-contact-band__form"
+                action="https://formsubmit.co/markjayson@markjayson.com"
+                method="post"
+              >
+                <input type="hidden" name="_subject" value="New message from markjayson.com" />
+                <input type="hidden" name="_template" value="table" />
+                <input type="hidden" name="_url" value="https://markjayson.com/" />
+                <input type="text" name="_honey" class="home-contact-band__honeypot" tabindex="-1" autocomplete="off" />
+
+                {
+                  homePage.contactFields.map((field) => (
+                    <label
+                      class:list={[
+                        "home-contact-band__field",
+                        `home-contact-band__field--${field.name}`,
+                        field.full && "home-contact-band__field--message",
+                      ]}
+                    >
+                      <span>{field.label}</span>
+                      {
+                        field.name === "message" ? (
+                          <textarea name={field.name} required></textarea>
+                        ) : (
+                          <input
+                            type={field.name === "email" ? "email" : "text"}
+                            name={field.name}
+                            required={field.name !== "subject"}
+                            autocomplete={
+                              field.name === "first-name"
+                                ? "given-name"
+                                : field.name === "last-name"
+                                  ? "family-name"
+                                  : field.name === "email"
+                                    ? "email"
+                                    : "off"
+                            }
+                          />
+                        )
+                      }
+                    </label>
+                  ))
+                }
+
+                <button class="home-contact-band__submit" type="submit">{homePage.contact.submitLabel}</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

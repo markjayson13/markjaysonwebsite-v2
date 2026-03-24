@@ -1,0 +1,60 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const sections = [
+  {
+    title: "Use of Site Content",
+    body:
+      "The materials on markjayson.com are provided for informational, academic, professional, and portfolio purposes. Content may not be copied, republished, or redistributed in a misleading way or without appropriate permission where permission is required.",
+  },
+  {
+    title: "Accuracy and Availability",
+    body:
+      "Reasonable effort is made to keep content current and accurate, but no guarantee is made that every page, document, or external link will always remain complete, available, or error free.",
+  },
+  {
+    title: "External Platforms",
+    body:
+      "This site may connect visitors to third-party platforms and public profile pages. Access to those services is subject to the terms and policies of the respective platform.",
+  },
+  {
+    title: "Contact",
+    body:
+      "For permissions, corrections, or questions about site use, reach out through the homepage contact form or by email at markjayson@markjayson.com.",
+  },
+];
+---
+
+<BaseLayout
+  title="Terms of Use"
+  description="Terms of Use for markjayson.com."
+  page="terms"
+  accent="#050505"
+  shell="bare"
+  footer={false}
+  replicaFooter={false}
+  replicaMotion={true}
+>
+  <article class="replica-page legal-page">
+    <div class="replica-canvas legal-page__canvas">
+      <header class="legal-page__header">
+        <p class="legal-page__eyebrow">Legal</p>
+        <h1 class="legal-page__title" data-lift>Terms of Use</h1>
+        <p class="legal-page__lead" data-lift>
+          These terms outline the general use of markjayson.com and its public-facing materials.
+        </p>
+      </header>
+
+      <div class="legal-page__sections">
+        {
+          sections.map((section) => (
+            <section class="legal-page__section" data-lift>
+              <h2>{section.title}</h2>
+              <p>{section.body}</p>
+            </section>
+          ))
+        }
+      </div>
+    </div>
+  </article>
+</BaseLayout>

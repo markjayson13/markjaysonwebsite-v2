@@ -1,0 +1,351 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { portfolioPage } from "../data/editorial";
+import { socialPreviewImages } from "../data/site";
+
+const panels = portfolioPage.sections.map((section) => ({
+  ...section,
+  entries: portfolioPage.entries.filter((entry) => entry.sectionId === section.id),
+}));
+
+const defaultPanel = panels.find((panel) => panel.id === "research")?.id ?? panels[0]?.id ?? "research";
+---
+
+<BaseLayout
+  title="Econometrics, Data Engineering, and Policy Portfolio"
+  description="Professional portfolio for Mark Jayson Martinez Farol covering econometrics, causal inference, data engineering, and public-facing analytical work."
+  page="portfolio"
+  accent="#050505"
+  shell="bare"
+  footer={false}
+  replicaFooter={false}
+  replicaMotion={true}
+  socialImage={socialPreviewImages.bio}
+>
+  <article class="replica-page portfolio-page portfolio-page--hub portfolio-page--canva">
+    <section class="portfolio-page__hero">
+      <div class="replica-canvas portfolio-page__canvas">
+        <div class="portfolio-page__shell">
+          <header class="portfolio-page__header portfolio-page__header--canva">
+            <h1 class="portfolio-page__title" data-lift>{portfolioPage.title}</h1>
+            <p class="portfolio-page__lead" data-lift>{portfolioPage.lead}</p>
+          </header>
+
+          <nav class="portfolio-page__menu" aria-label="Portfolio sections" data-portfolio-menu>
+            <div class="portfolio-page__menu-tabs" role="tablist" aria-label="Portfolio tabs">
+              {
+                portfolioPage.menu
+                  .filter((item) => !item.external)
+                  .map((item) => (
+                    <button
+                      type="button"
+                      id={`portfolio-menu-${item.id}`}
+                      class:list={["portfolio-page__menu-link", item.id === defaultPanel && "is-active"]}
+                      data-portfolio-menu-link
+                      data-target={item.id}
+                      role="tab"
+                      aria-selected={item.id === defaultPanel ? "true" : "false"}
+                      aria-controls={`portfolio-panel-${item.id}`}
+                      tabindex={item.id === defaultPanel ? 0 : -1}
+                    >
+                      {item.label}
+                    </button>
+                  ))
+              }
+            </div>
+
+            {
+              portfolioPage.menu
+                .filter((item) => item.external && item.href)
+                .map((item) => (
+                  <a class="portfolio-page__menu-link" href={item.href}>
+                    {item.label}
+                  </a>
+                ))
+            }
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <section class="portfolio-page__workspace" data-portfolio-root data-default-panel={defaultPanel}>
+      <div class="replica-canvas portfolio-page__workspace-canvas">
+        {
+          panels.map((panel) => {
+            const yearOptions = [...new Set(panel.entries.map((entry) => entry.year))].sort((left, right) => Number(right) - Number(left));
+            const categoryOptions = [...new Set(panel.entries.flatMap((entry) => entry.tags))].map((tagId) => ({
+              id: tagId,
+              label: portfolioPage.tags.find((tag) => tag.id === tagId)?.label ?? tagId,
+            }));
+
+            return (
+              <section
+                id={`portfolio-panel-${panel.id}`}
+                class="portfolio-page__panel"
+                data-portfolio-panel
+                data-section-id={panel.id}
+                role="tabpanel"
+                aria-labelledby={`portfolio-menu-${panel.id}`}
+                tabindex={panel.id === defaultPanel ? 0 : -1}
+                hidden={panel.id !== defaultPanel}
+              >
+                <header class="portfolio-page__panel-header">
+                  <h2 class="portfolio-page__panel-title">{panel.label}</h2>
+                </header>
+
+                <div class="portfolio-page__panel-topbar">
+                  <p class="portfolio-page__panel-intro">{panel.intro}</p>
+
+                  <div class="portfolio-page__controls" aria-label={`${panel.label} organization controls`}>
+                    <label class="portfolio-page__control">
+                      <span>Year</span>
+                      <select data-portfolio-year>
+                        <option value="all">All</option>
+                        {yearOptions.map((year) => <option value={year}>{year}</option>)}
+                      </select>
+                    </label>
+
+                    <label class="portfolio-page__control">
+                      <span>Category</span>
+                      <select data-portfolio-category>
+                        <option value="all">All</option>
+                        {categoryOptions.map((tag) => <option value={tag.id}>{tag.label}</option>)}
+                      </select>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="portfolio-page__entries" data-portfolio-entry-grid>
+                  {
+                    panel.entries.map((entry) => (
+                      <article
+                        class="portfolio-entry"
+                        data-portfolio-entry
+                        data-year={entry.year}
+                        data-tags={entry.tags.join(" ")}
+                        data-lift
+                      >
+                        <div class="portfolio-entry__content">
+                          <div class="portfolio-entry__meta-row">
+                            <p class="portfolio-entry__year">{entry.year}</p>
+                            <p class="portfolio-entry__eyebrow">{entry.eyebrow}</p>
+                          </div>
+                          <h3>{entry.title}</h3>
+                          <p class="portfolio-entry__summary-label">{panel.summaryLabel ?? "Overview"}</p>
+                          <p class="portfolio-entry__abstract">{entry.abstract}</p>
+
+                          <div class="portfolio-entry__footer">
+                            <ul class="portfolio-entry__tags" aria-label="Portfolio categories">
+                              {
+                                entry.tags.map((tag) => {
+                                  const label = portfolioPage.tags.find((item) => item.id === tag)?.label ?? tag;
+                                  return <li>{label}</li>;
+                                })
+                              }
+                            </ul>
+
+                            {
+                              entry.href && entry.ctaLabel && (
+                                <a class="replica-outline-button replica-outline-button--dark" href={entry.href} target="_blank" rel="noreferrer">
+                                  {entry.ctaLabel}
+                                </a>
+                              )
+                            }
+                          </div>
+                        </div>
+                      </article>
+                    ))
+                  }
+                </div>
+
+                <p class="portfolio-page__empty" data-portfolio-empty hidden>
+                  No entries match the current year and category selection.
+                </p>
+              </section>
+            );
+          })
+        }
+      </div>
+    </section>
+  </article>
+
+  <script is:inline>
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const animateVisibleEntries = (panel) => {
+      if (!(panel instanceof HTMLElement) || prefersReducedMotion) {
+        return;
+      }
+
+      const entries = Array.from(panel.querySelectorAll("[data-portfolio-entry]")).filter(
+        (entry) => entry instanceof HTMLElement && !entry.hidden,
+      );
+
+      entries.forEach((entry, index) => {
+        entry.animate(
+          [
+            { opacity: 0, transform: "translateY(22px)" },
+            { opacity: 1, transform: "translateY(0)" },
+          ],
+          {
+            duration: 520,
+            easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+            delay: index * 55,
+            fill: "both",
+          },
+        );
+      });
+    };
+
+    const setupPortfolioHub = () => {
+      const root = document.querySelector("[data-portfolio-root]");
+      if (!(root instanceof HTMLElement) || root.dataset.portfolioBound === "true") {
+        return;
+      }
+
+      root.dataset.portfolioBound = "true";
+
+      const menuLinks = Array.from(document.querySelectorAll("[data-portfolio-menu-link]")).filter(
+        (button) => button instanceof HTMLButtonElement,
+      );
+
+      const panels = menuLinks
+        .map((button) => {
+          const target = button.dataset.target;
+          if (!target) {
+            return null;
+          }
+
+          const panel = root.querySelector(`[data-section-id="${target}"]`);
+          if (!(panel instanceof HTMLElement)) {
+            return null;
+          }
+
+          return { button, panel, id: target };
+        })
+        .filter((item) => item !== null);
+
+      const applyFilters = (panel) => {
+        if (!(panel instanceof HTMLElement)) {
+          return;
+        }
+
+        const yearSelect = panel.querySelector("[data-portfolio-year]");
+        const categorySelect = panel.querySelector("[data-portfolio-category]");
+        const emptyState = panel.querySelector("[data-portfolio-empty]");
+        const entries = Array.from(panel.querySelectorAll("[data-portfolio-entry]")).filter(
+          (entry) => entry instanceof HTMLElement,
+        );
+
+        if (!(yearSelect instanceof HTMLSelectElement) || !(categorySelect instanceof HTMLSelectElement)) {
+          return;
+        }
+
+        let visibleCount = 0;
+        entries.forEach((entry) => {
+          const entryYear = entry.dataset.year ?? "";
+          const entryTags = (entry.dataset.tags ?? "").split(/\s+/).filter(Boolean);
+          const matchesYear = yearSelect.value === "all" || yearSelect.value === entryYear;
+          const matchesCategory = categorySelect.value === "all" || entryTags.includes(categorySelect.value);
+          const visible = matchesYear && matchesCategory;
+          entry.hidden = !visible;
+          if (visible) {
+            visibleCount += 1;
+          }
+        });
+
+        if (emptyState instanceof HTMLElement) {
+          emptyState.hidden = visibleCount > 0;
+        }
+      };
+
+      const activatePanel = (panelId, updateHash = true) => {
+        panels.forEach(({ button, panel, id }) => {
+          const active = id === panelId;
+          button.classList.toggle("is-active", active);
+          button.setAttribute("aria-selected", active ? "true" : "false");
+          button.tabIndex = active ? 0 : -1;
+          panel.hidden = !active;
+          panel.toggleAttribute("data-active-panel", active);
+          panel.tabIndex = active ? 0 : -1;
+
+          if (active) {
+            applyFilters(panel);
+            animateVisibleEntries(panel);
+          }
+        });
+
+        if (updateHash && typeof window.history.replaceState === "function") {
+          const next = new URL(window.location.href);
+          next.hash = panelId;
+          window.history.replaceState(null, "", next);
+        }
+      };
+
+      panels.forEach(({ panel, button }) => {
+        const yearSelect = panel.querySelector("[data-portfolio-year]");
+        const categorySelect = panel.querySelector("[data-portfolio-category]");
+
+        button.addEventListener("click", () => activatePanel(button.dataset.target ?? panels[0]?.id ?? "research"));
+        button.addEventListener("keydown", (event) => {
+          const currentIndex = panels.findIndex((item) => item.button === button);
+          if (currentIndex < 0) {
+            return;
+          }
+
+          if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+            event.preventDefault();
+            const next = panels[(currentIndex + 1) % panels.length];
+            activatePanel(next.id, false);
+            next.button.focus();
+          }
+
+          if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+            event.preventDefault();
+            const next = panels[(currentIndex - 1 + panels.length) % panels.length];
+            activatePanel(next.id, false);
+            next.button.focus();
+          }
+
+          if (event.key === "Home") {
+            event.preventDefault();
+            activatePanel(panels[0].id, false);
+            panels[0].button.focus();
+          }
+
+          if (event.key === "End") {
+            event.preventDefault();
+            const next = panels[panels.length - 1];
+            activatePanel(next.id, false);
+            next.button.focus();
+          }
+        });
+
+        if (yearSelect instanceof HTMLSelectElement) {
+          yearSelect.addEventListener("change", () => {
+            applyFilters(panel);
+            animateVisibleEntries(panel);
+          });
+        }
+
+        if (categorySelect instanceof HTMLSelectElement) {
+          categorySelect.addEventListener("change", () => {
+            applyFilters(panel);
+            animateVisibleEntries(panel);
+          });
+        }
+      });
+
+      const initialHash = window.location.hash.replace(/^#/, "");
+      const defaultPanel = root.dataset.defaultPanel ?? panels[0]?.id ?? "research";
+      const initialPanel = panels.some((item) => item.id === initialHash) ? initialHash : defaultPanel;
+      activatePanel(initialPanel, false);
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", setupPortfolioHub, { once: true });
+    } else {
+      setupPortfolioHub();
+    }
+  </script>
+</BaseLayout>

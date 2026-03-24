@@ -1,0 +1,80 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { bioPage } from "../data/editorial";
+import { buildPrimaryImageStructuredData, buildProfilePageStructuredData, socialPreviewImages } from "../data/site";
+const pageTitle = "About";
+const pageDescription =
+  "Professional overview for Mark Jayson Martinez Farol, an economist and data scientist focused on econometrics, causal inference, and data engineering.";
+const siteOrigin = Astro.site ?? new URL("https://markjayson.com");
+const pageUrl = new URL(Astro.url.pathname, siteOrigin).toString();
+const structuredData = [
+  ...buildProfilePageStructuredData(pageUrl, pageTitle, pageDescription),
+  ...buildPrimaryImageStructuredData(pageUrl, {
+    src: bioPage.portraitSrc,
+    alt: "Portrait of Mark Jayson Farol.",
+    caption: "Primary portrait of Mark Jayson Farol",
+  }),
+];
+const upperSections = bioPage.sections.slice(0, 2);
+const lowerSections = bioPage.sections.slice(2);
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  page="bio"
+  accent="#edf0f2"
+  shell="bare"
+  footer={false}
+  replicaFooter={false}
+  replicaMotion={true}
+  structuredData={structuredData}
+  socialImage={socialPreviewImages.bio}
+>
+  <article class="replica-page bio-page">
+    <div class="replica-canvas bio-page__canvas">
+      <div class="bio-page__story">
+        <h1 class="bio-page__title" data-lift>{bioPage.title}</h1>
+
+        <div class="bio-page__upper" data-lift>
+          {
+            upperSections.map((section) => (
+              <section class="bio-page__section">
+                <h2 class="bio-page__section-title">{section.title}</h2>
+                {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+              </section>
+            ))
+          }
+        </div>
+
+        <div class="bio-page__lower-copy" data-lift>
+          {
+            lowerSections.map((section) => (
+              <section class="bio-page__section">
+                <h2 class="bio-page__section-title">{section.title}</h2>
+                {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+              </section>
+            ))
+          }
+
+          <section class="bio-page__explore" aria-label="Explore">
+            <h2 class="bio-page__explore-title">Explore</h2>
+            <div class="bio-page__explore-links">
+              {
+                bioPage.exploreLinks.map((link) => (
+                  <a class="bio-page__explore-link" href={link.href}>
+                    {link.label}
+                  </a>
+                ))
+              }
+            </div>
+          </section>
+        </div>
+
+        <figure class="bio-page__portrait-panel" aria-hidden="true" data-lift>
+          <img src={bioPage.visiblePortraitSrc} alt="" loading="eager" />
+        </figure>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

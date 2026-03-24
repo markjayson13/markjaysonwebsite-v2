@@ -1,0 +1,21 @@
+---
+const destination = "/portfolio#public-writing";
+const canonical = `https://markjayson.com${destination}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting to Portfolio Publications</title>
+    <meta name="robots" content="noindex,follow" />
+    <link rel="canonical" href={canonical} />
+    <meta http-equiv="refresh" content={`0;url=${destination}`} />
+    <script is:inline>
+      window.location.replace("/portfolio#public-writing");
+    </script>
+  </head>
+  <body>
+    <p>Redirecting to <a href={destination}>Portfolio Public Writing</a>.</p>
+  </body>
+</html>
