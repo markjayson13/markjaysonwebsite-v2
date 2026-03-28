@@ -1,0 +1,55 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { canvaEmbedUrl, type CanvaPageConfig } from "../data/canva";
+import "../styles/canva-embed.css";
+
+interface Props {
+  config: CanvaPageConfig;
+}
+
+const { config } = Astro.props;
+---
+
+<BaseLayout
+  title={config.title}
+  description={config.description}
+  page={config.pageKey}
+  accent={config.accent}
+  shell="bare"
+  footer={false}
+  replicaFooter={false}
+  replicaMotion={false}
+>
+  <section
+    class="canva-embed-page"
+    style={`--canva-page-ratio:${config.ratio};--canva-mask-color:${config.maskColor};--canva-mask-height:${config.maskHeight ?? 54}px;`}
+  >
+    <div class="canva-embed-page__canvas">
+      {config.anchors?.map((anchor) => <span id={anchor.id} class="canva-embed-page__anchor" style={`top:${anchor.top * 100}%`}></span>)}
+
+      <div class="canva-embed-page__frame">
+        <iframe
+          class="canva-embed-page__iframe"
+          src={canvaEmbedUrl(config.slide)}
+          title={config.title}
+          loading="eager"
+          allow="autoplay; fullscreen"
+          referrerpolicy="strict-origin-when-cross-origin"
+        ></iframe>
+
+        {config.hotspots?.map((hotspot) => (
+          <a
+            class="canva-embed-page__hotspot"
+            href={hotspot.href}
+            aria-label={hotspot.label}
+            target={hotspot.external ? "_blank" : undefined}
+            rel={hotspot.external ? "noreferrer noopener" : undefined}
+            style={`left:${hotspot.left}%;top:${hotspot.top}%;width:${hotspot.width}%;height:${hotspot.height}%`}
+          ></a>
+        ))}
+
+        <div class="canva-embed-page__mask" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,91 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { creativeCluster } from "../../data/editorial";
+import type { CreativeResumeSection } from "../../data/editorial";
+
+const artisticResume = creativeCluster.artisticResume;
+const artisticResumeSections: CreativeResumeSection[] = artisticResume.sections;
+const dateMetaPattern = /\b(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec|spring|summer|fall|winter)\b|\b(?:19|20)\d{2}\b/i;
+const sanitizeCreativeMeta = (meta?: string) => {
+  if (!meta) {
+    return undefined;
+  }
+
+  const parts = meta
+    .split("·")
+    .map((part) => part.trim())
+    .filter(Boolean);
+
+  const filtered = parts.filter((part) => !dateMetaPattern.test(part));
+  const next = (filtered.length ? filtered : parts).join(" · ").trim();
+
+  return next || undefined;
+};
+---
+
+<BaseLayout
+  title="Artistic Resume"
+  description="Artistic resume for Mark Jayson Martinez Farol."
+  page={artisticResume.theme.page}
+  accent={artisticResume.theme.accent}
+  shell="bare"
+  footer={false}
+  replicaFooter={false}
+  replicaMotion={true}
+>
+  <article class="replica-page creative-cluster-page creative-resume-page">
+    <div class="replica-canvas creative-cluster-page__canvas">
+      <div class="creative-cluster-page__shell">
+        <header class="creative-resume-page__masthead" data-lift>
+          <div class="creative-resume-page__masthead-copy">
+            <p class="creative-page__eyebrow">Artistic Resume</p>
+            <h1 class="creative-resume-page__name">
+              <a href="#summary">{artisticResume.title}</a>
+            </h1>
+          </div>
+          <nav class="creative-resume-page__jump" aria-label="Artistic resume sections">
+            {
+              artisticResumeSections.map((section) => (
+                <a class="creative-resume-page__jump-link" href={`#${section.id}`}>
+                  {section.label}
+                </a>
+              ))
+            }
+          </nav>
+        </header>
+
+        <div class="creative-resume-page__sections">
+          {
+            artisticResumeSections.map((section) => (
+              <section id={section.id} class="creative-resume-page__section" aria-labelledby={`${section.id}-title`}>
+                <div class="creative-resume-page__section-shell">
+                  <header class="creative-resume-page__section-header" data-lift>
+                    <h2 id={`${section.id}-title`} class="creative-resume-page__section-title">{section.label}</h2>
+                    <p class="creative-resume-page__section-intro">{section.intro}</p>
+                  </header>
+
+                  <div class="creative-resume-page__entries">
+                    {
+                      section.entries.map((entry) => {
+                        const entryMeta = sanitizeCreativeMeta(entry.meta);
+
+                        return (
+                          <article class="creative-resume-entry" data-lift>
+                            <h3 class="creative-resume-entry__title">{entry.title}</h3>
+                            {entry.subtitle && <p class="creative-resume-card__subtitle">{entry.subtitle}</p>}
+                            {entryMeta && <p class="creative-resume-card__meta">{entryMeta}</p>}
+                            {entry.description && <p class="creative-resume-entry__description">{entry.description}</p>}
+                          </article>
+                        );
+                      })
+                    }
+                  </div>
+                </div>
+              </section>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
