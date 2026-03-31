@@ -6143,13 +6143,13 @@ body[data-page="portfolio"] {
 body[data-page="bio"] .bio-page__canvas {
   width: 100%;
   max-width: none;
-  padding: 1.15rem var(--strict-main-inset) 3.75rem;
+  padding: 1.15rem 0 3.75rem var(--strict-main-inset);
 }
 
 body[data-page="bio"] .bio-page__story {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(24rem, 0.92fr);
-  gap: 1.15rem 1.55rem;
+  grid-template-columns: minmax(0, 1.02fr) minmax(21rem, 0.78fr);
+  gap: 1.15rem 2.7rem;
   max-width: none;
   align-items: start;
 }
@@ -6199,9 +6199,8 @@ body[data-page="bio"] .bio-page__portrait-panel {
   grid-column: 2;
   grid-row: 2 / span 2;
   align-self: end;
-  justify-self: stretch;
-  width: 100%;
-  max-width: none;
+  justify-self: end;
+  width: min(100%, 37rem);
   aspect-ratio: 1540 / 1546;
   margin: 0;
   float: none;
@@ -6667,6 +6666,10 @@ body[data-page="profiles"] .profiles-page__button:nth-child(5) {
 }
 
 @media (max-width: 900px) {
+  body[data-page="bio"] .bio-page__canvas {
+    padding-right: var(--strict-main-inset);
+  }
+
   body[data-page="bio"] .bio-page__story {
     grid-template-columns: 1fr;
     gap: 1rem;
