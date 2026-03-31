@@ -390,35 +390,35 @@ export const bioPage = {
     {
       title: "My Foundation: The Quantitative Economist",
       paragraphs: [
-        "My name is Mark Jayson Farol. I am a quantitative economist who has earned a Master of Arts in Quantitative Business Economics. My training includes economic analysis, causal inference, and decision-based problem solving. While many data scientists focus on simply predicting the future accurately, my training teaches me to understand why I get the results I do.",
-        "I am a structural model thinker. In other words, I discipline my own intuition and judgment based upon evidence. I want to be sure that any pattern I identify is real and provides some form of actionability rather than mere noise.",
+        "My name is Mark Jayson Farol. I am a quantitative economist with a Master of Arts in Quantitative Business Economics. My training covers economic analysis, causal inference, and the tools to understand not just what the data shows, but why.",
+        "I think in structural models. I test my own intuition against evidence and try to make sure any pattern I identify is real and worth acting on, not just statistical noise.",
       ],
     },
     {
       title: "The Engine: Data Engineering & Statistical Programming",
       paragraphs: [
-        "When working with complex economic issues in practice, I find myself grappling with reality. With that said, I have extensive experience transforming large, highly dimensional, and generally disorganized administrative datasets into usable resources for causal analysis.",
-        "That process of getting the data ready has required me to develop strong skills in both statistical programming and data architecture. Through my experience in creating robust ETL pipelines using a variety of tools, I am able to construct the data pipeline safely from a provenance standpoint before running a single econometric model. I do not just analyze data. I create the pipeline that enables the analysis.",
+        "Complex economic questions rarely come with clean data. I have spent a lot of time working with large, disorganized administrative datasets and building the infrastructure needed to make causal analysis possible.",
+        "Getting the data ready requires both statistical programming and data architecture skills. I build ETL pipelines in Python, SQL, and related tools that are provenance-safe and reproducible before a single econometric model runs. I build the pipeline that makes the analysis possible, not just the analysis itself.",
       ],
     },
     {
       title: "The Interdisciplinary Mindset",
       paragraphs: [
-        "From day one I was driven by a multipassionate curiosity to understand what happens in reality and to verify actual world patterns. From a natural point of view, I have long been interested in the complex places where human behavior, systemic incentive structures, and data converge.",
-        "I chose economics because it provided a rigorous mathematical framework through which I could evaluate human decision making. This perspective has also been heavily influenced by my formal scientific background, including pure mathematics, advanced programming, and modern data science.",
+        "I have always been drawn to the places where human behavior, incentive structures, and measurable data intersect. That curiosity pushed me toward economics before I had the language to explain why.",
+        "I chose economics because it gave me a rigorous framework for studying decisions, not just describing them. My background in mathematics and programming sharpened that further.",
       ],
     },
     {
       title: "Leadership and Translation",
       paragraphs: [
-        "While there are many people who can execute technically complex tasks well, my overall goal has always been to translate complex theories into practical application. Whether I am using advanced techniques like Difference GMM to study higher education finance or modeling dynamic panels, I believe strongly in translating technical ideas into practical applications for non-technical stakeholders.",
-        "That same desire to translate complex ideas into tangible value carries over to my role as an educator. I regularly teach and mentor students in drawing valid economic inferences, evaluating their own findings, and seeing the best path forward.",
+        "Technical sophistication matters less if the results cannot be explained to the people who need to act on them. I have spent years in front of students, faculty, and non-specialist audiences translating economic findings into something usable — whether that meant simplifying a regression result or rewriting a methods section for a policy audience.",
+        "Teaching reinforces that. I work with students on drawing valid economic inferences, evaluating their findings critically, and knowing when a result is worth building on.",
       ],
     },
     {
       title: "What Lies Ahead",
       paragraphs: [
-        "Currently, I am focusing on utilizing these quantitative frameworks in real-world business contexts, particularly in areas such as analytics, financial economics, and strategic operations. I am seeking opportunities that require both a high level of analytical rigor and the ability to transform ambiguous, noisy data into a structured narrative that ultimately drives profitability.",
+        "Right now I am focused on applying these tools in business contexts, especially in analytics, financial economics, and strategy. I want roles where the quantitative work is rigorous and the results actually shape decisions.",
       ],
     },
   ],
@@ -461,24 +461,24 @@ export const resumePage = {
       title: "Bachelor of Science in Business Administration",
       subtitle: "Economics, University of Nevada, Las Vegas",
       summary:
-        "Built a multidisciplinary foundation across business, economics, communication, and performance, including early research development, scholarly writing, and publication.",
+        "Built a foundation across business, economics, and communication, with early research development and a first undergraduate publication.",
     },
     {
       title: "Minor in Theatre",
       subtitle: "University of Nevada, Las Vegas",
       summary:
-        "Supplementary training that strengthened presentation skills, public-facing confidence, and communication discipline alongside economics coursework.",
+        "Training that strengthened presentation skills and public-speaking confidence alongside the economics coursework.",
     },
     {
       title: "Advanced Diploma",
       subtitle: "Liberty High School",
       summary:
-        "The transition into U.S. schooling built the adaptability, confidence, and persistence that later shaped my academic and professional trajectory.",
+        "The transition into U.S. schooling built the adaptability and persistence that later shaped how I approached college and professional life.",
     },
   ] satisfies ResumeCredential[],
   experienceNarrative: [
-    "My experience combines academic research, teaching support, and customer-facing leadership. Across those roles, the common thread has been translating complexity into clear action, whether that meant mentoring students, structuring data workflows, supporting operational performance, or helping others understand what evidence actually means.",
-    "That through-line sharpened further as my faculty began to recognize my academic strength, research ability, and discipline. I presented work at symposiums, achieved my first publication, expanded smaller-scale analyses into larger empirical projects, and developed the habits that later supported my transition into graduate study and long-form research infrastructure building.",
+    "My experience spans academic research, teaching support, and customer-facing leadership. Across those roles, the common thread has been taking something complex and making it usable — whether that meant helping students understand regression output, structuring a dataset for reproducible analysis, or communicating results to people who needed to act on them.",
+    "That focus sharpened further as my faculty began to recognize my research output. I presented work at symposiums, published my first article, expanded smaller analyses into larger empirical projects, and built the habits that carried me into graduate study and longer-form infrastructure work.",
   ],
   roles: [
     {
@@ -503,11 +503,11 @@ export const resumePage = {
       organization: "Kate Spade New York",
       role: "Sales Associate",
       summary:
-        "Drove revenue through high-touch customer experience, clienteling, strong product storytelling, and a consistent record of service and sales performance.",
+        "Built a strong sales record through deep product knowledge, repeat client outreach, and consistent service across a high-traffic floor.",
     },
   ] satisfies ResumeRole[],
   certificationsIntro:
-    "My certifications reflect a broader habit of mine: I treat learning as something continuous, applied, and alive beyond the classroom. After building a strong academic foundation through economics, statistics, and quantitative research, I continued developing my technical skills through structured training in data science, analytics, finance, and evidence-based problem solving. They extend the applied side of my background and help me keep building a toolkit that stays current, disciplined, and usable.",
+    "My certifications reflect a broader pattern: I treat learning as something that continues past the classroom. After the econometrics and research training, I kept going with structured programs in data science, analytics, and finance — tools that build directly on the quantitative foundation and stay usable in practice.",
   certifications: [
     {
       title: "The Securities Industry Essentials (SIE)",
@@ -565,7 +565,7 @@ export const resumePage = {
     {
       title: "Publications",
       description:
-        "Published work and public-facing writing that translate technical analysis into accessible takeaways.",
+        "Published work and public-facing writing that translate technical analysis into readable argument.",
       href: withBase("/portfolio#publications"),
       cta: "Open portfolio",
     },
@@ -578,7 +578,7 @@ export const resumePage = {
     },
   ] satisfies ResumeProjectCard[],
   skillsIntro:
-    "My skills were built across research, education, professional work, and communication, which is why they function less like separate categories and more like connected branches of the same system. Economics, finance, statistics, and econometrics give me the analytical foundation to ask strong questions; programming, data engineering, and research tools help me investigate them; and teaching, leadership, and communication help me translate them.",
+    "My skills came from different directions — research, teaching, and professional work — but they reinforce each other. The economics gives me the right questions, the data engineering gives me the means to answer them, and the communication side means the results can actually be used.",
   skillGroups: [
     {
       title: "Economics, Finance & Policy",
@@ -615,13 +615,13 @@ export const portfolioPage = {
       id: "research",
       label: "Research",
       intro:
-        "My research investigates the systems, incentives, and institutions that influence economic and social life, using quantitative analysis and large-scale data to uncover meaningful patterns.",
+        "My research uses quantitative analysis and large-scale administrative data to examine how financial aid, institutional behavior, and pricing systems work in U.S. higher education.",
       summaryLabel: "Abstract",
     },
     {
       id: "projects",
       label: "Projects",
-      intro: "Data engineering systems and analytical tools built to reduce friction, improve quality, and support decision-ready research.",
+      intro: "Data engineering systems and analytical tools built to reduce preparation time, improve data quality, and support reproducible research.",
       summaryLabel: "Overview",
     },
     {
@@ -691,7 +691,7 @@ export const portfolioPage = {
       action:
         "Used CPS-MORG data in a quasi-experimental design with interaction terms and decomposition methods to compare tech and non-tech labor-market outcomes.",
       result:
-        "Built an empirical framework that isolates how AI exposure may shift wage inequality instead of relying on broad speculation.",
+        "Built an empirical framework that isolates how AI exposure may shift wage inequality without relying on broad assumptions.",
       tags: ["econometrics-causal", "finance-pricing"],
     },
     {
@@ -707,7 +707,7 @@ export const portfolioPage = {
       action:
         "Built food-security and literacy indices from local survey responses and estimated the relationship across linear probability, probit, logit, and IV-style specifications.",
       result:
-        "Produced a clearer local evidence base showing that stronger financial literacy aligns with lower food-insecurity risk and supports intervention design.",
+        "Produced local evidence showing that stronger financial literacy is associated with lower food-insecurity risk, with implications for program design.",
       tags: ["econometrics-causal", "higher-ed-policy"],
     },
     {
@@ -825,7 +825,7 @@ export const portfolioPage = {
       action:
         "Developed public-facing commentary formats that translate institutional incentives, policy tradeoffs, and research findings into direct language.",
       result:
-        "Created a clearer bridge between technical analysis and broader audiences who need the implications, not just the methods.",
+        "Made the research implications available to readers outside academic settings.",
       tags: ["public-writing", "higher-ed-policy"],
     },
     {
@@ -935,7 +935,7 @@ const researchEntries = [
 export const researchPage = {
   title: "Research",
   lead:
-    "My research investigates the systems, incentives, and institutions that influence economic and social life, using quantitative analysis and large-scale data to uncover meaningful patterns.",
+    "My research uses quantitative analysis and large-scale administrative data to examine how financial aid, institutional behavior, and pricing systems work in U.S. higher education.",
   legend: "\u2020 Working Paper \u2021 Published",
   rail: [
     { id: "2026", label: "2026" },
@@ -1019,7 +1019,7 @@ export const projectsPage = {
       id: "data-engineering",
       label: "Data Engineering",
       intro:
-        "I build data systems that transform fragmented, messy, or multi-source information into structured, usable, and research-ready datasets. This work includes panel construction, data harmonization, variable engineering, validation, and reproducible workflows designed to support serious empirical analysis.",
+        "I build data systems that take fragmented, inconsistent, or multi-source information and turn it into structured, analysis-ready datasets. The work covers panel construction, harmonization, variable engineering, validation, and reproducible workflows.",
       entries: projectDataEngineeringEntries,
     },
     {
@@ -1044,19 +1044,19 @@ const articleSections = [
     id: "op-ed",
     title: "OP-Ed",
     description:
-      "These are argument-driven pieces written for broader public audiences. They focus on issues that deserve clarity, urgency, and perspective, often connecting economic reasoning and systems thinking to questions of policy, opportunity, and everyday life.",
+      "Argument-driven pieces written for broader public audiences, connecting economic reasoning to questions of policy, opportunity, and everyday life.",
   },
   {
     id: "commentaries",
     title: "Commentaries",
     description:
-      "These writings are shorter reflections on institutions, incentives, culture, and social behavior. They often begin with an observation or tension and expand into a broader interpretation of how systems function and why that matters.",
+      "Shorter reflections on institutions, incentives, and social behavior that start from an observation and work toward a broader interpretation.",
   },
   {
     id: "essays-notes",
     title: "Essays & Notes",
     description:
-      "This section holds writing that moves more freely across forms: reflective essays, interdisciplinary observations, public scholarship, and exploratory pieces that sit between analysis, narrative, and critique.",
+      "Writing that moves more freely: reflective essays, public scholarship, and exploratory pieces that don't fit neatly into a formal paper format.",
   },
 ] satisfies ArticleSection[];
 

@@ -371,13 +371,13 @@ export const profile = {
   location: "Las Vegas, Nevada, United States",
   relocation: "Relocating to New York, NY",
   summary:
-    "I build research and analytical systems that turn complex data into decision-ready evidence for finance, policy, and institutional strategy.",
+    "I build research and analytical systems that turn complex data into clean evidence for finance, policy, and institutional strategy.",
   mission:
     "My work connects econometric reasoning, high-dimensional data, and plain-language communication so technical results can guide real decisions.",
   audience:
-    "I am pursuing economist, data scientist, and analytical roles where quantitative depth supports pricing, policy, research, strategy, and financial decision-making.",
+    "I am pursuing economist, data scientist, and analytical roles where quantitative work supports pricing, policy, research, strategy, and financial decision-making.",
   distinction:
-    "Selected as an Outstanding Student Commencement Speaker for translating technical analysis into persuasive, public-facing communication.",
+    "Selected as an Outstanding Student Commencement Speaker for making complex research understandable to a general audience.",
   languages: ["English", "Tagalog"],
   tools: ["Stata", "R", "Python", "Excel", "DuckDB", "PyArrow", "GitHub"],
 };
@@ -701,7 +701,7 @@ export const experiences: ExperienceItem[] = [
       "Created lecture slide decks and delivered lectures and review sessions for 200+ students per semester across micro and macro principles.",
       "Provided quantitative course support in statistics and econometrics, helping students interpret probability, hypothesis tests, and regression output.",
       "Held high-traffic office hours five days per week and coached students through capstone research design, data work, and final presentations.",
-      "Partnered with faculty on pacing, assessment design, and recurring pain-point analysis.",
+      "Worked with faculty on pacing, assessment design, and identifying where students consistently got stuck.",
     ],
     skills: [
       "University lecturing",
@@ -721,7 +721,7 @@ export const experiences: ExperienceItem[] = [
     bullets: [
       "Built an IPEDS panel construction pipeline that converts cross-sectional releases into consistent institution-year data suitable for longitudinal analysis.",
       "Authored three working papers on college pricing dynamics, aid packaging, and institutional behavior using fixed effects and IV strategies.",
-      "Expanded technical depth through advanced econometrics, panel methods, and self-directed data engineering work in Stata, R, and Python.",
+      "Deepened expertise in advanced econometrics, panel methods, and data engineering through self-directed work in Stata, R, and Python.",
       "Presented one working paper at WEAI's 100th Annual Conference.",
     ],
     skills: ["Econometrics", "Panel data analysis", "Causal inference", "Data engineering", "GitHub"],
@@ -737,7 +737,7 @@ export const experiences: ExperienceItem[] = [
       "Ranked as the top seller across tenure and earned top-performer recognition for three consecutive years.",
       "Analyzed selling reports and operational records to forecast performance and communicate daily and weekly metrics to a 15-person team.",
       "Supported opening and closing leadership, cash controls, bank deposits, and accuracy across roughly $3,600 in daily transactions.",
-      "Built repeat clientele through proactive outreach and confident issue de-escalation.",
+      "Built repeat clientele through proactive outreach and handling problems before they escalated.",
     ],
     skills: [
       "Sales operations",
@@ -753,12 +753,12 @@ export const experiences: ExperienceItem[] = [
     dateRange: "Mar 2020 - Jul 2022",
     location: "Las Vegas, Nevada",
     summary:
-      "Focused on revenue growth through product storytelling, personalized customer recommendations, and polished execution in a fast-moving retail environment.",
+      "Worked toward sales goals through strong product knowledge, repeat client outreach, and steady floor execution.",
     bullets: [
-      "Worked toward aggressive sales goals through repeat clientele, outreach, and customer-tailored recommendations.",
-      "Built deep product knowledge across categories and communicated value with clarity and speed.",
-      "Shared floor insights with peers, supported peak traffic needs, and helped maintain a customer-ready selling environment.",
-      "Handled objections and high-tension situations with diplomacy while protecting the brand experience.",
+      "Worked toward aggressive sales goals through repeat clientele, outreach, and recommendations matched to each customer.",
+      "Built deep product knowledge across categories and gave recommendations that actually matched what the customer needed.",
+      "Shared floor insights with peers, filled in during peak traffic, and kept the store ready throughout the day.",
+      "Handled objections and tense situations with diplomacy and kept the interaction on good terms.",
     ],
     skills: ["Sales", "Clienteling and CRM", "Product knowledge", "Adaptability", "Cashiering"],
   },
@@ -800,7 +800,7 @@ export const researchItems: ResearchItem[] = [
     outlet: "Spectra Undergraduate Research Journal",
     date: "May 15, 2025",
     summary:
-      "Published article examining tuition and cost-of-attendance drivers with NCES and IPEDS data, translating the findings into policy-relevant implications for students and institutions.",
+      "Published article examining what drives tuition and total cost of attendance using NCES and IPEDS data, with implications for students and institutions.",
     methods: ["IPEDS", "Stata", "Econometric modeling", "Public policy"],
     links: [
       { label: "DOI", href: "https://doi.org/10.9741/2766-7227.1033" },
@@ -876,7 +876,7 @@ export const portfolioEntries: PortfolioEntry[] = [
     category: "Forecasting and model communication",
     timeframe: "May 2025",
     problem:
-      "Forecast Alaska Airlines monthly Revenue Passenger Miles in a format that would make sense to a hiring-manager audience, not just an academic evaluator.",
+      "Forecast Alaska Airlines monthly Revenue Passenger Miles and write it up for a business audience, not just a methods reviewer.",
     approach:
       "Ran exploratory analysis, transformation, stationarity testing, seasonal ARIMA selection, residual diagnostics, and a SARIMA plus GARCH refinement for volatility clustering.",
     outcome:
