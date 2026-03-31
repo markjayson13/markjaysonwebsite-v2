@@ -45,6 +45,11 @@ body[data-page="projects"] {
   color: #f4f6fb;
 }
 
+body[data-page="economics-projects"] {
+  background: var(--replica-green);
+  color: #f4f6ef;
+}
+
 body[data-page="articles"] {
   background: var(--replica-green);
   color: #f4f6ef;

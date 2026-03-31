@@ -307,6 +307,11 @@ export const pageThemes: Record<string, PageTheme> = {
     leadMeasure: "52rem",
     copyMeasure: "64rem",
   },
+  "economics-projects": {
+    titleMeasure: "31rem",
+    leadMeasure: "52rem",
+    copyMeasure: "64rem",
+  },
   articles: {
     titleMeasure: "31rem",
     leadMeasure: "52rem",
