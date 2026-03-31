@@ -4897,7 +4897,7 @@ body[data-page="home"] .home-hero-band__headline-row--canva {
   gap: 1.7rem;
   align-items: end;
   margin-bottom: 0.55rem;
-  padding-left: clamp(0.75rem, 1vw, 1rem);
+  padding-left: clamp(1.45rem, 2vw, 2.1rem);
 }
 
 body[data-page="home"] .home-hero-band__headline-top {
@@ -4952,7 +4952,7 @@ body[data-page="home"] .home-hero-band__frame--canva {
 body[data-page="home"] .home-hero-band__frame-title--canva {
   grid-row: 1;
   gap: 0.2rem;
-  padding: 0.68rem 0.68rem 0.9rem;
+  padding: 0.68rem 0.9rem 0.9rem clamp(1.45rem, 2vw, 2.1rem);
   background: transparent;
 }
 
@@ -6148,8 +6148,8 @@ body[data-page="bio"] .bio-page__canvas {
 
 body[data-page="bio"] .bio-page__story {
   display: grid;
-  grid-template-columns: minmax(0, 1.02fr) minmax(21rem, 0.78fr);
-  gap: 1.15rem 2.7rem;
+  grid-template-columns: minmax(0, 1fr) minmax(24rem, 0.92fr);
+  gap: 1.15rem 1.55rem;
   max-width: none;
   align-items: start;
 }
@@ -6199,8 +6199,9 @@ body[data-page="bio"] .bio-page__portrait-panel {
   grid-column: 2;
   grid-row: 2 / span 2;
   align-self: end;
-  justify-self: end;
-  width: min(100%, 37rem);
+  justify-self: stretch;
+  width: 100%;
+  max-width: none;
   aspect-ratio: 1540 / 1546;
   margin: 0;
   float: none;
