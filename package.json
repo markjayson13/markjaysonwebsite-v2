@@ -10,7 +10,7 @@
     "build": "astro build",
     "prepreview": "npm run check:node",
     "preview": "astro preview",
-    "deploy": "wrangler pages deploy dist --project-name markjaysonwebsite"
+    "deploy": "wrangler pages deploy dist --project-name markjaysonwebsite-v2"
   },
   "keywords": [
     "astro",

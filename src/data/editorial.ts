@@ -303,7 +303,7 @@ export const homePage = {
     headlineTop: "Mark Jayson",
     headlineFrame: ["Martinez", "Farol"],
     roles: [
-      { label: "Economist", href: withBase("/economics-projects") },
+      { label: "Economist", href: withBase("/portfolio#research") },
       { label: "Data Scientist", href: withBase("/portfolio#projects") },
       { label: "Creative", href: withCreativeSite("/") },
     ],

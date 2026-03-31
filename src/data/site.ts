@@ -173,7 +173,6 @@ export const mainSiteTopLinks: MainSiteTopLink[] = [
   { label: "Portfolio", href: withBase("/portfolio") },
   { label: "Profiles", href: withBase("/profiles") },
   { label: "Contact", href: withBase("/#contact") },
-  { label: "Menu Bar", menuTrigger: true },
 ] satisfies MainSiteTopLink[];
 
 export const navLinks: NavLink[] = [
@@ -191,8 +190,8 @@ export const footerSecondaryLinks: NavLink[] = [
 ];
 
 export const footerLegalLinks: NavLink[] = [
-  { label: "Privacy Policy", href: withBase("/privacy") },
-  { label: "Terms of Use", href: withBase("/terms") },
+  { label: "Privacy Policy", href: withBase("/privacy-policy") },
+  { label: "Terms of Use", href: withBase("/terms-of-use") },
 ];
 
 export const footerContact: FooterContact = {
@@ -303,11 +302,6 @@ export const pageThemes: Record<string, PageTheme> = {
     copyMeasure: "68rem",
   },
   projects: {
-    titleMeasure: "31rem",
-    leadMeasure: "52rem",
-    copyMeasure: "64rem",
-  },
-  "economics-projects": {
     titleMeasure: "31rem",
     leadMeasure: "52rem",
     copyMeasure: "64rem",
