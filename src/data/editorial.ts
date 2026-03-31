@@ -19,10 +19,15 @@ export type HomeField = {
   full?: boolean;
 };
 
+export type HomeHeroRole = {
+  label: string;
+  href: string;
+};
+
 export type HomeHero = {
   headlineTop: string;
   headlineFrame: string[];
-  roleLabels: string[];
+  roles: HomeHeroRole[];
   topLinks: HomeTopLink[];
   videoSrc: string;
 };
@@ -297,7 +302,11 @@ export const homePage = {
   hero: {
     headlineTop: "Mark Jayson",
     headlineFrame: ["Martinez", "Farol"],
-    roleLabels: ["Economist", "Data Scientist", "Creative"],
+    roles: [
+      { label: "Economist", href: withBase("/economics-projects") },
+      { label: "Data Scientist", href: withBase("/portfolio#projects") },
+      { label: "Creative", href: withCreativeSite("/") },
+    ],
     topLinks: mainSiteTopLinks,
     videoSrc: withBase("/media/canva-home-hero.mp4"),
   } satisfies HomeHero,

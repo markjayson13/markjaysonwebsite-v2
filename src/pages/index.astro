@@ -32,8 +32,10 @@ const heroQuickLinks = heroQuickLinkOrder
 
           <div class="home-hero-band__role-strip" aria-label="Disciplines" data-home-stagger>
             {
-              homePage.hero.roleLabels.map((label) => (
-                <span class="home-hero-band__role-chip">{label}</span>
+              homePage.hero.roles.map((role) => (
+                <a class="home-hero-band__role-chip" href={role.href}>
+                  {role.label}
+                </a>
               ))
             }
           </div>
