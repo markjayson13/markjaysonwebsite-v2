@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SocialIcon from "../components/SocialIcon.astro";
 import { profilesPage } from "../data/editorial";
 import { buildPrimaryImageStructuredData, buildProfilePageStructuredData, socialPreviewImages } from "../data/site";
 
@@ -55,12 +56,12 @@ const structuredData = [
           profilesPage.buttons.map((button) =>
             button.href ? (
               <a class="profiles-page__button" href={button.href} target="_blank" rel="noreferrer" data-lift role="listitem">
-                <span class="profiles-page__symbol">{button.symbol}</span>
+                <span class="profiles-page__symbol" aria-hidden="true"><SocialIcon icon={button.icon} /></span>
                 <span>{button.label}</span>
               </a>
             ) : (
               <span class="profiles-page__button profiles-page__button--disabled" data-lift role="listitem">
-                <span class="profiles-page__symbol">{button.symbol}</span>
+                <span class="profiles-page__symbol" aria-hidden="true"><SocialIcon icon={button.icon} /></span>
                 <span>{button.label}</span>
               </span>
             )

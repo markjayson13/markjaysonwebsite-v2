@@ -1,31 +1,9 @@
 ---
 import { canonicalSiteUrl, footerContact, footerLegalLinks, footerSecondaryLinks, footerSocialLinks, profile } from "../data/site";
+import SocialIcon from "./SocialIcon.astro";
 
 const currentYear = new Date().getFullYear();
 const siteLabel = canonicalSiteUrl.replace(/^https?:\/\//, "");
-
-const footerIconMarkup: Record<(typeof footerSocialLinks)[number]["icon"], string> = {
-  linkedin:
-    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 8.7H2.7V21h2.8zm-1.4-4.9A1.64 1.64 0 1 0 4.1 7a1.64 1.64 0 0 0 0-3.2m6 4.9H7.4V21h2.8v-6.9c0-1.8.3-3.5 2.5-3.5s2.2 2 2.2 3.6V21h2.8v-7.4c0-3.6-.8-6.3-5-6.3a4.33 4.33 0 0 0-3.7 2.1z"/></svg>',
-  github:
-    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.8c-2.9.6-3.5-1.2-3.5-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 3 .9.1-.6.4-1.1.7-1.3-2.3-.3-4.8-1.2-4.8-5.2 0-1.1.4-2 1-2.8-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.7 9.7 0 0 1 5 0c2-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.7.7.8 1 1.7 1 2.8 0 4-2.5 4.9-4.8 5.2.4.3.7.9.7 1.8V21c0 .3.2.6.7.5A10 10 0 0 0 12 2"/></svg>',
-  scholar:
-    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 4 9 5-9 5-9-5zm-6 8.2V16l6 3.2 6-3.2v-3.8l-6 3.3z"/></svg>',
-  orcid:
-    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.1 6.6H5V18h2.1zm-1-3.1a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4M18.9 12a4.9 4.9 0 0 1-4.9 5H9.2V7H14a4.9 4.9 0 0 1 4.9 5m-2.1 0A2.8 2.8 0 0 0 14 9.2h-2.7v5.6H14a2.8 2.8 0 0 0 2.8-2.8"/></svg>',
-  researchgate:
-    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18V6h5.5a4 4 0 0 1 1.6 7.7L16 18h-2.7l-2.5-4h-2V18zm2.1-5.9h3.1a1.9 1.9 0 1 0 0-3.8H8.1z"/></svg>',
-  backstage:
-    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h7.8a4 4 0 0 1 0 8H9v2h3.9a4 4 0 0 1 0 8H5zm4 6h3.3a2 2 0 0 0 0-4H9zm0 8h3.5a2 2 0 0 0 0-4H9z"/></svg>',
-  instagram:
-    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 3h9A4.5 4.5 0 0 1 21 7.5v9a4.5 4.5 0 0 1-4.5 4.5h-9A4.5 4.5 0 0 1 3 16.5v-9A4.5 4.5 0 0 1 7.5 3m0 1.8A2.7 2.7 0 0 0 4.8 7.5v9a2.7 2.7 0 0 0 2.7 2.7h9a2.7 2.7 0 0 0 2.7-2.7v-9a2.7 2.7 0 0 0-2.7-2.7zm9.6 1.3a1.1 1.1 0 1 1-1.1 1.1 1.1 1.1 0 0 1 1.1-1.1M12 7.7A4.3 4.3 0 1 1 7.7 12 4.3 4.3 0 0 1 12 7.7m0 1.8A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5"/></svg>',
-  facebook:
-    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.7 21v-8.1h2.7l.4-3.1h-3.1V7.9c0-.9.3-1.5 1.6-1.5h1.7V3.6a21 21 0 0 0-2.4-.1c-2.4 0-4 1.5-4 4.2v2.1H8v3.1h2.6V21z"/></svg>',
-  x:
-    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 3H22l-6.8 7.8L23 21h-6.1l-4.7-6.2L6.8 21H3.7l7.3-8.4L2 3h6.2l4.2 5.6zm-1.1 16h1.7L7.3 4.9H5.5z"/></svg>',
-  tiktok:
-    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.6 3h2.5a4.6 4.6 0 0 0 3.2 3.1v2.5a7 7 0 0 1-3.2-.8v6.4a5.2 5.2 0 1 1-5.2-5.2c.3 0 .7 0 1 .1v2.6a2.6 2.6 0 1 0 1.7 2.5z"/></svg>',
-};
 ---
 
 <footer class="site-footer" aria-labelledby="site-footer-title">
@@ -38,7 +16,7 @@ const footerIconMarkup: Record<(typeof footerSocialLinks)[number]["icon"], strin
 
     <section class="site-footer__contact" aria-labelledby="site-footer-contact-title">
       <p id="site-footer-contact-title" class="site-footer__section-title">Contact</p>
-      <a class="site-footer__contact-link" href={`mailto:${footerContact.email}`}>{footerContact.email}</a>
+      <p class="site-footer__contact-link" aria-label={`Email ${footerContact.email}`}>{footerContact.email}</p>
       <p class="site-footer__contact-copy">{footerContact.location}</p>
       <a class="site-footer__button" href={footerContact.buttonHref}>{footerContact.buttonLabel}</a>
     </section>
@@ -63,11 +41,11 @@ const footerIconMarkup: Record<(typeof footerSocialLinks)[number]["icon"], strin
           footerSocialLinks.map((link) =>
             link.enabled && link.href ? (
               <a class="site-footer__social-link" href={link.href} target="_blank" rel="noreferrer" aria-label={link.label}>
-                <span class="site-footer__social-icon" set:html={footerIconMarkup[link.icon]} />
+                <span class="site-footer__social-icon"><SocialIcon icon={link.icon} /></span>
               </a>
             ) : (
               <span class="site-footer__social-link site-footer__social-link--disabled" aria-label={link.label}>
-                <span class="site-footer__social-icon" set:html={footerIconMarkup[link.icon]} />
+                <span class="site-footer__social-icon"><SocialIcon icon={link.icon} /></span>
               </span>
             ),
           )

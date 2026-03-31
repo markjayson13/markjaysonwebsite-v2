@@ -1,4 +1,5 @@
 import { homeDiscoveryItems, mainSiteTopLinks, socialLinks, withCreativeSite } from "./site";
+import type { FooterSocialLink } from "./site";
 import { withBase } from "../utils/paths";
 
 export type HomeLink = {
@@ -274,7 +275,7 @@ export type CreativePageTheme = {
 
 export type ProfileButton = {
   label: string;
-  symbol: string;
+  icon: FooterSocialLink["icon"];
   href?: string;
   disabled?: boolean;
 };
@@ -296,7 +297,6 @@ export type ProfilesPage = {
 const socialLookup = new Map(socialLinks.map((link) => [link.label, link.href]));
 const githubProfile = "https://github.com/markjayson13";
 const backstageHref = socialLookup.get("Backstage");
-export const replicaFooterCredit = "© Mark Jayson Martinez Farol";
 
 export const homePage = {
   hero: {
@@ -311,7 +311,7 @@ export const homePage = {
     videoSrc: withBase("/media/canva-home-hero.mp4"),
   } satisfies HomeHero,
   discovery: {
-    title: "What do you want to find Out?",
+    title: "What do you want to find out?",
     defaultLabel: "About",
   } satisfies HomeDiscovery,
   latestItems: [
@@ -1567,10 +1567,10 @@ export const profilesPage = {
   lead: "A curated hub of my academic, professional, and technical presence across the web.",
   videoSrc: withBase("/media/canva-profiles.mp4"),
   buttons: [
-    { label: "LinkedIn", symbol: "in", href: socialLookup.get("LinkedIn") },
-    { label: "GitHub", symbol: "{ }", href: githubProfile },
-    { label: "ORCID", symbol: "iD", href: socialLookup.get("ORCID") },
-    { label: "Research Gate", symbol: "RG", href: socialLookup.get("ResearchGate") },
-    { label: "Google Scholar", symbol: "GS", href: socialLookup.get("Google Scholar") },
+    { label: "LinkedIn", icon: "linkedin", href: socialLookup.get("LinkedIn") },
+    { label: "GitHub", icon: "github", href: githubProfile },
+    { label: "ORCID", icon: "orcid", href: socialLookup.get("ORCID") },
+    { label: "ResearchGate", icon: "researchgate", href: socialLookup.get("ResearchGate") },
+    { label: "Google Scholar", icon: "scholar", href: socialLookup.get("Google Scholar") },
   ] satisfies ProfileButton[],
 } satisfies ProfilesPage;

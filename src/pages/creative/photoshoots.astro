@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { creativeCluster, replicaFooterCredit } from "../../data/editorial";
+import { creativeCluster } from "../../data/editorial";
 import { buildImageCollectionPageStructuredData, socialPreviewImages } from "../../data/site";
 import type { CreativeGalleryItem } from "../../data/editorial";
 
@@ -128,8 +128,6 @@ const structuredData = buildImageCollectionPageStructuredData(
           </div>
         </div>
       </div>
-
-      <p class="page-credit page-credit--light">{replicaFooterCredit}</p>
     </div>
   </article>
 </BaseLayout>

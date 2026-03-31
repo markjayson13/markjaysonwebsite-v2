@@ -30,10 +30,14 @@ body[data-page="portfolio"] {
 
 body[data-page="bio"],
 body[data-page="resume"],
-body[data-page="research"],
-body[data-page="profiles"] {
+body[data-page="research"] {
   background: var(--replica-light);
   color: #080808;
+}
+
+body[data-page="profiles"] {
+  background: var(--replica-black);
+  color: #f3f1ea;
 }
 
 body[data-page="projects"] {
@@ -2428,9 +2432,15 @@ body[data-page="creative"] .section-rail__link[aria-selected="true"] {
   align-items: center;
   justify-content: center;
   min-width: 2.15rem;
-  font-size: 1.16rem;
-  font-weight: 600;
+  width: 1.35rem;
+  height: 1.35rem;
   line-height: 1;
+}
+
+.profiles-page__symbol :is(svg) {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
 }
 
 @media (max-width: 1180px) {
@@ -6035,6 +6045,10 @@ body[data-page="portfolio"] .portfolio-page__empty {
   font-size: 0.94rem;
 }
 
+body[data-page="portfolio"] .portfolio-page__empty[hidden] {
+  display: none !important;
+}
+
 @media (max-width: 1080px) {
   body[data-page="portfolio"] .portfolio-page__menu {
     gap: 0.3rem 0.95rem;
@@ -6556,11 +6570,12 @@ body[data-page="portfolio"] .portfolio-entry__footer .replica-outline-button {
 
 body[data-page="profiles"] .profiles-page {
   min-height: 100svh;
+  background: #000000;
 }
 
 body[data-page="profiles"] .profiles-page__video {
   object-position: center 50%;
-  transform: scale(0.88);
+  transform: none;
   filter: brightness(0.72);
 }
 

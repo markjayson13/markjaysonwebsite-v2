@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { creativeCluster, replicaFooterCredit } from "../../data/editorial";
+import { creativeCluster } from "../../data/editorial";
 import type { CreativeResumeSection } from "../../data/editorial";
 
 const artisticResume = creativeCluster.artisticResume;
@@ -86,8 +86,6 @@ const sanitizeCreativeMeta = (meta?: string) => {
           }
         </div>
       </div>
-
-      <p class="page-credit page-credit--light">{replicaFooterCredit}</p>
     </div>
   </article>
 </BaseLayout>

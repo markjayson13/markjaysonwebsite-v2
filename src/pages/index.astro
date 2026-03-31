@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { homePage, replicaFooterCredit } from "../data/editorial";
+import { homePage } from "../data/editorial";
 import { socialPreviewImages } from "../data/site";
 
 const heroQuickLinkOrder = ["Resume/CV", "Portfolio", "Profiles", "About", "Contact"];
@@ -44,8 +44,11 @@ const heroQuickLinks = heroQuickLinkOrder
         <div class="home-hero-band__frame home-hero-band__frame--canva" data-home-stagger>
           <div class="home-hero-band__frame-title home-hero-band__frame-title--canva" aria-hidden="true">
             {
-              homePage.hero.headlineFrame.map((line) => (
-                <span class="home-hero-band__frame-line">{line}</span>
+              homePage.hero.headlineFrame.map((line, index) => (
+                <>
+                  <span class="home-hero-band__frame-line">{line}</span>
+                  {index < homePage.hero.headlineFrame.length - 1 && " "}
+                </>
               ))
             }
           </div>
@@ -85,7 +88,7 @@ const heroQuickLinks = heroQuickLinkOrder
       <div class="replica-canvas home-discovery-band__canvas">
         <section class="home-latest-band" aria-labelledby="home-latest-title" data-home-reveal>
           <div class="home-latest-band__header">
-            <h2 class="home-latest-band__eyebrow" id="home-latest-title">Latest and News</h2>
+            <h2 class="home-latest-band__eyebrow" id="home-latest-title">Latest News</h2>
           </div>
 
           <div class="home-latest-band__grid">
@@ -200,8 +203,6 @@ const heroQuickLinks = heroQuickLinkOrder
             </div>
           </div>
         </div>
-
-        <p class="page-credit page-credit--light" data-home-reveal>{replicaFooterCredit}</p>
       </div>
     </section>
   </div>
