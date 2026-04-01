@@ -6185,7 +6185,7 @@ body[data-page="bio"] .bio-page__story {
     "title portrait"
     "upper portrait"
     "lower portrait";
-  grid-template-columns: minmax(0, 1fr) minmax(22rem, 34rem);
+  grid-template-columns: minmax(0, 1fr) minmax(24rem, 38rem);
   gap: 1.15rem 3rem;
   max-width: none;
   align-items: start;
@@ -6236,8 +6236,8 @@ body[data-page="bio"] .bio-page__portrait-panel {
   grid-area: portrait;
   align-self: end;
   justify-self: end;
-  width: min(34rem, 100%);
-  max-width: 34rem;
+  width: min(38rem, 100%);
+  max-width: 38rem;
   margin: 0;
   float: none;
   shape-outside: none;
