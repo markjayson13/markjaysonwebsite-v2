@@ -4855,8 +4855,8 @@ body[data-page="home"] .home-hero-band__canvas {
   width: min(1188px, calc(100vw - 2.2rem));
   min-height: auto;
   padding-top: 0.9rem;
-  --home-hero-name-size: clamp(5.8rem, 9.2vw, 8.15rem);
-  --home-hero-left-inset: clamp(3.2rem, 4.6vw, 4.8rem);
+  --home-hero-name-size: clamp(5.25rem, 8.6vw, 7.6rem);
+  --home-hero-left-inset: clamp(4.35rem, 6vw, 5.9rem);
 }
 
 body[data-page="home"] .home-hero-band__top-nav {
@@ -4943,7 +4943,7 @@ body[data-page="home"] .home-hero-band__role-chip:focus-visible {
 }
 
 body[data-page="home"] .home-hero-band__frame--canva {
-  grid-template-columns: minmax(20rem, 40%) minmax(0, 60%);
+  grid-template-columns: minmax(28rem, 46%) minmax(0, 54%);
   grid-template-rows: minmax(0, 1fr) auto;
   min-height: clamp(30rem, 42vw, 36rem);
   border: 1px solid rgba(255, 255, 255, 0.5);
@@ -4953,7 +4953,7 @@ body[data-page="home"] .home-hero-band__frame--canva {
 body[data-page="home"] .home-hero-band__frame-title--canva {
   grid-row: 1;
   gap: 0.2rem;
-  padding: 0.68rem 0.9rem 0.9rem var(--home-hero-left-inset);
+  padding: 0.68rem 1.1rem 0.9rem var(--home-hero-left-inset);
   background: transparent;
 }
 
@@ -6144,11 +6144,15 @@ body[data-page="portfolio"] {
 body[data-page="bio"] .bio-page__canvas {
   width: 100%;
   max-width: none;
-  padding: 1.15rem 0 3.75rem var(--strict-main-inset);
+  padding: 0 0 3.75rem var(--strict-main-inset);
 }
 
 body[data-page="bio"] .bio-page__story {
   display: grid;
+  grid-template-areas:
+    "title portrait"
+    "upper portrait"
+    "lower portrait";
   grid-template-columns: minmax(0, 0.98fr) minmax(24rem, 0.92fr);
   gap: 1.15rem 2.7rem;
   max-width: none;
@@ -6156,21 +6160,21 @@ body[data-page="bio"] .bio-page__story {
 }
 
 body[data-page="bio"] .bio-page__title {
-  grid-column: 1 / -1;
-  max-width: min(78rem, 100%);
-  margin: 0 0 1.55rem;
+  grid-area: title;
+  max-width: min(46rem, 100%);
+  margin: 1.15rem 0 1.55rem;
   font-size: clamp(5.35rem, 6.6vw, 7.45rem);
   line-height: 0.9;
 }
 
 body[data-page="bio"] .bio-page__upper {
-  grid-column: 1;
+  grid-area: upper;
   display: grid;
   gap: 1.2rem;
 }
 
 body[data-page="bio"] .bio-page__lower-copy {
-  grid-column: 1;
+  grid-area: lower;
   display: grid;
   gap: 1.15rem;
   align-content: start;
@@ -6197,9 +6201,8 @@ body[data-page="bio"] .bio-page__section p {
 }
 
 body[data-page="bio"] .bio-page__portrait-panel {
-  grid-column: 2;
-  grid-row: 2 / span 2;
-  align-self: end;
+  grid-area: portrait;
+  align-self: start;
   justify-self: stretch;
   width: 100%;
   max-width: none;
@@ -6639,6 +6642,10 @@ body[data-page="profiles"] .profiles-page__button:nth-child(5) {
   }
 
   body[data-page="bio"] .bio-page__story {
+    grid-template-areas:
+      "title portrait"
+      "upper portrait"
+      "lower portrait";
     grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.86fr);
     gap: 1.25rem 1.8rem;
   }
@@ -6669,17 +6676,21 @@ body[data-page="profiles"] .profiles-page__button:nth-child(5) {
 
 @media (max-width: 900px) {
   body[data-page="bio"] .bio-page__canvas {
+    padding-top: 1.15rem;
     padding-right: var(--strict-main-inset);
   }
 
   body[data-page="bio"] .bio-page__story {
+    grid-template-areas: none;
     grid-template-columns: 1fr;
     gap: 1rem;
   }
 
+  body[data-page="bio"] .bio-page__title,
   body[data-page="bio"] .bio-page__upper,
   body[data-page="bio"] .bio-page__lower-copy,
   body[data-page="bio"] .bio-page__portrait-panel {
+    grid-area: auto;
     grid-column: 1;
   }
 
