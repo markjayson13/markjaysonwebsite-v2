@@ -29,16 +29,6 @@ const heroQuickLinks = heroQuickLinkOrder
           <p class="home-hero-band__headline-top" aria-hidden="true" data-home-stagger>
             {homePage.hero.headlineTop}
           </p>
-
-          <div class="home-hero-band__role-strip" aria-label="Disciplines" data-home-stagger>
-            {
-              homePage.hero.roles.map((role) => (
-                <a class="home-hero-band__role-chip" href={role.href}>
-                  {role.label}
-                </a>
-              ))
-            }
-          </div>
         </div>
 
         <div class="home-hero-band__frame home-hero-band__frame--canva" data-home-stagger>
@@ -69,6 +59,16 @@ const heroQuickLinks = heroQuickLinkOrder
               <source src={homePage.hero.videoSrc} type="video/mp4" />
             </video>
             <div class="home-hero-band__shade"></div>
+          </div>
+
+          <div class="home-hero-band__role-strip home-hero-band__role-strip--frame" aria-label="Disciplines" data-home-stagger>
+            {
+              homePage.hero.roles.map((role) => (
+                <a class="home-hero-band__role-chip" href={role.href}>
+                  {role.label}
+                </a>
+              ))
+            }
           </div>
 
           <nav class="home-hero-band__quicklinks" aria-label="Homepage quick links">
