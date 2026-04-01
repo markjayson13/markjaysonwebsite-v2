@@ -6180,15 +6180,15 @@ body[data-page="bio"] .bio-page__story {
     "title portrait"
     "upper portrait"
     "lower portrait";
-  grid-template-columns: minmax(0, 0.98fr) minmax(24rem, 0.92fr);
-  gap: 1.15rem 2.7rem;
+  grid-template-columns: minmax(0, 1fr) minmax(22rem, 34rem);
+  gap: 1.15rem 3rem;
   max-width: none;
   align-items: start;
 }
 
 body[data-page="bio"] .bio-page__title {
   grid-area: title;
-  max-width: min(46rem, 100%);
+  max-width: min(58rem, 100%);
   margin: 1.15rem 0 1.55rem;
   font-size: clamp(5.35rem, 6.6vw, 7.45rem);
   line-height: 0.9;
@@ -6229,10 +6229,10 @@ body[data-page="bio"] .bio-page__section p {
 
 body[data-page="bio"] .bio-page__portrait-panel {
   grid-area: portrait;
-  align-self: start;
-  justify-self: stretch;
-  width: 100%;
-  max-width: none;
+  align-self: end;
+  justify-self: end;
+  width: min(34rem, 100%);
+  max-width: 34rem;
   margin: 0;
   float: none;
   shape-outside: none;
@@ -6673,12 +6673,13 @@ body[data-page="profiles"] .profiles-page__button:nth-child(5) {
       "title portrait"
       "upper portrait"
       "lower portrait";
-    grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.86fr);
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 28rem);
     gap: 1.25rem 1.8rem;
   }
 
   body[data-page="bio"] .bio-page__portrait-panel {
-    width: 100%;
+    width: min(28rem, 100%);
+    max-width: 28rem;
   }
 
   body[data-page="resume"] #education .resume-page__grid,
