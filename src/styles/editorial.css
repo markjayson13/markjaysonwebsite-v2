@@ -4852,11 +4852,11 @@ body[data-page="home"] .home-hero-band {
 }
 
 body[data-page="home"] .home-hero-band__canvas {
-  width: min(1188px, calc(100vw - 2.2rem));
+  width: min(1188px, calc(100vw - 4.6rem));
   min-height: auto;
   padding-top: 0.9rem;
   --home-hero-name-size: clamp(5.25rem, 8.6vw, 7.6rem);
-  --home-hero-left-inset: clamp(4.35rem, 6vw, 5.9rem);
+  --home-hero-left-inset: clamp(3.15rem, 4.8vw, 4.35rem);
 }
 
 body[data-page="home"] .home-hero-band__top-nav {
@@ -5302,7 +5302,7 @@ body[data-page="home"] .home-contact-band .page-credit {
   body[data-page="home"] .home-hero-band__canvas,
   body[data-page="home"] .home-discovery-band__canvas,
   body[data-page="home"] .home-contact-band__canvas {
-    width: min(1188px, calc(100vw - 1.4rem));
+    width: min(1188px, calc(100vw - 2.6rem));
   }
 
   body[data-page="home"] .home-hero-band__top-nav {
