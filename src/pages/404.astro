@@ -24,17 +24,14 @@ const recoveryLinks = [
         <p class="legal-page__eyebrow">404</p>
         <h1 class="legal-page__title" data-lift>Page Not Found</h1>
         <p class="legal-page__lead" data-lift>
-          That route does not exist or is no longer public. Use one of the primary paths below to continue.
+          This page doesn't exist or has moved.
         </p>
       </header>
 
       <div class="legal-page__sections">
         <section class="legal-page__section" data-lift>
-          <h2>Go Somewhere Useful</h2>
-          <p>
-            The strongest recovery paths are the homepage, portfolio, resume, and the main contact section.
-          </p>
-          <div style="display:flex; flex-wrap:wrap; gap:0.75rem;">
+          <h2>Try one of these</h2>
+          <div class="legal-page__actions">
             {
               recoveryLinks.map((link) => (
                 <a class="replica-outline-button replica-outline-button--dark" href={link.href}>

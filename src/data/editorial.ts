@@ -40,10 +40,7 @@ export type HomeLatestItem = {
 };
 
 export type HomeContact = {
-  label: string;
   title: string;
-  copy: string;
-  note: string;
   portraitSrc: string;
   videoSrc: string;
   submitLabel: string;
@@ -54,7 +51,7 @@ export type BioPage = {
   portraitSrc: string;
   visiblePortraitSrc: string;
   sections: BioSection[];
-  exploreLinks: BioExploreLink[];
+  exploreLinks: NavLink[];
 };
 
 export type BioSection = {
@@ -62,34 +59,25 @@ export type BioSection = {
   paragraphs: string[];
 };
 
-export type BioExploreLink = {
-  label: string;
-  href: string;
-};
-
-export type ResumeJumpLink = {
-  label: string;
-  href: string;
-};
-
 export type ResumeCredential = {
   title: string;
   subtitle: string;
+  dates?: string;
   summary: string;
 };
 
 export type ResumeRole = {
   organization: string;
   role: string;
+  dates: string;
   summary: string;
 };
 
 export type ResumeProjectCard = {
   title: string;
   description: string;
-  href?: string;
+  href: string;
   cta: string;
-  disabled?: boolean;
 };
 
 export type CertificationEntry = {
@@ -130,9 +118,6 @@ export type PortfolioHubEntry = {
   eyebrow: string;
   title: string;
   abstract: string;
-  problem: string;
-  action: string;
-  result: string;
   tags: string[];
   href?: string;
   ctaLabel?: string;
@@ -165,27 +150,27 @@ export const homePage = {
   } satisfies HomeHero,
   latestItems: [
     {
-      label: "Latest Work",
-      title: "Packaging Hierarchies in U.S. Higher Education",
+      label: "New",
+      title: "Macro by Mark",
       summary:
-        "Current working-paper progress on how colleges structure grant, Pell, and institutional aid packages across institution-year panels.",
-      href: withBase("/portfolio#research"),
-      cta: "View research",
+        "My macroeconomics learning site, with concept guides, theoretical models with graded practice, and simulators that run in the browser.",
+      href: externalLinks.macroByMark,
+      cta: "Visit macrobymark.com",
     },
     {
-      label: "Current Submission",
-      title: "Building a Quality-Assured IPEDS Institution-Year Panel",
+      label: "Open Source",
+      title: "IPEDS Institution-Year Panel",
       summary:
-        "Ongoing workflow and paper packaging around a reproducible IPEDS panel build for faster, auditable higher-education analysis.",
-      href: withBase("/portfolio#projects"),
-      cta: "View project",
+        "A Python and SQL pipeline that turns the annual NCES IPEDS Access databases into a checked institution-year panel for 2004–2023.",
+      href: externalLinks.ipedsPanelRepo,
+      cta: "View on GitHub",
     },
     {
       label: "Latest Publication",
       title: "Revisiting Bennett’s Hypothesis",
       summary:
-        "Published work on student aid, cost of attendance, and institutional pricing behavior across public and private nonprofit colleges.",
-      href: "https://doi.org/10.9741/2766-7227.1033",
+        "Published in Spectra Undergraduate Research Journal. Tests whether student aid raises the cost of attendance at public and private nonprofit colleges.",
+      href: externalLinks.bennettDoi,
       cta: "Read publication",
     },
   ] satisfies HomeLatestItem[],
@@ -193,29 +178,26 @@ export const homePage = {
     {
       label: "About",
       href: withBase("/bio"),
-      description: "Professional background, current focus, and the analytical perspective behind the work.",
+      description: "My background, how I work, and what I want to do next.",
     },
     {
       label: "Resume/CV",
       href: withBase("/resume"),
-      description: "Education, experience, credentials, and tools in a cleaner professional summary.",
+      description: "Education, experience, certifications, and skills.",
     },
     {
       label: "Portfolio",
       href: withBase("/portfolio"),
-      description: "Research, projects, and publications organized into one evidence-driven hub.",
+      description: "Research papers, data projects, and publications.",
     },
     {
       label: "Profiles",
       href: withBase("/profiles"),
-      description: "Academic, professional, and technical profile surfaces in one place.",
+      description: "LinkedIn, GitHub, Google Scholar, ORCID, and ResearchGate.",
     },
   ] satisfies HomeLink[],
   contact: {
-    label: "Get in Touch",
     title: "Get in Touch",
-    copy: "Reach out for econometrics, data engineering, policy analysis, pricing work, or research collaboration.",
-    note: "Use the form below for professional inquiries and academic collaborations.",
     portraitSrc: withBase("/images/home-contact-portrait.png"),
     videoSrc: withBase("/media/canva-home-contact.mp4"),
     submitLabel: "Submit",
@@ -235,37 +217,38 @@ export const bioPage = {
   visiblePortraitSrc: withBase("/images/bio-portrait-cutout.png"),
   sections: [
     {
-      title: "My Foundation: The Quantitative Economist",
+      title: "Economist by training",
       paragraphs: [
-        "My name is Mark Jayson Farol. I am a quantitative economist with a Master of Arts in Quantitative Business Economics. My training covers economic analysis, causal inference, and the tools to understand not just what the data shows, but why.",
-        "I think in structural models. I test my own intuition against evidence and try to make sure any pattern I identify is real and worth acting on, not just statistical noise.",
+        "My name is Mark Jayson Farol. I am a quantitative economist with a Master of Arts in Quantitative Business Economics from the University of Nevada, Las Vegas. My training is in economic analysis and causal inference: working out why the data looks the way it does, as well as what it shows.",
+        "I think in structural models. I test my own intuition against the evidence and check that a pattern is real before anyone acts on it.",
       ],
     },
     {
-      title: "The Engine: Data Engineering & Statistical Programming",
+      title: "Building the data",
       paragraphs: [
         "Complex economic questions rarely come with clean data. I have spent a lot of time working with large, disorganized administrative datasets and building the infrastructure needed to make causal analysis possible.",
-        "Getting the data ready requires both statistical programming and data architecture skills. I build ETL pipelines in Python, SQL, and related tools that are provenance-safe and reproducible before a single econometric model runs. I build the pipeline that makes the analysis possible, not just the analysis itself.",
+        "I build those pipelines myself in Python and SQL, so each dataset is reproducible and traceable to its source before a single econometric model runs. My IPEDS and Federal Student Aid panel pipelines are public on GitHub.",
       ],
     },
     {
-      title: "The Interdisciplinary Mindset",
+      title: "Why economics",
       paragraphs: [
         "I have always been drawn to the places where human behavior, incentive structures, and measurable data intersect. That curiosity pushed me toward economics before I had the language to explain why.",
-        "I chose economics because it gave me a rigorous framework for studying decisions, not just describing them. My background in mathematics and programming sharpened that further.",
+        "I chose economics because it gave me a rigorous way to study decisions instead of only describing them. Math and programming sharpened that further.",
       ],
     },
     {
-      title: "Leadership and Translation",
+      title: "Teaching and explaining",
       paragraphs: [
-        "Technical sophistication matters less if the results cannot be explained to the people who need to act on them. I have spent years in front of students, faculty, and non-specialist audiences translating economic findings into something usable — whether that meant simplifying a regression result or rewriting a methods section for a policy audience.",
-        "Teaching reinforces that. I work with students on drawing valid economic inferences, evaluating their findings critically, and knowing when a result is worth building on.",
+        "Results only matter if the people who need them can understand them. I have spent years explaining economics to students, faculty, and non-specialists, whether that meant walking through a regression table or rewriting a methods section for a policy audience. UNLV selected me as an Outstanding Student Commencement Speaker.",
+        "Teaching reinforced that. As a graduate teaching assistant, I worked with students on drawing valid economic inferences, judging their own findings critically, and knowing when a result is worth building on.",
       ],
     },
     {
-      title: "What Lies Ahead",
+      title: "What's next",
       paragraphs: [
-        "Right now I am focused on applying these tools in business contexts, especially in analytics, financial economics, and strategy. I want roles where the quantitative work is rigorous and the results actually shape decisions.",
+        "I want to apply these tools in business, especially analytics, financial economics, and strategy, in roles where the quantitative work is rigorous and the results shape decisions.",
+        "I also run Macro by Mark, a macroeconomics learning site built from the models and simulators I first made to teach myself.",
       ],
     },
   ],
@@ -280,17 +263,16 @@ export const bioPage = {
 export const resumePage = {
   title: "Mark Jayson M. Farol",
   jumpLinks: [
+    { label: "Summary", href: "#summary" },
     { label: "Education", href: "#education" },
+    { label: "Experience", href: "#experience" },
+    { label: "Projects", href: "#projects" },
     { label: "Certifications", href: "#certifications" },
     { label: "Skills", href: "#skills" },
-    { label: "Projects", href: "#projects" },
-    { label: "Experience", href: "#experience" },
-    { label: "Summary", href: "#summary" },
-  ] satisfies ResumeJumpLink[],
+  ] satisfies NavLink[],
   summary: [
     "I was born in a rural area in the Philippines, where ambition often grows alongside uncertainty and where education can feel deeply personal because of what it makes possible. Moving to the United States and continuing my education here reshaped my world. It demanded adaptation, resilience, and the ability to keep building while learning a new environment, a new academic culture, and a new sense of what my future could become.",
     "Over time, that journey became the foundation of who I am today. I grew into someone who moves across disciplines with purpose: economics, statistics, research, teaching, and communication. My path through high school in the United States, undergraduate study at UNLV, and graduate training in quantitative economics gave me more than credentials. It gave me a way of thinking grounded in rigor, curiosity, communication, and a strong belief that analytical work should stay connected to human lives.",
-    "This page tells that story through the experiences, education, and roles that shaped me.",
   ],
   educationNarrative: [
     "My educational journey began in the Philippines and continued in the United States, where attending high school marked a major turning point in my life. That transition meant adjusting to a different culture, a different school system, and a different set of expectations while learning how to carry my own story with confidence. Those early experiences built the resilience, adaptability, and drive that would later define how I approached college, research, and professional life.",
@@ -301,18 +283,21 @@ export const resumePage = {
     {
       title: "Master of Arts",
       subtitle: "Quantitative Business Economics, University of Nevada, Las Vegas",
+      dates: "Aug 2024 – Dec 2025",
       summary:
-        "Advanced graduate training in economic theory, applied statistics, quantitative research, and econometric methods. Recognized as Commencement Speaker for leadership, academic dedication, and contribution to the program.",
+        "Advanced graduate training in economic theory, applied statistics, quantitative research, and econometric methods. Selected as an Outstanding Student Commencement Speaker.",
     },
     {
       title: "Bachelor of Science in Business Administration",
       subtitle: "Economics, University of Nevada, Las Vegas",
+      dates: "Aug 2019 – May 2024",
       summary:
-        "Built a foundation across business, economics, and communication, with early research development and a first undergraduate publication.",
+        "Coursework across business, economics, and communication, plus my first research paper and first publication.",
     },
     {
       title: "Minor in Theatre",
       subtitle: "University of Nevada, Las Vegas",
+      dates: "Aug 2019 – May 2024",
       summary:
         "Training that strengthened presentation skills and public-speaking confidence alongside the economics coursework.",
     },
@@ -320,41 +305,52 @@ export const resumePage = {
       title: "Advanced Diploma",
       subtitle: "Liberty High School",
       summary:
-        "The transition into U.S. schooling built the adaptability and persistence that later shaped how I approached college and professional life.",
+        "The move into U.S. schooling built the adaptability and persistence that later shaped how I approached college and work.",
     },
   ] satisfies ResumeCredential[],
   experienceNarrative: [
-    "My experience spans academic research, teaching support, and customer-facing leadership. Across those roles, the common thread has been taking something complex and making it usable — whether that meant helping students understand regression output, structuring a dataset for reproducible analysis, or communicating results to people who needed to act on them.",
-    "That focus sharpened further as my faculty began to recognize my research output. I presented work at symposiums, published my first article, expanded smaller analyses into larger empirical projects, and built the habits that carried me into graduate study and longer-form infrastructure work.",
+    "My experience spans academic research, teaching, and customer-facing leadership. In each role I took something complex and made it usable, whether that meant helping students read regression output, structuring a dataset for reproducible analysis, or explaining results to the people who had to act on them.",
+    "As faculty began to recognize my research, I presented at symposiums, published my first article, and grew smaller analyses into larger empirical projects. Those habits carried me into graduate study and longer-term data infrastructure work. In 2026 I started Macro by Mark, a macroeconomics learning site that I build and run myself.",
   ],
   roles: [
     {
+      organization: "Macro by Mark",
+      role: "Founder",
+      dates: "2026 – Present",
+      summary:
+        "Built and run macrobymark.com, a macroeconomics learning site with concept guides, theoretical models with graded practice, and browser simulators. Built end to end with Next.js, TypeScript, Supabase, and Stripe.",
+    },
+    {
       organization: "UNLV Department of Economics",
       role: "Graduate Researcher",
+      dates: "Aug 2024 – Dec 2025",
       summary:
-        "Faculty-supervised research collaboration focused on higher-education finance, tuition-setting, and college pricing. Built institution-year data infrastructure using Python, SQL, panel econometrics, and validation workflows.",
+        "Faculty-supervised research on higher-education finance, tuition-setting, and college pricing. Built institution-year data infrastructure using Python, SQL, panel econometrics, and validation checks.",
     },
     {
       organization: "University of Nevada, Las Vegas",
       role: "Graduate Teaching Assistant",
+      dates: "Aug 2024 – Dec 2025",
       summary:
-        "Supported instruction across five economics courses, built lecture materials, led review sessions, and mentored students through quantitative concepts, empirical projects, and final presentations.",
+        "Supported five economics courses (micro and macro principles, statistics, econometrics, and the research seminar), built lecture materials, led review sessions, and mentored students through empirical projects and final presentations.",
     },
     {
       organization: "Kate Spade New York",
       role: "Lead Sales Associate",
+      dates: "Jul 2022 – Jul 2023",
       summary:
-        "Promoted into a leadership role driving strong revenue performance, customer experience, and day-to-day floor execution while overseeing opening and closing operations.",
+        "Promoted into a leadership role. Ran opening and closing operations, led the sales floor, and reported daily and weekly sales metrics to the team. Top seller across my time at the store, with top-performer recognition three years in a row.",
     },
     {
       organization: "Kate Spade New York",
       role: "Sales Associate",
+      dates: "Mar 2020 – Jul 2022",
       summary:
         "Built a strong sales record through deep product knowledge, repeat client outreach, and consistent service across a high-traffic floor.",
     },
   ] satisfies ResumeRole[],
   certificationsIntro:
-    "My certifications reflect a broader pattern: I treat learning as something that continues past the classroom. After the econometrics and research training, I kept going with structured programs in data science, analytics, and finance — tools that build directly on the quantitative foundation and stay usable in practice.",
+    "After the econometrics and research training, I kept going with structured programs in finance and data science that build on the same quantitative foundation.",
   certifications: [
     {
       title: "The Securities Industry Essentials (SIE)",
@@ -393,7 +389,7 @@ export const resumePage = {
     },
   ] satisfies CertificationEntry[],
   projectsIntro:
-    "My project work centers on research infrastructure, data engineering, and practical analytical tools. Each build is designed to reduce friction, improve data quality, or make economic evidence easier to produce and use.",
+    "My projects center on research data infrastructure and tools that make economic evidence easier to produce, check, and use.",
   projectCards: [
     {
       title: "Research",
@@ -405,27 +401,24 @@ export const resumePage = {
     {
       title: "Projects",
       description:
-        "Data pipelines, utilities, and tooling built to support reproducible econometric and institutional analysis.",
+        "Data pipelines and tools for reproducible econometric and institutional analysis.",
       href: withBase("/portfolio#projects"),
       cta: "Open portfolio",
     },
     {
       title: "Publications",
-      description:
-        "Published work and public-facing writing that translate technical analysis into readable argument.",
+      description: "Published papers and finished research reports.",
       href: withBase("/portfolio#publications"),
       cta: "Open portfolio",
     },
     {
-      title: "Public Writing",
-      description:
-        "Public-facing essays and analysis that translate technical work into readable argument.",
-      href: withBase("/portfolio#public-writing"),
-      cta: "Open portfolio",
+      title: "Macro by Mark",
+      description: "My macroeconomics learning site with models, simulators, and concept guides.",
+      href: externalLinks.macroByMark,
+      cta: "Visit site",
     },
   ] satisfies ResumeProjectCard[],
-  skillsIntro:
-    "My skills came from different directions — research, teaching, and professional work — but they reinforce each other. The economics gives me the right questions, the data engineering gives me the means to answer them, and the communication side means the results can actually be used.",
+  skillsIntro: "I picked these up through research, teaching, and customer-facing work.",
   skillGroups: [
     {
       title: "Economics, Finance & Policy",
@@ -433,11 +426,11 @@ export const resumePage = {
     },
     {
       title: "Statistics, Econometrics & Research",
-      items: ["Panel econometrics", "Fixed effects", "Instrumental variables", "Causal inference"],
+      items: ["Panel econometrics", "Fixed effects", "Instrumental variables", "Causal inference", "Stata", "R"],
     },
     {
       title: "Data Science, Programming & Engineering",
-      items: ["Python", "DuckDB", "PyArrow", "Reproducible ETL", "Data validation"],
+      items: ["Python", "SQL", "DuckDB", "PyArrow", "Reproducible ETL", "Data validation", "TypeScript and Next.js"],
     },
     {
       title: "Communication, Teaching & Leadership",
@@ -448,13 +441,11 @@ export const resumePage = {
 
 export const portfolioPage = {
   title: "Portfolio",
-  lead:
-    "Selected research, data systems, and public-facing writing focused on econometrics, causal inference, higher-education finance, and analytical decision support.",
+  lead: "Research papers, data pipelines, and publications on econometrics, causal inference, and higher-education finance.",
   menu: [
     { id: "research", label: "Research" },
     { id: "projects", label: "Projects" },
     { id: "publications", label: "Publications" },
-    { id: "public-writing", label: "Public Writing" },
     { id: "creative", label: "Creative", href: withCreativeSite("/"), external: true },
   ] satisfies PortfolioHubMenuItem[],
   sections: [
@@ -468,29 +459,23 @@ export const portfolioPage = {
     {
       id: "projects",
       label: "Projects",
-      intro: "Data engineering systems and analytical tools built to reduce preparation time, improve data quality, and support reproducible research.",
+      intro: "Data pipelines and research tools I built for reproducible analysis, plus Macro by Mark.",
       summaryLabel: "Overview",
     },
     {
       id: "publications",
       label: "Publications",
-      intro: "Published and formal outputs that translate technical analysis into readable evidence and argument.",
+      intro: "Published papers and finished research reports.",
       summaryLabel: "Abstract",
-    },
-    {
-      id: "public-writing",
-      label: "Public Writing",
-      intro: "Shorter commentary, essays, and public scholarship that make technical ideas easier to read and use.",
-      summaryLabel: "Overview",
     },
   ] satisfies PortfolioHubSection[],
   tags: [
-    { id: "all", label: "All" },
     { id: "econometrics-causal", label: "Econometrics & Causal Inference" },
     { id: "data-engineering", label: "Data Engineering" },
     { id: "higher-ed-policy", label: "Higher Education & Policy" },
     { id: "finance-pricing", label: "Finance & Pricing" },
-    { id: "public-writing", label: "Public Writing" },
+    { id: "labor-social", label: "Labor & Social Policy" },
+    { id: "econ-education", label: "Economics Education" },
   ] satisfies PortfolioHubTag[],
   entries: [
     {
@@ -501,12 +486,6 @@ export const portfolioPage = {
       title: "Packaging Hierarchies in U.S. Higher Education",
       abstract:
         "Maps how U.S. colleges structure financial-aid packages for full-time, first-time undergraduates and how those hierarchies vary with Pell exposure using institution-year IPEDS measures built from 2009 through 2023.",
-      problem:
-        "Colleges package grants, loans, and aid components differently, but those structures are hard to compare consistently across institutions and years.",
-      action:
-        "Built institution-year measures from IPEDS student-aid and cost data to compare how packaging changes with Pell exposure and sector differences.",
-      result:
-        "Created a cleaner way to evaluate grant-first, Pell-anchor, and institutional top-off strategies across the higher-education landscape.",
       tags: ["econometrics-causal", "higher-ed-policy", "finance-pricing"],
     },
     {
@@ -517,12 +496,6 @@ export const portfolioPage = {
       title: "When Costs Define Aid",
       abstract:
         "Studies how institutions adjust cost-of-attendance components when federal rules bind, showing that publics and private nonprofits respond through different pricing and non-tuition channels.",
-      problem:
-        "Cost-of-attendance caps shape how institutions price attendance, but the response differs by sector and is often discussed without strong institution-level evidence.",
-      action:
-        "Estimated panel models of tuition, cost-of-attendance components, and borrowing margins to study how institutions adjust when federal rules bind.",
-      result:
-        "Showed that publics and private nonprofits respond through different pricing and non-tuition channels, making policy effects more interpretable.",
       tags: ["econometrics-causal", "finance-pricing", "higher-ed-policy"],
     },
     {
@@ -532,14 +505,8 @@ export const portfolioPage = {
       eyebrow: "Working paper",
       title: "AI Diffusion and Gender Wage Inequality",
       abstract:
-        "Builds a quasi-experimental framework using CPS-MORG data to test whether AI diffusion changed wage gaps across tech and non-tech labor-market outcomes instead of relying on broad speculation.",
-      problem:
-        "Public discussion about AI and labor markets often lacks causal evidence on whether diffusion changes wage gaps across different kinds of work.",
-      action:
-        "Used CPS-MORG data in a quasi-experimental design with interaction terms and decomposition methods to compare tech and non-tech labor-market outcomes.",
-      result:
-        "Built an empirical framework that isolates how AI exposure may shift wage inequality without relying on broad assumptions.",
-      tags: ["econometrics-causal", "finance-pricing"],
+        "Uses CPS-MORG data and a quasi-experimental design to test whether the spread of AI changed gender wage gaps in tech and non-tech jobs.",
+      tags: ["econometrics-causal", "labor-social"],
     },
     {
       id: "portfolio-financial-literacy-food",
@@ -549,13 +516,19 @@ export const portfolioPage = {
       title: "Financial Literacy and Food Insecurity in Seniors",
       abstract:
         "Examines how financial literacy relates to food insecurity among older adults in Clark County using multiple probability-based models and locally collected survey data.",
-      problem:
-        "Food insecurity among older adults is often discussed without enough locally grounded evidence about how financial literacy changes risk.",
-      action:
-        "Built food-security and literacy indices from local survey responses and estimated the relationship across linear probability, probit, logit, and IV-style specifications.",
-      result:
-        "Produced local evidence showing that stronger financial literacy is associated with lower food-insecurity risk, with implications for program design.",
-      tags: ["econometrics-causal", "higher-ed-policy"],
+      tags: ["econometrics-causal", "labor-social"],
+    },
+    {
+      id: "portfolio-macro-by-mark",
+      sectionId: "projects",
+      year: "2026",
+      eyebrow: "Product",
+      title: "Macro by Mark",
+      abstract:
+        "A macroeconomics learning site I built and run. It has concept guides, schools of thought, policy chapters, theoretical models with graded practice, and simulators that run in the browser.",
+      tags: ["econ-education"],
+      href: externalLinks.macroByMark,
+      ctaLabel: "Visit site",
     },
     {
       id: "portfolio-ipeds-panel-builder",
@@ -565,15 +538,9 @@ export const portfolioPage = {
       title: "IPEDS Harmonized Panel Builder",
       abstract:
         "A reproducible Python and SQL pipeline that converts fragmented NCES IPEDS releases into auditable institution-year panels with provenance, harmonization, and release checks built in.",
-      problem:
-        "IPEDS releases are fragmented across yearly access databases, which makes longitudinal analysis slow, error-prone, and difficult to reproduce.",
-      action:
-        "Built a Python and SQL pipeline that harmonizes variables, preserves provenance, cleans parent-child relationships, and produces auditable institution-year panels.",
-      result:
-        "Reduced manual preparation overhead and made multi-year higher-education analysis faster to validate and reuse.",
       tags: ["data-engineering", "higher-ed-policy"],
-      href: externalLinks.github,
-      ctaLabel: "GitHub Repo",
+      href: externalLinks.ipedsPanelRepo,
+      ctaLabel: "GitHub repo",
     },
     {
       id: "portfolio-fsa-panel-pipeline",
@@ -583,15 +550,9 @@ export const portfolioPage = {
       title: "Federal Student Aid Volume Reports Panel Pipeline",
       abstract:
         "Transforms Federal Student Aid volume reports into dependable institution-year panels keyed by OPEID8 and award year, with QA checks for coverage, duplicates, gaps, and descriptor conflicts.",
-      problem:
-        "Federal Student Aid volume reports are useful for analysis, but the raw files are not structured for fast, consistent institution-year comparisons.",
-      action:
-        "Built a reproducible panel workflow keyed by OPEID8 and award year, with QA checks for duplicates, coverage, year gaps, and descriptor conflicts.",
-      result:
-        "Turned an awkward reporting archive into a dependable analytical dataset for tracking aid trends over time.",
       tags: ["data-engineering", "higher-ed-policy", "finance-pricing"],
-      href: externalLinks.github,
-      ctaLabel: "GitHub Repo",
+      href: externalLinks.fsaPanelRepo,
+      ctaLabel: "GitHub repo",
     },
     {
       id: "portfolio-variable-browser",
@@ -601,12 +562,6 @@ export const portfolioPage = {
       title: "IPEDS Variable Browser",
       abstract:
         "A browser-style utility that organizes variables, definitions, and release differences so repeated institutional-data analysis starts faster and with less manual metadata hunting.",
-      problem:
-        "Researchers lose time digging through metadata and annual dictionaries just to identify the right variables for a project.",
-      action:
-        "Created a browsing utility that organizes variable names, definitions, and release differences into a faster lookup workflow.",
-      result:
-        "Made project scoping and variable selection easier for repeated institutional-data analysis.",
       tags: ["data-engineering", "higher-ed-policy"],
     },
     {
@@ -617,12 +572,6 @@ export const portfolioPage = {
       title: "Econometric Workflow Utilities",
       abstract:
         "Reusable utilities for filtering, validation, and model-prep steps that make recurring econometric work easier to audit, standardize, and extend.",
-      problem:
-        "Repeated research tasks become inconsistent when filtering, validation, and model-prep steps are rebuilt from scratch across projects.",
-      action:
-        "Built reusable utilities for dataset checks, variable selection, and model-ready outputs across recurring econometric workflows.",
-      result:
-        "Improved consistency, reduced setup time, and made recurring analytical work easier to audit and extend.",
       tags: ["data-engineering", "econometrics-causal"],
     },
     {
@@ -632,15 +581,9 @@ export const portfolioPage = {
       eyebrow: "Published research",
       title: "Revisiting Bennett’s Hypothesis",
       abstract:
-        "A published paper using National Center for Education Statistics data to explain how student aid and cost-of-attendance dynamics interact across public and private nonprofit colleges.",
-      problem:
-        "Debates about whether student aid raises college costs often rely on broad claims without clearly communicating the institutional mechanisms involved.",
-      action:
-        "Studied public and private nonprofit colleges with National Center for Education Statistics data to evaluate how aid and cost of attendance move together.",
-      result:
-        "Produced a published paper that translates a contested policy debate into clearer empirical evidence.",
-      tags: ["higher-ed-policy", "finance-pricing", "public-writing"],
-      href: "https://doi.org/10.9741/2766-7227.1033",
+        "Published in Spectra Undergraduate Research Journal. Uses National Center for Education Statistics data to test whether government and institutional aid raise the cost of attendance at public and private nonprofit colleges.",
+      tags: ["higher-ed-policy", "finance-pricing"],
+      href: externalLinks.bennettDoi,
       ctaLabel: "Read publication",
     },
     {
@@ -650,53 +593,15 @@ export const portfolioPage = {
       eyebrow: "Research paper",
       title: "The Race for Increasing College Costs",
       abstract:
-        "A cross-sectional paper on tuition growth, aid, and institutional behavior that revisits Bennett’s Hypothesis through accessible empirical framing.",
-      problem:
-        "Tuition growth debates often flatten institutional differences and fail to connect cost changes with the structure of aid and pricing decisions.",
-      action:
-        "Used National Center for Education Statistics data to study tuition, aid, and institutional charging behavior through a Bennett’s Hypothesis lens.",
-      result:
-        "Produced a readable empirical paper that grounds the cost-growth debate in institution-level evidence rather than broad assumption.",
+        "A cross-sectional paper on tuition growth, aid, and institutional pricing, framed around Bennett’s Hypothesis and built on National Center for Education Statistics data.",
       tags: ["higher-ed-policy", "finance-pricing"],
-    },
-    {
-      id: "portfolio-public-commentary",
-      sectionId: "public-writing",
-      year: "2025",
-      eyebrow: "Public writing",
-      title: "Commentary and Public Scholarship",
-      abstract:
-        "Shorter public-facing commentary that translates institutional incentives, policy tradeoffs, and research findings into direct language for non-specialist readers.",
-      problem:
-        "Technical economic work often loses influence when it is not rewritten for readers outside academic or specialist settings.",
-      action:
-        "Developed public-facing commentary formats that translate institutional incentives, policy tradeoffs, and research findings into direct language.",
-      result:
-        "Made the research implications available to readers outside academic settings.",
-      tags: ["public-writing", "higher-ed-policy"],
-    },
-    {
-      id: "portfolio-essays-notes",
-      sectionId: "public-writing",
-      year: "2024",
-      eyebrow: "Public writing",
-      title: "Essays and Notes",
-      abstract:
-        "Analytical essays and notes that move between economic observation, institutional critique, and public-facing interpretation without the format constraints of a formal paper.",
-      problem:
-        "Not every useful analytical idea belongs in a formal paper; some insights are better published as shorter, more accessible pieces.",
-      action:
-        "Structured essays and notes around concrete observations, institutional behavior, and policy relevance instead of method-heavy framing.",
-      result:
-        "Made analytical thinking easier to share, reference, and build on outside formal publication channels.",
-      tags: ["public-writing"],
     },
   ] satisfies PortfolioHubEntry[],
 };
 
 export const profilesPage = {
   title: "Profiles",
-  lead: "A curated hub of my academic, professional, and technical presence across the web.",
+  lead: "Where to find my work and academic record online.",
   videoSrc: withBase("/media/canva-profiles.mp4"),
   buttons: [
     { label: "LinkedIn", icon: "linkedin", href: externalLinks.linkedIn },

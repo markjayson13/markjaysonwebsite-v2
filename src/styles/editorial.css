@@ -608,6 +608,12 @@ body[data-page="profiles"] {
   line-height: 1.5;
 }
 
+.legal-page__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
 .bio-page {
   min-height: auto;
 }
