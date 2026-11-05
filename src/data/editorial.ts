@@ -357,32 +357,11 @@ export const resumePage = {
     "After the econometrics and research training, I kept going with structured programs in finance and data science that build on the same quantitative foundation.",
   certifications: [
     {
-      title: "The Securities Industry Essentials (SIE)",
-      provider: "FINRA",
-      track: "Finance",
-      summary:
-        "A foundational securities-industry exam covering core products and their risks, market structure, regulatory agencies, and prohibited practices.",
-    },
-    {
       title: "Environmental, Social, & Governance Specialization",
       provider: "Corporate Finance Institute",
       track: "Finance",
       summary:
         "Focused on sustainable finance, stakeholder expectations, and the risks and opportunities shaping investment and strategy decisions.",
-    },
-    {
-      title: "Capital Markets & Securities Analyst (CMSA)",
-      provider: "Corporate Finance Institute",
-      track: "Finance",
-      summary:
-        "Focused on how global markets operate and how securities are traded, valued, and analyzed across major asset classes.",
-    },
-    {
-      title: "Financial Modeling & Valuation Analyst (FMVA)",
-      provider: "Corporate Finance Institute",
-      track: "Finance",
-      summary:
-        "Built practical financial modeling, forecasting, valuation, dashboarding, and analytical presentation skills.",
     },
     {
       title: "Data Scientist Associate",
