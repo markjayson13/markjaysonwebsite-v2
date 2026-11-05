@@ -1,24 +1,16 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { homePage } from "../data/editorial";
-import { socialPreviewImages } from "../data/site";
-
-const heroQuickLinkOrder = ["Resume/CV", "Portfolio", "Profiles", "About", "Contact"];
-const heroQuickLinks = heroQuickLinkOrder
-  .map((label) => homePage.hero.topLinks.find((link) => link.label === label && link.href))
-  .filter((link): link is { label: string; href: string } => Boolean(link?.href));
+import { buildHomeStructuredData } from "../data/site";
 ---
 
 <BaseLayout
-  title="Economist & Data Scientist"
-  description="Mark Jayson Martinez Farol is an economist and data scientist specializing in econometrics, causal inference, data engineering, and evidence-based financial and policy analysis."
+  title="Mark Jayson Farol | Economist & Data Scientist"
+  description="Economist and data scientist in Las Vegas working on econometrics, higher-education finance, and research data pipelines. Founder of Macro by Mark."
   page="home"
   accent="#050505"
-  shell="bare"
-  footer={false}
-  replicaFooter={false}
   replicaMotion={true}
-  socialImage={socialPreviewImages.home}
+  structuredData={buildHomeStructuredData()}
 >
   <div class="replica-page home-page home-replica">
     <section class="home-hero-band" data-home-hero>
@@ -71,15 +63,6 @@ const heroQuickLinks = heroQuickLinkOrder
             }
           </div>
 
-          <nav class="home-hero-band__quicklinks" aria-label="Homepage quick links">
-            {
-              heroQuickLinks.map((link) => (
-                <a class="home-hero-band__quicklink" href={link.href}>
-                  {link.label}
-                </a>
-              ))
-            }
-          </nav>
         </div>
       </div>
     </section>
@@ -129,11 +112,11 @@ const heroQuickLinks = heroQuickLinkOrder
     <section class="home-contact-band" id="contact" data-home-contact>
       <video
         class="home-contact-band__video"
-        autoplay
+        data-lazy-video
         muted
         loop
         playsinline
-        preload="auto"
+        preload="none"
         disablepictureinpicture
         disableRemotePlayback
         aria-hidden="true"
@@ -145,7 +128,14 @@ const heroQuickLinks = heroQuickLinkOrder
       <div class="replica-canvas home-contact-band__canvas">
         <div class="home-contact-band__content" data-home-reveal>
           <div class="home-contact-band__portrait">
-            <img src={homePage.contact.portraitSrc} alt="Mark Jayson Farol holding a glowing globe." loading="eager" />
+            <img
+              src={homePage.contact.portraitSrc}
+              alt="Mark Jayson Farol holding a glowing globe"
+              width="800"
+              height="1200"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
 
           <div class="home-contact-band__panel">
@@ -154,46 +144,49 @@ const heroQuickLinks = heroQuickLinkOrder
             </div>
 
             <div class="home-contact-band__form-shell">
+              <p class="home-contact-band__status" role="status" data-contact-status hidden>
+                Thank you. Your message has been sent.
+              </p>
+
               <form
                 class="home-contact-band__form"
                 action="https://formsubmit.co/markjayson@markjayson.com"
                 method="post"
+                data-contact-form
               >
                 <input type="hidden" name="_subject" value="New message from markjayson.com" />
                 <input type="hidden" name="_template" value="table" />
                 <input type="hidden" name="_url" value="https://markjayson.com/" />
-                <input type="text" name="_honey" class="home-contact-band__honeypot" tabindex="-1" autocomplete="off" />
+                <input type="hidden" name="_next" value="https://markjayson.com/?contact=sent#contact" />
+                <input
+                  type="text"
+                  name="_honey"
+                  class="home-contact-band__honeypot"
+                  tabindex="-1"
+                  autocomplete="off"
+                  aria-hidden="true"
+                />
 
                 {
                   homePage.contactFields.map((field) => (
                     <label
                       class:list={[
                         "home-contact-band__field",
-                        `home-contact-band__field--${field.name}`,
+                        `home-contact-band__field--${field.slot}`,
                         field.full && "home-contact-band__field--message",
                       ]}
                     >
                       <span>{field.label}</span>
-                      {
-                        field.name === "message" ? (
-                          <textarea name={field.name} required></textarea>
-                        ) : (
-                          <input
-                            type={field.name === "email" ? "email" : "text"}
-                            name={field.name}
-                            required={field.name !== "subject"}
-                            autocomplete={
-                              field.name === "first-name"
-                                ? "given-name"
-                                : field.name === "last-name"
-                                  ? "family-name"
-                                  : field.name === "email"
-                                    ? "email"
-                                    : "off"
-                            }
-                          />
-                        )
-                      }
+                      {field.name === "message" ? (
+                        <textarea name={field.name} required={field.required}></textarea>
+                      ) : (
+                        <input
+                          type={field.type ?? "text"}
+                          name={field.name}
+                          required={field.required}
+                          autocomplete={field.autocomplete}
+                        />
+                      )}
                     </label>
                   ))
                 }
@@ -206,4 +199,30 @@ const heroQuickLinks = heroQuickLinkOrder
       </div>
     </section>
   </div>
+  <script is:inline>
+    (() => {
+      const videos = document.querySelectorAll("video[data-lazy-video]");
+      const start = (video) => {
+        video.preload = "auto";
+        video.autoplay = true;
+        video.play().catch(() => {});
+      };
+      if (!("IntersectionObserver" in window)) {
+        videos.forEach(start);
+        return;
+      }
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              start(entry.target);
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { rootMargin: "400px 0px" },
+      );
+      videos.forEach((video) => observer.observe(video));
+    })();
+  </script>
 </BaseLayout>

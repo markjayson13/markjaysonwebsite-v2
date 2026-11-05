@@ -2,13 +2,14 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SocialIcon from "../components/SocialIcon.astro";
 import { profilesPage } from "../data/editorial";
-import { buildPrimaryImageStructuredData, buildProfilePageStructuredData, socialPreviewImages } from "../data/site";
+import { buildPrimaryImageStructuredData, buildProfilePageStructuredData } from "../data/site";
 
-const pageTitle = "Profiles";
-const pageDescription = "Curated profile directory for Mark Jayson Martinez Farol across academic, professional, and technical platforms.";
+const pageTitle = "Profiles & Links";
+const pageDescription =
+  "Find Mark Jayson Farol on LinkedIn, GitHub, Google Scholar, ORCID, ResearchGate, Instagram, Backstage, and his creative portfolio.";
 const siteOrigin = Astro.site ?? new URL("https://markjayson.com");
 const pageUrl = new URL(Astro.url.pathname, siteOrigin).toString();
-const profilesHeadshot = socialPreviewImages.profiles;
+const profilesHeadshot = profilesPage.headshot;
 const structuredData = [
   ...buildProfilePageStructuredData(pageUrl, pageTitle, pageDescription),
   ...buildPrimaryImageStructuredData(pageUrl, {
@@ -24,12 +25,8 @@ const structuredData = [
   description={pageDescription}
   page="profiles"
   accent="#efefea"
-  shell="bare"
-  footer={false}
-  replicaFooter={false}
   replicaMotion={true}
   structuredData={structuredData}
-  socialImage={profilesHeadshot}
 >
   <article class="replica-page profiles-page profiles-page--canva">
     <video
@@ -47,27 +44,34 @@ const structuredData = [
 
     <div class="replica-canvas profiles-page__canvas">
       <header class="profiles-page__header">
+        <img
+          class="profiles-page__headshot"
+          src={profilesPage.headshot.src}
+          alt={profilesPage.headshot.alt}
+          width={profilesPage.headshot.width}
+          height={profilesPage.headshot.height}
+          loading="eager"
+          data-lift
+        />
         <h1 class="profiles-page__title" data-lift>{profilesPage.title}</h1>
         <p class="profiles-page__lead" data-lift>{profilesPage.lead}</p>
       </header>
 
-      <div class="profiles-page__grid" role="list">
-        {
-          profilesPage.buttons.map((button) =>
-            button.href ? (
-              <a class="profiles-page__button" href={button.href} target="_blank" rel="noreferrer" data-lift role="listitem">
-                <span class="profiles-page__symbol" aria-hidden="true"><SocialIcon icon={button.icon} /></span>
-                <span>{button.label}</span>
-              </a>
-            ) : (
-              <span class="profiles-page__button profiles-page__button--disabled" data-lift role="listitem">
-                <span class="profiles-page__symbol" aria-hidden="true"><SocialIcon icon={button.icon} /></span>
-                <span>{button.label}</span>
-              </span>
-            )
-          )
-        }
-      </div>
+      {
+        profilesPage.groups.map((group) => (
+          <section class="profiles-page__group" aria-label={group.title}>
+            <h2 class="profiles-page__group-title">{group.title}</h2>
+            <div class="profiles-page__grid" role="list">
+              {group.buttons.map((button) => (
+                <a class="profiles-page__button" href={button.href} target="_blank" rel="me noreferrer" data-lift role="listitem">
+                  <span class="profiles-page__symbol" aria-hidden="true"><SocialIcon icon={button.icon} /></span>
+                  <span>{button.label}</span>
+                </a>
+              ))}
+            </div>
+          </section>
+        ))
+      }
     </div>
   </article>
 </BaseLayout>

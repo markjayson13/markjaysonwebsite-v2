@@ -1,7 +1,12 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { portfolioPage } from "../data/editorial";
-import { socialPreviewImages } from "../data/site";
+import { buildPortfolioStructuredData } from "../data/site";
+
+const pageTitle = "Research & Data Projects";
+const pageDescription =
+  "Research papers, open-source data pipelines, and publications by Mark Jayson Farol on econometrics, causal inference, and higher-education finance.";
+const pageUrl = new URL(Astro.url.pathname, Astro.site ?? "https://markjayson.com").toString();
 
 const panels = portfolioPage.sections.map((section) => ({
   ...section,
@@ -12,15 +17,12 @@ const defaultPanel = panels.find((panel) => panel.id === "research")?.id ?? pane
 ---
 
 <BaseLayout
-  title="Econometrics, Data Engineering, and Policy Portfolio"
-  description="Professional portfolio for Mark Jayson Martinez Farol covering econometrics, causal inference, data engineering, and public-facing analytical work."
+  title={pageTitle}
+  description={pageDescription}
+  structuredData={buildPortfolioStructuredData(pageUrl, pageTitle, pageDescription)}
   page="portfolio"
   accent="#050505"
-  shell="bare"
-  footer={false}
-  replicaFooter={false}
   replicaMotion={true}
-  socialImage={socialPreviewImages.bio}
 >
   <article class="replica-page portfolio-page portfolio-page--hub portfolio-page--canva">
     <section class="portfolio-page__hero">
