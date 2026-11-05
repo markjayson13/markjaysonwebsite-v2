@@ -33,6 +33,6 @@ npm run build
 npm run deploy
 ```
 
-`npm run deploy` publishes to the Pages project named in `package.json`
-(`markjaysonwebsite-v2`). Make sure that matches the project attached to
-`markjayson.com` in the Cloudflare dashboard.
+`npm run deploy` publishes to the `markjaysonwebsite-v2` Pages project.
+Pushes to GitHub also deploy automatically: `main` goes to production, and
+other branches get a preview URL on `markjaysonwebsite-v2.pages.dev`.
