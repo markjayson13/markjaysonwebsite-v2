@@ -1,11 +1,18 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { resumePage } from "../data/editorial";
+import { buildProfilePageStructuredData } from "../data/site";
+
+const pageTitle = "Resume | Mark Jayson Farol, Economist & Data Scientist";
+const pageDescription =
+  "Resume of Mark Jayson Farol: M.A. in Quantitative Business Economics (UNLV), graduate research and teaching, and founder of Macro by Mark.";
+const pageUrl = new URL(Astro.url.pathname, Astro.site ?? "https://markjayson.com").toString();
 ---
 
 <BaseLayout
-  title="Resume/CV"
-  description="Resume for Mark Jayson Martinez Farol covering economics, data science, econometrics, research, and analytical experience."
+  title={pageTitle}
+  description={pageDescription}
+  structuredData={buildProfilePageStructuredData(pageUrl, pageTitle, pageDescription)}
   page="resume"
   accent="#edf0f2"
   replicaMotion={true}

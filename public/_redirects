@@ -14,3 +14,6 @@ http://markjayson.com/* https://markjayson.com/:splat 301!
 /creative https://creative.markjayson.com/ 301
 /creative/ https://creative.markjayson.com/ 301
 /creative/* https://creative.markjayson.com/:splat 301
+/images/bio-portrait-cutout.png /images/mark-jayson-farol-portrait.webp 301
+/images/headshot.jpeg /images/mark-jayson-farol-headshot.jpg 301
+/images/creative/* https://creative.markjayson.com/images/creative/:splat 301

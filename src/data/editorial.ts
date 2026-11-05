@@ -1,4 +1,4 @@
-import { externalLinks, mainSiteTopLinks, withCreativeSite } from "./site";
+import { externalLinks, withCreativeSite } from "./site";
 import type { NavLink, SocialIconName } from "./site";
 import { withBase } from "../utils/paths";
 
@@ -27,7 +27,6 @@ export type HomeHero = {
   headlineTop: string;
   headlineFrame: string[];
   roles: HomeHeroRole[];
-  topLinks: NavLink[];
   videoSrc: string;
 };
 
@@ -129,11 +128,17 @@ export type ProfileButton = {
   href: string;
 };
 
+export type ProfileGroup = {
+  title: string;
+  buttons: ProfileButton[];
+};
+
 export type ProfilesPage = {
   title: string;
   lead: string;
   videoSrc: string;
-  buttons: ProfileButton[];
+  headshot: { src: string; alt: string; width: number; height: number };
+  groups: ProfileGroup[];
 };
 
 export const homePage = {
@@ -145,7 +150,6 @@ export const homePage = {
       { label: "Data Scientist", href: withBase("/portfolio#projects") },
       { label: "Creative", href: withCreativeSite("/") },
     ],
-    topLinks: mainSiteTopLinks,
     videoSrc: withBase("/media/canva-home-hero.mp4"),
   } satisfies HomeHero,
   latestItems: [
@@ -198,7 +202,7 @@ export const homePage = {
   ] satisfies HomeLink[],
   contact: {
     title: "Get in Touch",
-    portraitSrc: withBase("/images/home-contact-portrait.png"),
+    portraitSrc: withBase("/images/home-contact-portrait.webp"),
     videoSrc: withBase("/media/canva-home-contact.mp4"),
     submitLabel: "Submit",
   } satisfies HomeContact,
@@ -214,7 +218,7 @@ export const homePage = {
 export const bioPage = {
   title: "Mark Jayson Martinez Farol",
   portraitSrc: withBase("/images/bio/mark-jayson-bio-portrait.jpeg"),
-  visiblePortraitSrc: withBase("/images/bio-portrait-cutout.png"),
+  visiblePortraitSrc: withBase("/images/mark-jayson-farol-portrait.webp"),
   sections: [
     {
       title: "Economist by training",
@@ -601,13 +605,32 @@ export const portfolioPage = {
 
 export const profilesPage = {
   title: "Profiles",
-  lead: "Where to find my work and academic record online.",
+  lead: "Where to find my research, code, and creative work online.",
   videoSrc: withBase("/media/canva-profiles.mp4"),
-  buttons: [
-    { label: "LinkedIn", icon: "linkedin", href: externalLinks.linkedIn },
-    { label: "GitHub", icon: "github", href: externalLinks.github },
-    { label: "ORCID", icon: "orcid", href: externalLinks.orcid },
-    { label: "ResearchGate", icon: "researchgate", href: externalLinks.researchGate },
-    { label: "Google Scholar", icon: "scholar", href: externalLinks.googleScholar },
-  ] satisfies ProfileButton[],
+  headshot: {
+    src: withBase("/images/mark-jayson-farol-headshot.jpg"),
+    alt: "Studio headshot of Mark Jayson Farol in a dark suit and tie",
+    width: 1024,
+    height: 1536,
+  },
+  groups: [
+    {
+      title: "Research and work",
+      buttons: [
+        { label: "LinkedIn", icon: "linkedin", href: externalLinks.linkedIn },
+        { label: "GitHub", icon: "github", href: externalLinks.github },
+        { label: "ORCID", icon: "orcid", href: externalLinks.orcid },
+        { label: "ResearchGate", icon: "researchgate", href: externalLinks.researchGate },
+        { label: "Google Scholar", icon: "scholar", href: externalLinks.googleScholar },
+      ],
+    },
+    {
+      title: "Creative",
+      buttons: [
+        { label: "Instagram", icon: "instagram", href: externalLinks.instagram },
+        { label: "Creative portfolio", icon: "creative", href: withCreativeSite("/") },
+        { label: "Backstage", icon: "backstage", href: externalLinks.backstage },
+      ],
+    },
+  ],
 } satisfies ProfilesPage;

@@ -1,10 +1,10 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { bioPage } from "../data/editorial";
-import { buildPrimaryImageStructuredData, buildProfilePageStructuredData, socialPreviewImages } from "../data/site";
-const pageTitle = "About";
+import { buildPrimaryImageStructuredData, buildProfilePageStructuredData } from "../data/site";
+const pageTitle = "About Mark Jayson Farol, Economist & Data Scientist";
 const pageDescription =
-  "Professional overview for Mark Jayson Martinez Farol, an economist and data scientist focused on econometrics, causal inference, and data engineering.";
+  "About Mark Jayson Farol: quantitative economist (M.A., UNLV) who builds research data pipelines, studies higher-education finance, and runs Macro by Mark.";
 const siteOrigin = Astro.site ?? new URL("https://markjayson.com");
 const pageUrl = new URL(Astro.url.pathname, siteOrigin).toString();
 const structuredData = [
@@ -15,8 +15,6 @@ const structuredData = [
     caption: "Primary portrait of Mark Jayson Farol",
   }),
 ];
-const upperSections = bioPage.sections.slice(0, 2);
-const lowerSections = bioPage.sections.slice(2);
 ---
 
 <BaseLayout
@@ -26,27 +24,25 @@ const lowerSections = bioPage.sections.slice(2);
   accent="#edf0f2"
   replicaMotion={true}
   structuredData={structuredData}
-  socialImage={socialPreviewImages.bio}
 >
   <article class="replica-page bio-page">
     <div class="replica-canvas bio-page__canvas">
       <div class="bio-page__story">
         <h1 class="bio-page__title" data-lift>{bioPage.title}</h1>
 
-        <div class="bio-page__upper" data-lift>
-          {
-            upperSections.map((section) => (
-              <section class="bio-page__section">
-                <h2 class="bio-page__section-title">{section.title}</h2>
-                {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-              </section>
-            ))
-          }
-        </div>
+        <div class="bio-page__flow" data-lift>
+          <img
+            class="bio-page__portrait"
+            src={bioPage.visiblePortraitSrc}
+            alt="Mark Jayson Farol in a dark suit and tie"
+            width="1100"
+            height="1104"
+            loading="eager"
+            fetchpriority="high"
+          />
 
-        <div class="bio-page__lower-copy" data-lift>
           {
-            lowerSections.map((section) => (
+            bioPage.sections.map((section) => (
               <section class="bio-page__section">
                 <h2 class="bio-page__section-title">{section.title}</h2>
                 {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
@@ -67,10 +63,6 @@ const lowerSections = bioPage.sections.slice(2);
             </div>
           </section>
         </div>
-
-        <figure class="bio-page__portrait-panel" aria-hidden="true" data-lift>
-          <img src={bioPage.visiblePortraitSrc} alt="" loading="eager" />
-        </figure>
       </div>
     </div>
   </article>

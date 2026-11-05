@@ -1,8 +1,9 @@
 ---
-import { cornerMenuItems, mainSiteTopLinks, pageThemes, profile, socialPreviewImages } from "../data/site";
+import { buildBreadcrumbStructuredData, cornerMenuItems, pageThemes, profile, socialPreviewImages } from "../data/site";
 import type { SocialPreviewImage, StructuredData } from "../data/site";
 import ReplicaMotion from "../components/ReplicaMotion.astro";
 import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
 import { withBase } from "../utils/paths";
 import "../styles/global.css";
 import "../styles/editorial.css";
@@ -31,8 +32,15 @@ const {
 
 const siteOrigin = Astro.site ?? new URL("https://markjayson.com");
 const canonical = new URL(Astro.url.pathname, siteOrigin).toString();
-const structuredDataJson = structuredData ? JSON.stringify(structuredData, null, 2) : null;
-const previewImage = socialImage ?? socialPreviewImages.home;
+const isIndexable = !robots.includes("noindex");
+const documentTitle = title.includes(profile.name) ? title : `${title} | ${profile.name}`;
+const pageStructuredData = [
+  ...(page === "home" ? [] : [buildBreadcrumbStructuredData(canonical, title, page)]),
+  ...(Array.isArray(structuredData) ? structuredData : structuredData ? [structuredData] : []),
+];
+const structuredDataJson =
+  isIndexable && pageStructuredData.length ? JSON.stringify(pageStructuredData, null, 2) : null;
+const previewImage = socialImage ?? socialPreviewImages.card;
 const previewImageUrl = new URL(previewImage.src, siteOrigin).toString();
 const pageTheme = pageThemes[page] ?? pageThemes.home;
 const cornerMenuDefaultLabelMap: Record<string, string> = {
@@ -41,10 +49,7 @@ const cornerMenuDefaultLabelMap: Record<string, string> = {
   profiles: "Profiles",
 };
 const cornerMenuDefaultLabel = cornerMenuDefaultLabelMap[page] ?? "About";
-const showMainSiteTopRow = ["bio", "resume", "portfolio", "profiles"].includes(page);
-const backLinkHref = page === "home" || showMainSiteTopRow ? null : withBase("/");
-const normalizePath = (path: string) => (path.length > 1 ? path.replace(/\/$/, "") : path);
-const isActiveMainSiteLink = (href: string) => normalizePath(href) === normalizePath(Astro.url.pathname);
+const headerTone = ["bio", "resume"].includes(page) ? "dark" : "light";
 ---
 
 <!doctype html>
@@ -52,47 +57,38 @@ const isActiveMainSiteLink = (href: string) => normalizePath(href) === normalize
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title} | {profile.name}</title>
+    <title>{documentTitle}</title>
     <meta name="description" content={description} />
     <meta name="robots" content={robots} />
-    <link rel="canonical" href={canonical} />
+    {isIndexable && <link rel="canonical" href={canonical} />}
+    <meta name="author" content={profile.fullName} />
     <link rel="icon" href={withBase("/favicon.svg")} type="image/svg+xml" />
     <link rel="icon" href={withBase("/favicon.ico")} sizes="any" />
     <link rel="icon" href={withBase("/favicon-48x48.png")} type="image/png" sizes="48x48" />
     <link rel="icon" href={withBase("/favicon-96x96.png")} type="image/png" sizes="96x96" />
     <link rel="apple-touch-icon" href={withBase("/apple-touch-icon.png")} sizes="180x180" />
+    <link rel="manifest" href={withBase("/site.webmanifest")} />
     <meta name="theme-color" content={accent} />
-    <meta property="og:title" content={`${title} | ${profile.name}`} />
+    <meta property="og:title" content={documentTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={page === "home" ? "website" : "profile"} />
+    {page !== "home" && <meta property="profile:first_name" content="Mark Jayson" />}
+    {page !== "home" && <meta property="profile:last_name" content="Farol" />}
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content={profile.name} />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:image" content={previewImageUrl} />
     <meta property="og:image:alt" content={previewImage.alt} />
     {previewImage.width && <meta property="og:image:width" content={String(previewImage.width)} />}
     {previewImage.height && <meta property="og:image:height" content={String(previewImage.height)} />}
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={documentTitle} />
+    <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={previewImageUrl} />
     <meta name="twitter:image:alt" content={previewImage.alt} />
     {structuredDataJson && <script is:inline type="application/ld+json" set:html={structuredDataJson}></script>}
     <link rel="preload" href={withBase("/fonts/arimo-regular.woff2")} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={withBase("/fonts/arimo-bold.woff2")} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={withBase("/fonts/itc-franklin-gothic-lt-regular.woff2")} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={withBase("/fonts/itc-franklin-gothic-lt-semibold.woff2")} as="font" type="font/woff2" crossorigin />
-    <link
-      rel="preload"
-      href={withBase("/fonts/itc-franklin-gothic-lt-condensed-regular.woff2")}
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href={withBase("/fonts/itc-franklin-gothic-lt-condensed-semibold.woff2")}
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
   </head>
 
   <body
@@ -102,31 +98,7 @@ const isActiveMainSiteLink = (href: string) => normalizePath(href) === normalize
   >
     <a class="skip-link" href="#main-content">Skip to content</a>
 
-    {
-      showMainSiteTopRow && (
-        <header class="site-top-row-shell" data-site-top-row>
-          <div class="site-top-row-shell__inner">
-            <nav class="site-top-row" aria-label="Main site sections">
-              {
-                mainSiteTopLinks.map((link) => (
-                  <a class="site-top-row__link" href={link.href} aria-current={isActiveMainSiteLink(link.href) ? "page" : undefined}>
-                    {link.label}
-                  </a>
-                ))
-              }
-            </nav>
-          </div>
-        </header>
-      )
-    }
-
-    {
-      backLinkHref && (
-        <a class="site-back-link" href={backLinkHref} aria-label="Go back" title="Go back" data-site-back>
-          <span aria-hidden="true">←</span>
-        </a>
-      )
-    }
+    <SiteHeader tone={headerTone} />
 
     <main id="main-content" class="site-main site-main--bare">
       <slot />
@@ -344,47 +316,7 @@ const isActiveMainSiteLink = (href: string) => normalizePath(href) === normalize
         );
       };
 
-      const setupBackLink = () => {
-        const backLink = document.querySelector("[data-site-back]");
-
-        if (!(backLink instanceof HTMLAnchorElement) || backLink.dataset.backReady === "true") {
-          return;
-        }
-
-        backLink.dataset.backReady = "true";
-
-        backLink.addEventListener("click", (event) => {
-          if (
-            event.defaultPrevented ||
-            event.button !== 0 ||
-            event.metaKey ||
-            event.ctrlKey ||
-            event.shiftKey ||
-            event.altKey
-          ) {
-            return;
-          }
-
-          const referrer = document.referrer;
-          const hasSameOriginReferrer =
-            referrer &&
-            (() => {
-              try {
-                return new URL(referrer).origin === window.location.origin;
-              } catch {
-                return false;
-              }
-            })();
-
-          if (window.history.length > 1 && hasSameOriginReferrer) {
-            event.preventDefault();
-            window.history.back();
-          }
-        });
-      };
-
       setupCornerMenu();
-      setupBackLink();
       setupContactStatus();
     </script>
 

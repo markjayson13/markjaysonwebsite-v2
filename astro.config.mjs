@@ -4,7 +4,7 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   site: "https://markjayson.com",
   base: "/",
-  integrations: [sitemap()],
+  integrations: [sitemap({ lastmod: new Date() })],
   markdown: {
     smartypants: false,
   },

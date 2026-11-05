@@ -1,0 +1,36 @@
+---
+import Logo from "./Logo.astro";
+import { headerLinks, profile } from "../data/site";
+import { withBase } from "../utils/paths";
+
+interface Props {
+  tone: "light" | "dark";
+}
+
+const { tone } = Astro.props;
+const normalizePath = (path: string) => (path.length > 1 ? path.replace(/\/$/, "") : path);
+const currentPath = normalizePath(Astro.url.pathname);
+---
+
+<header class="site-header" data-tone={tone}>
+  <div class="site-header__inner">
+    <a class="site-header__brand" href={withBase("/")} aria-label={`${profile.name}, home`}>
+      <Logo class="site-header__logo" />
+      <span class="site-header__name">{profile.name}</span>
+    </a>
+
+    <nav class="site-header__nav" aria-label="Main">
+      {
+        headerLinks.map((link) => (
+          <a
+            class="site-header__link"
+            href={link.href}
+            aria-current={normalizePath(link.href) === currentPath ? "page" : undefined}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>
