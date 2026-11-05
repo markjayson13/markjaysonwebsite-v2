@@ -1,5 +1,5 @@
-import { homeDiscoveryItems, mainSiteTopLinks, socialLinks, withCreativeSite } from "./site";
-import type { FooterSocialLink } from "./site";
+import { externalLinks, mainSiteTopLinks, withCreativeSite } from "./site";
+import type { NavLink, SocialIconName } from "./site";
 import { withBase } from "../utils/paths";
 
 export type HomeLink = {
@@ -8,15 +8,13 @@ export type HomeLink = {
   description: string;
 };
 
-export type HomeTopLink = {
-  label: string;
-  href?: string;
-  menuTrigger?: boolean;
-};
-
 export type HomeField = {
   label: string;
   name: string;
+  slot: string;
+  type?: "text" | "email";
+  required?: boolean;
+  autocomplete?: string;
   full?: boolean;
 };
 
@@ -29,13 +27,8 @@ export type HomeHero = {
   headlineTop: string;
   headlineFrame: string[];
   roles: HomeHeroRole[];
-  topLinks: HomeTopLink[];
+  topLinks: NavLink[];
   videoSrc: string;
-};
-
-export type HomeDiscovery = {
-  title: string;
-  defaultLabel: string;
 };
 
 export type HomeLatestItem = {
@@ -60,7 +53,6 @@ export type BioPage = {
   title: string;
   portraitSrc: string;
   visiblePortraitSrc: string;
-  footerCredit: string;
   sections: BioSection[];
   exploreLinks: BioExploreLink[];
 };
@@ -112,14 +104,6 @@ export type SkillGroup = {
   items: string[];
 };
 
-export type PortfolioTile = {
-  title: string;
-  description: string;
-  href?: string;
-  cta: string;
-  tone: "light" | "blue" | "green" | "mustard";
-};
-
 export type PortfolioHubSection = {
   id: string;
   label: string;
@@ -154,136 +138,10 @@ export type PortfolioHubEntry = {
   ctaLabel?: string;
 };
 
-export type RailItem = {
-  id: string;
-  label: string;
-};
-
-export type ResearchEntry = {
-  year: string;
-  id: string;
-  title: string;
-  summary: string;
-  status: "Working Paper" | "Published" | "Research Paper" | "Master's Capstone";
-  href?: string;
-  ctaLabel?: string;
-};
-
-export type ProjectEntry = {
-  title: string;
-  summary: string;
-  href?: string;
-  ctaLabel?: string;
-};
-
-export type ProjectSection = {
-  id: string;
-  label: string;
-  intro: string;
-  entries: ProjectEntry[];
-};
-
-export type ArticleSection = {
-  id: string;
-  title: string;
-  description: string;
-};
-
-export type LatestResearchPanel = {
-  id: string;
-  label: string;
-  intro: string;
-  entries: ResearchEntry[];
-};
-
-export type LatestProjectPanel = {
-  id: string;
-  label: string;
-  intro: string;
-  entries: ProjectEntry[];
-};
-
-export type LatestArticlePanel = {
-  id: string;
-  label: string;
-  intro: string;
-  sections: ArticleSection[];
-};
-
-export type CreativeClusterNavItem = {
-  label: string;
-  href: string;
-  shortLabel?: string;
-};
-
-export type CreativeFeatureCard = {
-  title: string;
-  description: string;
-  href?: string;
-  cta?: string;
-  note?: string;
-};
-
-export type CreativeMeasure = {
-  label: string;
-  value: string;
-};
-
-export type CreativeVideoAsset = {
-  src: string;
-  posterSrc?: string;
-  alt: string;
-};
-
-export type CreativeResumeEntry = {
-  title: string;
-  subtitle?: string;
-  meta?: string;
-  description?: string;
-};
-
-export type CreativeResumeSection = {
-  id: string;
-  label: string;
-  intro: string;
-  entries: CreativeResumeEntry[];
-};
-
-export type CreativeGalleryItem = {
-  src: string;
-  alt: string;
-  caption: string;
-  featured?: boolean;
-  aspect?: "portrait" | "landscape";
-  detailsLabel?: string;
-  detailsText?: string;
-  instagramHref?: string;
-};
-
-export type CreativeGalleryGroup = {
-  id: string;
-  label: string;
-  intro: string;
-  items: CreativeGalleryItem[];
-};
-
-export type CreativePageTheme = {
-  page: "creative-landing" | "creative-artistic-resume" | "creative-headshots" | "creative-photoshoots";
-  accent: string;
-  mode: "light" | "dark";
-};
-
 export type ProfileButton = {
   label: string;
-  icon: FooterSocialLink["icon"];
-  href?: string;
-  disabled?: boolean;
-};
-
-export type ProfileSecondaryLink = {
-  label: string;
+  icon: SocialIconName;
   href: string;
-  note: string;
 };
 
 export type ProfilesPage = {
@@ -291,12 +149,7 @@ export type ProfilesPage = {
   lead: string;
   videoSrc: string;
   buttons: ProfileButton[];
-  secondaryLinks?: ProfileSecondaryLink[];
 };
-
-const socialLookup = new Map(socialLinks.map((link) => [link.label, link.href]));
-const githubProfile = "https://github.com/markjayson13";
-const backstageHref = socialLookup.get("Backstage");
 
 export const homePage = {
   hero: {
@@ -310,10 +163,6 @@ export const homePage = {
     topLinks: mainSiteTopLinks,
     videoSrc: withBase("/media/canva-home-hero.mp4"),
   } satisfies HomeHero,
-  discovery: {
-    title: "What do you want to find out?",
-    defaultLabel: "About",
-  } satisfies HomeDiscovery,
   latestItems: [
     {
       label: "Latest Work",
@@ -362,7 +211,6 @@ export const homePage = {
       description: "Academic, professional, and technical profile surfaces in one place.",
     },
   ] satisfies HomeLink[],
-  discoveryItems: homeDiscoveryItems,
   contact: {
     label: "Get in Touch",
     title: "Get in Touch",
@@ -373,11 +221,11 @@ export const homePage = {
     submitLabel: "Submit",
   } satisfies HomeContact,
   contactFields: [
-    { label: "First Name*", name: "first-name" },
-    { label: "Last Name*", name: "last-name" },
-    { label: "EMAIL*", name: "email" },
-    { label: "Subject", name: "subject" },
-    { label: "Message", name: "message", full: true },
+    { label: "First Name*", name: "first_name", slot: "first-name", required: true, autocomplete: "given-name" },
+    { label: "Last Name*", name: "last_name", slot: "last-name", required: true, autocomplete: "family-name" },
+    { label: "Email*", name: "email", slot: "email", type: "email", required: true, autocomplete: "email" },
+    { label: "Subject", name: "subject", slot: "subject", autocomplete: "off" },
+    { label: "Message*", name: "message", slot: "message", required: true, full: true },
   ] satisfies HomeField[],
 } as const;
 
@@ -385,7 +233,6 @@ export const bioPage = {
   title: "Mark Jayson Martinez Farol",
   portraitSrc: withBase("/images/bio/mark-jayson-bio-portrait.jpeg"),
   visiblePortraitSrc: withBase("/images/bio-portrait-cutout.png"),
-  footerCredit: "© MARK JAYSON M. FAROL",
   sections: [
     {
       title: "My Foundation: The Quantitative Economist",
@@ -725,7 +572,7 @@ export const portfolioPage = {
       result:
         "Reduced manual preparation overhead and made multi-year higher-education analysis faster to validate and reuse.",
       tags: ["data-engineering", "higher-ed-policy"],
-      href: githubProfile,
+      href: externalLinks.github,
       ctaLabel: "GitHub Repo",
     },
     {
@@ -743,7 +590,7 @@ export const portfolioPage = {
       result:
         "Turned an awkward reporting archive into a dependable analytical dataset for tracking aid trends over time.",
       tags: ["data-engineering", "higher-ed-policy", "finance-pricing"],
-      href: githubProfile,
+      href: externalLinks.github,
       ctaLabel: "GitHub Repo",
     },
     {
@@ -847,730 +694,15 @@ export const portfolioPage = {
   ] satisfies PortfolioHubEntry[],
 };
 
-const researchEntries = [
-  {
-    year: "2026",
-    id: "packaging-hierarchies",
-    title: "Packaging Hierarchies in U.S. Higher Education: Pell Exposure and the Composition of Aid (Working Paper)\u2020",
-    status: "Working Paper",
-    summary:
-      "Working paper mapping how U.S. colleges structure financial-aid packages for full-time, first-time undergraduates and how these hierarchies vary with Pell exposure. Built institution-year, per-FTFT measures from 2009\u20132023 IPEDS by linking Student Financial Aid aggregates to residency-weighted COA, expressed as shares of cost of attendance with indices for Grant-First, Pell-Anchor, and Institutional Top-off.",
-  },
-  {
-    year: "2026",
-    id: "when-costs-define-aid",
-    title: "When Costs Define Aid: Responses to Federal Cost-of-Attendance Caps\u2020",
-    status: "Working Paper",
-    summary:
-      "Institutions adjust the Cost of Attendance differently across sectors, with private nonprofits exhibiting strategic price-aid bundling and publics showing adjustment through non-tuition borrowing margins. Uses institution fixed effects, dynamic fixed effects, and system-GMM models of cost of attendance, tuition, and non-tuition components.",
-  },
-  {
-    year: "2026",
-    id: "ipeds-panel-letter",
-    title: "Building a Quality-Assured IPEDS Institution-Year Panel from Annual Access Databases, 2004\u20132023\u2020",
-    status: "Working Paper",
-    summary:
-      "Introduces IPEDSDB_Panel, an open-source workflow that converts annual NCES IPEDS Access databases into a reproducible, integrity-checked unbalanced panel keyed by institution and year for 2004\u20132023. The workflow automates acquisition, extraction, metadata harmonization, panel construction, parent-child cleaning, and layered validation.",
-  },
-  {
-    year: "2025",
-    id: "financial-literacy-food-insecurity",
-    title: "Financial Literacy & Food Insecurity in Seniors (Master\u2019s Capstone)",
-    status: "Master's Capstone",
-    summary:
-      "Examines the link between financial literacy and food insecurity among older adults in Clark County, Nevada using local survey data and multiple probability-based models to measure the relationship and test robustness.",
-  },
-  {
-    year: "2025",
-    id: "dynamic-structure-federal-aid",
-    title: "A Dynamic Structure of the Causal Link Between Increases in Federal Student Aid and Increases in College Prices",
-    status: "Working Paper",
-    summary:
-      "Extends the Bennett's Hypothesis literature through dynamic panel specifications and pricing-aid structure analysis, focusing on how federal student aid and institutional responses interact over time across higher-education sectors.",
-  },
-  {
-    year: "2025",
-    id: "ai-diffusion-gender-wage",
-    title: "AI Diffusion and Gender Wage Inequality: A Quasi-Experimental Approach\u2020",
-    status: "Working Paper",
-    summary:
-      "Studies whether the diffusion of generative AI shifted gender wage inequality across tech versus non-tech roles using CPS-MORG via IPUMS. Uses pooled OLS with a triple-interaction quasi-experimental design and Blinder-Oaxaca decompositions.",
-  },
-  {
-    year: "2025",
-    id: "revisiting-bennetts-hypothesis",
-    title: "Revisiting Bennett\u2019s Hypothesis: The Unintended Effects of Student Financial Aid on the Cost of College\u2021",
-    status: "Published",
-    summary:
-      "Investigates Bennett\u2019s Hypothesis with National Center for Education Statistics data, focusing on public and private nonprofit colleges and the effects of government and institutional financial aid on the cost of attendance.",
-    href: "https://doi.org/10.9741/2766-7227.1033",
-    ctaLabel: "View PDF",
-  },
-  {
-    year: "2024",
-    id: "race-for-increasing-college-costs",
-    title: "The Race for Increasing College Costs",
-    status: "Research Paper",
-    summary:
-      "A cross-sectional study of tuition growth, aid, and institutional behavior using National Center for Education Statistics data and Bennett\u2019s Hypothesis as a guiding framework.",
-  },
-  {
-    year: "2024",
-    id: "caesars-philippines",
-    title: "Potential Expansion for Caesars Entertainment to the Philippines",
-    status: "Research Paper",
-    summary:
-      "Explores whether the Philippines offers a viable expansion opportunity by combining macro indicators, tourism and spending trends, regulatory analysis, and competitor benchmarking.",
-  },
-  {
-    year: "2023",
-    id: "retirement-age",
-    title: "Economic Effects of Raising Retirement Age",
-    status: "Research Paper",
-    summary:
-      "Analyzes the economic effects of France\u2019s policy shift to raise the retirement age from 62 to 64 using the Solow Model, IS/MP-PC, and labor-market frameworks.",
-  },
-] satisfies ResearchEntry[];
-
-export const researchPage = {
-  title: "Research",
-  lead:
-    "My research uses quantitative analysis and large-scale administrative data to examine how financial aid, institutional behavior, and pricing systems work in U.S. higher education.",
-  legend: "\u2020 Working Paper \u2021 Published",
-  rail: [
-    { id: "2026", label: "2026" },
-    { id: "2025", label: "2025" },
-    { id: "2024", label: "2024" },
-    { id: "2023", label: "2023" },
-  ] satisfies RailItem[],
-  latest: {
-    id: "2026",
-    label: "2026",
-    intro: "Current research directions and the 2026 working papers driving the portfolio right now.",
-    entries: researchEntries.slice(0, 3),
-  } satisfies LatestResearchPanel,
-  entries: researchEntries,
-};
-
-const projectDataEngineeringEntries = [
-  {
-    title: "IPEDS Harmonized Panel Builder (2004\u20132024)",
-    summary:
-      "A reproducible Python and SQL data-engineering pipeline that converts NCES IPEDS cross-sections into institution-year panels with strict release checks, provenance-preserving harmonization, parent-child cleaning, and auditable QC artifacts.",
-    href: githubProfile,
-    ctaLabel: "GitHub Repo",
-  },
-  {
-    title: "Federal Student Aid Volume Reports Panel Pipeline (1999\u20132025)",
-    summary:
-      "A reproducible workflow that transforms Federal Student Aid Title IV volume reports into institution-year panel datasets using exact OPEID8 and award-year keys, with QA/QC checks for coverage, duplicate keys, year gaps, and descriptor conflicts.",
-    href: githubProfile,
-    ctaLabel: "GitHub Repo",
-  },
-] satisfies ProjectEntry[];
-
-const projectEconomicToolsEntries = [
-  {
-    title: "IPEDS Variable Browser",
-    summary:
-      "A browser-style utility for exploring IPEDS variables, metadata, and release differences without manually stepping through annual dictionaries.",
-  },
-  {
-    title: "Econometric Workflow Utilities",
-    summary:
-      "Small tools that standardize filtering, variable selection, data checks, and model-ready outputs for repeated analytical tasks.",
-  },
-] satisfies ProjectEntry[];
-
-const projectMiscEntries = [
-  {
-    title: "Public Portfolio Site",
-    summary:
-      "A routed Astro site that packages academic, analytical, and creative work into a clearer public-facing system.",
-  },
-  {
-    title: "Presentation and Writing Systems",
-    summary:
-      "Reusable templates and structured workflows used to prepare talks, public writing, and research communication materials.",
-  },
-] satisfies ProjectEntry[];
-
-export const projectsPage = {
-  title: "Projects",
-  lead: "Built systems, tools, and infrastructure that support research and analysis.",
-  rail: [
-    { id: "latest", label: "Latest" },
-    { id: "data-engineering", label: "Data Engineering" },
-    { id: "economic-tools", label: "Economic Tools" },
-    { id: "misc", label: "Misc" },
-  ] satisfies RailItem[],
-  latest: {
-    id: "latest",
-    label: "Latest",
-    intro: "Recent systems, data pipelines, and workflow tools that currently define the project portfolio.",
-    entries: [
-      projectDataEngineeringEntries[0],
-      projectDataEngineeringEntries[1],
-      projectEconomicToolsEntries[0],
-    ],
-  } satisfies LatestProjectPanel,
-  sections: [
-    {
-      id: "data-engineering",
-      label: "Data Engineering",
-      intro:
-        "I build data systems that take fragmented, inconsistent, or multi-source information and turn it into structured, analysis-ready datasets. The work covers panel construction, harmonization, variable engineering, validation, and reproducible workflows.",
-      entries: projectDataEngineeringEntries,
-    },
-    {
-      id: "economic-tools",
-      label: "Economic Tools",
-      intro:
-        "These projects focus on usability at the level of the researcher, analyst, or decision-maker. They include interfaces, browsers, utilities, and workflow tools that make data easier to navigate, select, interpret, and use in practice.",
-      entries: projectEconomicToolsEntries,
-    },
-    {
-      id: "misc",
-      label: "Misc",
-      intro:
-        "Smaller supporting builds, exploratory systems, and public-facing packaging work that stay useful even when they sit outside the main research pipeline.",
-      entries: projectMiscEntries,
-    },
-  ] satisfies ProjectSection[],
-};
-
-const articleSections = [
-  {
-    id: "op-ed",
-    title: "OP-Ed",
-    description:
-      "Argument-driven pieces written for broader public audiences, connecting economic reasoning to questions of policy, opportunity, and everyday life.",
-  },
-  {
-    id: "commentaries",
-    title: "Commentaries",
-    description:
-      "Shorter reflections on institutions, incentives, and social behavior that start from an observation and work toward a broader interpretation.",
-  },
-  {
-    id: "essays-notes",
-    title: "Essays & Notes",
-    description:
-      "Writing that moves more freely: reflective essays, public scholarship, and exploratory pieces that don't fit neatly into a formal paper format.",
-  },
-] satisfies ArticleSection[];
-
-export const articlesPage = {
-  title: "Articles",
-  lead: "Public-facing writing that translates research and systems thinking for wider audiences.",
-  rail: [
-    { id: "latest", label: "Latest" },
-    { id: "op-ed", label: "OP-Ed" },
-    { id: "commentaries", label: "Commentaries" },
-    { id: "essays-notes", label: "Essays & Notes" },
-  ] satisfies RailItem[],
-  latest: {
-    id: "latest",
-    label: "Latest",
-    intro: "Current writing directions across public scholarship, commentary, and essays while the archive continues to expand.",
-    sections: articleSections,
-  } satisfies LatestArticlePanel,
-  sections: articleSections,
-};
-
-const creativeHeadshotSelections = [
-  {
-    src: withBase("/images/creative/headshots/headshot-01.jpeg"),
-    alt: "Cinematic seated portrait of Mark Jayson Farol in officewear.",
-    caption: "Cinematic portrait",
-    detailsText: "Officewear portrait study with a cinematic seated composition.",
-    aspect: "portrait",
-  },
-  {
-    src: withBase("/images/creative/headshots/headshot-02.jpeg"),
-    alt: "Studio headshot of Mark Jayson Farol in a dark blazer against a light background.",
-    caption: "Studio headshot",
-    detailsText: "Clean studio headshot with a neutral background, direct gaze, and formal blazer styling.",
-    featured: true,
-    aspect: "portrait",
-  },
-  {
-    src: withBase("/images/creative/headshots/headshot-03.jpeg"),
-    alt: "Angled portrait study of Mark Jayson Farol in a dark jacket.",
-    caption: "Angled portrait study",
-    detailsText: "Three-quarter portrait with a darker jacket and softer side angle.",
-    aspect: "portrait",
-  },
-] satisfies CreativeGalleryItem[];
-
-const creativeEditorialSelections = [
-  {
-    src: withBase("/images/creative/photoshoots/editorials/editorial-02.jpg"),
-    alt: "Black-and-white editorial portrait of Mark Jayson Farol in sunglasses and a leather jacket.",
-    caption: "Black-and-white editorial portrait",
-    detailsText: "Monochrome editorial image with leather outerwear and a stronger fashion-forward silhouette.",
-    featured: true,
-    aspect: "landscape",
-  },
-  {
-    src: withBase("/images/creative/photoshoots/editorials/editorial-01.jpeg"),
-    alt: "Editorial portrait of Mark Jayson Farol from the creative archive.",
-    caption: "Editorial portrait I",
-    detailsText: "Black-and-white editorial frame with a looser gesture and softer movement.",
-    aspect: "portrait",
-  },
-  {
-    src: withBase("/images/creative/photoshoots/editorials/editorial-03.jpg"),
-    alt: "Styled editorial portrait of Mark Jayson Farol.",
-    caption: "Editorial portrait II",
-    detailsText: "Low-key editorial portrait built around contrast, posture, and mood.",
-    aspect: "portrait",
-  },
-  {
-    src: withBase("/images/creative/photoshoots/editorials/editorial-04.jpeg"),
-    alt: "Editorial study of Mark Jayson Farol with fashion-forward styling.",
-    caption: "Editorial portrait III",
-    detailsText: "Color editorial portrait with floral styling and a cleaner front-facing composition.",
-    aspect: "portrait",
-  },
-  {
-    src: withBase("/images/creative/photoshoots/editorials/editorial-05.jpeg"),
-    alt: "Creative editorial image of Mark Jayson Farol.",
-    caption: "Editorial portrait IV",
-    detailsText: "Softly lit portrait with floral styling and a lighter tonal treatment.",
-    aspect: "portrait",
-  },
-  {
-    src: withBase("/images/creative/photoshoots/editorials/editorial-06.jpeg"),
-    alt: "Editorial close portrait of Mark Jayson Farol.",
-    caption: "Editorial portrait V",
-    detailsText: "Tighter editorial frame focused on pose, facial expression, and tonal contrast.",
-    aspect: "portrait",
-  },
-] satisfies CreativeGalleryItem[];
-
-const creativeCommencementSelections = [
-  {
-    src: withBase("/images/creative/photoshoots/commencement/commencement-08.jpg"),
-    alt: "Commencement portrait of Mark Jayson Farol in graduation regalia against the Las Vegas skyline.",
-    caption: "Commencement portrait I",
-    detailsText: "Graduation portrait with skyline framing and a wider commemorative composition.",
-    featured: true,
-    aspect: "landscape",
-  },
-  {
-    src: withBase("/images/creative/photoshoots/commencement/commencement-01.jpeg"),
-    alt: "Graduation portrait of Mark Jayson Farol.",
-    caption: "Commencement portrait II",
-    detailsText: "Formal graduation portrait from the commencement portrait set.",
-    aspect: "portrait",
-  },
-  {
-    src: withBase("/images/creative/photoshoots/commencement/commencement-02.jpeg"),
-    alt: "Formal graduation image of Mark Jayson Farol.",
-    caption: "Commencement portrait III",
-    detailsText: "Studio-style commencement image with cap-and-gown focus.",
-    aspect: "portrait",
-  },
-  {
-    src: withBase("/images/creative/photoshoots/commencement/commencement-03.jpeg"),
-    alt: "Graduation photo study of Mark Jayson Farol.",
-    caption: "Commencement portrait IV",
-    detailsText: "Commencement portrait built around posture and celebratory detail.",
-    aspect: "portrait",
-  },
-  {
-    src: withBase("/images/creative/photoshoots/commencement/commencement-04.jpeg"),
-    alt: "Commencement image of Mark Jayson Farol with a cap and gown.",
-    caption: "Commencement portrait V",
-    detailsText: "Cap-and-gown portrait from the main graduation image sequence.",
-    aspect: "portrait",
-  },
-  {
-    src: withBase("/images/creative/photoshoots/commencement/commencement-05.jpeg"),
-    alt: "Graduation portrait of Mark Jayson Farol from the local creative archive.",
-    caption: "Commencement portrait VI",
-    detailsText: "Graduation image with a quieter portrait framing and softer expression.",
-    aspect: "portrait",
-  },
-  {
-    src: withBase("/images/creative/photoshoots/commencement/commencement-06.jpeg"),
-    alt: "Commencement portrait of Mark Jayson Farol in evening light.",
-    caption: "Commencement portrait VII",
-    detailsText: "Evening-light commencement image with a warmer outdoor atmosphere.",
-    aspect: "portrait",
-  },
-  {
-    src: withBase("/images/creative/photoshoots/commencement/commencement-07.jpeg"),
-    alt: "Graduation portrait of Mark Jayson Farol in a formal pose.",
-    caption: "Commencement portrait VIII",
-    detailsText: "Formal graduation pose from the commencement archive.",
-    aspect: "portrait",
-  },
-] satisfies CreativeGalleryItem[];
-
-const creativeHalloweenSelections = [
-  {
-    src: withBase("/images/creative/photoshoots/halloween/halloween-03.jpeg"),
-    alt: "Halloween character portrait of Mark Jayson Farol inside a library aisle.",
-    caption: "Character portrait I",
-    detailsText: "Clark Kent and Superman-inspired character portrait set in a library aisle.",
-    featured: true,
-    aspect: "portrait",
-  },
-  {
-    src: withBase("/images/creative/photoshoots/halloween/halloween-01.jpeg"),
-    alt: "Halloween portrait of Mark Jayson Farol from the costume archive.",
-    caption: "Character portrait II",
-    detailsText: "Costume portrait with a stronger theatrical makeup and character styling treatment.",
-    aspect: "portrait",
-  },
-  {
-    src: withBase("/images/creative/photoshoots/halloween/halloween-02.jpeg"),
-    alt: "Costumed Halloween study of Mark Jayson Farol.",
-    caption: "Character portrait III",
-    detailsText: "Superman-inspired image study with a cinematic fantasy-composite treatment.",
-    aspect: "portrait",
-  },
-  {
-    src: withBase("/images/creative/photoshoots/halloween/halloween-04.jpeg"),
-    alt: "Halloween portrait of Mark Jayson Farol in a staged scene.",
-    caption: "Character portrait IV",
-    detailsText: "Villain-inspired costume portrait with a darker forest-set composition.",
-    aspect: "portrait",
-  },
-  {
-    src: withBase("/images/creative/photoshoots/halloween/halloween-05.jpeg"),
-    alt: "Costume-based portrait of Mark Jayson Farol.",
-    caption: "Character portrait V",
-    detailsText: "Character image built around costume, pose, and a more dramatic stylized mood.",
-    aspect: "portrait",
-  },
-  {
-    src: withBase("/images/creative/photoshoots/halloween/halloween-06.jpeg"),
-    alt: "Halloween portrait from the current creative archive.",
-    caption: "Character portrait VI",
-    detailsText: "Costume portrait from the broader Halloween archive.",
-    aspect: "portrait",
-  },
-  {
-    src: withBase("/images/creative/photoshoots/halloween/halloween-07.jpeg"),
-    alt: "Dramatic Halloween image of Mark Jayson Farol.",
-    caption: "Character portrait VII",
-    detailsText: "Dramatic costume image with a darker tonal palette and character emphasis.",
-    aspect: "portrait",
-  },
-  {
-    src: withBase("/images/creative/photoshoots/halloween/halloween-08.jpeg"),
-    alt: "Halloween portrait of Mark Jayson Farol in costume.",
-    caption: "Character portrait VIII",
-    detailsText: "Costume portrait with a stylized performance-oriented frame.",
-    aspect: "portrait",
-  },
-  {
-    src: withBase("/images/creative/photoshoots/halloween/halloween-09.jpeg"),
-    alt: "Styled Halloween portrait of Mark Jayson Farol.",
-    caption: "Character portrait IX",
-    detailsText: "Styled Halloween portrait from the extended character archive.",
-    aspect: "portrait",
-  },
-] satisfies CreativeGalleryItem[];
-
-export const creativeCluster = {
-  nav: [
-    { label: "Creative", href: withCreativeSite("/") },
-    { label: "Artistic Resume", href: withCreativeSite("/artistic-resume") },
-    { label: "Headshots", href: withCreativeSite("/headshots") },
-    { label: "Photoshoots", href: withCreativeSite("/photoshoots") },
-  ] satisfies CreativeClusterNavItem[],
-  landing: {
-    theme: {
-      page: "creative-landing",
-      accent: "#b69030",
-      mode: "dark",
-    } satisfies CreativePageTheme,
-    title: "Creative",
-    lead: "Music, performance, film, and storytelling across my artistic practice.",
-    statement:
-      "Arts has been one of my earliest ways of understanding myself and the world around me. I exhibit different forms of arts through music, theatre, film, performance, and visual storytelling, each one shaping how I communicate, create, and connect with people. My artistic practice has strengthened my discipline, emotional range, confidence, and presence, while deepening the human side of how I think and work. Across stage, screen, and sound, I continue to treat art as both expression and exploration. Find out my artistic journey through my performances, music, film, and creative work.",
-    spotlightVideo: {
-      src: withBase("/media/creative/firebook.mov"),
-      posterSrc: creativeEditorialSelections[0].src,
-      alt: "Landscape creative spotlight reel featuring Mark Jayson Farol.",
-    } satisfies CreativeVideoAsset,
-    measurements: [
-      { label: "Height", value: "5'7\"" },
-      { label: "Bust", value: "36\"" },
-      { label: "Waist", value: "28\"" },
-      { label: "Hips", value: "30\"" },
-      { label: "Shoes", value: "US 8.5" },
-      { label: "Shirt", value: "US S/M" },
-      { label: "Hair", value: "Dark Brown" },
-      { label: "Eyes", value: "Dark Brown" },
-    ] satisfies CreativeMeasure[],
-    headshotPreviews: creativeHeadshotSelections.slice(0, 3),
-    headshotsCta: {
-      label: "View Headshots",
-      href: withCreativeSite("/headshots"),
-    },
-    featureCards: [
-      {
-        title: "Performing Arts",
-        description:
-          "Stage work across musical theatre, plays, and live showcase performances, with strengths in character work, vocals, movement, and stage presence.",
-        href: withCreativeSite("/artistic-resume"),
-        cta: "Artistic Resume",
-      },
-      {
-        title: "Modeling and Photography",
-        description:
-          "Editorial, portrait, and character-based visual work focused on camera presence, range, styling, and expressive storytelling.",
-        href: withCreativeSite("/photoshoots"),
-        cta: "Photoshoots",
-      },
-      {
-        title: "Music",
-        description:
-          "Music practice spanning vocals, songwriting, and performance across pop, musical theatre, and contemporary styles.",
-      },
-      {
-        title: "Film",
-        description:
-          "On-camera performance and screen-based storytelling centered on character, presence, and emotional clarity.",
-      },
-    ] satisfies CreativeFeatureCard[],
-  },
-  artisticResume: {
-    theme: {
-      page: "creative-artistic-resume",
-      accent: "#570100",
-      mode: "dark",
-    } satisfies CreativePageTheme,
-    title: "Mark Jayson M. Farol",
-    lead:
-      "Artist, performer, musician, and storyteller with experience across musical theatre, plays, live performance, and on-camera work. Trained through theatre and performance-based roles that strengthened stage presence, vocal expression, movement, and character work. Brings discipline, emotional range, and strong audience connection across stage and screen.",
-    sections: [
-      {
-        id: "summary",
-        label: "Summary",
-        intro: "Overview",
-        entries: [
-          {
-            title: "Artist statement",
-            description:
-              "Artist, performer, musician, and storyteller with experience across musical theatre, plays, live performance, and on-camera work. Trained through theatre and performance-based roles that strengthened stage presence, vocal expression, movement, and character work. Brings discipline, emotional range, and strong audience connection across stage and screen.",
-          },
-        ],
-      },
-      {
-        id: "education",
-        label: "Education",
-        intro: "Training in performance, stagecraft, and theatre-based communication.",
-        entries: [
-          {
-            title: "University of Nevada, Las Vegas",
-            subtitle: "Minor in Theatre",
-            description:
-              "The Department of Theatre in the College of Fine Arts offers programs in performance, production and technology taught by experienced faculty while taking advantage of the entertainment richness of Las Vegas.",
-          },
-          {
-            title: "Courses",
-            subtitle:
-              "Acting: Camera · Voice and Movement for Actors I · Voice and Movement for Actors II · Acting I: Techniques · Act Studio II: Technique · Play Structure & Analysis · Acting III: Scene Study · Speech for the Actor · Acting as a Profession",
-            description:
-              "Coursework across camera acting, movement, text analysis, voice, rehearsal process, and professional preparation.",
-          },
-        ],
-      },
-      {
-        id: "musical-theatre",
-        label: "Musical Theatre",
-        intro: "Selected musical theatre roles and training work.",
-        entries: [
-          {
-            title: "Willy Wonka",
-            subtitle: "Augustus Gloop",
-            meta: "LHS Patriot Theatre · Apr 2019",
-            description:
-              "A whimsical stage musical following the mysterious Willy Wonka and the children invited into his fantastical chocolate factory. Augustus Gloop is bold, indulgent, and larger than life, bringing humor, strong physicality, and exaggerated stage presence to the production.",
-          },
-          {
-            title: "Rock of Ages",
-            subtitle: "Ensemble",
-            meta: "LHS Patriot Theatre · Apr 2018",
-            description:
-              "A high-energy jukebox musical set on the 1980s Sunset Strip, filled with rock anthems, comedy, and larger-than-life characters chasing fame and connection. Ensemble work helped create the vibrant world of the show through dynamic movement, vocal energy, character versatility, and collaborative stage presence.",
-          },
-          {
-            title: "The Phantom of the Opera",
-            subtitle: "Erik, The Phantom | Viscount Raoul de Chagny",
-            meta: "Training and scene work",
-            description:
-              "A gothic musical set in the Paris Opera House, centered on obsession, genius, longing, and the haunting relationship between Christine Daae and the Phantom. Erik demands dramatic depth and emotional complexity, while Raoul brings steadiness, loyalty, and romantic devotion to the story.",
-          },
-          {
-            title: "Les Miserables",
-            subtitle: "Jean Valjean | Marius Pontmercy",
-            meta: "Training and scene work",
-            description:
-              "An epic musical set in 19th-century France, exploring justice, mercy, sacrifice, and redemption amid social unrest and revolution. Jean Valjean requires immense emotional range and spiritual weight, while Marius carries youthful passion, sincerity, and emotional growth.",
-          },
-        ],
-      },
-      {
-        id: "plays",
-        label: "Plays",
-        intro: "Straight plays and directed work focused on dramatic range and storytelling precision.",
-        entries: [
-          {
-            title: "The Curious Incident of the Dog in the Night-time",
-            subtitle: "Christopher (Understudy) | Ensemble",
-            meta: "LHS Patriot Theatre · Feb 2019",
-            description:
-              "A stage adaptation of Mark Haddon's novel, following a mathematically gifted teenager as he investigates the death of a neighbor's dog and navigates a world that often feels overwhelming and unpredictable. Christopher requires precision, vulnerability, focus, and a deeply physical performance style.",
-          },
-          {
-            title: "Radium Girls",
-            subtitle: "Dr. Flinn / C.B. Charlie Lee",
-            meta: "LHS Patriot Theatre · Feb 2018",
-            description:
-              "A historical drama based on the true story of young women poisoned by radium while working in factories, and their fight for justice against powerful institutions. The supporting roles helped shape the tension, authority, and ethical conflict surrounding the workers' struggle.",
-          },
-          {
-            title: "Check Please: Take Two",
-            subtitle: "Director",
-            meta: "LHS Patriot Theatre · Dec 2018",
-            description:
-              "A fast-paced comedy built around a series of disastrous blind dates, quick transitions, and sharply contrasted characters. The production was directed with attention to pacing, scene flow, comedic timing, and performance clarity.",
-          },
-        ],
-      },
-      {
-        id: "performances",
-        label: "Performances",
-        intro: "Live showcases and public-facing performance work.",
-        entries: [
-          {
-            title: "Nevada Thespian State Conference Opening Number",
-            subtitle: "Performer",
-            meta: "State conference appearance",
-            description:
-              "Featured performer in the opening number for the Nevada Thespian State Conference, delivering a dynamic combination of vocals, choreography, and character performance in a high-visibility theatrical showcase.",
-          },
-          {
-            title: "Public Education Foundation Ed Hero Award Gala",
-            subtitle: "Performing artist",
-            meta: "Las Vegas, Nevada · Sep 2018",
-            description:
-              "Featured performer at the Public Education Foundation Ed Hero Award Gala, presenting a polished live performance through singing, dancing, and acting for a public-facing celebratory event.",
-          },
-        ],
-      },
-      {
-        id: "awards",
-        label: "Awards",
-        intro: "Recognition earned through adjudicated theatre events and performance presentation.",
-        entries: [
-          {
-            title: "International Thespian Festival",
-            subtitle: "Superior in Individual Events",
-            description:
-              "Received a Superior rating in Individual Events at the International Thespian Festival, recognizing excellence in performance, preparation, and theatrical presentation in a competitive setting.",
-          },
-          {
-            title: "State Thespian Festival",
-            subtitle: "Superior in Individual Events",
-            description:
-              "Earned a Superior rating in Individual Events at the State Thespian Conference, reflecting strong performance quality, stage presence, and execution in a judged theatre event.",
-          },
-        ],
-      },
-      {
-        id: "skills",
-        label: "Skills",
-        intro: "Performance tools spanning voice, movement, instruments, and accents.",
-        entries: [
-          {
-            title: "Vocal",
-            description: "Classical, Pop, Rap, Opera",
-          },
-          {
-            title: "Musical Instruments",
-            description: "Guitar, Piano, Violin",
-          },
-          {
-            title: "Dance",
-            description: "K-Pop, Hip-Hop",
-          },
-          {
-            title: "Accents",
-            description: "British RP, Australian, Russian, American",
-          },
-        ],
-      },
-    ] satisfies CreativeResumeSection[],
-  },
-  headshots: {
-    theme: {
-      page: "creative-headshots",
-      accent: "#f6f6fa",
-      mode: "light",
-    } satisfies CreativePageTheme,
-    title: "Headshots",
-    lead: "A selection of still-image headshots from the creative archive.",
-    backstageHref,
-    items: creativeHeadshotSelections,
-  },
-  photoshoots: {
-    theme: {
-      page: "creative-photoshoots",
-      accent: "#000000",
-      mode: "dark",
-    } satisfies CreativePageTheme,
-    title: "Photoshoots",
-    lead:
-      "Editorial, commencement, and Halloween image studies from the creative archive.",
-    defaultId: "editorials",
-    rail: [
-      { id: "editorials", label: "Editorials" },
-      { id: "commencement", label: "Commencement" },
-      { id: "halloween", label: "Halloween" },
-    ] satisfies RailItem[],
-    groups: [
-      {
-        id: "editorials",
-        label: "Editorials",
-        intro:
-          "Styled portraits, monochrome fashion studies, and portfolio-ready frames that carry the strongest editorial energy in the current archive.",
-        items: creativeEditorialSelections,
-      },
-      {
-        id: "commencement",
-        label: "Commencement",
-        intro:
-          "Formal graduation portraiture and milestone imagery from the current commencement gallery.",
-        items: creativeCommencementSelections,
-      },
-      {
-        id: "halloween",
-        label: "Halloween",
-        intro:
-          "Character-forward styling, costume work, and moodier image studies from the Halloween archive.",
-        items: creativeHalloweenSelections,
-      },
-    ] satisfies CreativeGalleryGroup[],
-  },
-} as const;
-
 export const profilesPage = {
   title: "Profiles",
   lead: "A curated hub of my academic, professional, and technical presence across the web.",
   videoSrc: withBase("/media/canva-profiles.mp4"),
   buttons: [
-    { label: "LinkedIn", icon: "linkedin", href: socialLookup.get("LinkedIn") },
-    { label: "GitHub", icon: "github", href: githubProfile },
-    { label: "ORCID", icon: "orcid", href: socialLookup.get("ORCID") },
-    { label: "ResearchGate", icon: "researchgate", href: socialLookup.get("ResearchGate") },
-    { label: "Google Scholar", icon: "scholar", href: socialLookup.get("Google Scholar") },
+    { label: "LinkedIn", icon: "linkedin", href: externalLinks.linkedIn },
+    { label: "GitHub", icon: "github", href: externalLinks.github },
+    { label: "ORCID", icon: "orcid", href: externalLinks.orcid },
+    { label: "ResearchGate", icon: "researchgate", href: externalLinks.researchGate },
+    { label: "Google Scholar", icon: "scholar", href: externalLinks.googleScholar },
   ] satisfies ProfileButton[],
 } satisfies ProfilesPage;

@@ -14,9 +14,6 @@ const heroQuickLinks = heroQuickLinkOrder
   description="Mark Jayson Martinez Farol is an economist and data scientist specializing in econometrics, causal inference, data engineering, and evidence-based financial and policy analysis."
   page="home"
   accent="#050505"
-  shell="bare"
-  footer={false}
-  replicaFooter={false}
   replicaMotion={true}
   socialImage={socialPreviewImages.home}
 >
@@ -154,46 +151,49 @@ const heroQuickLinks = heroQuickLinkOrder
             </div>
 
             <div class="home-contact-band__form-shell">
+              <p class="home-contact-band__status" role="status" data-contact-status hidden>
+                Thank you. Your message has been sent.
+              </p>
+
               <form
                 class="home-contact-band__form"
                 action="https://formsubmit.co/markjayson@markjayson.com"
                 method="post"
+                data-contact-form
               >
                 <input type="hidden" name="_subject" value="New message from markjayson.com" />
                 <input type="hidden" name="_template" value="table" />
                 <input type="hidden" name="_url" value="https://markjayson.com/" />
-                <input type="text" name="_honey" class="home-contact-band__honeypot" tabindex="-1" autocomplete="off" />
+                <input type="hidden" name="_next" value="https://markjayson.com/?contact=sent#contact" />
+                <input
+                  type="text"
+                  name="_honey"
+                  class="home-contact-band__honeypot"
+                  tabindex="-1"
+                  autocomplete="off"
+                  aria-hidden="true"
+                />
 
                 {
                   homePage.contactFields.map((field) => (
                     <label
                       class:list={[
                         "home-contact-band__field",
-                        `home-contact-band__field--${field.name}`,
+                        `home-contact-band__field--${field.slot}`,
                         field.full && "home-contact-band__field--message",
                       ]}
                     >
                       <span>{field.label}</span>
-                      {
-                        field.name === "message" ? (
-                          <textarea name={field.name} required></textarea>
-                        ) : (
-                          <input
-                            type={field.name === "email" ? "email" : "text"}
-                            name={field.name}
-                            required={field.name !== "subject"}
-                            autocomplete={
-                              field.name === "first-name"
-                                ? "given-name"
-                                : field.name === "last-name"
-                                  ? "family-name"
-                                  : field.name === "email"
-                                    ? "email"
-                                    : "off"
-                            }
-                          />
-                        )
-                      }
+                      {field.name === "message" ? (
+                        <textarea name={field.name} required={field.required}></textarea>
+                      ) : (
+                        <input
+                          type={field.type ?? "text"}
+                          name={field.name}
+                          required={field.required}
+                          autocomplete={field.autocomplete}
+                        />
+                      )}
                     </label>
                   ))
                 }

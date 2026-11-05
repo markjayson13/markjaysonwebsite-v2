@@ -24,9 +24,6 @@ const structuredData = [
   description={pageDescription}
   page="profiles"
   accent="#efefea"
-  shell="bare"
-  footer={false}
-  replicaFooter={false}
   replicaMotion={true}
   structuredData={structuredData}
   socialImage={profilesHeadshot}
@@ -53,19 +50,12 @@ const structuredData = [
 
       <div class="profiles-page__grid" role="list">
         {
-          profilesPage.buttons.map((button) =>
-            button.href ? (
-              <a class="profiles-page__button" href={button.href} target="_blank" rel="noreferrer" data-lift role="listitem">
-                <span class="profiles-page__symbol" aria-hidden="true"><SocialIcon icon={button.icon} /></span>
-                <span>{button.label}</span>
-              </a>
-            ) : (
-              <span class="profiles-page__button profiles-page__button--disabled" data-lift role="listitem">
-                <span class="profiles-page__symbol" aria-hidden="true"><SocialIcon icon={button.icon} /></span>
-                <span>{button.label}</span>
-              </span>
-            )
-          )
+          profilesPage.buttons.map((button) => (
+            <a class="profiles-page__button" href={button.href} target="_blank" rel="noreferrer" data-lift role="listitem">
+              <span class="profiles-page__symbol" aria-hidden="true"><SocialIcon icon={button.icon} /></span>
+              <span>{button.label}</span>
+            </a>
+          ))
         }
       </div>
     </div>

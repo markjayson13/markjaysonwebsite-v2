@@ -1,13 +1,5 @@
 ---
-import {
-  cornerMenuItems,
-  creativeSiteUrl,
-  mainSiteTopLinks,
-  pageThemes,
-  profile,
-  socialPreviewImages,
-  withCreativeSite,
-} from "../data/site";
+import { cornerMenuItems, mainSiteTopLinks, pageThemes, profile, socialPreviewImages } from "../data/site";
 import type { SocialPreviewImage, StructuredData } from "../data/site";
 import ReplicaMotion from "../components/ReplicaMotion.astro";
 import SiteFooter from "../components/SiteFooter.astro";
@@ -21,9 +13,6 @@ interface Props {
   page: string;
   accent?: string;
   robots?: string;
-  shell?: "bare";
-  footer?: boolean;
-  replicaFooter?: boolean;
   replicaMotion?: boolean;
   structuredData?: StructuredData;
   socialImage?: SocialPreviewImage;
@@ -34,79 +23,28 @@ const {
   description,
   page,
   accent = "#0f6d63",
-  robots,
+  robots = "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
   replicaMotion = true,
   structuredData,
   socialImage,
 } = Astro.props;
 
 const siteOrigin = Astro.site ?? new URL("https://markjayson.com");
-const creativeOrigin = new URL(creativeSiteUrl);
-const pageGroup = page.startsWith("creative-") ? "creative" : page;
-const isCreativeHost = siteOrigin.hostname === creativeOrigin.hostname;
-const creativeCanonicalPathMap: Record<string, string> = {
-  "creative-landing": "/",
-  "creative-artistic-resume": "/artistic-resume",
-  "creative-headshots": "/headshots",
-  "creative-photoshoots": "/photoshoots",
-};
-const canonicalOrigin = pageGroup === "creative" ? creativeOrigin : siteOrigin;
-const canonicalPath = pageGroup === "creative" ? creativeCanonicalPathMap[page] ?? Astro.url.pathname : Astro.url.pathname;
-const canonical = new URL(canonicalPath, canonicalOrigin).toString();
+const canonical = new URL(Astro.url.pathname, siteOrigin).toString();
 const structuredDataJson = structuredData ? JSON.stringify(structuredData, null, 2) : null;
 const previewImage = socialImage ?? socialPreviewImages.home;
 const previewImageUrl = new URL(previewImage.src, siteOrigin).toString();
-const pageTheme = pageThemes[page] ?? pageThemes[pageGroup] ?? pageThemes.home;
-const defaultRobots = "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1";
-const robotsContent =
-  robots ??
-  (pageGroup === "creative" && !isCreativeHost
-    ? `noindex,follow,${defaultRobots.split(",").slice(2).join(",")}`
-    : defaultRobots);
+const pageTheme = pageThemes[page] ?? pageThemes.home;
 const cornerMenuDefaultLabelMap: Record<string, string> = {
-  home: "About",
-  bio: "About",
   resume: "Resume/CV",
   portfolio: "Portfolio",
-  research: "Portfolio",
-  projects: "Portfolio",
-  articles: "Portfolio",
   profiles: "Profiles",
-  privacy: "About",
-  terms: "About",
 };
-const cornerMenuDefaultLabel = cornerMenuDefaultLabelMap[pageGroup] ?? "About";
-const mainSiteTopRowPages = new Set(["bio", "resume", "portfolio", "profiles"]);
-const showMainSiteTopRow = mainSiteTopRowPages.has(page);
-const backLinkFallbackMap: Record<string, string> = {
-  bio: withBase("/"),
-  resume: withBase("/"),
-  portfolio: withBase("/"),
-  profiles: withBase("/"),
-  privacy: withBase("/"),
-  terms: withBase("/"),
-  research: withBase("/portfolio"),
-  projects: withBase("/portfolio"),
-  articles: withBase("/portfolio"),
-  "creative-landing": withBase("/portfolio"),
-  "creative-artistic-resume": withCreativeSite("/"),
-  "creative-headshots": withCreativeSite("/"),
-  "creative-photoshoots": withCreativeSite("/"),
-};
-const backLinkHref =
-  page === "home" || showMainSiteTopRow ? null : backLinkFallbackMap[page] ?? backLinkFallbackMap[pageGroup] ?? withBase("/");
-const isActiveMainSiteLink = (href?: string) => {
-  if (!href) {
-    return false;
-  }
-
-  try {
-    const linkUrl = new URL(href, canonicalOrigin);
-    return linkUrl.origin === siteOrigin.origin && linkUrl.pathname === Astro.url.pathname;
-  } catch {
-    return false;
-  }
-};
+const cornerMenuDefaultLabel = cornerMenuDefaultLabelMap[page] ?? "About";
+const showMainSiteTopRow = ["bio", "resume", "portfolio", "profiles"].includes(page);
+const backLinkHref = page === "home" || showMainSiteTopRow ? null : withBase("/");
+const normalizePath = (path: string) => (path.length > 1 ? path.replace(/\/$/, "") : path);
+const isActiveMainSiteLink = (href: string) => normalizePath(href) === normalizePath(Astro.url.pathname);
 ---
 
 <!doctype html>
@@ -116,8 +54,7 @@ const isActiveMainSiteLink = (href?: string) => {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title} | {profile.name}</title>
     <meta name="description" content={description} />
-    <meta name="robots" content={robotsContent} />
-    <meta name="googlebot" content={robotsContent} />
+    <meta name="robots" content={robots} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href={withBase("/favicon.svg")} type="image/svg+xml" />
     <link rel="icon" href={withBase("/favicon.ico")} sizes="any" />
@@ -161,26 +98,21 @@ const isActiveMainSiteLink = (href?: string) => {
   <body
     class="has-site-footer"
     data-page={page}
-    data-page-group={pageGroup}
     style={`--page-accent:${accent}; --page-title-measure:${pageTheme.titleMeasure}; --page-lead-measure:${pageTheme.leadMeasure}; --page-copy-measure:${pageTheme.copyMeasure ?? pageTheme.leadMeasure};`}
   >
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
     {
       showMainSiteTopRow && (
         <header class="site-top-row-shell" data-site-top-row>
           <div class="site-top-row-shell__inner">
             <nav class="site-top-row" aria-label="Main site sections">
               {
-                mainSiteTopLinks.map((link) =>
-                  link.menuTrigger ? (
-                    <button class="site-top-row__link" type="button" data-site-menu-launch>
-                      {link.label}
-                    </button>
-                  ) : (
-                    <a class="site-top-row__link" href={link.href} aria-current={isActiveMainSiteLink(link.href) ? "page" : undefined}>
-                      {link.label}
-                    </a>
-                  ),
-                )
+                mainSiteTopLinks.map((link) => (
+                  <a class="site-top-row__link" href={link.href} aria-current={isActiveMainSiteLink(link.href) ? "page" : undefined}>
+                    {link.label}
+                  </a>
+                ))
               }
             </nav>
           </div>
@@ -382,68 +314,34 @@ const isActiveMainSiteLink = (href?: string) => {
         });
 
         document.addEventListener("keydown", (event) => {
-          if (event.key === "Escape") {
+          if (event.key === "Escape" && root.classList.contains("is-open")) {
             closeMenu();
           }
         });
       };
 
-      const setupInlinePreviewMenus = () => {
-        const roots = document.querySelectorAll("[data-preview-menu-root]");
-        roots.forEach((root) => {
-          if (!(root instanceof HTMLElement) || root.closest("[data-corner-menu-root]")) {
-            return;
-          }
+      const setupContactStatus = () => {
+        const form = document.querySelector("[data-contact-form]");
+        const status = document.querySelector("[data-contact-status]");
+        if (!(form instanceof HTMLFormElement)) {
+          return;
+        }
 
-          if (root.dataset.previewBound === "true") {
-            return;
-          }
+        if (status instanceof HTMLElement) {
+          status.hidden = new URLSearchParams(window.location.search).get("contact") !== "sent";
+        }
 
-          const nav = root.querySelector("[data-menu-nav]");
-          const items = Array.from(root.querySelectorAll("[data-menu-item]")).filter(
-            (item) => item instanceof HTMLElement,
-          );
-          const titleEl = root.querySelector("[data-menu-preview-title]");
-          const descriptionEl = root.querySelector("[data-menu-preview-description]");
-          const defaultLabel = root.dataset.defaultLabel ?? "About";
-
-          const getItemByLabel = (label) =>
-            items.find((item) => item instanceof HTMLElement && item.dataset.label === label);
-
-          const setPreview = (label) => {
-            const active = getItemByLabel(label);
-            if (!(active instanceof HTMLElement)) {
-              return;
+        const submit = form.querySelector("[type=submit]");
+        form.addEventListener(
+          "submit",
+          () => {
+            if (submit instanceof HTMLButtonElement) {
+              submit.disabled = true;
+              submit.textContent = "Sending...";
             }
-
-            items.forEach((item) => {
-              if (item instanceof HTMLElement) {
-                item.classList.toggle("is-active", item === active);
-              }
-            });
-
-            if (titleEl instanceof HTMLElement) {
-              titleEl.textContent = active.dataset.title ?? label;
-            }
-
-            if (descriptionEl instanceof HTMLElement) {
-              descriptionEl.textContent = active.dataset.description ?? "";
-            }
-          };
-
-          root.dataset.previewBound = "true";
-          items.forEach((item) => {
-            const label = item.dataset.label || defaultLabel;
-            item.addEventListener("mouseenter", () => setPreview(label));
-            item.addEventListener("focus", () => setPreview(label));
-          });
-
-          if (nav instanceof HTMLElement) {
-            nav.addEventListener("mouseleave", () => setPreview(defaultLabel));
-          }
-
-          setPreview(defaultLabel);
-        });
+          },
+          { once: true },
+        );
       };
 
       const setupBackLink = () => {
@@ -485,138 +383,9 @@ const isActiveMainSiteLink = (href?: string) => {
         });
       };
 
-      const setupContactForm = () => {
-        const form = document.querySelector(".home-contact-band__form");
-        if (!(form instanceof HTMLFormElement) || form.dataset.contactReady === "true") {
-          return;
-        }
-
-        form.dataset.contactReady = "true";
-        form.action = "https://formsubmit.co/markjayson@markjayson.com";
-        form.method = "post";
-
-        const upsertHidden = (name, value) => {
-          let input = form.querySelector(`input[type="hidden"][name="${name}"]`);
-          if (!(input instanceof HTMLInputElement)) {
-            input = document.createElement("input");
-            input.type = "hidden";
-            input.name = name;
-            form.prepend(input);
-          }
-          input.value = value;
-          return input;
-        };
-
-        const firstName =
-          form.querySelector('input[name="first_name"]') ?? form.querySelector('input[name="first-name"]');
-        const lastName =
-          form.querySelector('input[name="last_name"]') ?? form.querySelector('input[name="last-name"]');
-        const email = form.querySelector('input[name="email"]');
-        const subject = form.querySelector('input[name="subject"]');
-        const message = form.querySelector('textarea[name="message"]');
-        const submit = form.querySelector(".home-contact-band__submit");
-
-        if (firstName instanceof HTMLInputElement) {
-          firstName.name = "first_name";
-          firstName.required = true;
-          firstName.autocomplete = "given-name";
-        }
-
-        if (lastName instanceof HTMLInputElement) {
-          lastName.name = "last_name";
-          lastName.required = true;
-          lastName.autocomplete = "family-name";
-        }
-
-        if (email instanceof HTMLInputElement) {
-          email.required = true;
-          email.autocomplete = "email";
-        }
-
-        if (subject instanceof HTMLInputElement) {
-          subject.autocomplete = "off";
-        }
-
-        if (message instanceof HTMLTextAreaElement) {
-          message.required = true;
-        }
-
-        const nextUrl = new URL(window.location.href);
-        nextUrl.searchParams.set("contact", "sent");
-        nextUrl.hash = "contact";
-
-        upsertHidden("_subject", "New message from markjayson.com");
-        upsertHidden("_template", "table");
-        upsertHidden("_url", "https://markjayson.com/");
-        upsertHidden("_next", nextUrl.toString());
-
-        let honey = form.querySelector('input[type="hidden"][name="_honey"]');
-        if (!(honey instanceof HTMLInputElement)) {
-          honey = document.createElement("input");
-          honey.type = "text";
-          honey.name = "_honey";
-          honey.tabIndex = -1;
-          honey.autocomplete = "off";
-          honey.className = "home-contact-band__honeypot";
-          form.prepend(honey);
-        }
-
-        let status = form.parentElement?.querySelector("[data-contact-status]");
-        if (!(status instanceof HTMLElement) && form.parentElement instanceof HTMLElement) {
-          status = document.createElement("p");
-          status.className = "home-contact-band__status";
-          status.dataset.contactStatus = "true";
-          status.hidden = true;
-          status.setAttribute("aria-live", "polite");
-          status.textContent = "Thank you. Your message has been sent.";
-          form.parentElement.insertBefore(status, form);
-        }
-
-        if (status instanceof HTMLElement) {
-          const params = new URLSearchParams(window.location.search);
-          status.hidden = params.get("contact") !== "sent";
-        }
-
-        if (submit instanceof HTMLButtonElement) {
-          form.addEventListener(
-            "submit",
-            () => {
-              submit.disabled = true;
-              submit.textContent = "Sending...";
-            },
-            { once: true },
-          );
-        }
-      };
-
-      const setupSiteTopRowMenuLaunch = () => {
-        const launchers = document.querySelectorAll("[data-site-menu-launch]");
-        const trigger = document.querySelector("[data-corner-menu-trigger]");
-
-        if (!(trigger instanceof HTMLButtonElement)) {
-          return;
-        }
-
-        launchers.forEach((launcher) => {
-          if (!(launcher instanceof HTMLButtonElement) || launcher.dataset.bound === "true") {
-            return;
-          }
-
-          launcher.dataset.bound = "true";
-          launcher.addEventListener("click", () => trigger.click());
-        });
-      };
-
-      document.addEventListener("DOMContentLoaded", setupCornerMenu);
-      document.addEventListener("astro:page-load", setupCornerMenu);
-      document.addEventListener("DOMContentLoaded", setupInlinePreviewMenus);
-      document.addEventListener("astro:page-load", setupInlinePreviewMenus);
-      document.addEventListener("DOMContentLoaded", setupContactForm);
-      document.addEventListener("astro:page-load", setupContactForm);
-      document.addEventListener("DOMContentLoaded", setupBackLink);
-      document.addEventListener("astro:page-load", setupBackLink);
-      document.addEventListener("DOMContentLoaded", setupSiteTopRowMenuLaunch);
-      document.addEventListener("astro:page-load", setupSiteTopRowMenuLaunch);
+      setupCornerMenu();
+      setupBackLink();
+      setupContactStatus();
     </script>
 
     {replicaMotion && <ReplicaMotion />}
