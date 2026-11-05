@@ -34,5 +34,5 @@ npm run deploy
 ```
 
 `npm run deploy` publishes to the `markjaysonwebsite-v2` Pages project.
-Pushes to GitHub also deploy automatically: `main` goes to production, and
-other branches get a preview URL on `markjaysonwebsite-v2.pages.dev`.
+Pushes to GitHub also trigger Cloudflare Pages builds, and pull request
+branches get a preview URL on `markjaysonwebsite-v2.pages.dev`.
