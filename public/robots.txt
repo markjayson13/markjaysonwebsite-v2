@@ -1,3 +1,7 @@
+# Keep the globe portrait out of Google Images (both the old PNG and current WebP).
+User-agent: Googlebot-Image
+Disallow: /images/home-contact-portrait
+
 User-agent: *
 Allow: /
 

@@ -1,16 +1,20 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { resumePage } from "../data/editorial";
+import { buildProfilePageStructuredData } from "../data/site";
+
+const pageTitle = "Resume | Mark Jayson Farol, Economist & Data Scientist";
+const pageDescription =
+  "Resume of Mark Jayson Farol: M.A. in Quantitative Business Economics (UNLV), graduate research and teaching, and founder of Macro by Mark.";
+const pageUrl = new URL(Astro.url.pathname, Astro.site ?? "https://markjayson.com").toString();
 ---
 
 <BaseLayout
-  title="Resume/CV"
-  description="Resume for Mark Jayson Martinez Farol covering economics, data science, econometrics, research, and analytical experience."
+  title={pageTitle}
+  description={pageDescription}
+  structuredData={buildProfilePageStructuredData(pageUrl, pageTitle, pageDescription)}
   page="resume"
   accent="#edf0f2"
-  shell="bare"
-  footer={false}
-  replicaFooter={false}
   replicaMotion={true}
 >
   <article class="replica-page resume-page">
@@ -56,6 +60,7 @@ import { resumePage } from "../data/editorial";
               {
                 resumePage.credentials.map((credential) => (
                   <article class="resume-page__card" data-lift>
+                    {credential.dates && <p class="resume-page__card-meta">{credential.dates}</p>}
                     <h3>{credential.title}</h3>
                     <strong>{credential.subtitle}</strong>
                     <p>{credential.summary}</p>
@@ -81,6 +86,7 @@ import { resumePage } from "../data/editorial";
               {
                 resumePage.roles.map((role) => (
                   <article class="resume-page__card" data-lift>
+                    <p class="resume-page__card-meta">{role.dates}</p>
                     <h3>{role.organization}</h3>
                     <strong>{role.role}</strong>
                     <p>{role.summary}</p>

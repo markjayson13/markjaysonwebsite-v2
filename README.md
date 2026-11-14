@@ -1,6 +1,6 @@
 # Mark Jayson Farol Website
 
-Editorial-cinematic Astro website for Mark Jayson Farol.
+Personal site for Mark Jayson Farol, built with Astro and deployed on Cloudflare Pages.
 
 Production URL: `https://markjayson.com/`
 
@@ -13,13 +13,17 @@ npm run build
 npm run preview
 ```
 
+## Where things live
+
+- Page copy and portfolio entries: `src/data/editorial.ts`
+- Links, nav, footer, and structured data: `src/data/site.ts`
+- Pages: `src/pages/` (home, about, resume, portfolio, profiles, legal, 404)
+- Redirects (www, old routes, `/creative`): `public/_redirects`
+
+The creative site at `creative.markjayson.com` is a separate repo
+(`creative-markjayson`). Anything under `/creative` on this domain redirects there.
+
 ## Cloudflare Pages
-
-This repo is configured to deploy through Cloudflare Pages.
-
-Dashboard project:
-
-- `markjaysonwebsite`
 
 Manual deploy from the CLI:
 
@@ -29,9 +33,6 @@ npm run build
 npm run deploy
 ```
 
-Recommended dashboard setup:
-
-1. In Cloudflare, open `Workers & Pages` and select `markjaysonwebsite`.
-2. Under `Custom domains`, attach `markjayson.com`.
-3. Add `www.markjayson.com` and redirect it to `markjayson.com` if desired.
-4. Remove any GitHub Pages custom-domain setting from the repository to avoid conflicts.
+`npm run deploy` publishes to the `markjaysonwebsite-v2` Pages project.
+Pushes to GitHub also trigger Cloudflare Pages builds, and pull request
+branches get a preview URL on `markjaysonwebsite-v2.pages.dev`.

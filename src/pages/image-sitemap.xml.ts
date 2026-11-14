@@ -1,24 +1,21 @@
 import type { APIRoute } from "astro";
-import { bioPage, homePage } from "../data/editorial";
-import { canonicalSiteUrl, socialPreviewImages } from "../data/site";
+import { bioPage, profilesPage } from "../data/editorial";
+import { canonicalSiteUrl } from "../data/site";
 
 type ImageSitemapEntry = {
   page: string;
   images: string[];
 };
 
+// The homepage globe portrait is left out on purpose: it should not appear in image search.
 const imageEntries: ImageSitemapEntry[] = [
   {
-    page: `${canonicalSiteUrl}/`,
-    images: [homePage.contact.portraitSrc],
-  },
-  {
     page: `${canonicalSiteUrl}/bio/`,
-    images: [bioPage.portraitSrc],
+    images: [bioPage.visiblePortraitSrc],
   },
   {
     page: `${canonicalSiteUrl}/profiles/`,
-    images: [socialPreviewImages.profiles.src],
+    images: [profilesPage.headshot.src],
   },
 ];
 
